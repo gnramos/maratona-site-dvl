@@ -11,58 +11,44 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      function toolTip(phase, rank) {
-        return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rank}</div>`;
-        // return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(phase, 12, rank)}</div>`;
-      }
-
-      // google.charts.load('current');
-      // google.charts.setOnLoadCallback(drawCurveTypes);
-      function drawCurveTypes() {
-        console.log('drawCurveTypes');
-        // google.charts.load('current', {packages: ['corechart', 'line']});
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Year');
-
-        data.addColumn('number', '1aFase');
-        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
-        data.addColumn('number', 'Nacional');
-        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
-        // year, rank_1aFase, toolTip(phase, rank)_1aFase, rank_Nacional, toolTip(phase, rank)_Nacional
-        data.addRow(['2017', 27, toolTip('1aFase', 27), 16, toolTip('Nacional', 16)]);
-        data.addRow(['2018', 10, toolTip('1aFase', 10), 4, toolTip('Nacional', 4)]);
-        data.addRow(['2019', 7, toolTip('1aFase', 7), 4, toolTip('Nacional', 4)]);
-        data.addRow(['2020', 25, toolTip('1aFase', 25), 23, toolTip('Nacional', 23)]);
-        data.addRow(['2021', 24, toolTip('1aFase', 24), 13, toolTip('Nacional', 13)]);
-
-        var options = {hAxis: {title: 'Ano'},
-                       vAxis: {title: 'Rank', baseline: 1},
-                       legend: {position: 'top'},
-                       tooltip: {isHtml: true}};
-
-        var lineChart = new google.visualization.LineChart(chart);
-        lineChart.draw(data, options);
-      }
+      var ROWS = [// ano, rank_1aFase, rank_Nacional,
+                 ['2013', 76, null],
+                 ['2014', 75, 29],
+                 ['2015', 76, 45],
+                 ['2016', 34, 16],
+                 ['2017', 27, 16],
+                 ['2018', 10, 4],
+                 ['2019', 7, 4],
+                 ['2020', 25, 23],
+                 ['2021', 24, 13]];
       google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(function() { drawCurveTypes(ROWS) });
     </script>
   </head>
   <body>
     <script type="text/javascript">header();</script>
     <div class="container text-center">
-      <div class="row">
-        <div class="col-sm">
+      <div class="row align-items-center">
+        <div class="col-sm-2">
           <img src="marca.png" height="100pt">
         </div>
-        <div class="col">
+        <div class="col-sm-10">
           <div id="chart" class="row">
-            <script type="text/javascript">google.setOnLoadCallback(drawCurveTypes);</script>
           </div>
         </div>
       </div>
     </div>
-    <p>
-      A <a href="http://www.unb.br">Universidade de Brasília</a> é legal.
-    </p>
+    <div class="container text-left">
+      <p>
+        A <a href="http://www.unb.br">Universidade de Brasília</a> é legal.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id blandit lacus, in laoreet est. In at neque massa. Mauris velit nunc, maximus non porttitor id, dictum at nisi. Etiam quis cursus sapien. Etiam et dignissim nulla. Nulla id lacus ac quam vehicula commodo. Sed vel quam pretium, ullamcorper quam sit amet, molestie sem. Phasellus dapibus elit ut dui vulputate, eu cursus turpis viverra. Proin ut auctor tortor. Duis mollis accumsan lobortis.
+      </p>
+      <p>
+        Curabitur dignissim lectus sem, sed vehicula risus tincidunt vel. Mauris bibendum orci eget sollicitudin tristique. Curabitur fermentum, ex a vehicula imperdiet, dui augue mollis mauris, eget fermentum est libero vitae felis. Nam et tempor quam, a dignissim ex. Fusce scelerisque blandit est in lobortis. Fusce eu feugiat mauris. Mauris viverra vestibulum libero, a viverra lectus aliquam ac. Etiam quis quam a lorem accumsan euismod.
+      </p>
+    </div>
     <script type="text/javascript">footer();</script>
   </body>
 </html>

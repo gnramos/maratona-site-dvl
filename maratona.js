@@ -5,8 +5,8 @@ function contact(...args) {
 
 function root() {
   var url = window.location.pathname.split('/');
-  return '../'.repeat(url.length - 3)
-//   return '../'.repeat(url.length - 9)
+  return '../'.repeat(url.length - 3);
+  // return '../'.repeat(url.length - 9);
 }
 
 function header() {
@@ -79,4 +79,30 @@ function footer() {
     <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" height="100"></a>
   </div>
 </footer>`);
+}
+
+function toolTip(phase, rank) {
+  return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank}</div>`;
+  // return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(phase, 12, rank)}</div>`;
+}
+
+function drawCurveTypes(rows) {
+  google.charts.load('current', {packages: ['corechart', 'line']});
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Year');
+
+  data.addColumn('number', '1aFase');
+  data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+  data.addColumn('number', 'Nacional');
+  data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+  for (let row of rows)
+    data.addRow([row[0], row[1], toolTip('1aFase', row[1] == null ? '' : row[1]), row[2], toolTip('Nacional', row[2] == null ? '': row[2])]);
+
+  var options = {hAxis: {title: 'Ano'},
+                 vAxis: {title: 'Rank', baseline: 1},
+                 legend: {position: 'top'},
+                 tooltip: {isHtml: true}};
+
+  var lineChart = new google.visualization.LineChart(chart);
+  lineChart.draw(data, options);
 }
