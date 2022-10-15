@@ -82,8 +82,8 @@ function footer() {
 }
 
 function drawVisualization(rows) {
-  function rankImg(phase, heightPx, rank, reverse=false) {
-    var multiplier = (phase == "Nacional") ? 3 : 1,
+  function rankImg(year, phase, heightPx, rank, reverse=false) {
+    var multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
     images = [], imgHTML = "";
 
     if (rank > 0)
@@ -105,15 +105,14 @@ function drawVisualization(rows) {
 
     return imgHTML;
   }
-  function toolTip(phase, rank) {
-    // return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank}</div>`;
-    return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(phase, 12, rank)}</div>`;
+  function toolTip(year, phase, rank) {
+    return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
 
   function makeRow(row) {
     return [row[0], // year
-            row[1], toolTip('1aFase', row[1] == null ? '' : row[1]), // 1aFase
-            row[2], toolTip('Nacional', row[2] == null ? '': row[2])];  // Nacional
+            row[1], toolTip(row[0], '1aFase', row[1] == null ? '' : row[1]), // 1aFase
+            row[2], toolTip(row[0], 'Nacional', row[2] == null ? '': row[2])];  // Nacional
   }
 
   google.charts.load('current', {packages: ['corechart', 'line']});
