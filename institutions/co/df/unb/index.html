@@ -12,15 +12,15 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var ROWS = [// ano, rank_1aFase, rank_Nacional,
-                 ['2013', 76, null],
-                 ['2014', 75, 29],
-                 ['2015', 76, 45],
-                 ['2016', 34, 16],
-                 ['2017', 27, 16],
-                 ['2018', 10, 4],
-                 ['2019', 7, 4],
-                 ['2020', 25, 23],
-                 ['2021', 24, 13]];
+                 ['2013', 76, null, null],
+                 ['2014', 75, 29, null],
+                 ['2015', 76, 45, null],
+                 ['2016', 34, 16, null],
+                 ['2017', 27, 16, null],
+                 ['2018', 10, 4, 57],
+                 ['2019', 7, 4, 47],
+                 ['2020', 25, 23, null],
+                 ['2021', 24, 13, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(ROWS); });
     </script>
