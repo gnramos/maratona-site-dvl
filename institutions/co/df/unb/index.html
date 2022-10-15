@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona de Programação SBC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../../maratona.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      function toolTip(phase, rank) {
+        return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rank}</div>`;
+        // return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(phase, 12, rank)}</div>`;
+      }
+
+      // google.charts.load('current');
+      // google.charts.setOnLoadCallback(drawCurveTypes);
+      function drawCurveTypes() {
+        console.log('drawCurveTypes');
+        // google.charts.load('current', {packages: ['corechart', 'line']});
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+
+        data.addColumn('number', '1aFase');
+        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+        data.addColumn('number', 'Nacional');
+        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+        // year, rank_1aFase, toolTip(phase, rank)_1aFase, rank_Nacional, toolTip(phase, rank)_Nacional
+        data.addRow(['2017', 27, toolTip('1aFase', 27), 16, toolTip('Nacional', 16)]);
+        data.addRow(['2018', 10, toolTip('1aFase', 10), 4, toolTip('Nacional', 4)]);
+        data.addRow(['2019', 7, toolTip('1aFase', 7), 4, toolTip('Nacional', 4)]);
+        data.addRow(['2020', 25, toolTip('1aFase', 25), 23, toolTip('Nacional', 23)]);
+        data.addRow(['2021', 24, toolTip('1aFase', 24), 13, toolTip('Nacional', 13)]);
+
+        var options = {hAxis: {title: 'Ano'},
+                       vAxis: {title: 'Rank', baseline: 1},
+                       legend: {position: 'top'},
+                       tooltip: {isHtml: true}};
+
+        var lineChart = new google.visualization.LineChart(chart);
+        lineChart.draw(data, options);
+      }
+      google.charts.load('current', {packages: ['corechart', 'line']});
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">header();</script>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-sm">
+          <img src="marca.png" height="100pt">
+        </div>
+        <div class="col">
+          <div id="chart" class="row">
+            <script type="text/javascript">google.setOnLoadCallback(drawCurveTypes);</script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>
+      A <a href="http://www.unb.br">Universidade de Brasília</a> é legal.
+    </p>
+    <script type="text/javascript">footer();</script>
+  </body>
+</html>
