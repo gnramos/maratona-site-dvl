@@ -5,7 +5,7 @@ function contact(...args) {
 
 function root() {
   var url = window.location.pathname.split('/');
-  return '../'.repeat(url.length - 9)
+  return '../'.repeat(url.length - 8)
 }
 
 function header() {
