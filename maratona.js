@@ -1,0 +1,81 @@
+function contact(...args) {
+    var mail = args.reduce((acc, cur) => acc + cur);
+    document.write(`<a href="mailto:${mail}">${mail}</a>`);
+}
+
+function root() {
+  var url = window.location.pathname.split('/');
+  return '../'.repeat(url.length - 9)
+}
+
+function header() {
+  var url = window.location.pathname.split('/');
+  var current = window.location.pathname.split('/').pop();
+  if (!current.endsWith('html'))
+    current = 'index.html';
+  var selected = `class="nav-link active" aria-current="page"`,
+      unselected = `class="nav-link"`;
+  var competitionArray = ['historico.html', 'event.html'];
+
+  document.write(`
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <img src="${root()}img/maratona-logo.jpg" class="bi me-2" height="32">
+          <span class="fs-4">Maratona de Programação</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="${root()}about.html" ${current == 'about.html' ? selected : unselected}>Sobre</a>
+          </li>
+          <li class="nav-item">
+            <a href="${root()}participate.html" ${current == 'participate.html' ? selected : unselected}>Inscreva-se</a>
+          </li>
+          <li class="nav-item">
+            <a href="${root()}contact.html" ${current == 'contact.html' ? selected : unselected}>Contato</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle ${competitionArray.includes(current) ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Competições
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://maratona.sbc.org.br/final22.html">2022</a></li>
+              <li><a class="dropdown-item" href="${root()}history.html">Anteriores</a></li>
+              <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
+              <li><a class="dropdown-item" href="${root()}institutions.html">Instituições</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.facebook.com/maratona/" class="nav-link">
+              <i class="bi bi-facebook" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                </svg>
+              </i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.youtube.com/channel/UCuLfhw7dJoKYbzBktNRgAkA" class="nav-link">
+              <i class="bi bi-youtube" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                </svg>
+              </i>
+            </a>
+          </li>
+        </ul>
+      </header>
+    </div>`);
+}
+
+function footer() {
+  document.write(`
+    <footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted">Realização: </span>
+    <a href="http://www.sbc.org.br/"><img src="${root()}img/footer_SBC.png" height="100"></a>
+    <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" height="100"></a>
+  </div>
+</footer>`);
+}
