@@ -1,6 +1,6 @@
-function contact(...args) {
+function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
-    document.write(`<a href="mailto:${mail}">${mail}</a>`);
+    document.write(`<a href="mailto:${mail}">${text}</a>`);
 }
 
 function root() {
@@ -11,41 +11,49 @@ function root() {
 
 function header() {
   var url = window.location.pathname.split('/');
-  var current = window.location.pathname.split('/').pop();
-  if (!current.endsWith('html'))
-    current = 'index.html';
+  var currentPage = url.at(-1), currentDir = url.at(-2);
+  if (!currentPage.endsWith('html'))
+    currentPage = 'index.html';
   var selected = `class="nav-link active" aria-current="page"`,
       unselected = `class="nav-link"`;
-  var competitionArray = ['historico.html', 'event.html'];
 
   document.write(`
     <div class="container">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <a href="${root()}index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
           <img src="${root()}img/maratona-logo.jpg" class="bi me-2" height="32">
           <span class="fs-4">Maratona de Programação</span>
         </a>
 
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a href="${root()}about.html" ${current == 'about.html' ? selected : unselected}>Sobre</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle ${currentDir == 'about' ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sobre
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="${root()}about/index.html">O que é?</a></li>
+              <li><a class="dropdown-item" href="${root()}about/rules.html">Regras</a></li>
+              <li><a class="dropdown-item" href="${root()}about/format.html">Formato</a></li>
+              <li><a class="dropdown-item" href="${root()}about/resources.html">Ambiente Computacional</a></li>
+              <li><a class="dropdown-item" href="${root()}about/organization.html">Organização</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="${root()}participate.html" ${current == 'participate.html' ? selected : unselected}>Inscreva-se</a>
-          </li>
-          <li class="nav-item">
-            <a href="${root()}contact.html" ${current == 'contact.html' ? selected : unselected}>Contato</a>
+            <a href="${root()}participate.html" ${currentPage == 'participate.html' ? selected : unselected}>Inscreva-se</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${competitionArray.includes(current) ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${(currentPage == 'history.html') || (currentDir == 'institutions') ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Competições
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="https://maratona.sbc.org.br/final22.html">2022</a></li>
               <li><a class="dropdown-item" href="${root()}history.html">Anteriores</a></li>
               <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
-              <li><a class="dropdown-item" href="${root()}institutions.html">Instituições</a></li>
+              <li><a class="dropdown-item" href="${root()}institutions/index.html">Instituições</a></li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="${root()}contact.html" ${currentPage == 'contact.html' ? selected : unselected}>Contato</a>
           </li>
           <li class="nav-item">
             <a href="https://www.facebook.com/maratona/" class="nav-link">
@@ -74,9 +82,11 @@ function footer() {
   document.write(`
     <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
+    <div class="d-flex justify-content-between">
     <span class="text-muted">Realização: </span>
     <a href="http://www.sbc.org.br/"><img src="${root()}img/footer_SBC.png" height="100"></a>
     <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" height="100"></a>
+    </div>
   </div>
 </footer>`);
 }
@@ -129,4 +139,25 @@ function drawVisualization(rows) {
 
   var lineChart = new google.visualization.LineChart(chart);
   lineChart.draw(data, options);
+}
+
+
+
+function yearsAgo(numYears) {document.write(new Date().getFullYear() - numYears);}
+function firstYear() { return 1996; }
+function currentContest() {
+    date = new Date();
+    date.setFullYear(date.getFullYear() - firstYear() + 1);
+    return date.getFullYear();
+}
+
+var romanNumbers = [ // [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
+                    [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+function toRoman(num) {
+  // http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
+  if (num === 0) return '';
+
+  for (var i = 0; i < romanNumbers.length; i++)
+    if (num >= romanNumbers[i][0])
+      return romanNumbers[i][1] + toRoman(num - romanNumbers[i][0]);
 }
