@@ -47,7 +47,7 @@ function header() {
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="https://maratona.sbc.org.br/final22.html">2022</a></li>
-              <li><a class="dropdown-item" href="${root()}history.html">Anteriores</a></li>
+              <li><a class="dropdown-item" href="${root()}history/index.html">Anteriores</a></li>
               <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
               <li><a class="dropdown-item" href="${root()}institutions/index.html">Instituições</a></li>
             </ul>
