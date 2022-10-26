@@ -161,7 +161,7 @@ function yearsAgo(numYears) {return new Date().getFullYear() - numYears;}
 // }
 
 
-function resultTable(header, site_teams) {
+function resultTable(site_teams) {
   var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
   function ruleHeaderCells() {
@@ -200,7 +200,6 @@ function resultTable(header, site_teams) {
   }
 
   return `
-<h3>${header}</h3>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -213,17 +212,18 @@ function resultTable(header, site_teams) {
 </table>`;
 }
 
-function accordion(name, items) {
-  document.write(`
-<div class="accordion" id="accordion${name}">`);
+function accordion_str(name, items) {
+  var acc = `
+<div class="accordion" id="accordion${name}">`;
   for (item of items)
-    accordionItem(`accordion${name}`, item[0], item[1], item[2]);
-  document.write(`
-</div>`);
+    acc += accordionItem(`accordion${name}`, item[0], item[1], item[2]);
+  acc += `
+</div>`;
+  return acc;
 }
 
 function accordionItem(accordionName, itemName, itemHeader, itemBody) {
-  document.write(`
+  return `
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading${itemName}">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${itemName}" aria-expanded="false" aria-controls="collapse${itemName}">
@@ -235,5 +235,8 @@ function accordionItem(accordionName, itemName, itemHeader, itemBody) {
         ${itemBody}
       </div>
     </div>
-  </div>`);
+  </div>`;
+}
+function accordion(name, items) {
+  document.write(accordion_str(name, items));
 }

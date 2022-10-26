@@ -61,7 +61,7 @@
   <li><a href="resultado_clarifications.html">Lista de perguntas</a></li>
   <li><a href="resultado_stats.html">Estatísticas</a></li>
 </ul>`;
-        var limiar_ok = resultTable('Sedes que atingiram o limiar de 10 times e 5 escolas',
+        var limiar_ok = resultTable(
             [['Bahia', [['[UFBA] SQLados'],
                         ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
                         ['[UESC] Gramado, eu te amo!']]],
@@ -89,7 +89,7 @@
              ['São Paulo', [['[USP] Zikados', "[USP] Hoje tem 'In queue' do Ribamar", '[USP-São Carlos] gramando no deitado', '[Unicamp] EhNois_', '[USP-São Carlos] Se der bom não pergunta como', '[Unicamp] Moratonistas', '[ITA] GGH'],
                             ['[UFABC] NJR10', '[UNESP-Bauru] UnespLRM', '[UNESP Rio Claro] Hell Claro 2', '[FATEC-Sorocaba] No Main No Gain', '[FFCLRP-USP] FrenchFries', '[UFSCar] seg em fentree olhe para o log'],
                             []]]]);
-        var ssco = resultTable('Supersede Centro-Oeste (3 vagas)',
+        var ssco = resultTable(
             [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
                                    ['[UnB/FGA] Confia no py'],
                                    []]],
@@ -102,7 +102,7 @@
              ['Mato Grosso do Sul', [[],
                                      ['[FACOM - UFMS] print "Batatinha Frita", 1, 2, 3'],
                                      []]]]);
-        var ssne = resultTable('Supersede Nordeste (3 vagas)',
+        var ssne = resultTable(
             [['Alagoas', [[],
                           ['[UFAL] A query tá O(n) DE NOVO'],
                           []]],
@@ -114,7 +114,7 @@
                                       [],
                                       []]],
              ['Sergipe', [[], [], []]]]);
-        var ssno = resultTable('Supersede Norte (2 vagas)',
+        var ssno = resultTable(
             [['Acre', [[],
                        [],
                        ['[UFAC] Wrong Answer 1000%']]],
@@ -128,21 +128,25 @@
              ['Rondônia', [[], [], []]],
              ['Roraima', [[], [], []]],
              ['Tocantins', [[], [], []]]]);
-        var ssbr = resultTable('Supersede Brasil (2 vagas)',
+        var ssbr = resultTable(
             [['Espírito Santo', [['[UFES] man java'],
                                  [],
                                  []]],
              ['Rio Grande do Sul', [[],
                                     ['[UFRGS] Obtusos'],
                                     []]]]);
+        var acc = accordion_str('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
+                                                 ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
+                                                 ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
+                                                 ['ssno', 'Supersede Norte (2 vagas)', ssno],
+                                                 ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
+          ]);
 
-
-        var result_tables = limiar_ok + ssco + ssne + ssno + ssbr;
         accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
                             ['Signup', 'Inscrições', signup],
                             ['Organization', 'Organização', organization],
                             ['Contest', 'Prova', contest],
-                            ['Result', 'Resultados', result_reports + result_tables]]);
+                            ['Result', 'Resultados', result_reports + acc]]);
       </script>
     </div>
     <script type="text/javascript">footer();</script>
