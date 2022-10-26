@@ -12,84 +12,54 @@
   <body>
     <script type="text/javascript">header();</script>
     <div class="container text-left">
-      <div class="accordion" id="institutionAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingCentroOeste">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCentroOeste" aria-expanded="false" aria-controls="collapseCentroOeste">
-              Centro-Oeste
-            </button>
-          </h2>
-          <div id="collapseCentroOeste" class="accordion-collapse collapse" aria-labelledby="headingCentroOeste" data-bs-parent="#institutionAccordion">
-            <div class="accordion-body">
-              <p class="leader"> A região Centro-Oeste tem um longo histórico de participações, com X/y/z/ medalhas ...
-              </p>
-              <ul class="list-group">
-                <li class="list-group-item"><a href="co/df/index.html">Distrito Federal</a></li>
-                <li class="list-group-item">Goiás</li>
-                <li class="list-group-item">Mato Grosso</li>
-                <li class="list-group-item">Mato Grosso do Sul</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingNordeste">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNordeste" aria-expanded="false" aria-controls="collapseNordeste">
-              Nordeste
-            </button>
-          </h2>
-          <div id="collapseNordeste" class="accordion-collapse collapse" aria-labelledby="headingNordeste" data-bs-parent="#institutionAccordion">
-            <div class="accordion-body">
-              <ul class="list-group">
-                <li class="list-group-item">???</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingNorte">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNorte" aria-expanded="false" aria-controls="collapseNorte">
-              Norte
-            </button>
-          </h2>
-          <div id="collapseNorte" class="accordion-collapse collapse" aria-labelledby="headingNorte" data-bs-parent="#institutionAccordion">
-            <div class="accordion-body">
-              <ul class="list-group">
-                <li class="list-group-item">???</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingSudeste">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSudeste" aria-expanded="false" aria-controls="collapseSudeste">
-              Sudeste
-            </button>
-          </h2>
-          <div id="collapseSudeste" class="accordion-collapse collapse" aria-labelledby="headingSudeste" data-bs-parent="#institutionAccordion">
-            <div class="accordion-body">
-              <ul class="list-group">
-                <li class="list-group-item">???</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingSul">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSul" aria-expanded="false" aria-controls="collapseSul">
-              Sul
-            </button>
-          </h2>
-          <div id="collapseSul" class="accordion-collapse collapse" aria-labelledby="headingSul" data-bs-parent="#institutionAccordion">
-            <div class="accordion-body">
-              <ul class="list-group">
-                <li class="list-group-item">???</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <script type="text/javascript">
+        var co = `
+<p>
+  A região Centro-Oeste tem um longo histórico de participações, com X/y/z/ medalhas ...
+</p>
+<ul>
+  <li><a href="co/df/index.html">Distrito Federal</a></li>
+  <li>Goiás</li>
+  <li>Mato Grosso</li>
+  <li>Mato Grosso do Sul</li>
+</ul>`;
+      var ne = `
+<p>
+  A região Nordeste ...
+</p>
+<ul>
+  <li>???</li>
+</ul>`;
+      var no = `
+<p>
+  A região Norte ...
+</p>
+<ul>
+  <li>???</li>
+</ul>`;
+      var se = `
+<p>
+  A região Sudeste ...
+</p>
+<ul>
+  <li>???</li>
+</ul>`;
+      var su = `
+<p>
+  A região Sul ...
+</p>
+<ul>
+  <li>???</li>
+</ul>`;
+
+
+        accordion('school', [['CO', 'Centro-Oeste', co],
+                             ['NE', 'Nordeste', ne],
+                             ['NO', 'Norte', no],
+                             ['SE', 'Sudeste', se],
+                             ['SU', 'Sul', su]]);
+        </script>
       </div>
-    </div>
     <script type="text/javascript">footer();</script>
   </body>
 </html>

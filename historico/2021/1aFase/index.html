@@ -16,101 +16,52 @@
       <p>
         Em 2021 ocorreu a XXVI Maratona SBC de Programação. A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
       </p>
-      <div class="accordion" id="phaseAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingSponsors">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSponsors" aria-expanded="false" aria-controls="collapseSponsors">
-              Patrocinadores
-            </button>
-          </h2>
-          <div id="collapseSponsors" class="accordion-collapse collapse" aria-labelledby="headingSponsors" data-bs-parent="#phaseAccordion">
-            <div class="accordion-body">
-              <p>
-                Informações sobre patrocinadores.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingRegister">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRegister" aria-expanded="false" aria-controls="collapseRegister">
-              Inscrições
-            </button>
-          </h2>
-          <div id="collapseRegister" class="accordion-collapse collapse" aria-labelledby="headingRegister" data-bs-parent="#phaseAccordion">
-            <div class="accordion-body">
-              <p>
-                Informações sobre inscrições.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOrganization">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrganization" aria-expanded="false" aria-controls="collapseOrganization">
-              Organização
-            </button>
-          </h2>
-          <div id="collapseOrganization" class="accordion-collapse collapse" aria-labelledby="headingOrganization" data-bs-parent="#phaseAccordion">
-            <div class="accordion-body">
-              <p>
-                Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingContest">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContest" aria-expanded="false" aria-controls="collapseContest">
-              Prova
-            </button>
-          </h2>
-          <div id="collapseContest" class="accordion-collapse collapse" aria-labelledby="headingContest" data-bs-parent="#phaseAccordion">
-            <div class="accordion-body">
-              <ul>
-                <li><a href="prova_info.pdf">Informações</a></li>
-                <li><a href="prova.pdf">Problemas da prova</a></li>
-                <li><a href="prova_io.tar">Entradas e Saídas dos problemas</a></li>
-              </ul>
-              </p>
-                Autores dos problemas:
-              <p>
-                <ol type="A">
-                    <li>Alocação de Prêmios - Clodes Silva</li>
-                    <li>Belas Palavras - Rafael Assis</li>
-                    <li>Criando Multiplos - Cláudio Lucchesi</li>
-                    <li>Dividindo o Reino - Matias Hunicken</li>
-                    <li>Escada Rolante - Cristhian Bonilha</li>
-                    <li>Fuga da Prisão - Victor Lamarca</li>
-                    <li>Garantindo o Treino - Pablo Blanc</li>
-                    <li>Haja Ordenação - Juan Pablo Marin Rosas</li>
-                    <li>Invertendo Ferrovias - Giovanna Kobus</li>
-                    <li>Jogo Duro - Matias Hunicken</li>
-                    <li>Katmandu - Giovanna Kobus</li>
-                    <li>Lembre sua Senha - Fernando Fonseca e Victor Lamarca</li>
-                    <li>Monarquia em Vertigem - Cristhian Bonilha</li>
-                    <li>Na Trave! - Vinicius dos Santos</li>
-                </ol>
-              </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingResults">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResults" aria-expanded="false" aria-controls="collapseResults">
-              Resultados
-            </button>
-          </h2>
-          <div id="collapseResults" class="accordion-collapse collapse" aria-labelledby="headingResults" data-bs-parent="#phaseAccordion">
-            <div class="accordion-body">
-              <ul>
-                <li><a href="resultado_placar.html">Placar final</a></li>
-                <li><a href="resultado_runs.html">Lista de submissões</a></li>
-                <li><a href="resultado_clarifications.html">Lista de perguntas</a></li>
-                <li><a href="resultado_stats.html">Estatísticas</a></li>
-              </ul>
-
-              <script type="text/javascript">
-resultTable('Sedes que atingiram o limiar de 10 times e 5 escolas',
+      <script type="text/javascript">
+        var sponsor = `
+<p>
+  Informações sobre patrocinadores.
+</p>`;
+        var signup = `
+<p>
+  Informações sobre inscrições.
+</p>`;
+        var organization = `
+<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
+</p>`;
+        var contest = `
+<ul>
+  <li><a href="prova_info.pdf">Informações</a></li>
+  <li><a href="prova.pdf">Problemas da prova</a></li>
+  <li><a href="prova_io.tar">Entradas e Saídas dos problemas</a></li>
+</ul>
+<p>
+  Autores dos problemas:
+</p>
+<ol type="A">
+    <li>Alocação de Prêmios - Clodes Silva</li>
+    <li>Belas Palavras - Rafael Assis</li>
+    <li>Criando Multiplos - Cláudio Lucchesi</li>
+    <li>Dividindo o Reino - Matias Hunicken</li>
+    <li>Escada Rolante - Cristhian Bonilha</li>
+    <li>Fuga da Prisão - Victor Lamarca</li>
+    <li>Garantindo o Treino - Pablo Blanc</li>
+    <li>Haja Ordenação - Juan Pablo Marin Rosas</li>
+    <li>Invertendo Ferrovias - Giovanna Kobus</li>
+    <li>Jogo Duro - Matias Hunicken</li>
+    <li>Katmandu - Giovanna Kobus</li>
+    <li>Lembre sua Senha - Fernando Fonseca e Victor Lamarca</li>
+    <li>Monarquia em Vertigem - Cristhian Bonilha</li>
+    <li>Na Trave! - Vinicius dos Santos</li>
+</ol>`;
+        var result_reports = `
+<ul>
+  <li><a href="resultado_placar.html">Placar final</a></li>
+  <li><a href="resultado_runs.html">Lista de submissões</a></li>
+  <li><a href="resultado_clarifications.html">Lista de perguntas</a></li>
+  <li><a href="resultado_stats.html">Estatísticas</a></li>
+</ul>`;
+        var limiar_ok = resultTable('Sedes que atingiram o limiar de 10 times e 5 escolas',
             [['Bahia', [['[UFBA] SQLados'],
                         ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
                         ['[UESC] Gramado, eu te amo!']]],
@@ -138,8 +89,7 @@ resultTable('Sedes que atingiram o limiar de 10 times e 5 escolas',
              ['São Paulo', [['[USP] Zikados', "[USP] Hoje tem 'In queue' do Ribamar", '[USP-São Carlos] gramando no deitado', '[Unicamp] EhNois_', '[USP-São Carlos] Se der bom não pergunta como', '[Unicamp] Moratonistas', '[ITA] GGH'],
                             ['[UFABC] NJR10', '[UNESP-Bauru] UnespLRM', '[UNESP Rio Claro] Hell Claro 2', '[FATEC-Sorocaba] No Main No Gain', '[FFCLRP-USP] FrenchFries', '[UFSCar] seg em fentree olhe para o log'],
                             []]]]);
-
-resultTable('Supersede Centro-Oeste (3 vagas)',
+        var ssco = resultTable('Supersede Centro-Oeste (3 vagas)',
             [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
                                    ['[UnB/FGA] Confia no py'],
                                    []]],
@@ -152,8 +102,7 @@ resultTable('Supersede Centro-Oeste (3 vagas)',
              ['Mato Grosso do Sul', [[],
                                      ['[FACOM - UFMS] print "Batatinha Frita", 1, 2, 3'],
                                      []]]]);
-
-resultTable('Supersede Nordeste (3 vagas)',
+        var ssne = resultTable('Supersede Nordeste (3 vagas)',
             [['Alagoas', [[],
                           ['[UFAL] A query tá O(n) DE NOVO'],
                           []]],
@@ -165,8 +114,7 @@ resultTable('Supersede Nordeste (3 vagas)',
                                       [],
                                       []]],
              ['Sergipe', [[], [], []]]]);
-
-resultTable('Supersede Norte (2 vagas)',
+        var ssno = resultTable('Supersede Norte (2 vagas)',
             [['Acre', [[],
                        [],
                        ['[UFAC] Wrong Answer 1000%']]],
@@ -180,19 +128,22 @@ resultTable('Supersede Norte (2 vagas)',
              ['Rondônia', [[], [], []]],
              ['Roraima', [[], [], []]],
              ['Tocantins', [[], [], []]]]);
-
-
-resultTable('Supersede Brasil (2 vagas)',
+        var ssbr = resultTable('Supersede Brasil (2 vagas)',
             [['Espírito Santo', [['[UFES] man java'],
                                  [],
                                  []]],
              ['Rio Grande do Sul', [[],
                                     ['[UFRGS] Obtusos'],
                                     []]]]);
-              </script>
-            </div>
-          </div>
-        </div>
+
+
+        var result_tables = limiar_ok + ssco + ssne + ssno + ssbr;
+        accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
+                            ['Signup', 'Inscrições', signup],
+                            ['Organization', 'Organização', organization],
+                            ['Contest', 'Prova', contest],
+                            ['Result', 'Resultados', result_reports + result_tables]]);
+      </script>
     </div>
     <script type="text/javascript">footer();</script>
   </body>

@@ -7,27 +7,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="../../maratona.js"></script>
+    <script type="text/javascript" src="../../../maratona.js"></script>
   </head>
   <body>
     <script type="text/javascript">header();</script>
     <div class="container text-left">
-      <div class="d-flex align-items-stretch">
-        <div class="span2">
-          <img src="Nacional/img/poster.png" class="img-fluid" width=200 height=100  onerror="this.src='../../img/maratona-logo.jpg';">
-        </div>
-        <div class="span10">
-          <p>
-            Em AAAA ocorreu a ???? Maratona SBC de Programação.
-          </p>
-          <ul>
-            <li><a href="1aFase/index.html">Primeira Fase</a></li>
-            <li><a href="Nacional/index.html">Final Nacional</a></li>
-            <li><a href="SummerSchool/index.html">Summer School</a></li>
-            <li><a href="Mundial/index.html">Final Mundial</a></li>
-          </ul>
-        </div>
-      </div>
+      <h1>Summer School</h1>
+      Informações iniciais.
+      <script type="text/javascript">
+        var signup = `
+<p>
+  Informações dos inscritos.
+</p>`;
+        var organization = `
+<p>
+  Informações dos organizadores.
+</p>`;
+        var event1 = `
+<p>
+  Informações do evento 1.
+</p>`;
+
+        accordion('Phase', [['Signup', 'Inscrições', signup],
+                            ['Organization', 'Organização', organization],
+                            ['Event1', 'Evento 1', event1]]);
+      </script>
     </div>
     <script type="text/javascript">footer();</script>
   </body>

@@ -2,7 +2,7 @@ CURRENT_YEAR = 2022;
 
 function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
-    document.write(`<a href="mailto:${mail}">${text}</a>`);
+    return `<a href="mailto:${mail}">${text}</a>`;
 }
 
 function root() {
@@ -152,47 +152,88 @@ function drawVisualization(rows) {
 
 
 
-function yearsAgo(numYears) {document.write(new Date().getFullYear() - numYears);}
-function firstYear() { return 1996; }
-function currentContest() {
-    date = new Date();
-    date.setFullYear(date.getFullYear() - firstYear() + 1);
-    return date.getFullYear();
-}
+function yearsAgo(numYears) {return new Date().getFullYear() - numYears;}
+// function firstYear() { return 1996; }
+// function currentContest() {
+//     date = new Date();
+//     date.setFullYear(date.getFullYear() - firstYear() + 1);
+//     return date.getFullYear();
+// }
 
 
 function resultTable(header, site_teams) {
-  var COLORS = ['text-danger', 'text-primary', 'text-success'];
+  var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
-  document.write(`<h3>${header}</h3>
+  function ruleHeaderCells() {
+    var cells = '';
+    for (i in RULE_COLORS)
+      cells += `
+        <th class='${RULE_COLORS[i]}' scope="col">regra ${Number(i) + 1}</th>`;
+    return cells;
+  }
+  function ruleRowCells(teams) {
+    var cells = '';
+    for (i in RULE_COLORS)
+      cells += `
+      <td class='${RULE_COLORS[i]}'>${teams[i].length}</td>`;
+    return cells;
+  }
+  function teamsCell(teams) {
+    var cell = '';
+    for (i in RULE_COLORS)
+      for (team of teams[i])
+        cell += `<span class="${RULE_COLORS[i]}">${team}</span><br>`;
+    return cell;
+  }
+  function makeRow(site_teams) {
+    var row = '';
+    for (site_team of site_teams) {
+      var [site, teams] = site_team;
+      row += `
+    <tr>
+      <td scope="row">${site}</td>
+      ${ruleRowCells(teams)}
+      <td>${teamsCell(teams)}</td>
+    </tr>`;
+    }
+    return row;
+  }
 
+  return `
+<h3>${header}</h3>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Sede</th>`);
-  for (i in COLORS)
-    document.write(`
-      <th class='${COLORS[i]}' scope="col">regra ${Number(i) + 1}</th>`);
-  document.write(`
+      <th scope="col">Sede</th>
+      ${ruleHeaderCells()}
       <th scope="col">Times classificados</th>
     </tr>
-  </thead>`);
-  for (site_team of site_teams) {
-    var [site, teams] = site_team;
-    document.write(`
-    <tr>
-      <td>${site}</td>
-      <td class='text-danger'>${teams[0].length}</td>
-      <td class='text-primary'>${teams[1].length}</td>
-      <td class='text-success'>${teams[2].length}</td>
-      <td>`);
-    for (i in COLORS)
-      for (team of teams[i])
-        document.write(`<span class="${COLORS[i]}">${team}</font><br>`);
-    document.write(`
-  </td>
-</tr>`);
-  }
+  </thead>
+  ${makeRow(site_teams)}
+</table>`;
+}
+
+function accordion(name, items) {
   document.write(`
-</table>`);
+<div class="accordion" id="accordion${name}">`);
+  for (item of items)
+    accordionItem(`accordion${name}`, item[0], item[1], item[2]);
+  document.write(`
+</div>`);
+}
+
+function accordionItem(accordionName, itemName, itemHeader, itemBody) {
+  document.write(`
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading${itemName}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${itemName}" aria-expanded="false" aria-controls="collapse${itemName}">
+        ${itemHeader}
+      </button>
+    </h2>
+    <div id="collapse${itemName}" class="accordion-collapse collapse" aria-labelledby="heading${itemName}" data-bs-parent="#${accordionName}">
+      <div class="accordion-body">
+        ${itemBody}
+      </div>
+    </div>
+  </div>`);
 }
