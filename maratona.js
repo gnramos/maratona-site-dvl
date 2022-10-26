@@ -1,3 +1,5 @@
+CURRENT_YEAR = 2022;
+
 function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
     document.write(`<a href="mailto:${mail}">${text}</a>`);
@@ -24,36 +26,43 @@ function header() {
           <img src="${root()}img/maratona-logo.jpg" class="bi me-2" height="32">
           <span class="fs-4">Maratona de Programação</span>
         </a>
-
         <ul class="nav nav-pills">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${currentDir == 'about' ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${currentDir == 'sobre' ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sobre
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}about/index.html">O que é?</a></li>
-              <li><a class="dropdown-item" href="${root()}about/rules.html">Regras</a></li>
-              <li><a class="dropdown-item" href="${root()}about/format.html">Formato</a></li>
-              <li><a class="dropdown-item" href="${root()}about/resources.html">Ambiente Computacional</a></li>
-              <li><a class="dropdown-item" href="${root()}about/organization.html">Organização</a></li>
+              <li><a class="dropdown-item" href="${root()}sobre/index.html">O que é?</a></li>
+              <li><a class="dropdown-item" href="${root()}sobre/regras.html">Regras</a></li>
+              <li><a class="dropdown-item" href="${root()}sobre/ambiente_computacional.html">Ambiente Computacional</a></li>
+              <li><a class="dropdown-item" href="${root()}sobre/organizacao.html">Organização</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="${root()}participate.html" ${currentPage == 'participate.html' ? selected : unselected}>Inscreva-se</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${(currentPage == 'history.html') || (currentDir == 'institutions') ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Competições
+            <a class="nav-link dropdown-toggle ${currentDir == CURRENT_YEAR ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Participe
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="https://maratona.sbc.org.br/final22.html">2022</a></li>
-              <li><a class="dropdown-item" href="${root()}history/index.html">Anteriores</a></li>
+              <li><a class="dropdown-item" href="${root()}inscricoes.html">Inscrições</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero.html">Fase Zero</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase.html">Primeira Fase</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional.html">Final Nacional</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/SummerSchool.html">Summer School</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial.html">Final Mundial</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle ${['historico', 'instituticoes'].includes(currentDir) ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Informações
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="${root()}historico/index.html">Competições Passadas</a></li>
               <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
-              <li><a class="dropdown-item" href="${root()}institutions/index.html">Instituições</a></li>
+              <li><a class="dropdown-item" href="${root()}instituicoes/index.html">Instituições</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="${root()}contact.html" ${currentPage == 'contact.html' ? selected : unselected}>Contato</a>
+            <a href="${root()}contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
           </li>
           <li class="nav-item">
             <a href="https://www.facebook.com/maratona/" class="nav-link">
@@ -151,13 +160,39 @@ function currentContest() {
     return date.getFullYear();
 }
 
-var romanNumbers = [ // [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
-                    [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
-function toRoman(num) {
-  // http://blog.stevenlevithan.com/archives/javascript-roman-numeral-converter
-  if (num === 0) return '';
 
-  for (var i = 0; i < romanNumbers.length; i++)
-    if (num >= romanNumbers[i][0])
-      return romanNumbers[i][1] + toRoman(num - romanNumbers[i][0]);
+function resultTable(header, site_teams) {
+  var COLORS = ['text-danger', 'text-primary', 'text-success'];
+
+  document.write(`<h3>${header}</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Sede</th>`);
+  for (i in COLORS)
+    document.write(`
+      <th class='${COLORS[i]}' scope="col">regra ${Number(i) + 1}</th>`);
+  document.write(`
+      <th scope="col">Times classificados</th>
+    </tr>
+  </thead>`);
+  for (site_team of site_teams) {
+    var [site, teams] = site_team;
+    document.write(`
+    <tr>
+      <td>${site}</td>
+      <td class='text-danger'>${teams[0].length}</td>
+      <td class='text-primary'>${teams[1].length}</td>
+      <td class='text-success'>${teams[2].length}</td>
+      <td>`);
+    for (i in COLORS)
+      for (team of teams[i])
+        document.write(`<span class="${COLORS[i]}">${team}</font><br>`);
+    document.write(`
+  </td>
+</tr>`);
+  }
+  document.write(`
+</table>`);
 }
