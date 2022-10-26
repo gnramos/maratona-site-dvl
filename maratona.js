@@ -1,4 +1,4 @@
-CURRENT_YEAR = 2022;
+CURRENT_YEAR = 2021;
 
 function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
@@ -44,11 +44,10 @@ function header() {
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="${root()}inscricoes.html">Inscrições</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero.html">Fase Zero</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase.html">Primeira Fase</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional.html">Final Nacional</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/SummerSchool.html">Summer School</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial.html">Final Mundial</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/SummerSchool/index.html">Summer School</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -169,6 +168,10 @@ function resultTable(site_teams) {
     for (i in RULE_COLORS)
       cells += `
         <th class='${RULE_COLORS[i]}' scope="col">regra ${Number(i) + 1}</th>`;
+
+    // A decidir se fica ou não
+    return '';
+
     return cells;
   }
   function ruleRowCells(teams) {
@@ -176,6 +179,10 @@ function resultTable(site_teams) {
     for (i in RULE_COLORS)
       cells += `
       <td class='${RULE_COLORS[i]}'>${teams[i].length}</td>`;
+
+    // A decidir se fica ou não
+    return '';
+
     return cells;
   }
   function teamsCell(teams) {
