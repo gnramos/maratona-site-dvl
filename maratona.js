@@ -1,4 +1,4 @@
-CURRENT_YEAR = 2021;
+CURRENT_YEAR = '2021';
 
 function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
@@ -13,11 +13,11 @@ function root() {
 
 function maratonaHeader() {
   var url = window.location.pathname.split('/');
-  var currentPage = url.at(-1), currentDir = url.at(-2);
-  if (!currentPage.endsWith('html'))
-    currentPage = 'index.html';
+  var currentPage = url.at(-1);
   var selected = `class="nav-link active" aria-current="page"`,
       unselected = `class="nav-link"`;
+  var isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
+  var isInfo = !isParticipate && (url.includes('historico') || url.includes('instituicoes'));
 
   document.write(`
     <div class="container">
@@ -28,7 +28,7 @@ function maratonaHeader() {
         </a>
         <ul class="nav nav-pills">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${currentDir == 'sobre' ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${url.includes('sobre') ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sobre
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,7 +39,7 @@ function maratonaHeader() {
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${currentDir == CURRENT_YEAR ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${isParticipate ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Participe!
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -51,7 +51,7 @@ function maratonaHeader() {
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${['historico', 'instituticoes'].includes(currentDir) ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${isInfo ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Informações
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
