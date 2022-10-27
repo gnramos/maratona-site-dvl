@@ -10,16 +10,15 @@
     <script type="text/javascript" src="maratona.js"></script>
     <script type="text/javascript">
       function carousel(images) {
-        var buttons = ''
-        for (i in images)
-          buttons += `<button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="${i}" ${i == 0 ? 'class="active" aria-current="true"' : '' } aria-label="Slide ${Number(i)+1}"></button>`;
-
-        var items = '';
-        for (i in images)
+        var buttons = '', items = '';
+        for (i in images) {
+          buttons += `
+        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="${i}" ${i == 0 ? 'class="active" aria-current="true"' : '' } aria-label="Slide ${Number(i)+1}"></button>`;
           items += `
         <div class="carousel-item ${i == 0 ? 'active' : ''}">
           <img src="${images[i]}" class="d-block w-100">
         </div>`;
+        }
 
         return `
     <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
