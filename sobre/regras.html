@@ -15,7 +15,7 @@
     </script>
   </head>
   <body>
-    <script type="text/javascript">maratonaHeader();</script>
+    <script type="text/javascript">document.write(bodyHeader());</script>
 
     <div class="container text-left">
       <h1>Regras</h1>
@@ -129,17 +129,17 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 <p>
   Um recurso deve estar baseado em uma ou mais das circunstâncias a seguir: violação de uma regra, má conduta de um time ou má conduta da administração do concurso com intenção de prejudicar. As decisões dos juízes são finais. Não cabe recurso quanto a julgamento de problemas.
 </p>`;
-        accordion('rules', [['School', 'Escolas', school],
-                             ['Coach', 'Técnicos/Coaches', coach],
-                             ['Team', 'Time', team],
-                             ['Contest', 'Competição', contest],
-                             ['Site', 'Sede', site],
-                             ['Spots', 'Vagas na Final Brasileira', spot],
-                             ['Appeal', 'Recursos', appeal],
-                             ]);
+        document.write(accordion('rules', [['School', 'Escolas', school],
+                                           ['Coach', 'Técnicos/Coaches', coach],
+                                           ['Team', 'Time', team],
+                                           ['Contest', 'Competição', contest],
+                                           ['Site', 'Sede', site],
+                                           ['Spots', 'Vagas na Final Brasileira', spot],
+                                           ['Appeal', 'Recursos', appeal],
+                                           ]));
       </script>
     </div>
 
-    <script type="text/javascript">maratonaFooter();</script>
+    <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

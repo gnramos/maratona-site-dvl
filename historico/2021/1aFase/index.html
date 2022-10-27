@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../../utils.js"></script>
   </head>
   <body>
-    <script type="text/javascript">maratonaHeader();</script>
+    <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
       <h1>Primeira Fase</h1>
       <p>
@@ -32,9 +32,9 @@
 </p>`;
         var contest = `
 <ul>
-  <li><a href="boca/info_maratona.pdf">Informações</a></li>
-  <li><a href="boca/maratona.pdf">Problemas da prova</a></li>
-  <li><a href="boca/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
+  <li><a href="contest/info_maratona.pdf">Informações</a></li>
+  <li><a href="contest/maratona.pdf">Problemas da prova</a></li>
+  <li><a href="contest/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
 </ul>
 <p>
   Autores dos problemas:
@@ -55,12 +55,12 @@
     <li>Monarquia em Vertigem - Cristhian Bonilha</li>
     <li>Na Trave! - Vinicius dos Santos</li>
 </ol>`;
-        var result_reports = `
+        var reports = `
 <ul>
-  <li><a href="boca/score.html">Placar final</a></li>
-  <li><a href="boca/runs.html">Lista de submissões</a></li>
-  <li><a href="boca/clarifications.html">Lista de perguntas</a></li>
-  <li><a href="boca/statistic.html">Estatísticas</a></li>
+  <li><a href="contest/score.html">Placar final</a></li>
+  <li><a href="contest/runs.html">Lista de submissões</a></li>
+  <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
+  <li><a href="contest/statistic.html">Estatísticas</a></li>
 </ul>`;
         var limiar_ok = resultTable(
             [['Bahia', [['[UFBA] SQLados'],
@@ -136,20 +136,20 @@
              ['Rio Grande do Sul', [[],
                                     ['[UFRGS] Obtusos'],
                                     []]]]);
-        var acc = accordion_str('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
-                                                 ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
-                                                 ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
-                                                 ['ssno', 'Supersede Norte (2 vagas)', ssno],
-                                                 ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
+        var acc = accordion('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
+                                             ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
+                                             ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
+                                             ['ssno', 'Supersede Norte (2 vagas)', ssno],
+                                             ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
           ]);
 
-        accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
-                            ['Signup', 'Inscrições', signup],
-                            ['Organization', 'Organização', organization],
-                            ['Contest', 'Prova', contest],
-                            ['Result', 'Resultados', result_reports + acc]]);
+        document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
+                                           ['Signup', 'Inscrições', signup],
+                                           ['Organization', 'Organização', organization],
+                                           ['Contest', 'Prova', contest],
+                                           ['Result', 'Resultados', reports + acc]]));
       </script>
     </div>
-    <script type="text/javascript">maratonaFooter();</script>
+    <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

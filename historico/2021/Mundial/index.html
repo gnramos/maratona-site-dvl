@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../../utils.js"></script>
   </head>
   <body>
-    <script type="text/javascript">maratonaHeader();</script>
+    <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
       <h1>Final Mundial</h1>
       Informações iniciais.
@@ -28,11 +28,11 @@
 <p>
   Informações dos resultados.
 </p>`;
-        accordion('Phase', [['Signup', 'Inscrições', signup],
-                            ['Contest', 'Prova', contest],
-                            ['Result', 'Resultados', results]]);
+        document.write(accordion('Phase', [['Signup', 'Inscrições', signup],
+                                           ['Contest', 'Prova', contest],
+                                           ['Result', 'Resultados', results]]));
       </script>
     </div>
-    <script type="text/javascript">maratonaFooter();</script>
+    <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

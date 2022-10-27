@@ -10,7 +10,7 @@
     <script type="text/javascript" src="maratona.js"></script>
   </head>
   <body>
-    <script type="text/javascript">maratonaHeader();</script>
+    <script type="text/javascript">document.write(bodyHeader());</script>
 
     <div class="container text-left">
       <h1>Inscrições</h1>
@@ -71,11 +71,11 @@
   Caso haja desistência de participação até o dia ??? pode-se fazer a devolução de 80% do valor pago pela inscrição. Após esta data não haverá devolução de qualquer valor pago. Para solicitar o cancelamento, enviar um e-mail a ${contact("faturamento da SBC", "faturamento", "@sb", "c.o", "rg", ".br")}.
 </p>`;
 
-        accordion('enroll', [['team', 'Time(s)', team],
-                             ['ccl', 'Café-com-Leite', ccl],
-                             ['refund', 'Desistência & Reembolso', refund]]);
+        document.write(accordion('enroll', [['team', 'Time(s)', team],
+                                            ['ccl', 'Café-com-Leite', ccl],
+                                            ['refund', 'Desistência & Reembolso', refund]]));
     </script>
 
-    <script type="text/javascript">maratonaFooter();</script>
+    <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

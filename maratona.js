@@ -11,7 +11,7 @@ function root() {
   // return '../'.repeat(url.length - 8);
 }
 
-function maratonaHeader() {
+function bodyHeader() {
   var url = window.location.pathname.split('/');
   var currentPage = url.at(-1);
   var selected = `class="nav-link active" aria-current="page"`,
@@ -19,7 +19,7 @@ function maratonaHeader() {
   var isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
   var isInfo = !isParticipate && (url.includes('historico') || url.includes('instituicoes'));
 
-  document.write(`
+  return`
     <div class="container">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="${root()}index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
@@ -83,11 +83,11 @@ function maratonaHeader() {
           </li>
         </ul>
       </header>
-    </div>`);
+    </div>`;
 }
 
-function maratonaFooter() {
-  document.write(`
+function bodyFooter() {
+  return `
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container">
         <div class="row">
@@ -102,34 +102,28 @@ function maratonaFooter() {
           </div>
         </div>
       </div>
-    </footer>`);
+    </footer>`;
 }
 
-function accordion_str(name, items) {
-  var acc = `
-<div class="accordion" id="accordion${name}">`;
+function accordion(name, items) {
+  var accItems = '';
   for (item of items)
-    acc += accordionItem(`accordion${name}`, item[0], item[1], item[2]);
-  acc += `
-</div>`;
-  return acc;
-}
-
-function accordionItem(accordionName, itemName, itemHeader, itemBody) {
-  return `
+    accItems += `
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${itemName}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${itemName}" aria-expanded="false" aria-controls="collapse${itemName}">
-        ${itemHeader}
+    <h2 class="accordion-header" id="heading${item[0]}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${item[0]}" aria-expanded="false" aria-controls="collapse${item[0]}">
+        ${item[1]}
       </button>
     </h2>
-    <div id="collapse${itemName}" class="accordion-collapse collapse" aria-labelledby="heading${itemName}" data-bs-parent="#${accordionName}">
+    <div id="collapse${item[0]}" class="accordion-collapse collapse" aria-labelledby="heading${item[0]}" data-bs-parent="#accordion${name}">
       <div class="accordion-body">
-        ${itemBody}
+        ${item[2]}
       </div>
     </div>
   </div>`;
-}
-function accordion(name, items) {
-  document.write(accordion_str(name, items));
+
+  return `
+<div class="accordion" id="accordion${name}">
+  ${accItems}
+</div>`;
 }
