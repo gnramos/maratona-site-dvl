@@ -1,3 +1,30 @@
+function contest_info(contest, problems) {
+  var info = `
+<ul>
+  <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
+  <li><a href=${contest}/maratona.pdf">Problemas da prova</a></li>
+  <li><a href=${contest}/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
+</ul>
+<p>
+  Autores dos problemas:
+</p>
+<ol type="A">`;
+  for (problem of problems)
+    info += `<li>${problem}</li>`;
+  return `${info}
+  </ol>`;
+}
+
+function contest_reports() {
+  return`
+<ul>
+  <li><a href="contest/score.html">Placar final</a></li>
+  <li><a href="contest/runs.html">Lista de submissões</a></li>
+  <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
+  <li><a href="contest/statistic.html">Estatísticas</a></li>
+</ul>`;
+}
+
 function resultTable(site_teams) {
   // site_teams -> [siteName, [list_of_teams_rule1, list_of_teams_rule3, list_of_teams_rule3]]
   var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];

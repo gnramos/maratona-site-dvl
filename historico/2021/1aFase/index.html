@@ -9,60 +9,34 @@
 
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../utils.js"></script>
-  </head>
-  <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <h1>Primeira Fase</h1>
-      <p>
-        Em 2021 ocorreu a XXVI Maratona SBC de Programação. A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
-      </p>
-      <script type="text/javascript">
-        var sponsor = `
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // initial_info, organization, contest_problems, results [limiar_ok + sedes]
+      //====================================================================================================
+      var initial_info = `
 <p>
-  Informações sobre patrocinadores.
+  Em 2021 ocorreu a XXVI Maratona SBC de Programação. A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
 </p>`;
-        var signup = `
-<p>
-  Informações sobre inscrições.
-</p>`;
-        var organization = `
-<p>
+      var organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
 </p>`;
-        var contest = `
-<ul>
-  <li><a href="contest/info_maratona.pdf">Informações</a></li>
-  <li><a href="contest/maratona.pdf">Problemas da prova</a></li>
-  <li><a href="contest/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
-</ul>
-<p>
-  Autores dos problemas:
-</p>
-<ol type="A">
-    <li>Alocação de Prêmios - Clodes Silva</li>
-    <li>Belas Palavras - Rafael Assis</li>
-    <li>Criando Multiplos - Cláudio Lucchesi</li>
-    <li>Dividindo o Reino - Matias Hunicken</li>
-    <li>Escada Rolante - Cristhian Bonilha</li>
-    <li>Fuga da Prisão - Victor Lamarca</li>
-    <li>Garantindo o Treino - Pablo Blanc</li>
-    <li>Haja Ordenação - Juan Pablo Marin Rosas</li>
-    <li>Invertendo Ferrovias - Giovanna Kobus</li>
-    <li>Jogo Duro - Matias Hunicken</li>
-    <li>Katmandu - Giovanna Kobus</li>
-    <li>Lembre sua Senha - Fernando Fonseca e Victor Lamarca</li>
-    <li>Monarquia em Vertigem - Cristhian Bonilha</li>
-    <li>Na Trave! - Vinicius dos Santos</li>
-</ol>`;
-        var reports = `
-<ul>
-  <li><a href="contest/score.html">Placar final</a></li>
-  <li><a href="contest/runs.html">Lista de submissões</a></li>
-  <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
-  <li><a href="contest/statistic.html">Estatísticas</a></li>
-</ul>`;
-        var limiar_ok = resultTable(
+      var contest_problems = ['Alocação de Prêmios - Clodes Silva',
+                              'Belas Palavras - Rafael Assis',
+                              'Criando Multiplos - Cláudio Lucchesi',
+                              'Dividindo o Reino - Matias Hunicken',
+                              'Escada Rolante - Cristhian Bonilha',
+                              'Fuga da Prisão - Victor Lamarca',
+                              'Garantindo o Treino - Pablo Blanc',
+                              'Haja Ordenação - Juan Pablo Marin Rosas',
+                              'Invertendo Ferrovias - Giovanna Kobus',
+                              'Jogo Duro - Matias Hunicken',
+                              'Katmandu - Giovanna Kobus',
+                              'Lembre sua Senha - Fernando Fonseca e Victor Lamarca',
+                              'Monarquia em Vertigem - Cristhian Bonilha',
+                              'Na Trave! - Vinicius dos Santos'];
+
+        var limiar_ok = resultTable( // [ [site, [list_rule1, list_rule2, list_rule3]]]
             [['Bahia', [['[UFBA] SQLados'],
                         ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
                         ['[UESC] Gramado, eu te amo!']]],
@@ -136,18 +110,27 @@
              ['Rio Grande do Sul', [[],
                                     ['[UFRGS] Obtusos'],
                                     []]]]);
-        var acc = accordion('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
-                                             ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
-                                             ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
-                                             ['ssno', 'Supersede Norte (2 vagas)', ssno],
-                                             ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
+        var results = accordion('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
+                                                 ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
+                                                 ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
+                                                 ['ssno', 'Supersede Norte (2 vagas)', ssno],
+                                                 ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
           ]);
 
-        document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
-                                           ['Signup', 'Inscrições', signup],
-                                           ['Organization', 'Organização', organization],
-                                           ['Contest', 'Prova', contest],
-                                           ['Result', 'Resultados', reports + acc]]));
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>Final Nacional</h1>
+      <script type="text/javascript">
+        document.write(initial_info);
+        document.write(accordion('Phase', [['Organization', 'Organização', organization],
+                                           ['Contest', 'Prova', contest_info('contest', contest_problems)],
+                                           ['Result', 'Resultados', contest_reports() + results]]));
       </script>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>

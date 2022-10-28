@@ -111,7 +111,7 @@ function accordion(name, items, headerClasses=[]) {
     var [itemID, itemTitle, itemBody] = items[i];
     accItems += `
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${itemID}" style="background-color: coral;">
+    <h2 class="accordion-header" id="heading${itemID}">
       <button class="accordion-button collapsed ${headerClasses[i] != undefined ? headerClasses[i] : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${itemID}" aria-expanded="false" aria-controls="collapse${itemID}">
         ${itemTitle}
       </button>
