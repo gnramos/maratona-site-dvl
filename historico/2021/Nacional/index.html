@@ -9,77 +9,70 @@
 
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../utils.js"></script>
-  </head>
-  <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <h1>Final Nacional</h1>
-      Informações iniciais.
-      <script type="text/javascript">
-        //======================================================================
-        // Atualizar as informações abaixo.
-        // sponsor, signup, organization,
-        //======================================================================
-        var sponsor = `
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // initial_info, sponsor, signup, organization, warmup_problems, contest_problems, medalists,
+      // regional_champs e ccl.
+      //====================================================================================================
+      var initial_info = `
+<p>
+  Em 2021 ocorreu a XXVI Maratona SBC de Programação. A primeira fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. <strong>Foram 534 times de 127 instituições brasileiras.</strong>
+</p>`
+      var sponsor = `
 <p>
   Informações dos patrocinadores.
 </p>`;
-        // ********************************************************************
-        var signup = `
+      var signup = `
 <p>
   Informações dos inscritos.
 </p>`;
-        // ********************************************************************
-        var organization = `
+      var organization = `
 <p>
-  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva..
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva.
 </p>`;
-        // ********************************************************************
-        var warmup_problems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
-                               'Mountain Ranges - Vinicius Santos, Brasil',
-                               'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
-        // ********************************************************************
-        var contest_problems = ['Ancient Towers - Giovanna Kobus Conrado, Brasil',
-                                'Because, Art! - Naim Shaikhzadeh Santos, Brasil',
-                                'Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil',
-                                'Daily Turnovers, Yan Silva, Brasil',
-                                'Expedition Plans, Daniel Bossle, Brasil',
-                                'Fields Division, Yan Silva, Brasil',
-                                'Generator Tree, Victor de Sousa Lamarca, Brasil',
-                                'Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil',
-                                'Invested Money, Alejandro Strejilevich de Loma, Argentina',
-                                'Joining Pairs, Giovanna Kobus Conrado, Brasil',
-                                'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
-                                'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
-                                'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+      var warmup_problems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
+                             'Mountain Ranges - Vinicius Santos, Brasil',
+                             'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
+      var contest_problems = ['Ancient Towers - Giovanna Kobus Conrado, Brasil',
+                              'Because, Art! - Naim Shaikhzadeh Santos, Brasil',
+                              'Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil',
+                              'Daily Turnovers, Yan Silva, Brasil',
+                              'Expedition Plans, Daniel Bossle, Brasil',
+                              'Fields Division, Yan Silva, Brasil',
+                              'Generator Tree, Victor de Sousa Lamarca, Brasil',
+                              'Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil',
+                              'Invested Money, Alejandro Strejilevich de Loma, Argentina',
+                              'Joining Pairs, Giovanna Kobus Conrado, Brasil',
+                              'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
+                              'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
+                              'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+      var medalists = [// [teamName, [contestants], [coaches]
+        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
+        ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
+        ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
+        ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
+        ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
+        ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
+        ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli.']],
+        ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
+        ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
+        ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
+        ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
+        ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
+      var ccl = [['WAN TAAN SURI KILL', [], []]]; // [teamName, [contestants], [coaches]
 
-        // ********************************************************************
-        var medalists = [// [teamName, [contestants], [coaches]
-         ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
-         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
-         ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
-         ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
-         ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
-         ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
-         ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli.']],
-         ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
-         ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
-         ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
-         ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
-         ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
+      var regional_champs = ['UnB - Posso mandar um WA?',     // CO
+                             'UFPE - Amigos do Yuki U・ᴥ・U',  // NE
+                             'UFAM - tuturu sem O(1)',        // NO
+                             'UFMG - Summerginmune?',         // SE
+                             'UDESC - The Ballonatics'];      // SU
 
-        var regional_champs = ['UnB - Posso mandar um WA?',     // CO
-                               'UFPE - Amigos do Yuki U・ᴥ・U',  // NE
-                               'UFAM - tuturu sem O(1)',        // NO
-                               'UFMG - Summerginmune?',         // SE
-                               'UDESC - The Ballonatics'];      // SU
-
-        var ccl = [['WAN TAAN SURI KILL', [], []]]; // [teamName, [contestants], [coaches]
-        //======================================================================
-        // Não editar a partir daqui.
-        //======================================================================
-        function contest_info(contest, problems) {
-          var info = `
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+      function contest_info(contest, problems) {
+        var info = `
 <ul>
   <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
   <li><a href=${contest}/maratona.pdf">Problemas da prova</a></li>
@@ -89,29 +82,29 @@
   Autores dos problemas:
 </p>
 <ol type="A">`;
-          for (problem of problems)
-            info += `<li>${problem}</li>`;
-          return `${info}
+        for (problem of problems)
+          info += `<li>${problem}</li>`;
+        return `${info}
   </ol>`;
-        }
+      }
 
-        function listTeams(teams, start) {
-          var list = `<ol start=${start}>`;
-          for (team of teams)
-            list += `
+      function listTeams(teams, start) {
+        var list = `<ol start=${start}>`;
+        for (team of teams)
+          list += `
   <li><strong>${team[0]}:</strong> ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
-          return `${list}
+        return `${list}
 </ol>`;
-        }
+      }
 
-        var reports = `
+      var reports = `
 <ul>
   <li><a href="contest/score.html">Placar final</a></li>
   <li><a href="contest/runs.html">Lista de submissões</a></li>
   <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
   <li><a href="contest/statistic.html">Estatísticas</a></li>
 </ul>`;
-        var champion = `
+      var champion = `
 <div class="card mb-3">
   <h4 class='text-center'><strong>Campeões</strong></h4>
   <div class="row g-0">
@@ -126,7 +119,7 @@
     </div>
   </div>
 </div>`;
-        var regional_champs = `
+      var regional_champs = `
 <ul class="list-group list-group-flush">
   <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0]}</strong></li>
   <li class="list-group-item">Nordeste: <strong>${regional_champs[1]}</strong></li>
@@ -135,22 +128,29 @@
   <li class="list-group-item">Sul: <strong>${regional_champs[4]}</strong></li>
 </ul>`;
 
-        var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = medalists.length / 3;
-        var gold = medalists.slice(0, TEAMS_PER_MEDAL),
-            silver = medalists.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
-            bronze = medalists.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
-        var results = accordion('PhaseResults',
-                                [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
-                                 ['S', 'Medalhas de Prata', listTeams(silver, 1 + TEAMS_PER_MEDAL)],
-                                 ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + 2 * TEAMS_PER_MEDAL)],
-                                 ['CR', 'Campeões Regionais', regional_champs],
-                                 ['CCL', 'Café com Leite', listTeams(ccl, 1)]],
-                                ['bg-warning  text-black',
-                                 'bg-secondary text-white',
-                                 'bg-secondary bg-opacity-25 text-black',
-                                 'bg-success text-white',
-                                 'bg-light text-black']);
-
+      var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = medalists.length / 3;
+      var gold = medalists.slice(0, TEAMS_PER_MEDAL),
+          silver = medalists.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
+          bronze = medalists.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
+      var results = accordion('PhaseResults',
+                              [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
+                               ['S', 'Medalhas de Prata', listTeams(silver, 1 + TEAMS_PER_MEDAL)],
+                               ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + 2 * TEAMS_PER_MEDAL)],
+                               ['CR', 'Campeões Regionais', regional_champs],
+                               ['CCL', 'Café com Leite', listTeams(ccl, 1)]],
+                              ['bg-warning  text-black',
+                               'bg-secondary text-white',
+                               'bg-secondary bg-opacity-25 text-black',
+                               'bg-success text-white',
+                               'bg-light text-black']);
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>Final Nacional</h1>
+      <script type="text/javascript">
+        document.write(initial_info);
         document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
                                            ['Signup', 'Inscrições', signup],
                                            ['Organization', 'Organização', organization],
