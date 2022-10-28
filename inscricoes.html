@@ -8,74 +8,95 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="maratona.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // deadline, discount_deadline, discount_prices, full_prices.
+      //====================================================================================================
+      var deadline = `26/9/2022`;
+      var discount_deadline = '26/08/2022';
+      var discount_prices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
+                             ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 /time']], // Instituição não associada.
+          full_prices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 /time'],  // Instituição associada.
+                         ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 /time']]; // Instituição não associada.
+
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+      var deadline_start = new Date();
+      deadline_start.setDate(discount_deadline.substring(0, 2));
+      deadline_start.setMonth(discount_deadline.substring(3, 5));
+      deadline_start.setYear(discount_deadline.substring(6));
+      deadline_start.setDate(deadline_start.getDate() + 1);
+      deadline_start = `${deadline_start.getDate()}/${deadline_start.getMonth()}/${deadline_start.getFullYear()}`;
+
+      var team = `
+      <p>
+        A inscrição é feita em dois passos, que podem ser feitos em qualquer ordem:
+      </p>
+      <ol>
+        <li>
+          O técnico deve inscrever os times no <a href=http://icpc.global>site do ICPC</a>, na <a href=1aFase.html>sede da sua região</a> (conforme as <a href="../../sobre/regras.html">regras do concurso</a>) do subcontest <em>South America/Brazil First Phase</em>.
+        </li>
+        <li>
+          O técnico deve providenciar o pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site do ECOS da SBC</a>. Veja abaixo os valores para inscrever os times de sua instituição:
+          <center>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Times</th>
+                  <th scope="col">Instituição Associada</th>
+                  <th scope="col">Instituição <strong>Não</strong> Associada</th>
+                </tr>
+              </thead>
+              <tr>
+                  <td rowspan="3" class="align-middle">Até ${discount_deadline}</td>
+                  <td>1</td> <td>${discount_prices[0][0]}</td><td>${discount_prices[1][0]}</td></tr>
+              <tr><td>2</td> <td>${discount_prices[0][1]}</td><td>${discount_prices[1][1]}</td></tr>
+              <tr><td>3+</td><td>${discount_prices[0][2]}</td><td>${discount_prices[1][2]}</td></tr>
+              <tr>
+                <td rowspan="3" class="align-middle">De ${deadline_start} a ${deadline}</td>
+                  <td>1</td> <td>${full_prices[0][0]}</td><td>${full_prices[1][0]}</td></tr>
+              <tr><td>2</td> <td>${full_prices[0][1]}</td><td>${full_prices[1][1]}</td></tr>
+              <tr><td>3+</td><td>${full_prices[0][2]}</td><td>${full_prices[1][2]}</td></tr>
+            </table>
+          </center>
+        </li>
+      </ol>
+      <p>
+        <strong class="text-danger">IMPORTANTE:</strong> Verifique no site do ICPC que o status de seus times passe de <em>pending</em> para <em>accepted</em> quando os passos acima forem cumpridos. Caso isso não ocorra, entre em contato com <a href="contato.html"> a organização do evento.</a>
+      </p>
+      <p>
+        A inscrição na Maratona é Institucional, por isso é fortemente recomendado que seja feita a inscrição somente pelo cadastro da Instituição responsável para se inscrever como Associada Institucional da SBC, deve acessar o ECOS utilizando o cadastro da Instituição, somente assim o sistema reconhecerá a associação Institucional e liberará as categorias para associados. Caso não tenha conhecimento do e-mail que está cadastrado no sistema da SBC e se a associação institucional está vigente, pode ${contact("consultar a SBC", "s", "bc@sbc", ".org.", "b", "r")}.
+      </p>`;
+              var ccl = `
+      <p>
+        Algumas sedes oferecem vagas para times <em>café-com-leite</em> - que não podem se classificar para as fases seguintes. Os participantes destes times não precisar ser elegíveis ou mesmo alunos de instituições de ensino superior. A inscrição também se dá em dois passos:
+      </p>
+      <ol>
+        <li>O representante do time deve preencher os dados do time <a href="">neste formulário.</a></li>
+        <li>Pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site da SBC</a> (como no item anterior).</li>
+      </ol>`;
+              var refund = `
+      <p>
+        Caso haja desistência de participação até o dia ??? pode-se fazer a devolução de 80% do valor pago pela inscrição. Após esta data não haverá devolução de qualquer valor pago. Para solicitar o cancelamento, enviar um e-mail a ${contact("faturamento da SBC", "faturamento", "@sb", "c.o", "rg", ".br")}.
+      </p>`;
+    </script>
   </head>
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
-
-    <div class="container text-left">
-      <h1>Inscrições</h1>
-      <p class="text-danger">
-        O prazo de inscrição é <strong>dd/mm/aa</strong>.
-      </p>
+      <div class="container text-left">
+        <h1>Inscrições</h1>
+        <p class="text-danger">
+          O prazo de inscrição é <strong><script type="text/javascript">document.write(deadline);</script></strong>.
+        </p>
       <script type="text/javascript">
-        var team = `
-<p>
-  A inscrição é feita em dois passos, que podem ser feitos em qualquer ordem:
-</p>
-<ol>
-  <li>
-    O técnico deve inscrever os times no <a href=http://icpc.global>site do ICPC</a>, na <a href=1aFase.html>sede da sua região</a> (conforme as <a href="../../sobre/regras.html">regras do concurso</a>) do subcontest <em>South America/Brazil First Phase</em>.
-  </li>
-  <li>
-    O técnico deve providenciar o pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site do ECOS da SBC</a>. Veja abaixo os valores para inscrever os times de sua instituição:
-    <center>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Times</th>
-            <th scope="col">Instituição Associada</th>
-            <th scope="col">Instituição <strong>Não</strong> Associada</th>
-          </tr>
-        </thead>
-        <tr>
-          <td rowspan="3" class="align-middle">Até dd/mm/aa</td>
-            <td>1</td> <td>R$ ,00</td>       <td>R$ ,00</td></tr>
-        <tr><td>2</td> <td>R$ ,00</td>       <td>R$ ,00</td></tr>
-        <tr><td>3+</td><td>R$ ,00 / time</td><td>R$ ,00 / time</td></tr>
-        <tr>
-          <td rowspan="3" class="align-middle">De dd/mm/aa a dd/mm/aa</td>
-            <td>1</td> <td>R$ ,00</td>       <td>R$ ,00</td></tr>
-        <tr><td>2</td> <td>R$ ,00</td>       <td>R$ ,00</td></tr>
-        <tr><td>3+</td><td>R$ ,00 / time</td><td>R$ ,00 / time</td></tr>
-      </table>
-    </center>
-  </li>
-</ol>
-<p>
-  <strong class="text-danger">IMPORTANTE:</strong> Verifique no site do ICPC que o status de seus times passe de <em>pending</em> para <em>accepted</em> quando os passos acima forem cumpridos. Caso isso não ocorra, entre em contato com <a href="contato.html"> a organização do evento.</a>
-</p>
-<p>
-  A inscrição na Maratona é Institucional, por isso é fortemente recomendado que seja feita a inscrição somente pelo cadastro da Instituição responsável para se inscrever como Associada Institucional da SBC, deve acessar o ECOS utilizando o cadastro da Instituição, somente assim o sistema reconhecerá a associação Institucional e liberará as categorias para associados. Caso não tenha conhecimento do e-mail que está cadastrado no sistema da SBC e se a associação institucional está vigente, pode ${contact("consultar a SBC", "s", "bc@sbc", ".org.", "b", "r")}.
-</p>`;
-        var ccl = `
-<p>
-  Algumas sedes oferecem vagas para times <em>café-com-leite</em> - que não podem se classificar para as fases seguintes. Os participantes destes times não precisar ser elegíveis ou mesmo alunos de instituições de ensino superior. A inscrição também se dá em dois passos:
-</p>
-<ol>
-  <li>O representante do time deve preencher os dados do time <a href="">neste formulário.</a></li>
-  <li>Pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site da SBC</a> (como no item anterior).</li>
-</ol>`;
-        var refund = `
-<p>
-  Caso haja desistência de participação até o dia ??? pode-se fazer a devolução de 80% do valor pago pela inscrição. Após esta data não haverá devolução de qualquer valor pago. Para solicitar o cancelamento, enviar um e-mail a ${contact("faturamento da SBC", "faturamento", "@sb", "c.o", "rg", ".br")}.
-</p>`;
-
         document.write(accordion('enroll', [['team', 'Time(s)', team],
-                                            ['ccl', 'Café-com-Leite', ccl],
-                                            ['refund', 'Desistência & Reembolso', refund]]));
-    </script>
-
-    <script type="text/javascript">document.write(bodyFooter());</script>
+                                              ['ccl', 'Café-com-Leite', ccl],
+                                              ['refund', 'Desistência & Reembolso', refund]]));
+        document.write(bodyFooter());
+      </script>
+    </div>
   </body>
 </html>
