@@ -16,7 +16,10 @@
       <h1>Final Nacional</h1>
       Informações iniciais.
       <script type="text/javascript">
-        // ********************************************************************
+        //======================================================================
+        // Atualizar as informações abaixo.
+        // sponsor, signup, organization,
+        //======================================================================
         var sponsor = `
 <p>
   Informações dos patrocinadores.
@@ -32,47 +35,26 @@
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva..
 </p>`;
         // ********************************************************************
-        var warmup = `
-<ul>
-  <li><a href="warmup/info_maratona.pdf">Informações</a></li>
-  <li><a href="warmup/maratona.pdf">Problemas da prova</a></li>
-  <li><a href="warmup/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
-</ul>
-</p>
-  Autores dos problemas:
-<p>
-  <ol type="A">
-      <li>Almost Origami - Alejandro Strejilevich de Loma, Argentina</li>
-      <li>Mountain Ranges - Vinicius Santos, Brasil</li>
-      <li>Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil</li>
-  </ol>`;
+        var warmup_problems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
+                               'Mountain Ranges - Vinicius Santos, Brasil',
+                               'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
         // ********************************************************************
-        var contest = `
-<ul>
-  <li><a href="contest/info_maratona.pdf">Informações</a></li>
-  <li><a href="contest/maratona.pdf">Problemas da prova</a></li>
-  <li><a href="contest/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
-</ul>
-</p>
-  Autores dos problemas:
-<p>
-  <ol type="A">
-      <li>Ancient Towers - Giovanna Kobus Conrado, Brasil</li>
-      <li>Because, Art! - Naim Shaikhzadeh Santos, Brasil</li>
-      <li>Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil</li>
-      <li>Daily Turnovers, Yan Silva, Brasil</li>
-      <li>Expedition Plans, Daniel Bossle, Brasil</li>
-      <li>Fields Division, Yan Silva, Brasil</li>
-      <li>Generator Tree, Victor de Sousa Lamarca, Brasil</li>
-      <li>Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil</li>
-      <li>Invested Money, Alejandro Strejilevich de Loma, Argentina</li>
-      <li>Joining Pairs, Giovanna Kobus Conrado, Brasil</li>
-      <li>KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina</li>
-      <li>Leaving Yharnam, Giovanna Kobus Conrado, Brasil</li>
-      <li>Most Ordered Way, Naim Shaikhzadeh Santos, Brasil</li>
-  </ol>`;
+        var contest_problems = ['Ancient Towers - Giovanna Kobus Conrado, Brasil',
+                                'Because, Art! - Naim Shaikhzadeh Santos, Brasil',
+                                'Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil',
+                                'Daily Turnovers, Yan Silva, Brasil',
+                                'Expedition Plans, Daniel Bossle, Brasil',
+                                'Fields Division, Yan Silva, Brasil',
+                                'Generator Tree, Victor de Sousa Lamarca, Brasil',
+                                'Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil',
+                                'Invested Money, Alejandro Strejilevich de Loma, Argentina',
+                                'Joining Pairs, Giovanna Kobus Conrado, Brasil',
+                                'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
+                                'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
+                                'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+
         // ********************************************************************
-        var topTeams = [//[teamName, [contestants], [coaches]
+        var medalists = [// [teamName, [contestants], [coaches]
          ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
          ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
          ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
@@ -86,18 +68,41 @@
          ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
          ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
 
-        var regional = `
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">Centro Oeste: UnB - Posso mandar um WA?</li>
-  <li class="list-group-item">Nordeste: UFPE - Amigos do Yuki U・ᴥ・U</li>
-  <li class="list-group-item">Norte: UFAM - tuturu sem O(1)</li>
-  <li class="list-group-item">Sudeste: UFMG - Summerginmune?</li>
-  <li class="list-group-item">Sul: UDESC - The Ballonatics</li>
-</ul>`;
-        var ccl = [['WAN TAAN SURI KILL', [], []]];
+        var regional_champs = ['UnB - Posso mandar um WA?',     // CO
+                               'UFPE - Amigos do Yuki U・ᴥ・U',  // NE
+                               'UFAM - tuturu sem O(1)',        // NO
+                               'UFMG - Summerginmune?',         // SE
+                               'UDESC - The Ballonatics'];      // SU
+
+        var ccl = [['WAN TAAN SURI KILL', [], []]]; // [teamName, [contestants], [coaches]
         //======================================================================
         // Não editar a partir daqui.
         //======================================================================
+        function contest_info(contest, problems) {
+          var info = `
+<ul>
+  <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
+  <li><a href=${contest}/maratona.pdf">Problemas da prova</a></li>
+  <li><a href=${contest}/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
+</ul>
+<p>
+  Autores dos problemas:
+</p>
+<ol type="A">`;
+          for (problem of problems)
+            info += `<li>${problem}</li>`;
+          return `${info}
+  </ol>`;
+        }
+
+        function listTeams(teams, start) {
+          var list = `<ol start=${start}>`;
+          for (team of teams)
+            list += `
+  <li><strong>${team[0]}:</strong> ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
+          return `${list}
+</ol>`;
+        }
 
         var reports = `
 <ul>
@@ -115,41 +120,42 @@
     </div>
     <div class="col-md-11">
       <div class="card-body">
-        <h5 class="card-title">${topTeams[0][0]}</h5>
-        <p class="card-text">${topTeams[0][1].join(', ')}${topTeams[0][2].length > 0 ? ' e coach(es) ' + topTeams[0][2].join(', ') : ''}.</p>
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
       </div>
     </div>
   </div>
 </div>`;
+        var regional_champs = `
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0]}</strong></li>
+  <li class="list-group-item">Nordeste: <strong>${regional_champs[1]}</strong></li>
+  <li class="list-group-item">Norte: <strong>${regional_champs[2]}</strong></li>
+  <li class="list-group-item">Sudeste: <strong>${regional_champs[3]}</strong></li>
+  <li class="list-group-item">Sul: <strong>${regional_champs[4]}</strong></li>
+</ul>`;
 
-        function listTeams(teams, start) {
-          var list = `<ol start=${start}>`;
-          for (team of teams)
-            list += `
-  <li>${team[0]}: ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
-          return `${list}
-</ol>`;
-        }
-
-        var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = 4, xxx = '';
-        var gold = topTeams.slice(0, TEAMS_PER_MEDAL),
-            silver = topTeams.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
-            bronze = topTeams.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
-
-
+        var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = medalists.length / 3;
+        var gold = medalists.slice(0, TEAMS_PER_MEDAL),
+            silver = medalists.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
+            bronze = medalists.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
         var results = accordion('PhaseResults',
                                 [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
                                  ['S', 'Medalhas de Prata', listTeams(silver, 1 + TEAMS_PER_MEDAL)],
                                  ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + 2 * TEAMS_PER_MEDAL)],
-                                 ['CR', 'Campeões Regionais', regional],
-                                 ['CCL', 'Café com Leite', 'WAN TAAN SURI KILL']],
-                                ['bg-warning  text-black', 'bg-secondary text-white', 'bg-secondary bg-opacity-25  text-black', 'bg-success text-white', 'bg-light text-black']);
+                                 ['CR', 'Campeões Regionais', regional_champs],
+                                 ['CCL', 'Café com Leite', listTeams(ccl, 1)]],
+                                ['bg-warning  text-black',
+                                 'bg-secondary text-white',
+                                 'bg-secondary bg-opacity-25 text-black',
+                                 'bg-success text-white',
+                                 'bg-light text-black']);
 
         document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
                                            ['Signup', 'Inscrições', signup],
                                            ['Organization', 'Organização', organization],
-                                           ['WarmUp', 'Warm Up', warmup],
-                                           ['Contest', 'Prova', contest],
+                                           ['WarmUp', 'Warm Up', contest_info('warmup', warmup_problems)],
+                                           ['Contest', 'Prova', contest_info('contest', contest_problems)],
                                            ['Result', 'Resultados', reports + champion + results]]));
       </script>
     </div>
