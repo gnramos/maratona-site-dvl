@@ -16,18 +16,22 @@
       <h1>Final Nacional</h1>
       Informações iniciais.
       <script type="text/javascript">
+        // ********************************************************************
         var sponsor = `
 <p>
   Informações dos patrocinadores.
 </p>`;
+        // ********************************************************************
         var signup = `
 <p>
   Informações dos inscritos.
 </p>`;
+        // ********************************************************************
         var organization = `
 <p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva..
 </p>`;
+        // ********************************************************************
         var warmup = `
 <ul>
   <li><a href="warmup/info_maratona.pdf">Informações</a></li>
@@ -42,6 +46,7 @@
       <li>Mountain Ranges - Vinicius Santos, Brasil</li>
       <li>Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil</li>
   </ol>`;
+        // ********************************************************************
         var contest = `
 <ul>
   <li><a href="contest/info_maratona.pdf">Informações</a></li>
@@ -66,22 +71,41 @@
       <li>Leaving Yharnam, Giovanna Kobus Conrado, Brasil</li>
       <li>Most Ordered Way, Naim Shaikhzadeh Santos, Brasil</li>
   </ol>`;
-         var reports = `
+        // ********************************************************************
+        var topTeams = [//[teamName, [contestants], [coaches]
+         ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
+         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
+         ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
+         ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
+         ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
+         ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
+         ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli.']],
+         ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
+         ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
+         ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
+         ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
+         ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
+
+        var regional = `
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Centro Oeste: UnB - Posso mandar um WA?</li>
+  <li class="list-group-item">Nordeste: UFPE - Amigos do Yuki U・ᴥ・U</li>
+  <li class="list-group-item">Norte: UFAM - tuturu sem O(1)</li>
+  <li class="list-group-item">Sudeste: UFMG - Summerginmune?</li>
+  <li class="list-group-item">Sul: UDESC - The Ballonatics</li>
+</ul>`;
+        var ccl = [['WAN TAAN SURI KILL', [], []]];
+        //======================================================================
+        // Não editar a partir daqui.
+        //======================================================================
+
+        var reports = `
 <ul>
   <li><a href="contest/score.html">Placar final</a></li>
   <li><a href="contest/runs.html">Lista de submissões</a></li>
   <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
   <li><a href="contest/statistic.html">Estatísticas</a></li>
 </ul>`;
-
-        function medal(teams, start) {
-          var t = `<ol start=${start}>`;
-          for (team of teams)
-            t += `
-  <li>${team}</li>`
-          return t;
-        }
-
         var champion = `
 <div class="card mb-3">
   <h4 class='text-center'><strong>Campeões</strong></h4>
@@ -91,36 +115,35 @@
     </div>
     <div class="col-md-11">
       <div class="card-body">
-        <h5 class="card-title">UFPE - Amigos de Yuki U・ᴥ・U</h5>
-        <p class="card-text">Gabriel Pessoa, Bezaliel Silva, Ícaro Guerra, coaches Nivan Ferreira e Tiago Gonçalves.</p>
+        <h5 class="card-title">${topTeams[0][0]}</h5>
+        <p class="card-text">${topTeams[0][1].join(', ')}${topTeams[0][2].length > 0 ? ' e coach(es) ' + topTeams[0][2].join(', ') : ''}.</p>
       </div>
     </div>
   </div>
 </div>`;
-        var regional = `
-<ul class="list-group list-group-flush">
-  <li class="list-group-item">Centro Oeste: UnB - Posso mandar um WA?</li>
-  <li class="list-group-item">Nordeste: UFPE - Amigos do Yuki U・ᴥ・U</li>
-  <li class="list-group-item">Norte: UFAM - tuturu sem O(1)</li>
-  <li class="list-group-item">Sudeste: UFMG - Summerginmune?</li>
-  <li class="list-group-item">Sul: UDESC - The Ballonatics</li>
-</ul>`;
 
-        var results = accordion('PhaseResults', [['G', 'Medalhas de Ouro', medal(['UFPE - Amigos de Yuki U・ᴥ・U: Gabriel Pessoa, Bezaliel Silva, Ícaro Guerra, coaches Nivan Ferreira e Tiago Gonçalves',
-                                                                                'UFMG - Summergimurne?: Emanuel Silva, Bernardo Amorim, Bruno Monteiro e coaches Pedro Paniago e Rafael Grandsire',
-                                                                                'IMPA - Last Chance: Yukun Zhao, Celio Passos, Angel Napa Bernuy, coach Lucas Resende',
-                                                                                'USP-São Carlos - gramando no deitado'], 1)],
-                                             ['S', 'Medalhas de Prata', medal(["USP - Hoje tem 'In Queue' do Ribamar: Gabriel Morete, Thiago Oliveira, Lucas Harada, coaches Arthur Nascimento, Germano Neuenfeld.",
-                                                                               'UFCG - O amarelo foi ejetado: Daniel Figueiredo, Rennan Freitas, João Medeiros, e coaches Rohit Gheyi, Emerson Lucena e Lucas Figueiredo.',
-                                                                               'UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!: Christopher Ciafrino, Leticia Sousa, Felipe Chen, coach Marcia Cerioli.',
-                                                                               'UFMG - Guloso k-dimensional: Kaio Vieira, Tomaz Mascarenhas, Henrique Brito, coaches Pedro Paniago, Rafael Grandsire.'], 5)],
-                                             ['B', 'Medalhas de Bronze', medal(['Unicamp - Moratonistas: Bernardo Archegas, Luiz Oda, Luiz Morato, e coaches Fabio Usberti e Matheus Viana.',
-                                                                                'UFRN - SegTreeste e Persistente: Paulo Medeiros, Paulo es, João Aquino, e coaches Sergio Medeiros, Carlos o, Rafael Beserra Gomes.',
-                                                                                'IME - Nada é trivial: Henrique Navarro, Davi Holanda, io Macário, e coach Claudia Justel.',
-                                                                                'Se der bom não pergunte como: Israel Silva, Kenzo Nobre,  Arcanjo, e coach Guilherme Tubone e João batista .'], 9)],
-                                             ['CR', 'Campeões Regionais', regional],
-                                             ['CCL', 'Café com Leite', 'WAN TAAN SURI KILL'],
-                                             ], ['bg-warning', 'bg-secondary', 'bg-secondary bg-opacity-25', 'bg-success text-white']);
+        function listTeams(teams, start) {
+          var list = `<ol start=${start}>`;
+          for (team of teams)
+            list += `
+  <li>${team[0]}: ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
+          return `${list}
+</ol>`;
+        }
+
+        var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = 4, xxx = '';
+        var gold = topTeams.slice(0, TEAMS_PER_MEDAL),
+            silver = topTeams.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
+            bronze = topTeams.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
+
+
+        var results = accordion('PhaseResults',
+                                [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
+                                 ['S', 'Medalhas de Prata', listTeams(silver, 1 + TEAMS_PER_MEDAL)],
+                                 ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + 2 * TEAMS_PER_MEDAL)],
+                                 ['CR', 'Campeões Regionais', regional],
+                                 ['CCL', 'Café com Leite', 'WAN TAAN SURI KILL']],
+                                ['bg-warning  text-black', 'bg-secondary text-white', 'bg-secondary bg-opacity-25  text-black', 'bg-success text-white', 'bg-light text-black']);
 
         document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
                                            ['Signup', 'Inscrições', signup],
