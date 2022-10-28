@@ -12,20 +12,16 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, sponsor, signup, organization, warmup_problems, contest_problems, medalists,
+      // initial_info, sponsor, organization, warmup_problems, contest_problems, medalists,
       // regional_champs e ccl.
       //====================================================================================================
       var initial_info = `
 <p>
-  Em 2021 ocorreu a XXVI Maratona SBC de Programação. A primeira fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. <strong>Foram 534 times de 127 instituições brasileiras.</strong>
+  A final brasileira de 2021 foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
 </p>`
       var sponsor = `
 <p>
-  Informações dos patrocinadores.
-</p>`;
-      var signup = `
-<p>
-  Informações dos inscritos.
+  A competição foi patrocinada por VTEX, SAP, CNPq, Americanas, BrDigital, beecrowd e Alura
 </p>`;
       var organization = `
 <p>
@@ -152,7 +148,6 @@
       <script type="text/javascript">
         document.write(initial_info);
         document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
-                                           ['Signup', 'Inscrições', signup],
                                            ['Organization', 'Organização', organization],
                                            ['WarmUp', 'Warm Up', contest_info('warmup', warmup_problems)],
                                            ['Contest', 'Prova', contest_info('contest', contest_problems)],
