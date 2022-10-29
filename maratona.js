@@ -129,3 +129,33 @@ function accordion(name, items, headerClasses=[]) {
   ${accItems}
 </div>`;
 }
+
+function carousel(images) {
+  var buttons = '', items = '';
+  for (i in images) {
+    buttons += `
+  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="${i}" ${i == 0 ? 'class="active" aria-current="true"' : '' } aria-label="Slide ${Number(i)+1}"></button>`;
+    items += `
+  <div class="carousel-item ${i == 0 ? 'active' : ''}">
+    <img src="${images[i]}" class="d-block w-100">
+  </div>`;
+  }
+
+  return `
+<div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    ${buttons}
+  </div>
+  <div class="carousel-inner">
+    ${items}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>`;
+  }

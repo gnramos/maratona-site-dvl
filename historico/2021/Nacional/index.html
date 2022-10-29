@@ -12,13 +12,14 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, sponsor, organization, warmup_problems, contest_problems, medalists,
+      // initial_info, images, sponsor, organization, warmup_problems, contest_problems, medalists,
       // regional_champs e ccl.
       //====================================================================================================
       var initial_info = `
 <p>
   A final brasileira de 2021 foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
 </p>`;
+      var images = ['img/all_participants.jpeg'];
       var sponsor = `
 <p>
   A competição foi patrocinada por VTEX, SAP, CNPq, Americanas, BrDigital, beecrowd e Alura
@@ -126,7 +127,8 @@
       <h1>Final Nacional</h1>
       <script type="text/javascript">
         document.write(initial_info);
-        document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
+        document.write(accordion('Phase', [['Images', 'Fotos', carousel(images)],
+                                           ['Sponsor', 'Patrocinadores', sponsor],
                                            ['Organization', 'Organização', organization],
                                            ['WarmUp', 'Warm Up', slides + contest_info('warmup', warmup_problems)],
                                            ['Contest', 'Prova', contest_info('contest', contest_problems)],
