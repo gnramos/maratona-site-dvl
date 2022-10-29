@@ -76,6 +76,9 @@
 </ol>`;
       }
 
+      var slides = `
+<a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
+
       var champion = `
 <div class="card mb-3">
   <h4 class='text-center'><strong>Campeões</strong></h4>
@@ -125,7 +128,7 @@
         document.write(initial_info);
         document.write(accordion('Phase', [['Sponsor', 'Patrocinadores', sponsor],
                                            ['Organization', 'Organização', organization],
-                                           ['WarmUp', 'Warm Up', contest_info('warmup', warmup_problems)],
+                                           ['WarmUp', 'Warm Up', slides + contest_info('warmup', warmup_problems)],
                                            ['Contest', 'Prova', contest_info('contest', contest_problems)],
                                            ['Result', 'Resultados', contest_reports() + champion + results]]));
       </script>
