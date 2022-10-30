@@ -64,6 +64,16 @@
                              'UFAM - tuturu sem O(1)',        // NO
                              'UFMG - Summerginmune?',         // SE
                              'UDESC - The Ballonatics'];      // SU
+      var extra = `
+ <p>
+ Foi realizada tamb&eacute;m uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/"> Caninos Loucos</a>,
+    organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS).  Os três melhores times foram:
+</p>
+<ul>
+  <li><a href="img/cefetrj.webp">CEFET-RJ - random.choice(funny_names)</a>
+  <li><a href="img/unb.webp">UnB - Posso mandar um WA?</a>
+  <li><a href="img/ufcqxd.webp">UFC-Quixadá - two thousands rubles trap</a>
+</ul>`;
 
       //======================================================================
       // Não editar a partir daqui.
@@ -132,7 +142,13 @@
                                            ['Organization', 'Organização', organization],
                                            ['WarmUp', 'Warm Up', slides + contest_info('warmup', warmup_problems)],
                                            ['Contest', 'Prova', contest_info('contest', contest_problems)],
-                                           ['Result', 'Resultados', contest_reports() + champion + results]]));
+                                           ['Result', 'Resultados', contest_reports() + champion + results],
+                                           ['Extra', 'Caninos Loucos', extra]
+                                           ]));
+        document.write(`
+<p>
+  Os times classificados para a final mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(CURRENT_YEAR) + 1}/"> curso de treinamento </a> que ocorrerá na Unicamp.
+</p>`);
       </script>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>
