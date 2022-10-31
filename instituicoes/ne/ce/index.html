@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona de Programação SBC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../draw.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>Ceará</h1>
+    </div>
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col-sm-2">
+          <img src="ce.svg" style="border: 1px solid #555;" height="100pt">
+        </div>
+        <div class="col-sm-10">
+          <!-- Data chart vai aqui, nada a fazer. -->
+          <div id="chart" class="row"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-left">
+      <ul class="list-group">
+        <li class="list-group-item"><a href="unichristus.html">Centro Universitário Christus</a></li>
+        <li class="list-group-item"><a href="flf.html">Faculdade Lourenço Filho</a></li>
+        <li class="list-group-item"><a href="fap.html">Faculdade Paraíso do Ceará</a></li>
+        <li class="list-group-item"><a href="fjn.html">Faculdade de Juazeiro do Norte</a></li>
+        <li class="list-group-item"><a href="ufersa.html">Federal University Rural of the Semi-Arid</a></li>
+        <li class="list-group-item"><a href="ifce-aracati.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Aracati</a></li>
+        <li class="list-group-item"><a href="ifcecampuscedro.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Cedro</a></li>
+        <li class="list-group-item"><a href="ifce-campuscrato.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Crato</a></li>
+        <li class="list-group-item"><a href="ifce-fortaleza.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Fortaleza</a></li>
+        <li class="list-group-item"><a href="ifce-tiangua.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Tianguá</a></li>
+        <li class="list-group-item"><a href="cienciadacomputacao.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Maracanaú</a></li>
+        <li class="list-group-item"><a href="ifce.html">Instituto Federal de Ensino, Ciência e Tecnologia do Ceará</a></li>
+        <li class="list-group-item"><a href=".html">Universidade Estadual Vale do Acaraú</a></li>
+        <li class="list-group-item"><a href="uece.html">Universidade Estadual do Ceará</a></li>
+        <li class="list-group-item"><a href="ufca.html">Universidade Federal do Cariri</a></li>
+        <li class="list-group-item"><a href="ufc-crateus.html">Universidade Federal do Ceará - Campus Crateús</a></li>
+        <li class="list-group-item"><a href="ufc-quixada.html">Universidade Federal do Ceará - Campus Quixadá</a></li>
+        <li class="list-group-item"><a href="ufc.html">Universidade Federal do Ceará</a></li>
+        <li class="list-group-item"><a href="unifor.html">Universidade de Fortaleza</a></li>
+      </ul>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>

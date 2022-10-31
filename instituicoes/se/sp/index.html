@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona de Programação SBC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../draw.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>São Paulo</h1>
+    </div>
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col-sm-2">
+          <img src="sp.svg" style="border: 1px solid #555;" height="100pt">
+        </div>
+        <div class="col-sm-10">
+          <!-- Data chart vai aqui, nada a fazer. -->
+          <div id="chart" class="row"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-left">
+      <ul class="list-group">
+        <li class="list-group-item"><a href="fatecaracatuba.html">Centro Estadual de Educação Tecnológica Paula Souza</a></li>
+        <li class="list-group-item"><a href="unifacef.html">Centro Universitario Municipal de Franca</a></li>
+        <li class="list-group-item"><a href="unisalesiano.html">Centro Universitário Católico Salesiano Auxilum</a></li>
+        <li class="list-group-item"><a href="uniararas.html">Centro Universitário Hermínio Ometto</a></li>
+        <li class="list-group-item"><a href="cuml.html">Centro Universitário Moura Lacerda</a></li>
+        <li class="list-group-item"><a href="unisal.html">Centro Universitário Salesiano de São Paulo</a></li>
+        <li class="list-group-item"><a href="senac-sp.html">Centro Universitário Senac-SP</a></li>
+        <li class="list-group-item"><a href="fei.html">Centro Universitário da FEI</a></li>
+        <li class="list-group-item"><a href="ceub-ite.html">Centro Universitário de Bauru</a></li>
+        <li class="list-group-item"><a href="unorp.html">Centro Universitário do Norte Paulista</a></li>
+        <li class="list-group-item"><a href="esamc.html">ESAMC Sorocaba</a></li>
+        <li class="list-group-item"><a href="espm.html">Escola Superior de Propaganda e Marketing de São Paulo</a></li>
+        <li class="list-group-item"><a href="eep.html">Escola de Engenharia de Piracicaba</a></li>
+        <li class="list-group-item"><a href="facens.html">FACENS - Faculdade de Engenharia de Sorocaba</a></li>
+        <li class="list-group-item"><a href="fatecipe.html">FATEC Itapetininga</a></li>
+        <li class="list-group-item"><a href="fam.html">Faculdade Das Americas</a></li>
+        <li class="list-group-item"><a href="faculdadeimpactade.html">Faculdade Impacta de Tecnologia</a></li>
+        <li class="list-group-item"><a href="fateb.html">Faculdade de Ciências e Tecnologia de Birigui</a></li>
+        <li class="list-group-item"><a href="ffclrp-usp.html">Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto (Universidade de São Paulo)</a></li>
+        <li class="list-group-item"><a href="fiap.html">Faculdade de Informática e Administração Paulista</a></li>
+        <li class="list-group-item"><a href="faj.html">Faculdade de Jaguariúna - FAJ</a></li>
+        <li class="list-group-item"><a href="fatecamericana.html">Faculdade de Tecnologia Americana</a></li>
+        <li class="list-group-item"><a href="ftt.html">Faculdade de Tecnologia Termomecanica</a></li>
+        <li class="list-group-item"><a href="fateczl.html">Faculdade de Tecnologia da Zona Leste</a></li>
+        <li class="list-group-item"><a href="fateczs.html">Faculdade de Tecnologia da Zona Sul</a></li>
+        <li class="list-group-item"><a href="fateccruzeiro.html">Faculdade de Tecnologia de Cruzeiro</a></li>
+        <li class="list-group-item"><a href="fatecgarca.html">Faculdade de Tecnologia de Garça</a></li>
+        <li class="list-group-item"><a href="fatec-gt.html">Faculdade de Tecnologia de Guaratingueta</a></li>
+        <li class="list-group-item"><a href="faculdadedetecnologiadeitu.html">Faculdade de Tecnologia de Itu</a></li>
+        <li class="list-group-item"><a href="fateclins.html">Faculdade de Tecnologia de Lins</a></li>
+        <li class="list-group-item"><a href="fatecmococa.html">Faculdade de Tecnologia de Mococa</a></li>
+        <li class="list-group-item"><a href="fatec-mc.html">Faculdade de Tecnologia de Mogi das Cruzes</a></li>
+        <li class="list-group-item"><a href="fatecourinhos.html">Faculdade de Tecnologia de Ourinhos</a></li>
+        <li class="list-group-item"><a href=".html">Faculdade de Tecnologia de Sorocaba</a></li>
+        <li class="list-group-item"><a href="fatec-sjc.html">Faculdade de Tecnologia de São José dos Campos</a></li>
+        <li class="list-group-item"><a href="fatecsaopaulo.html">Faculdade de Tecnologia de São Paulo</a></li>
+        <li class="list-group-item"><a href="fib.html">Faculdades Integradas de Bauru</a></li>
+        <li class="list-group-item"><a href="fatecbauru.html">Fatec Bauru</a></li>
+        <li class="list-group-item"><a href="ifsp-salto.html">IFSP - Salto</a></li>
+        <li class="list-group-item"><a href="insper.html">Insper Institute of Education and Research</a></li>
+        <li class="list-group-item"><a href="ite.html">Instituição Toledo de Ensino</a></li>
+        <li class="list-group-item"><a href="ipt.html">Institute for Technological Research of the State of São Paulo</a></li>
+        <li class="list-group-item"><a href="ifsp-birigui.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus Birigui</a></li>
+        <li class="list-group-item"><a href="ifsp-campuspresid.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus Presidente Epitácio</a></li>
+        <li class="list-group-item"><a href="ifsp.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo</a></li>
+        <li class="list-group-item"><a href="ifsp-barretos.html">Instituto Federal de São Paulo - Barretos</a></li>
+        <li class="list-group-item"><a href="ifsp-piracicaba.html">Instituto Federal de São Paulo - Campus Piracicaba</a></li>
+        <li class="list-group-item"><a href="imt-cscs.html">Instituto Mauá de Tecnologia- Campus de São Caetano do Sul</a></li>
+        <li class="list-group-item"><a href="ita.html">Instituto Tecnológico de Aeronautica</a></li>
+        <li class="list-group-item"><a href="puc-campinas.html">Pontifícia Universidade Católica de Campinas</a></li>
+        <li class="list-group-item"><a href="fct-unesp.html">UNESP - Universidade Estadual Paulista (Faculdade de Ciências e Tecnologia - Presidente Prudente)</a></li>
+        <li class="list-group-item"><a href="ibilce-unesp.html">UNESP - Universidade Estadual Paulista (IBILCE)</a></li>
+        <li class="list-group-item"><a href="unesp-bauru.html">UNESP - Universidade Estadual Paulista - (Faculdade de Ciências - Bauru)</a></li>
+        <li class="list-group-item"><a href="unip-campussorocaba.html">UNIP - Campus Sorocaba</a></li>
+        <li class="list-group-item"><a href="univem.html">UNIVEM - Centro Universitário Eurípides de Marília</a></li>
+        <li class="list-group-item"><a href="unoeste.html">UNOESTE - Universidade do Oeste Paulista</a></li>
+        <li class="list-group-item"><a href="unisantos.html">Universidade Católica de Santos</a></li>
+        <li class="list-group-item"><a href="unesprioclaro.html">Universidade Estadual Paulista Rio Claro</a></li>
+        <li class="list-group-item"><a href="unesp-rc.html">Universidade Estadual Paulista Unesp Rio Claro</a></li>
+        <li class="list-group-item"><a href="unicamp-ft.html">Universidade Estadual de Campinas - Faculdade de Tecnologia</a></li>
+        <li class="list-group-item"><a href="unicamp.html">Universidade Estadual de Campinas</a></li>
+        <li class="list-group-item"><a href="uenp.html">Universidade Estadual do Norte do Paraná</a></li>
+        <li class="list-group-item"><a href="ufscar-sorocaba.html">Universidade Federal de São Carlos - Campus Sorocaba</a></li>
+        <li class="list-group-item"><a href="ufscar.html">Universidade Federal de São Carlos</a></li>
+        <li class="list-group-item"><a href="unifesp.html">Universidade Federal de São Paulo</a></li>
+        <li class="list-group-item"><a href="ufabc.html">Universidade Federal do ABC</a></li>
+        <li class="list-group-item"><a href="ufpr-ja.html">Universidade Federal do Paraná - Jandaia do Sul</a></li>
+        <li class="list-group-item"><a href="uninove.html">Universidade Nove de Julho</a></li>
+        <li class="list-group-item"><a href="uniparacatuba.html">Universidade Paulista - Campus Araçatuba</a></li>
+        <li class="list-group-item"><a href="unip-bauru.html">Universidade Paulista - Campus Bauru</a></li>
+        <li class="list-group-item"><a href="unip.html">Universidade Paulista</a></li>
+        <li class="list-group-item"><a href="usf.html">Universidade São Francisco</a></li>
+        <li class="list-group-item"><a href="usjt.html">Universidade São Judas Tadeu</a></li>
+        <li class="list-group-item"><a href="univesp.html">Universidade Virtual do Estado de São Paulo</a></li>
+        <li class="list-group-item"><a href="universidadedesorocaba.html">Universidade de Sorocaba</a></li>
+        <li class="list-group-item"><a href="usp-saocarlos.html">Universidade de São Paulo - Campus de São Carlos</a></li>
+        <li class="list-group-item"><a href="poli-usp.html">Universidade de São Paulo - Escola Politécnica</a></li>
+        <li class="list-group-item"><a href="each-usp.html">Universidade de São Paulo - Escola de Artes, Ciências e Humanidades</a></li>
+        <li class="list-group-item"><a href="usp.html">Universidade de São Paulo</a></li>
+        <li class="list-group-item"><a href="unitau.html">Universidade de Taubaté</a></li>
+        <li class="list-group-item"><a href="unesc.html">Universidade do Extremo Sul Catarinense</a></li>
+        <li class="list-group-item"><a href="univap.html">Universidade do Vale do Paraíba</a></li>
+      </ul>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona de Programação SBC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../draw.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>Santa Catarina</h1>
+    </div>
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col-sm-2">
+          <img src="sc.svg" style="border: 1px solid #555;" height="100pt">
+        </div>
+        <div class="col-sm-10">
+          <!-- Data chart vai aqui, nada a fazer. -->
+          <div id="chart" class="row"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-left">
+      <ul class="list-group">
+        <li class="list-group-item"><a href="unibave.html">Centro Universitário Barriga Verde</a></li>
+        <li class="list-group-item"><a href="ceplan-udesc.html">Centro de Educação do Planalto Norte</a></li>
+        <li class="list-group-item"><a href="faculdadeanhanguera.html">Faculdade Anhanguera de Joinville</a></li>
+        <li class="list-group-item"><a href="horus.html">Horus Faculdades - Pinhalzinho</a></li>
+        <li class="list-group-item"><a href="ifc.html">Instituto Federal Catarinense</a></li>
+        <li class="list-group-item"><a href="ifsc.html">Instituto Federal de Santa Catarina</a></li>
+        <li class="list-group-item"><a href="iesgf.html">Instituto de Ensino Superior da Grande Florianópolis</a></li>
+        <li class="list-group-item"><a href="unisociesc.html">UNISOCIESC - Centro Universitário Sociedade Educacional de Santa Catarina</a></li>
+        <li class="list-group-item"><a href="univille.html">UNIVILLE - Universidade da Região de Joinville</a></li>
+        <li class="list-group-item"><a href="unoesc-chapeco.html">UNOESC - Universidade do Oeste de Santa Catarina - Chapecó</a></li>
+        <li class="list-group-item"><a href="unoesc-saomiguel.html">UNOESC - Universidade do Oeste de Santa Catarina - São Miguel do Oeste</a></li>
+        <li class="list-group-item"><a href="unoesc.html">UNOESC - Universidade do Oeste de Santa Catarina</a></li>
+        <li class="list-group-item"><a href="chapeco.html">Universidade Comunitária Regional de Chapecó</a></li>
+        <li class="list-group-item"><a href="uffs.html">Universidade Federal da Fronteira Sul</a></li>
+        <li class="list-group-item"><a href="ufsc-ara.html">Universidade Federal de Santa Catarina (Campus Araranguá)</a></li>
+        <li class="list-group-item"><a href="ufsantacatarina.html">Universidade Federal de Santa Catarina (Campus Florianópolis)</a></li>
+        <li class="list-group-item"><a href="furb.html">Universidade Regional de Blumenau</a></li>
+        <li class="list-group-item"><a href="udesc-ceavi.html">Universidade do Estado de Santa Catarina - CEAVI</a></li>
+        <li class="list-group-item"><a href="udesc.html">Universidade do Estado de Santa Catarina</a></li>
+        <li class="list-group-item"><a href="unesc.html">Universidade do Extremo Sul Catarinense</a></li>
+        <li class="list-group-item"><a href="unisul.html">Universidade do Sul de Santa Catarina</a></li>
+      </ul>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>
