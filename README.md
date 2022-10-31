@@ -6,14 +6,14 @@ Arquivos para divulgação das informações sobre a etapa brasileira do [ICPC](
 
 Diretório com os arquivos de código para processamento de relatórios.
 
-## www
+## docs
 
 Diretório com os arquivos do site.
 
 A criação de um novo evento é simples:
-1. Duplique o diretório [template](www/historico/template) e atualize seu nome para o ano vigente.
-1. Ajustar o valor de `CURRENT_YEAR` ([aqui](www/maratona.js)) para o novo ano.
-1. Inclua o link do ano anterior na página [índice](www/historico/index.html) do histórico.
+1. Duplique o diretório [template](docs/historico/template) e atualize seu nome para o ano vigente.
+1. Ajustar o valor de `CURRENT_YEAR` ([aqui](docs/maratona.js)) para o novo ano.
+1. Inclua o link do ano anterior na página [índice](docs/historico/index.html) do histórico.
 1. Acrescente as informações da edição atual do evento aos arquivo do novo diretório.
 
 #### Instituições
