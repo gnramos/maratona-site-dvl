@@ -9,7 +9,15 @@
 
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      var results = [
+['2017', null, 45, null],
+['2018', null, 32, null],
+['2019', null, 26, null],
+['2020', 35, 28, null],
+['2021', 25, 32, null],
+['2022', 12, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
