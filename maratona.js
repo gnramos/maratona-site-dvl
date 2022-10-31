@@ -88,21 +88,23 @@ function bodyHeader() {
 
 function bodyFooter() {
   return `
-    <footer class="footer mt-auto py-3 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-2">
-            Realização:
-          </div>
-          <div class="col-sm-3">
-            <a href="http://www.sbc.org.br/"><img src="${root()}img/footer_SBC.png" class="img-fluid"></a>
-          </div>
-          <div class="col-sm-7">
-            <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" class="img-fluid"></a>
+    <div class="container">
+      <footer class="footer mt-auto py-3 bg-light justify-content-center border-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              Realização:
+            </div>
+            <div class="col-sm-3">
+              <a href="http://www.sbc.org.br/"><img src="${root()}img/footer_SBC.png" class="img-fluid"></a>
+            </div>
+            <div class="col-sm-7">
+              <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" class="img-fluid"></a>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>`;
+      </footer>
+    </div`;
 }
 
 function accordion(name, items, headerClasses=[]) {
