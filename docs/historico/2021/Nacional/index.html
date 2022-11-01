@@ -12,12 +12,13 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, images, sponsor, organization, warmup_problems, contest_problems, medalists,
+      // THIS_YEAR, initial_info, images, sponsor, organization, warmup_problems, contest_problems, medalists,
       // regional_champs e ccl.
       //====================================================================================================
+      var THIS_YEAR = 2021;
       var initial_info = `
 <p>
-  A final brasileira de 2021 foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
+  A final brasileira de ${THIS_YEAR} foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
 </p>`;
       var images = ['img/all_participants.jpeg', 'img/salao21.jpg'];
       var sponsor = `
@@ -114,14 +115,11 @@
   <li class="list-group-item">Sul: <strong>${regional_champs[4]}</strong></li>
 </ul>`;
 
-      var TEAMS_PER_MEDAL = medalists.length / 3;
-      var gold = medalists.slice(0, TEAMS_PER_MEDAL),
-          silver = medalists.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
-          bronze = medalists.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
+      var [gold, silver, bronze] = medals(medalists);
       var results = accordion('PhaseResults',
                               [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
-                               ['S', 'Medalhas de Prata', listTeams(silver, 1 + TEAMS_PER_MEDAL)],
-                               ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + 2 * TEAMS_PER_MEDAL)],
+                               ['S', 'Medalhas de Prata', listTeams(silver, 1 + gold.length)],
+                               ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
                                ['CR', 'Campeões Regionais', regional_champs],
                                ['CCL', 'Café com Leite', listTeams(ccl, 1)]],
                               ['text-black" style="background-color: #FFD700;"',
@@ -148,7 +146,7 @@
         document.write(`
 <br>
 <p>
-  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(CURRENT_YEAR) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
+  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(THIS_YEAR) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
 </p>`);
       </script>
     </div>

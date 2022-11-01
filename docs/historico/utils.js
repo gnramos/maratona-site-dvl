@@ -1,5 +1,8 @@
 function contest_info(contest, problems) {
-  var info = `
+  var info = '';
+  for (problem of problems)
+    info += `\n  <li>${problem}</li>`;
+  return `
 <ul>
   <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
   <li><a href=${contest}/maratona.pdf">Problemas da prova</a></li>
@@ -8,11 +11,8 @@ function contest_info(contest, problems) {
 <p>
   Autores dos problemas:
 </p>
-<ol type="A">`;
-  for (problem of problems)
-    info += `<li>${problem}</li>`;
-  return `${info}
-  </ol>`;
+<ol type="A">${info}
+</ol>`;
 }
 
 function contest_reports() {
@@ -23,6 +23,13 @@ function contest_reports() {
   <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
   <li><a href="contest/statistic.html">Estatísticas</a></li>
 </ul>`;
+}
+
+function medals(medalists) {
+  var teamsPerMedal = medalists.length / 3;
+  return [medalists.slice(0, teamsPerMedal),                         // gold
+          medalists.slice(teamsPerMedal, 2 * teamsPerMedal),       // silver
+          medalists.slice(2 * teamsPerMedal, 3 * teamsPerMedal)];  // bronze
 }
 
 function resultTable(site_teams) {
