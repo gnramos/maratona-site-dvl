@@ -46,7 +46,7 @@
                               'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
                               'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
       var medalists = [// [teamName, [contestants], [coaches], img]
-        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves'], 'yuki.webp'],
+        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
         ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
         ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
@@ -61,11 +61,11 @@
       var ccl = [['WAN TAAN SURI KILL', [], [], 'ccl.jpg']];
 
       var regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
-                             'UnB - Posso mandar um WA?',
-                             'UFPE - Amigos do Yuki U・ᴥ・U',
-                             'UFAM - tuturu sem O(1)',
-                             'UFMG - Summerginmune?',
-                             'UDESC - The Ballonatics'];
+                             ['UnB - Posso mandar um WA?', 'unb.webp'],
+                             ['UFPE - Amigos do Yuki U・ᴥ・U', 'team1.webp'],
+                             ['UFAM - tuturu sem O(1)', 'ufam.webp'],
+                             ['UFMG - Summerginmune?', 'team2.webp'],
+                             ['UDESC - The Ballonatics', 'udesc.webp']];
       var extra = `
  <p>
  Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/">Caninos Loucos</a>, organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS). Os três melhores times foram:
@@ -75,48 +75,23 @@
   <li><a href="img/unb.webp">UnB - Posso mandar um WA?</a>
   <li><a href="img/ufcqxd.webp">UFC-Quixadá - two thousands rubles trap</a>
 </ul>
-<div class="row text-center text-lg-start">
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="img/cefetrj.webp" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/cefetrj.webp" alt="CEFET-RJ - random.choice(funny_names)">
-    </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="img/unb.webp" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/unb.webp" alt="UnB - Posso mandar um WA?">
-    </a>
-  </div>
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="img/ufcqxd.webp" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/ufcqxd.webp" alt="UFC-Quixadá - two thousands rubles trap">
-    </a>
-  </div>
-</div>`;
+${gallery(['cefetrj.webp', 'unb.webp', 'ufcqxd.webp'])}`;
 
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
       function listTeams(teams, start) {
-        var ol = `\n<ol start=${start}>`;
-        for (team of teams)
-          ol += `
-  <li><strong>${team[0]}:</strong> ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
-        ol += `
-</ol>`;
-
-
-        var gallery = `
-<div class="row text-center text-lg-start">`;
-        for (i in teams)
-          gallery += `
-  <div class="col-lg-3 col-md-4 col-6">
-    <a href="img/${teams[i][3] != undefined ? teams[i][3] : "team" + Number(i) + start + ".webp"}" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/${teams[i][3] != undefined ? teams[i][3] : "team" + Number(i) + start + ".webp"}" alt="${teams[i][0]}">
-    </a>
-  </div>`;
-        gallery += `
-</div>`;
-        return ol + gallery;
+        var items = ``, images = [];
+        for (i in teams){
+          items += `
+  <li><strong>${teams[i][0]}:</strong> ${teams[i][1].join(', ')}${teams[i][2].length > 0 ? ' e coach(es) ' + teams[i][2].join(', ') : ''}.</li>`;
+          images.push(teams[i][3] != undefined ? teams[i][3] : "team" + (Number(i) + start) + ".webp");
+        }
+        return `
+\n<ol start=${start}>
+  ${items}
+</ol>
+${gallery(images)}`;
       }
 
       var slides = `
@@ -139,12 +114,13 @@
 </div>`;
       var regional_champs = `
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0]}</strong></li>
-  <li class="list-group-item">Nordeste: <strong>${regional_champs[1]}</strong></li>
-  <li class="list-group-item">Norte: <strong>${regional_champs[2]}</strong></li>
-  <li class="list-group-item">Sudeste: <strong>${regional_champs[3]}</strong></li>
-  <li class="list-group-item">Sul: <strong>${regional_champs[4]}</strong></li>
-</ul>`;
+  <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0][0]}</strong></li>
+  <li class="list-group-item">Nordeste: <strong>${regional_champs[1][0]}</strong></li>
+  <li class="list-group-item">Norte: <strong>${regional_champs[2][0]}</strong></li>
+  <li class="list-group-item">Sudeste: <strong>${regional_champs[3][0]}</strong></li>
+  <li class="list-group-item">Sul: <strong>${regional_champs[4][0]}</strong></li>
+</ul>
+${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
       var [gold, silver, bronze] = medals(medalists);
       var results = accordion('PhaseResults',

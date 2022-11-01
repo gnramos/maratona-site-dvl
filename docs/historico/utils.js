@@ -25,6 +25,21 @@ function contest_reports() {
 </ul>`;
 }
 
+function gallery(images) {
+  var gal = '';
+  for (img of images)
+    gal += `
+  <div class="col-lg-3 col-md-4 col-6">
+    <a href="img/${img}" class="d-block mb-4 h-100">
+      <img class="img-fluid img-thumbnail" src="img/${img}">
+    </a>
+  </div>`;
+        return `
+<div class="row text-center text-lg-start">
+${gal}
+</div>`;
+      }
+
 function medals(medalists) {
   var teamsPerMedal = medalists.length / 3;
   return [medalists.slice(0, teamsPerMedal),                         // gold
