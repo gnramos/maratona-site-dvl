@@ -12,8 +12,8 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // THIS_YEAR, initial_info, images, sponsor, organization, warmup_problems, contest_problems, medalists,
-      // regional_champs e ccl.
+      // THIS_YEAR, initial_info, images, sponsor, organization, warmup_problems, contest_problems,
+      // champion_pic, medalists, regional_champs e ccl.
       //====================================================================================================
       var THIS_YEAR = 2021;
       var initial_info = `
@@ -45,6 +45,7 @@
                               'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
                               'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
                               'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+      var champion_pic = 'team1.webp'
       var medalists = [// [teamName, [contestants], [coaches], img]
         ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
@@ -99,16 +100,26 @@ ${gallery(images)}`;
 
       var champion = `
 <div class="card mb-3">
-  <h4 class='text-center'><strong>Campeões</strong></h4>
+  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
   <div class="row g-0">
-    <div class="col-md-1">
-      <img src="../../../img/trophy.png" class="img-fluid" tyle="max-height: 50px;" alt="...">
+  <!--  <div class="col-md-1">
+      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
     </div>
     <div class="col-md-11">
       <div class="card-body">
         <h5 class="card-title">${medalists[0][0]}</h5>
         <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
       </div>
+    </div>-->
+    <div class="col-md-9">
+      <h4 class='text-center'><strong>Campeões</strong></h4>
+      <div class="card-body">
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <img class="img-fluid img-thumbnail" src="img/${champion_pic}">
     </div>
   </div>
 </div>`;
