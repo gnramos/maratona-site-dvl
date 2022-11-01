@@ -51,23 +51,23 @@
         ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
         ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
         ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
-        ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli.']],
+        ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli']],
         ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
         ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
         ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
         ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
         ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
-      var ccl = [['WAN TAAN SURI KILL', [], []]]; // [teamName, [contestants], [coaches]
+      var ccl = [['WAN TAAN SURI KILL', [], []]];
 
-      var regional_champs = ['UnB - Posso mandar um WA?',     // CO
-                             'UFPE - Amigos do Yuki U・ᴥ・U',  // NE
-                             'UFAM - tuturu sem O(1)',        // NO
-                             'UFMG - Summerginmune?',         // SE
-                             'UDESC - The Ballonatics'];      // SU
+      var regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
+                             'UnB - Posso mandar um WA?',
+                             'UFPE - Amigos do Yuki U・ᴥ・U',
+                             'UFAM - tuturu sem O(1)',
+                             'UFMG - Summerginmune?',
+                             'UDESC - The Ballonatics'];
       var extra = `
  <p>
- Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/"> Caninos Loucos</a>,
-    organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS).  Os três melhores times foram:
+ Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/">Caninos Loucos</a>, organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS). Os três melhores times foram:
 </p>
 <ul>
   <li><a href="img/cefetrj.webp">CEFET-RJ - random.choice(funny_names)</a>
@@ -114,7 +114,7 @@
   <li class="list-group-item">Sul: <strong>${regional_champs[4]}</strong></li>
 </ul>`;
 
-      var medals = ['gold', 'silver', 'bronze'], TEAMS_PER_MEDAL = medalists.length / 3;
+      var TEAMS_PER_MEDAL = medalists.length / 3;
       var gold = medalists.slice(0, TEAMS_PER_MEDAL),
           silver = medalists.slice(TEAMS_PER_MEDAL, 2 * TEAMS_PER_MEDAL),
           bronze = medalists.slice(2 * TEAMS_PER_MEDAL, 3 * TEAMS_PER_MEDAL);
@@ -148,7 +148,7 @@
         document.write(`
 <br>
 <p>
-  Os times classificados para a final mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(CURRENT_YEAR) + 1}/"> curso de treinamento </a> que ocorrerá na Unicamp.
+  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(CURRENT_YEAR) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
 </p>`);
       </script>
     </div>

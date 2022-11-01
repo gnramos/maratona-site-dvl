@@ -19,6 +19,13 @@
 
     <div class="container text-left">
       <h1>Regras</h1>
+      <p>
+        <strong class='text-danger'>O Comitê Diretor da Maratona de Programação, na reunião realizada em Gramado, aprovou as seguintes regras para vigorarem a partir do ano de 2022:</strong>
+      </p>
+      <ul>
+        <li><strong class='text-danger'>Possibilidade de indicar um segundo time de uma mesma escola pela regra 3 em casos excepcionais.</strong></li>
+        <li><strong class='text-danger'>Vaga para o melhor time feminino na final brasileira, independentemente da instituição.</strong></li>
+      </ul>
       <script type="text/javascript">
         var school = `
 <p>
@@ -61,6 +68,12 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 <p>
 <strong class="text-danger">ATENÇÃO:</strong> Há a possibilidade de, em casos excepcionais (afastamentos por motivo de saúde, serviço militar, etc.), ser concedida uma extensão no período de elegibilidade de um competidor. Para isso o técnico deverá encaminhar um pedido ao comitê de elegibilidade do ICPC (detalhes <a href="https://icpc.global/regional/rules">aqui</a>). Caso seu pedido seja atendido, envie uma cópia da mensagem do Comitê de Elegibilidade do ICPC ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>.
 </p>`;
+        var phases = `temos uma fase zero, de participação opcional e disputada virtualmente, a primeira
+fase, multisede, disputada presencialmente, e a final brasileira,
+classificatória para as competições internacionais (a partir de 24
+teremos a final latino-americana, que se chamará "Programadores da
+América" :) Acho que deve mencionar em algum lugar que há inscrição
+para sediar a primeira fase.`;
         var contest = `
 <p>
   Os times receberão uma prova com diversos problemas computacionais que devem ser resolvidos durante 5 horas de competição - o vencedor é aquele que resolve a maior quantidade de problemas no menor tempo.
@@ -132,6 +145,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
         document.write(accordion('rules', [['School', 'Escolas', school],
                                            ['Coach', 'Técnicos/Coaches', coach],
                                            ['Team', 'Time', team],
+                                           ['Phases', 'Fases', phases],
                                            ['Contest', 'Competição', contest],
                                            ['Site', 'Sede', site],
                                            ['Spots', 'Vagas na Final Brasileira', spot],

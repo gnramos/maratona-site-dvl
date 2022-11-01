@@ -17,7 +17,7 @@ function bodyHeader() {
   var selected = `class="nav-link active" aria-current="page"`,
       unselected = `class="nav-link"`;
   var isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
-  var isInfo = !isParticipate && (url.includes('historico') || url.includes('instituicoes'));
+  var isInfo = !isParticipate && (url.includes('historico') || url.includes('escolas'));
 
   return`
     <div class="container">
@@ -57,7 +57,7 @@ function bodyHeader() {
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="${root()}historico/index.html">Competições Passadas</a></li>
               <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
-              <li><a class="dropdown-item" href="${root()}instituicoes/index.html">Instituições</a></li>
+              <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -96,7 +96,7 @@ function bodyFooter() {
               Realização:
             </div>
             <div class="col-sm-3">
-              <a href="http://www.sbc.org.br/"><img src="${root()}img/footer_SBC.png" class="img-fluid"></a>
+              <a href="${root()}sobre/sbc.html"><img src="${root()}img/footer_SBC.png" class="img-fluid"></a>
             </div>
             <div class="col-sm-7">
               <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" class="img-fluid"></a>
