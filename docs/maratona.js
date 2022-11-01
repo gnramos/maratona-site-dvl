@@ -89,7 +89,7 @@ function bodyHeader() {
 function bodyFooter() {
   return `
     <div class="container">
-      <footer class="footer mt-auto py-3 bg-light justify-content-center border-top">
+      <footer class="footer mt-auto py-3 justify-content-center border-top">
         <div class="container">
           <div class="row">
             <div class="col-sm-2">
