@@ -9,24 +9,21 @@
 
     <script type="text/javascript" src="../maratona.js"></script>
     <script type="text/javascript">
-      function yearsAgo(numYears) {
-        return new Date().getFullYear() - numYears;
-      }
-    </script>
-  </head>
-  <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
+      function yearsAgo(numYears) { return new Date().getFullYear() - numYears; }
 
-    <div class="container text-left">
-      <h1>Regras</h1>
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // initial_info, school, coach, team, phases, contest, site, spot, e appeal.
+      //====================================================================================================
+      var initial_info = `
       <p>
         <strong class='text-danger'>O Comitê Diretor da Maratona de Programação, na reunião realizada em Gramado, aprovou as seguintes regras para vigorarem a partir do ano de 2022:</strong>
       </p>
       <ul>
-        <li><strong class='text-danger'>Possibilidade de indicar um segundo time de uma mesma escola pela regra 3 em casos excepcionais.</strong></li>
-        <li><strong class='text-danger'>Vaga para o melhor time feminino na final brasileira, independentemente da instituição.</strong></li>
-      </ul>
-      <script type="text/javascript">
+        <li class='text-danger'><strong class='text-danger'>Possibilidade de indicar um segundo time de uma mesma escola pela regra 3 em casos excepcionais.</strong></li>
+        <li class='text-danger'><strong class='text-danger'>Vaga para o melhor time feminino na final brasileira, independentemente da instituição.</strong></li>
+      </ul>`;
+
         var school = `
 <p>
   Uma escola é definida pela instituição de ensino superior e a cidade de onde vêm os alunos participantes. Assim, por exemplo, a USP poderá ter times de várias escolas: USP-São Paulo, USP-São Carlos, etc. Se a instituição preferir pode inscrever times com alunos de diferentes cidades. Neste caso, a instituição contará como uma escola apenas para fins de alocação de <em>slots</em> na final brasileira. No caso de um curso a distância, a escola poderá ser definida pela instituição de ensino superior e o polo de onde provêm os estudantes ou, no caso do time combinar alunos de vários polos, a instituição de ensino superior e o adjetivo "virtual" para caracterizar que são alunos de EAD.
@@ -68,12 +65,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 <p>
 <strong class="text-danger">ATENÇÃO:</strong> Há a possibilidade de, em casos excepcionais (afastamentos por motivo de saúde, serviço militar, etc.), ser concedida uma extensão no período de elegibilidade de um competidor. Para isso o técnico deverá encaminhar um pedido ao comitê de elegibilidade do ICPC (detalhes <a href="https://icpc.global/regional/rules">aqui</a>). Caso seu pedido seja atendido, envie uma cópia da mensagem do Comitê de Elegibilidade do ICPC ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>.
 </p>`;
-        var phases = `temos uma fase zero, de participação opcional e disputada virtualmente, a primeira
-fase, multisede, disputada presencialmente, e a final brasileira,
-classificatória para as competições internacionais (a partir de 24
-teremos a final latino-americana, que se chamará "Programadores da
-América" :) Acho que deve mencionar em algum lugar que há inscrição
-para sediar a primeira fase.`;
+        var phases = `temos uma fase zero, de participação opcional e disputada virtualmente, a primeira fase, multisede, disputada presencialmente, e a final brasileira, classificatória para as competições internacionais (a partir de 24 teremos a final latino-americana, que se chamará "Programadores da América").`;
         var contest = `
 <p>
   Os times receberão uma prova com diversos problemas computacionais que devem ser resolvidos durante 5 horas de competição - o vencedor é aquele que resolve a maior quantidade de problemas no menor tempo.
@@ -142,6 +134,15 @@ para sediar a primeira fase.`;
 <p>
   Um recurso deve estar baseado em uma ou mais das circunstâncias a seguir: violação de uma regra, má conduta de um time ou má conduta da administração do concurso com intenção de prejudicar. As decisões dos juízes são finais. Não cabe recurso quanto a julgamento de problemas.
 </p>`;
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <h1>Regras</h1>
+
+      <script type="text/javascript">
+        document.write(initial_info);
         document.write(accordion('rules', [['School', 'Escolas', school],
                                            ['Coach', 'Técnicos/Coaches', coach],
                                            ['Team', 'Time', team],
@@ -153,7 +154,6 @@ para sediar a primeira fase.`;
                                            ]));
       </script>
     </div>
-
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>
