@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 276, null, null]];
+['2016', 276, null, null],
+['2017', 259, 66, null],
+['2018', null, null, null],
+['2019', null, null, null],
+['2020', 241, 56, null],
+['2021', 134, 54, null],
+['2022', 60, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">CO</li>
+        </ol>
+      </nav>
       <h1>Mato Grosso</h1>
     </div>
     <div class="container text-center">
@@ -40,7 +52,9 @@
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="ufmt-cuiaba.html">Universidade Federal de Mato Grosso - Campus Cuiabá</a></li>
+           <li><a class="dropdown-item" href="ufmt-rondonopolis.html">Universidade Federal de Mato Grosso - Campus Rondonópolis</a></li>
            <li><a class="dropdown-item" href="ufmt-varzeagrande.html">Universidade Federal de Mato Grosso- Campus Várzea Grande</a></li>
+           <li><a class="dropdown-item" href="unemat.html">Universidade do Estado de Mato Grosso</a></li>
          </ul>
        </div>
     </div>

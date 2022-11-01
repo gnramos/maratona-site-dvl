@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 91, 50, null]];
+['2016', 91, 50, null],
+['2017', 42, 33, null],
+['2018', 34, 30, null],
+['2019', 23, 10, 95],
+['2020', 47, 30, null],
+['2021', 27, 20, null],
+['2022', 24, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">NO</li>
+        </ol>
+      </nav>
       <h1>Amazonas</h1>
     </div>
     <div class="container text-center">
@@ -40,10 +52,14 @@
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="cueda.html">Centro Universitário Estácio da Amazônia</a></li>
+           <li><a class="dropdown-item" href="icompufam.html">Institute of Computing - Federal University of Amazonas</a></li>
+           <li><a class="dropdown-item" href="ifam.html">Instituto Federal de Educação, Ciência e Tecnologia do Amazonas</a></li>
            <li><a class="dropdown-item" href="cesf.html">Instituto de Ensino Superior Fucapi</a></li>
+           <li><a class="dropdown-item" href="uninorte.html">UNINORTE - Laureate International Universities</a></li>
            <li><a class="dropdown-item" href="ufam.html">Universidade Federal do Amazonas</a></li>
            <li><a class="dropdown-item" href="ufam-itacoatiara.html">Universidade Federal do Amazonas - Campus Itacoatiara</a></li>
            <li><a class="dropdown-item" href="uea.html">Universidade do Estado do Amazonas</a></li>
+           <li><a class="dropdown-item" href="uea-cest.html">Universidade do Estado do Amazonas - Itacoatiara</a></li>
          </ul>
        </div>
     </div>

@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 1, 1, 75]];
+['2016', 1, 1, 75],
+['2017', 2, 3, 104],
+['2018', 2, 2, 52],
+['2019', 2, 3, 64],
+['2020', 13, 11, null],
+['2021', 7, 1, null],
+['2022', 4, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">NE</li>
+        </ol>
+      </nav>
       <h1>Pernambuco</h1>
     </div>
     <div class="container text-center">
@@ -39,16 +51,22 @@
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="unipe.html">Centro Universitário de João Pessoa</a></li>
+                      <li><a class="dropdown-item" href="cesarschool.html">CESAR School</a></li>
+           <li><a class="dropdown-item" href="unipe.html">Centro Universitário de João Pessoa</a></li>
            <li><a class="dropdown-item" href="faculdadedecienciassociaisaplicadas-facisa(pb).html">Faculdade de Ciências Sociais Aplicadas - FACISA (PB)</a></li>
            <li><a class="dropdown-item" href="faculdadesintegradasbarrosmelo.html">Faculdades Integradas Barros Melo</a></li>
+           <li><a class="dropdown-item" href="uag-ufrpe.html">Federal Rural University of Pernambuco - Academic Unit of Garanhuns</a></li>
            <li><a class="dropdown-item" href="ifpb-joaopessoa.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba - Campus João Pessoa</a></li>
            <li><a class="dropdown-item" href="ifpe.html">Instituto Federal de Educação, Ciência e Tecnologia de Pernambuco</a></li>
+           <li><a class="dropdown-item" href="uepb.html">Universidade Estadual da Paraíba</a></li>
+           <li><a class="dropdown-item" href="ufrpe.html">Universidade Federal Rural de Pernambuco</a></li>
            <li><a class="dropdown-item" href="ufpb.html">Universidade Federal da Paraíba</a></li>
            <li><a class="dropdown-item" href="ufpb-campusiv.html">Universidade Federal da Paraíba - Campus IV</a></li>
            <li><a class="dropdown-item" href="ufcg.html">Universidade Federal de Campina Grande</a></li>
            <li><a class="dropdown-item" href="ufpernambuco.html">Universidade Federal de Pernambuco</a></li>
            <li><a class="dropdown-item" href="ufpe.html">Universidade Federal de Pernambuco</a></li>
+           <li><a class="dropdown-item" href="univasf.html">Universidade Federal do Vale do São Francisco</a></li>
+           <li><a class="dropdown-item" href="universidadedepernambuco.html">Universidade de Pernambuco</a></li>
          </ul>
        </div>
     </div>

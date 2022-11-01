@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 393, null, null]];
+['2016', 393, null, null],
+['2017', 508, 72, null],
+['2018', 162, 61, null],
+['2019', 307, null, null],
+['2020', 178, 58, null],
+['2021', 142, 53, null],
+['2022', 168, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">NO</li>
+        </ol>
+      </nav>
       <h1>Acre</h1>
     </div>
     <div class="container text-center">
@@ -39,7 +51,11 @@
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="fab.html">Faculdade Barão do Rio Branco</a></li>
+                      <li><a class="dropdown-item" href="u:verse.html">Centro Universitário U:VERSE</a></li>
+           <li><a class="dropdown-item" href="fab.html">Faculdade Barão do Rio Branco</a></li>
+           <li><a class="dropdown-item" href="fameta.html">Faculdade Meta</a></li>
+           <li><a class="dropdown-item" href="faao.html">Faculdade da Amazônia Ocidental</a></li>
+           <li><a class="dropdown-item" href="ifac.html">Instituto Federal de Educação, Ciência e Tecnologia do Acre</a></li>
            <li><a class="dropdown-item" href="ufac.html">Universidade Federal do Acre</a></li>
          </ul>
        </div>

@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 2, 3, 95]];
+['2016', 2, 3, 95],
+['2017', 29, 29, null],
+['2018', 16, 19, null],
+['2019', 18, 27, null],
+['2020', 4, 3, null],
+['2021', 8, 19, null],
+['2022', 19, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">NE</li>
+        </ol>
+      </nav>
       <h1>Bahia</h1>
     </div>
     <div class="container text-center">
@@ -40,16 +52,21 @@
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="fainor.html">Faculdade Independente do Nordeste - Fainor</a></li>
+           <li><a class="dropdown-item" href="facape.html">Faculdade de Ciências Aplicadas e Sociais de Petrolina</a></li>
            <li><a class="dropdown-item" href="senaicimatic.html">Faculdade de Tecnologia SENAI CIMATEC</a></li>
            <li><a class="dropdown-item" href="ftc.html">Faculdade de Tecnologia e Ciências</a></li>
+           <li><a class="dropdown-item" href="ifbasalvador.html">Instituto Federal da Bahia - Campus Salvador</a></li>
+           <li><a class="dropdown-item" href="ifba-irece.html">Instituto Federal de Ciência e Tecnologia da Bahia - Campus Irecê</a></li>
            <li><a class="dropdown-item" href="institutofederaldeeducacao,cienciaetecnologiadabahia-campusvitoriadaconquista.html">Instituto Federal de Educação, Ciência e Tecnologia da Bahia - Campus Vitória da Conquista</a></li>
            <li><a class="dropdown-item" href="unime.html">UNIME - União Metropolitana de Educação e Cultura</a></li>
+           <li><a class="dropdown-item" href="ucsal.html">Universidade Catolica do Salvador</a></li>
            <li><a class="dropdown-item" href="uefs.html">Universidade Estadual de Feira de Santana</a></li>
            <li><a class="dropdown-item" href="uesc.html">Universidade Estadual de Santa Cruz</a></li>
            <li><a class="dropdown-item" href="uesb.html">Universidade Estadual do Sudoeste da Bahia</a></li>
            <li><a class="dropdown-item" href=".html">Universidade Estadual do Sudoeste da Bahia - Campus Jequié</a></li>
            <li><a class="dropdown-item" href="ufba.html">Universidade Federal da Bahia</a></li>
            <li><a class="dropdown-item" href="univasf.html">Universidade Federal do Vale do São Francisco</a></li>
+           <li><a class="dropdown-item" href="unifacs.html">Universidade Salvador</a></li>
            <li><a class="dropdown-item" href="uneb.html">Universidade do Estado da Bahia</a></li>
            <li><a class="dropdown-item" href="area1.html">Área1 – Faculdade de Ciência e Tecnologia</a></li>
          </ul>

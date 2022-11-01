@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 6, 2, 96]];
+['2016', 6, 2, 96],
+['2017', 1, 1, 17],
+['2018', 1, 1, 58],
+['2019', 1, 1, 54],
+['2020', 1, 2, null],
+['2021', 3, 4, null],
+['2022', 1, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">SE</li>
+        </ol>
+      </nav>
       <h1>São Paulo</h1>
     </div>
     <div class="container text-center">
@@ -39,11 +51,17 @@
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="unisalesiano.html">Centro Universitário Católico Salesiano Auxilum</a></li>
+                      <li><a class="dropdown-item" href="fatecaracatuba.html">Centro Estadual de Educação Tecnológica Paula Souza</a></li>
+           <li><a class="dropdown-item" href="unifacef.html">Centro Universitario Municipal de Franca</a></li>
+           <li><a class="dropdown-item" href="unisalesiano.html">Centro Universitário Católico Salesiano Auxilum</a></li>
            <li><a class="dropdown-item" href="uniararas.html">Centro Universitário Hermínio Ometto</a></li>
            <li><a class="dropdown-item" href="cuml.html">Centro Universitário Moura Lacerda</a></li>
+           <li><a class="dropdown-item" href="unisal.html">Centro Universitário Salesiano de São Paulo</a></li>
+           <li><a class="dropdown-item" href="senac-sp.html">Centro Universitário Senac-SP</a></li>
            <li><a class="dropdown-item" href="fei.html">Centro Universitário da FEI</a></li>
+           <li><a class="dropdown-item" href="ceubite.html">Centro Universitário de Bauru</a></li>
            <li><a class="dropdown-item" href="unorp.html">Centro Universitário do Norte Paulista</a></li>
+           <li><a class="dropdown-item" href="esamc.html">ESAMC Sorocaba</a></li>
            <li><a class="dropdown-item" href="espm.html">Escola Superior de Propaganda e Marketing de São Paulo</a></li>
            <li><a class="dropdown-item" href="eep.html">Escola de Engenharia de Piracicaba</a></li>
            <li><a class="dropdown-item" href="facens.html">FACENS - Faculdade de Engenharia de Sorocaba</a></li>
@@ -51,31 +69,49 @@
            <li><a class="dropdown-item" href="fam.html">Faculdade Das Americas</a></li>
            <li><a class="dropdown-item" href="faculdadeimpactade.html">Faculdade Impacta de Tecnologia</a></li>
            <li><a class="dropdown-item" href="fateb.html">Faculdade de Ciências e Tecnologia de Birigui</a></li>
+           <li><a class="dropdown-item" href="ffclrp-usp.html">Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto (Universidade de São Paulo)</a></li>
+           <li><a class="dropdown-item" href="fiap.html">Faculdade de Informática e Administração Paulista</a></li>
            <li><a class="dropdown-item" href="faj.html">Faculdade de Jaguariúna - FAJ</a></li>
            <li><a class="dropdown-item" href="fatecamericana.html">Faculdade de Tecnologia Americana</a></li>
+           <li><a class="dropdown-item" href="ftt.html">Faculdade de Tecnologia Termomecanica</a></li>
            <li><a class="dropdown-item" href="fateczl.html">Faculdade de Tecnologia da Zona Leste</a></li>
            <li><a class="dropdown-item" href="fateczs.html">Faculdade de Tecnologia da Zona Sul</a></li>
            <li><a class="dropdown-item" href="fateccruzeiro.html">Faculdade de Tecnologia de Cruzeiro</a></li>
            <li><a class="dropdown-item" href="fatecgarca.html">Faculdade de Tecnologia de Garça</a></li>
+           <li><a class="dropdown-item" href="fatec-gt.html">Faculdade de Tecnologia de Guaratingueta</a></li>
            <li><a class="dropdown-item" href="faculdadedetecnologiadeitu.html">Faculdade de Tecnologia de Itu</a></li>
            <li><a class="dropdown-item" href="fateclins.html">Faculdade de Tecnologia de Lins</a></li>
+           <li><a class="dropdown-item" href="fatecmococa.html">Faculdade de Tecnologia de Mococa</a></li>
+           <li><a class="dropdown-item" href="fatec-mc.html">Faculdade de Tecnologia de Mogi das Cruzes</a></li>
+           <li><a class="dropdown-item" href="fatecourinhos.html">Faculdade de Tecnologia de Ourinhos</a></li>
            <li><a class="dropdown-item" href=".html">Faculdade de Tecnologia de Sorocaba</a></li>
            <li><a class="dropdown-item" href="fatec-sjc.html">Faculdade de Tecnologia de São José dos Campos</a></li>
            <li><a class="dropdown-item" href="fatecsaopaulo.html">Faculdade de Tecnologia de São Paulo</a></li>
+           <li><a class="dropdown-item" href="fib.html">Faculdades Integradas de Bauru</a></li>
+           <li><a class="dropdown-item" href="fatecbauru.html">Fatec Bauru</a></li>
+           <li><a class="dropdown-item" href="ifsp-salto.html">IFSP - Salto</a></li>
+           <li><a class="dropdown-item" href="insper.html">Insper Institute of Education and Research</a></li>
+           <li><a class="dropdown-item" href="ite.html">Instituição Toledo de Ensino</a></li>
+           <li><a class="dropdown-item" href="ipt.html">Institute for Technological Research of the State of São Paulo</a></li>
            <li><a class="dropdown-item" href="ifsp.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo</a></li>
            <li><a class="dropdown-item" href="ifsp-birigui.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus Birigui</a></li>
-           <li><a class="dropdown-item" href="ifsp-salto.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus Salto</a></li>
+           <li><a class="dropdown-item" href="ifsp-campuspresid.html">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo - Campus Presidente Epitácio</a></li>
+           <li><a class="dropdown-item" href="ifsp-barretos.html">Instituto Federal de São Paulo - Barretos</a></li>
            <li><a class="dropdown-item" href="ifsp-piracicaba.html">Instituto Federal de São Paulo - Campus Piracicaba</a></li>
            <li><a class="dropdown-item" href="imt-cscs.html">Instituto Mauá de Tecnologia- Campus de São Caetano do Sul</a></li>
            <li><a class="dropdown-item" href="ita.html">Instituto Tecnológico de Aeronautica</a></li>
            <li><a class="dropdown-item" href="puc-campinas.html">Pontifícia Universidade Católica de Campinas</a></li>
            <li><a class="dropdown-item" href="fct-unesp.html">UNESP - Universidade Estadual Paulista (Faculdade de Ciências e Tecnologia - Presidente Prudente)</a></li>
+           <li><a class="dropdown-item" href="ibilce-unesp.html">UNESP - Universidade Estadual Paulista (IBILCE)</a></li>
            <li><a class="dropdown-item" href="unesp-bauru.html">UNESP - Universidade Estadual Paulista - (Faculdade de Ciências - Bauru)</a></li>
            <li><a class="dropdown-item" href="unip-campussorocaba.html">UNIP - Campus Sorocaba</a></li>
            <li><a class="dropdown-item" href="univem.html">UNIVEM - Centro Universitário Eurípides de Marília</a></li>
            <li><a class="dropdown-item" href="unoeste.html">UNOESTE - Universidade do Oeste Paulista</a></li>
            <li><a class="dropdown-item" href="unisantos.html">Universidade Católica de Santos</a></li>
+           <li><a class="dropdown-item" href="unesprioclaro.html">Universidade Estadual Paulista Rio Claro</a></li>
+           <li><a class="dropdown-item" href="unesp-rc.html">Universidade Estadual Paulista Unesp Rio Claro</a></li>
            <li><a class="dropdown-item" href="unicamp.html">Universidade Estadual de Campinas</a></li>
+           <li><a class="dropdown-item" href="unicamp-ft.html">Universidade Estadual de Campinas - Faculdade de Tecnologia</a></li>
            <li><a class="dropdown-item" href="uenp.html">Universidade Estadual do Norte do Paraná</a></li>
            <li><a class="dropdown-item" href="ufscar.html">Universidade Federal de São Carlos</a></li>
            <li><a class="dropdown-item" href="ufscar-sorocaba.html">Universidade Federal de São Carlos - Campus Sorocaba</a></li>
@@ -84,12 +120,18 @@
            <li><a class="dropdown-item" href="ufpr-ja.html">Universidade Federal do Paraná - Jandaia do Sul</a></li>
            <li><a class="dropdown-item" href="uninove.html">Universidade Nove de Julho</a></li>
            <li><a class="dropdown-item" href="unip.html">Universidade Paulista</a></li>
-           <li><a class="dropdown-item" href="unisal.html">Universidade Salesianas de São Paulo</a></li>
+           <li><a class="dropdown-item" href="uniparacatuba.html">Universidade Paulista - Campus Araçatuba</a></li>
+           <li><a class="dropdown-item" href="unip-bauru.html">Universidade Paulista - Campus Bauru</a></li>
+           <li><a class="dropdown-item" href="usf.html">Universidade São Francisco</a></li>
            <li><a class="dropdown-item" href="usjt.html">Universidade São Judas Tadeu</a></li>
+           <li><a class="dropdown-item" href="univesp.html">Universidade Virtual do Estado de São Paulo</a></li>
            <li><a class="dropdown-item" href="universidadedesorocaba.html">Universidade de Sorocaba</a></li>
            <li><a class="dropdown-item" href="usp.html">Universidade de São Paulo</a></li>
            <li><a class="dropdown-item" href="usp-saocarlos.html">Universidade de São Paulo - Campus de São Carlos</a></li>
+           <li><a class="dropdown-item" href="poli-usp.html">Universidade de São Paulo - Escola Politécnica</a></li>
+           <li><a class="dropdown-item" href="each-usp.html">Universidade de São Paulo - Escola de Artes, Ciências e Humanidades</a></li>
            <li><a class="dropdown-item" href="unitau.html">Universidade de Taubaté</a></li>
+           <li><a class="dropdown-item" href="unesc.html">Universidade do Extremo Sul Catarinense</a></li>
            <li><a class="dropdown-item" href="univap.html">Universidade do Vale do Paraíba</a></li>
          </ul>
        </div>

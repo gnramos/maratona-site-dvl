@@ -11,7 +11,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 416, null, null]];
+['2016', 416, null, null],
+['2017', 243, null, null],
+['2018', 208, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +21,13 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">SE</li>
+          <li class="breadcrumb-item"><a href="index.html">São Paulo</a></li>
+        </ol>
+      </nav>
       <h1>Universidade Estadual do Norte do Paraná</h1>
     </div>
     <div class="container text-center">

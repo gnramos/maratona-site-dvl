@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 32, 14, null]];
+['2016', 32, 14, null],
+['2017', 11, 13, null],
+['2018', 10, 4, 57],
+['2019', 7, 4, 47],
+['2020', 25, 23, null],
+['2021', 24, 13, null],
+['2022', 9, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">CO</li>
+        </ol>
+      </nav>
       <h1>Distrito Federal</h1>
     </div>
     <div class="container text-center">
@@ -40,6 +52,9 @@
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="cu-iesb.html">Centro Universitário IESB</a></li>
+           <li><a class="dropdown-item" href="uniceub.html">Centro Universitário de Brasília</a></li>
+           <li><a class="dropdown-item" href="faculdadedetecnolo.html">Faculdade de Tecnologia - UnB</a></li>
+           <li><a class="dropdown-item" href="ifb.html">Instituto Federal de Educação, Ciência e Tecnologia de Brasília</a></li>
            <li><a class="dropdown-item" href="unb.html">Universidade de Brasília</a></li>
            <li><a class="dropdown-item" href="unbfga.html">Universidade de Brasília - Faculdade UnB Gama</a></li>
          </ul>

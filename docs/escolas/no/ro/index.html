@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 350, null, null]];
+['2016', 350, null, null],
+['2017', 535, null, null],
+['2018', 413, 71, null],
+['2019', 665, null, null],
+['2020', 179, 62, null],
+['2021', null, null, null],
+['2022', 349, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">NO</li>
+        </ol>
+      </nav>
       <h1>Rondônia</h1>
     </div>
     <div class="container text-center">
@@ -41,6 +53,8 @@
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="ceulji-ulbra.html">Centro Universitário Luterano de Ji-Paraná da ULBRA</a></li>
            <li><a class="dropdown-item" href="fip.html">Faculdade de Porto Velho</a></li>
+           <li><a class="dropdown-item" href="unir.html">Fundação Universidade Federal de Rondônia</a></li>
+           <li><a class="dropdown-item" href="ifro.html">Instituto Federal de Educação, Ciência e Tecnologia de Rondônia</a></li>
          </ul>
        </div>
     </div>

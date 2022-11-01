@@ -11,7 +11,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 35, 9, null]];
+['2016', 35, 9, null],
+['2017', 32, 12, null],
+['2018', 6, 11, null],
+['2019', 3, 8, 98],
+['2020', 20, 10, null],
+['2021', 41, 18, null],
+['2022', 13, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -19,6 +25,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
+          <li class="breadcrumb-item active">CO</li>
+        </ol>
+      </nav>
       <h1>Goiás</h1>
     </div>
     <div class="container text-center">
@@ -39,12 +51,18 @@
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="faculdadedetecnolo.html">Faculdade de Tecnologia Senac Goiás</a></li>
+                      <li><a class="dropdown-item" href="delta.html">Faculdade Delta</a></li>
+           <li><a class="dropdown-item" href="fasam.html">Faculdade Sul-Americana</a></li>
+           <li><a class="dropdown-item" href="faculdadedetecnolo.html">Faculdade de Tecnologia Senac Goiás</a></li>
            <li><a class="dropdown-item" href="ifgoiano-campusri.html">Instituto Federal Goiano - Campus Rio Verde</a></li>
+           <li><a class="dropdown-item" href="ifgoinao-campusu.html">Instituto Federal Goiano - Campus Urutaí</a></li>
            <li><a class="dropdown-item" href="ifgoiano-campusi.html">Instituto Federal de Educação, Ciência e Tecnologia Goiano - Câmpus Iporá</a></li>
+           <li><a class="dropdown-item" href="iftm-campusparaca.html">Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro - Campus Paracatu</a></li>
            <li><a class="dropdown-item" href="ufg.html">Instituto de Informática - UFG</a></li>
+           <li><a class="dropdown-item" href="puc-goias.html">Pontifícia Universidade Católica de Goiás</a></li>
            <li><a class="dropdown-item" href="ueg.html">Unidade Universitária de Ciências Exatas e Tecnológicas - UEG</a></li>
            <li><a class="dropdown-item" href="ucg.html">Universidade Católica de Goiás</a></li>
+           <li><a class="dropdown-item" href="ufcat.html">Universidade Federal de Catalão</a></li>
            <li><a class="dropdown-item" href="cajufg.html">Universidade Federal de Goiás - Câmpus Jataí</a></li>
            <li><a class="dropdown-item" href="unirv.html">Universidade de Rio Verde</a></li>
          </ul>
