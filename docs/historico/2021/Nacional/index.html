@@ -45,8 +45,8 @@
                               'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
                               'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
                               'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
-      var medalists = [// [teamName, [contestants], [coaches]]
-        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
+      var medalists = [// [teamName, [contestants], [coaches], img]
+        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves'], 'yuki.webp'],
         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
         ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
         ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
@@ -80,12 +80,26 @@
       // Não editar a partir daqui.
       //======================================================================
       function listTeams(teams, start) {
-        var list = `<ol start=${start}>`;
+        var ol = `\n<ol start=${start}>`;
         for (team of teams)
-          list += `
+          ol += `
   <li><strong>${team[0]}:</strong> ${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</li>`;
-        return `${list}
+        ol += `
 </ol>`;
+
+        var gallery = `
+<hr class="mt-2 mb-5">
+<div class="row text-center text-lg-start">`;
+        for (i in teams)
+          gallery += `
+  <div class="col-lg-3 col-md-4 col-6">
+    <a href="img/team${Number(i) + start}.webp" class="d-block mb-4 h-100">
+      <img class="img-fluid img-thumbnail" src="img/team${Number(i) + start}.webp" alt="${teams[i][0]}">
+    </a>
+  </div>`;
+        gallery += `
+</div>`;
+        return ol + gallery;
       }
 
       var slides = `
