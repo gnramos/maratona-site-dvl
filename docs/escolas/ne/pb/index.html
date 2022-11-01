@@ -6,19 +6,12 @@
     <title>Maratona de Programação SBC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', null, 6, 111],
-['2017', null, 5, 105],
-['2018', 5, 3, 92],
-['2019', 6, 17, null],
-['2020', 6, 1, null],
-['2021', 14, 6, null],
-['2022', 22, null, null]];
+['2016', null, 6, 111]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -31,7 +24,7 @@
     <div class="container text-center">
       <div class="row align-items-center">
         <div class="col-sm-2">
-          <img src="pb.svg" style="border: 1px solid #555;" height="100pt">
+          <img src="pb.svg" class="img-fluid" style="border: 1px solid #555;">
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
@@ -41,27 +34,14 @@
     </div>
     <br>
     <div class="container text-left">
-      
       <div class="dropdown">
          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="unifacisa.html">Centro Universitário Unifacisa</a></li>
-           <li><a class="dropdown-item" href="unipe.html">Centro Universitário de João Pessoa</a></li>
-           <li><a class="dropdown-item" href="faculdadedecienciassociaisaplicadas-facisa(pb).html">Faculdade de Ciências Sociais Aplicadas - FACISA (PB)</a></li>
-           <li><a class="dropdown-item" href="uag-ufrpe.html">Federal Rural University of Pernambuco - Academic Unit of Garanhuns</a></li>
-           <li><a class="dropdown-item" href="ifpb-cg.html">Instituto Federal da Paraíba</a></li>
-           <li><a class="dropdown-item" href="ifpb.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba</a></li>
-           <li><a class="dropdown-item" href="ifpb-cajazeiras.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba - Campus Cajazeiras</a></li>
-           <li><a class="dropdown-item" href="ifpb-campinagrand.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba - Campus Campina Grande</a></li>
-           <li><a class="dropdown-item" href="ifpb-joaopessoa.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba - Campus João Pessoa</a></li>
-           <li><a class="dropdown-item" href="uniesp.html">UNIESP Centro Universitário</a></li>
-           <li><a class="dropdown-item" href="uepb.html">Universidade Estadual da Paraíba</a></li>
+                      <li><a class="dropdown-item" href="ifpb-joaopessoa.html">Instituto Federal de Educação, Ciência e Tecnologia da Paraíba - Campus João Pessoa</a></li>
            <li><a class="dropdown-item" href="ufpb.html">Universidade Federal da Paraíba</a></li>
-           <li><a class="dropdown-item" href="ufpb-campusiv.html">Universidade Federal da Paraíba - Campus IV</a></li>
            <li><a class="dropdown-item" href="ufcg.html">Universidade Federal de Campina Grande</a></li>
-           <li><a class="dropdown-item" href="univap.html">Universidade do Vale do Paraíba</a></li>
          </ul>
        </div>
     </div>

@@ -6,19 +6,12 @@
     <title>Maratona de Programação SBC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 103, 32, null],
-['2017', 57, 63, null],
-['2018', 70, 34, null],
-['2019', 79, 32, null],
-['2020', 26, 24, null],
-['2021', 44, 30, null],
-['2022', 35, null, null]];
+['2016', 103, 32, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -31,7 +24,7 @@
     <div class="container text-center">
       <div class="row align-items-center">
         <div class="col-sm-2">
-          <img src="pi.svg" style="border: 1px solid #555;" height="100pt">
+          <img src="pi.svg" class="img-fluid" style="border: 1px solid #555;">
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
@@ -41,24 +34,16 @@
     </div>
     <br>
     <div class="container text-left">
-      
       <div class="dropdown">
          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="estacio|ceut.html">Centro Universitário Estácio de Teresina</a></li>
-           <li><a class="dropdown-item" href="mauriciodenassaup.html">Faculdade Maurício de Nassau Parnaíba</a></li>
-           <li><a class="dropdown-item" href="ifce-tiangua.html">Instituto Federal de Educação, Ciência e Tecnologia do Ceará - Campus Tianguá</a></li>
+                      <li><a class="dropdown-item" href="mauriciodenassaup.html">Faculdade Maurício de Nassau Parnaíba</a></li>
            <li><a class="dropdown-item" href="ifpi.html">Instituto Federal de Educação, Ciência e Tecnologia do Piauí</a></li>
            <li><a class="dropdown-item" href="institutofederaldeeducacao,cienciaetecnologiadopiaui-campuspicos.html">Instituto Federal de Educação, Ciência e Tecnologia do Piauí - Campus Picos</a></li>
-           <li><a class="dropdown-item" href="iesrsa.html">Instituto de Educação Superior Raimundo Sá</a></li>
-           <li><a class="dropdown-item" href=".html">Universidade Estadual Vale do Acaraú</a></li>
            <li><a class="dropdown-item" href="uespi.html">Universidade Estadual do Piauí</a></li>
-           <li><a class="dropdown-item" href="uespiparnaiba.html">Universidade Estadual do Piauí - Campus de Parnaíba</a></li>
-           <li><a class="dropdown-item" href="uespipiripiri.html">Universidade Estadual do Piauí - Campus de Piripiri</a></li>
-           <li><a class="dropdown-item" href="ufpi.html">Universidade Federal do Piauí</a></li>
-           <li><a class="dropdown-item" href="ufpi-picos.html">Universidade Federal do Piauí - Campus Picos</a></li>
+           <li><a class="dropdown-item" href="ufpi.html">Universidade Federal do Piauí </a></li>
          </ul>
        </div>
     </div>

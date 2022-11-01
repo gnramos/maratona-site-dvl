@@ -6,19 +6,12 @@
     <title>Maratona de Programação SBC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 32, 14, null],
-['2017', 11, 13, null],
-['2018', 10, 4, 57],
-['2019', 7, 4, 47],
-['2020', 25, 23, null],
-['2021', 24, 13, null],
-['2022', 9, null, null]];
+['2016', 32, 14, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -41,16 +34,12 @@
     </div>
     <br>
     <div class="container text-left">
-
       <div class="dropdown">
          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
                       <li><a class="dropdown-item" href="cu-iesb.html">Centro Universitário IESB</a></li>
-           <li><a class="dropdown-item" href="uniceub.html">Centro Universitário de Brasília</a></li>
-           <li><a class="dropdown-item" href="faculdadedetecnolo.html">Faculdade de Tecnologia - UnB</a></li>
-           <li><a class="dropdown-item" href="ifb.html">Instituto Federal de Educação, Ciência e Tecnologia de Brasília</a></li>
            <li><a class="dropdown-item" href="unb.html">Universidade de Brasília</a></li>
            <li><a class="dropdown-item" href="unbfga.html">Universidade de Brasília - Faculdade UnB Gama</a></li>
          </ul>

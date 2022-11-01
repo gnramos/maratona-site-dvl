@@ -6,19 +6,12 @@
     <title>Maratona de Programação SBC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 36, 20, null],
-['2017', 61, 31, null],
-['2018', 111, 40, null],
-['2019', 37, 14, null],
-['2020', 33, 44, null],
-['2021', 58, 45, null],
-['2022', 39, null, null]];
+['2016', 36, 20, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -31,7 +24,7 @@
     <div class="container text-center">
       <div class="row align-items-center">
         <div class="col-sm-2">
-          <img src="pr.svg" style="border: 1px solid #555;" height="100pt">
+          <img src="pr.svg" class="img-fluid" style="border: 1px solid #555;">
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
@@ -41,31 +34,20 @@
     </div>
     <br>
     <div class="container text-left">
-      
       <div class="dropdown">
          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
            Instituições Participantes
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="unifil.html">Centro Universitário Filadélfia</a></li>
-           <li><a class="dropdown-item" href="uninter.html">Centro Universitário Internacional</a></li>
-           <li><a class="dropdown-item" href="ceulji-ulbra.html">Centro Universitário Luterano de Ji-Paraná da ULBRA</a></li>
-           <li><a class="dropdown-item" href="cei.html">Centro de Ensino Integrado de Campo Mourão</a></li>
-           <li><a class="dropdown-item" href="pucpr.html">Pontificia Universidade Católica do Paraná</a></li>
+                      <li><a class="dropdown-item" href="pucpr.html">Pontificia Universidade Católica do Paraná</a></li>
            <li><a class="dropdown-item" href="unioeste.html">UNIOESTE - Campus Cascavel</a></li>
-           <li><a class="dropdown-item" href="uel.html">Universidade Estadual de Londrina</a></li>
            <li><a class="dropdown-item" href="uem.html">Universidade Estadual de Maringá</a></li>
            <li><a class="dropdown-item" href="uepg.html">Universidade Estadual de Ponta Grossa</a></li>
            <li><a class="dropdown-item" href="unicentro.html">Universidade Estadual do Centro-Oeste</a></li>
            <li><a class="dropdown-item" href="ufparana.html">Universidade Federal do Paraná</a></li>
-           <li><a class="dropdown-item" href="ufpr-ja.html">Universidade Federal do Paraná - Jandaia do Sul</a></li>
            <li><a class="dropdown-item" href="universidadepositivo.html">Universidade Positivo</a></li>
            <li><a class="dropdown-item" href="universidadetecnologicafederaldoparana.html">Universidade Tecnológica Federal do Paraná</a></li>
-           <li><a class="dropdown-item" href="utfpr-dv.html">Universidade Tecnológica Federal do Paraná (UTFPR) - Campus Dois Vizinhos</a></li>
-           <li><a class="dropdown-item" href="utfprtoledo.html">Universidade Tecnológica Federal do Paraná (UTFPR) - Campus Toledo</a></li>
-           <li><a class="dropdown-item" href="utfpr-ct.html">Universidade Tecnológica Federal do Paraná - Campus Curitiba</a></li>
            <li><a class="dropdown-item" href="universidadetecnologicafederaldoparana-campusmedianeira.html">Universidade Tecnológica Federal do Paraná - Campus Medianeira</a></li>
-           <li><a class="dropdown-item" href="utfpr-patobranco.html">Universidade Tecnológica Federal do Paraná - Campus Pato Branco</a></li>
            <li><a class="dropdown-item" href="utfpr-pontagrossa.html">Universidade Tecnológica Federal do Paraná - campus Ponta Grossa</a></li>
            <li><a class="dropdown-item" href="unisep.html">União de Ensino do Sudoeste do Paraná</a></li>
          </ul>

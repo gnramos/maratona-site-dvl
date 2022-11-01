@@ -6,19 +6,12 @@
     <title>Maratona de Programação SBC</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../draw.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       var results = [
-['2016', 13, 18, null],
-['2017', 16, 23, null],
-['2018', 42, 45, null],
-['2019', 72, 43, null],
-['2020', 86, 43, null],
-['2021', 54, 41, null],
-['2022', 49, null, null]];
+['2016', 13, 18, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
     </script>
@@ -31,7 +24,7 @@
     <div class="container text-center">
       <div class="row align-items-center">
         <div class="col-sm-2">
-          <img src="rs.svg" style="border: 1px solid #555;" height="100pt">
+          <img src="rs.svg" class="img-fluid" style="border: 1px solid #555;">
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
@@ -41,7 +34,6 @@
     </div>
     <br>
     <div class="container text-left">
-      
       <div class="dropdown">
          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
            Instituições Participantes
@@ -50,12 +42,9 @@
                       <li><a class="dropdown-item" href="unifra.html">Centro Universitário Franciscano</a></li>
            <li><a class="dropdown-item" href="imed.html">Faculdade Meridional - IMED</a></li>
            <li><a class="dropdown-item" href="fatec-pelotas.html">Faculdade de Tecnologia Senac Pelotas</a></li>
-           <li><a class="dropdown-item" href="santarita.html">Faculdades Santa Rita</a></li>
-           <li><a class="dropdown-item" href="ifsul.html">Federal Institute of Education, Science and Technology Sul Rio-Grandense - Campus Charqueadas</a></li>
            <li><a class="dropdown-item" href="furg.html">Fundação Universidade Federal do Rio Grande</a></li>
            <li><a class="dropdown-item" href="horus.html">Horus Faculdades - Pinhalzinho</a></li>
            <li><a class="dropdown-item" href="ideau.html">IDEAU - Instituto de Desenvolvimento Educacional do Alto Uruguai</a></li>
-           <li><a class="dropdown-item" href="ifsul-pf.html">Instituto Federal Sul-rio-grandense - Campus Passo Fundo</a></li>
            <li><a class="dropdown-item" href="iffar.html">Instituto Federal de Educação, Ciência e Tecnologia Farroupilha - Campus Santo Augusto</a></li>
            <li><a class="dropdown-item" href="ifsul-pelotas.html">Instituto Federal de Educação, Ciência e Tecnologia Sul-Rio-Grandense - Campus Pelotas</a></li>
            <li><a class="dropdown-item" href="ifrsrestinga.html">Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul (IFRS) - Campus Restinga</a></li>
@@ -63,23 +52,17 @@
            <li><a class="dropdown-item" href="setrem.html">Sociedade Educacional Três de Maio</a></li>
            <li><a class="dropdown-item" href="unijui-santarosa.html">UNIJUI - Santa Rosa</a></li>
            <li><a class="dropdown-item" href="unoesc-chapeco.html">UNOESC - Universidade do Oeste de Santa Catarina - Chapecó</a></li>
-           <li><a class="dropdown-item" href="unoesc-saomiguel.html">UNOESC - Universidade do Oeste de Santa Catarina - São Miguel do Oeste</a></li>
-           <li><a class="dropdown-item" href="unoesc.html">UNOESC - Universidade do Oeste de Santa Catarina - Xanxerê</a></li>
            <li><a class="dropdown-item" href="ucpel.html">Universidade Católica de Pelotas</a></li>
            <li><a class="dropdown-item" href="chapeco.html">Universidade Comunitária Regional de Chapecó</a></li>
            <li><a class="dropdown-item" href="uffs.html">Universidade Federal da Fronteira Sul</a></li>
            <li><a class="dropdown-item" href="ufpel.html">Universidade Federal de Pelotas</a></li>
            <li><a class="dropdown-item" href="ufsantacatarina.html">Universidade Federal de Santa Catarina</a></li>
            <li><a class="dropdown-item" href="ufsm.html">Universidade Federal de Santa Maria</a></li>
-           <li><a class="dropdown-item" href="universidadefederaldopampa-campusalegrete.html">Universidade Federal do Pampa - Campus Alegrete</a></li>
            <li><a class="dropdown-item" href="ufrgs.html">Universidade Federal do Rio Grande do Sul</a></li>
            <li><a class="dropdown-item" href="uri-erechim.html">Universidade Regional Integrada - Campus de Erechim</a></li>
            <li><a class="dropdown-item" href="universidaderegionalintegrada-campusdesantoangelo.html">Universidade Regional Integrada - Campus de Santo Ângelo</a></li>
            <li><a class="dropdown-item" href="unijui.html">Universidade Regional do Noroeste do Estado do Rio Grande do Sul</a></li>
-           <li><a class="dropdown-item" href="utfpr-dv.html">Universidade Tecnológica Federal do Paraná (UTFPR) - Campus Dois Vizinhos</a></li>
            <li><a class="dropdown-item" href="upf.html">Universidade de Passo Fundo</a></li>
-           <li><a class="dropdown-item" href="upf-casca.html">Universidade de Passo Fundo - Campus Casca</a></li>
-           <li><a class="dropdown-item" href="unisinos.html">Universidade do Vale do Rio dos Sinos</a></li>
          </ul>
        </div>
     </div>
