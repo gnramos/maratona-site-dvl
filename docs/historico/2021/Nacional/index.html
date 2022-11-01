@@ -58,7 +58,7 @@
         ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
         ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
         ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
-      var ccl = [['WAN TAAN SURI KILL', [], []]];
+      var ccl = [['WAN TAAN SURI KILL', [], [], 'ccl.jpg']];
 
       var regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
                              'UnB - Posso mandar um WA?',
@@ -104,13 +104,14 @@
         ol += `
 </ol>`;
 
+
         var gallery = `
 <div class="row text-center text-lg-start">`;
         for (i in teams)
           gallery += `
   <div class="col-lg-3 col-md-4 col-6">
-    <a href="img/team${Number(i) + start}.webp" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/team${Number(i) + start}.webp" alt="${teams[i][0]}">
+    <a href="img/${teams[i][3] != undefined ? teams[i][3] : "team" + Number(i) + start + ".webp"}" class="d-block mb-4 h-100">
+      <img class="img-fluid img-thumbnail" src="img/${teams[i][3] != undefined ? teams[i][3] : "team" + Number(i) + start + ".webp"}" alt="${teams[i][0]}">
     </a>
   </div>`;
         gallery += `
