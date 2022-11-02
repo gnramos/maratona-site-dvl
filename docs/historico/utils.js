@@ -1,12 +1,19 @@
-function contest_info(contest, problems) {
+/**
+ * Format the basic information for a contest.
+ *
+ * @param  {String} contest  name of directory with the contest files
+ * @param  {Array}  problems list of problem names
+ * @return {String}          the HTML with the formatted information
+ */
+function contestInfo(contest, problems) {
   var info = '';
   for (problem of problems)
     info += `\n  <li>${problem}</li>`;
   return `
 <ul>
   <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
-  <li><a href=${contest}/maratona.pdf">Problemas da prova</a></li>
-  <li><a href=${contest}/packages.tar.gz">Entradas e Saídas dos problemas</a></li>
+  <li><a href=${contest}/maratona.pdf">Problemas</a></li>
+  <li><a href=${contest}/packages.tar.gz">Entradas e Saídas</a></li>
 </ul>
 <p>
   Autores dos problemas:
@@ -15,7 +22,14 @@ function contest_info(contest, problems) {
 </ol>`;
 }
 
-function contest_reports() {
+/**
+ * Format the links for BOCA reports of a contest.
+ *
+ * Links are hard-coded and files are expected to exist.
+ *
+ * @return {String} the HTML with the formatted information
+ */
+function contestReports() {
   return`
 <ul>
   <li><a href="contest/score.html">Placar final</a></li>
@@ -25,6 +39,14 @@ function contest_reports() {
 </ul>`;
 }
 
+/**
+ * Build a gallery from a list of images.
+ *
+ * Gallery style is hard-coded, assumes all image files are in "img" directory.
+ *
+ * @param  {Array}  images list of image files
+ * @return {String}        the HTML with the formatted information
+ */
 function gallery(images) {
   var gal = '';
   for (img of images)
@@ -40,14 +62,20 @@ ${gal}
 </div>`;
       }
 
-function medals(medalists) {
+/**
+ * Splits the list into gold/silver/bronze groups.
+ *
+ * @param  {Array}  medalists list of medalist objects
+ * @return {Array}            [gold, silver, bronze] groups
+ */
+function splitbyMedal(medalists) {
   var teamsPerMedal = medalists.length / 3;
-  return [medalists.slice(0, teamsPerMedal),                         // gold
+  return [medalists.slice(0, teamsPerMedal),                       // gold
           medalists.slice(teamsPerMedal, 2 * teamsPerMedal),       // silver
           medalists.slice(2 * teamsPerMedal, 3 * teamsPerMedal)];  // bronze
 }
 
-function resultTable(site_teams) {
+function siteResult(site_teams) {
   // site_teams -> [siteName, [list_of_teams_rule1, list_of_teams_rule3, list_of_teams_rule3]]
   var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
@@ -108,3 +136,5 @@ function resultTable(site_teams) {
   ${makeRow(site_teams)}
 </table>`;
 }
+
+function thisYear() { return window.location.pathname.split('/').at(-3); }

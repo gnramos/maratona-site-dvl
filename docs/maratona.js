@@ -110,17 +110,16 @@ function bodyFooter() {
 function accordion(name, items, headerClasses=[]) {
   var accItems = '';
   for (i in items) {
-    var [itemID, itemTitle, itemBody] = items[i];
     accItems += `
   <div class="accordion-item">
-    <h2 class="accordion-header" id="heading${itemID}">
-      <button class="accordion-button collapsed ${headerClasses[i] != undefined ? headerClasses[i] : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${itemID}" aria-expanded="false" aria-controls="collapse${itemID}">
-        ${itemTitle}
+    <h2 class="accordion-header" id="heading${name + i}">
+      <button class="accordion-button collapsed ${headerClasses[i] != undefined ? headerClasses[i] : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${name + i}" aria-expanded="false" aria-controls="collapse${name + i}">
+        ${items[i][0]}
       </button>
     </h2>
-    <div id="collapse${itemID}" class="accordion-collapse collapse" aria-labelledby="heading${itemID}" data-bs-parent="#accordion${name}">
+    <div id="collapse${name + i}" class="accordion-collapse collapse" aria-labelledby="heading${name + i}" data-bs-parent="#accordion${name}">
       <div class="accordion-body">
-        ${itemBody}
+        ${items[i][1]}
       </div>
     </div>
   </div>`;

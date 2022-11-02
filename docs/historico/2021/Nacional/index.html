@@ -12,23 +12,22 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // THIS_YEAR, initial_info, images, sponsor, organization, warmup_problems, contest_problems,
+      // initial_info, images, sponsor, organization, warmup_problems, contest_problems,
       // champion_pic, medalists, regional_champs e ccl.
       //====================================================================================================
-      var THIS_YEAR = 2021;
       var initial_info = `
 <p>
-  A final brasileira de ${THIS_YEAR} foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
-</p>`;
-      var images = ['img/all_participants.jpeg', 'img/salao21.jpg'];
+  A Final Brasileira foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
+</p>`;  // informações a serem apresentadas no topo da página (HTML).
+      var images = ['img/all_participants.jpeg', 'img/salao21.jpg']; // imagens do carousel
       var sponsor = `
 <p>
   A competição foi patrocinada por VTEX, SAP, CNPq, Americanas, BrDigital, beecrowd e Alura
-</p>`;
+</p>`;  // informações sobre os patrocinadores.
       var organization = `
 <p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva.
-</p>`;
+</p>`;  // geralmente a listagem dos envolvidos na organização do evento.
       var warmup_problems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
                              'Mountain Ranges - Vinicius Santos, Brasil',
                              'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
@@ -45,8 +44,8 @@
                               'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
                               'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
                               'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
-      var champion_pic = 'team1.webp'
-      var medalists = [// [teamName, [contestants], [coaches], img]
+      var champion_pic = 'team1.webp';
+      var medalists = [// [teamName, [contestants], [coaches]]
         ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
         ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
         ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
@@ -72,9 +71,9 @@
  Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/">Caninos Loucos</a>, organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS). Os três melhores times foram:
 </p>
 <ul>
-  <li><a href="img/cefetrj.webp">CEFET-RJ - random.choice(funny_names)</a>
-  <li><a href="img/unb.webp">UnB - Posso mandar um WA?</a>
-  <li><a href="img/ufcqxd.webp">UFC-Quixadá - two thousands rubles trap</a>
+  <li>CEFET-RJ - random.choice(funny_names)</li>
+  <li>UnB - Posso mandar um WA?</li>
+  <li>UFC-Quixadá - two thousands rubles trap</li>
 </ul>
 ${gallery(['cefetrj.webp', 'unb.webp', 'ufcqxd.webp'])}`;
 
@@ -133,13 +132,13 @@ ${gallery(images)}`;
 </ul>
 ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
-      var [gold, silver, bronze] = medals(medalists);
+      var [gold, silver, bronze] = splitbyMedal(medalists);
       var results = accordion('PhaseResults',
-                              [['G', 'Medalhas de Ouro', listTeams(gold, 1)],
-                               ['S', 'Medalhas de Prata', listTeams(silver, 1 + gold.length)],
-                               ['B', 'Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
-                               ['CR', 'Campeões Regionais', regional_champs],
-                               ['CCL', 'Café com Leite', listTeams(ccl, 1)]],
+                              [['Medalhas de Ouro', listTeams(gold, 1)],
+                               ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
+                               ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
+                               ['Campeões Regionais', regional_champs],
+                               ['Café com Leite', listTeams(ccl, 1)]],
                               ['text-black" style="background-color: #FFD700;"',
                                'text-black" style="background-color: #C0C0C0;"',
                                'text-black" style="background-color: #CD7F32;"',
@@ -150,21 +149,21 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
-      <h1>Final Nacional</h1>
       <script type="text/javascript">
+        document.write(`<h1>${thisYear()} - Final Nacional</h1>\n`);
         document.write(initial_info);
-        document.write(accordion('Phase', [['Images', 'Fotos', carousel(images)],
-                                           ['Sponsor', 'Patrocinadores', sponsor],
-                                           ['Organization', 'Organização', organization],
-                                           ['WarmUp', 'Warm Up', slides + contest_info('warmup', warmup_problems)],
-                                           ['Contest', 'Prova', contest_info('contest', contest_problems)],
-                                           ['Result', 'Resultados', contest_reports() + champion + results],
-                                           ['Extra', 'Caninos Loucos', extra]
+        document.write(accordion('Phase', [['Fotos', carousel(images)],
+                                           ['Patrocinadores', sponsor],
+                                           ['Organização', organization],
+                                           ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
+                                           ['Prova', contestInfo('contest', contest_problems)],
+                                           ['Resultados', contestReports() + champion + results],
+                                           ['Caninos Loucos', extra]
                                            ]));
         document.write(`
 <br>
 <p>
-  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(THIS_YEAR) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
+  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
 </p>`);
       </script>
     </div>

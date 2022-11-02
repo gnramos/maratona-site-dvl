@@ -12,11 +12,11 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, organization, contest_problems, results [limiar_ok + sedes]
+      // initial_info, organization, contest_problems, results [limiar_ok + supersedes]
       //====================================================================================================
       var initial_info = `
 <p>
-  Em 2021 ocorreu a XXVI Maratona SBC de Programação. A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
+  A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
 </p>`;
       var organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
@@ -36,85 +36,81 @@
                               'Monarquia em Vertigem - Cristhian Bonilha',
                               'Na Trave! - Vinicius dos Santos'];
 
-        var limiar_ok = resultTable( // [ [site, [list_rule1, list_rule2, list_rule3]]]
-            [['Bahia', [['[UFBA] SQLados'],
-                        ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
-                        ['[UESC] Gramado, eu te amo!']]],
-             ['Ceará', [['[UFC-QXD] two thousands rubles trap'],
-                        ['[UFC] AC(¬‿¬)WA', '[UECE] Jacarés e Grafinho Embriagados de Café'],
-                        []]],
-             ['Minas Gerais', [['[UFMG] Summerigimurne?', '[UFMG] Guloso k-dimensional'],
-                              ['[DPI-UFV] O JOGO', '[UNIFEI] Pôneis de Guerra', '[UFU] Saideira ', '[INATEL] Array do Gado ', '[UFV-Florestal] seila', '[CEFET-MG-C2] NO(f*ck)', '[IFNMG - Montes Claros] Como assim a maratona é hoje?'],
-                              []]],
-             ['Paraíba', [['[UFCG] O amarelo foi ejetado'],
-                         ['[IFPB-João Pessoa] 2 matemáticos e 2 flamenguistas'],
-                         []]],
-             ['Paraná', [[],
-                        ['[UTFPR-CT] Programmeurs: end(0)', '[UFPR] Dupla de três'],
-                        ['[UTFPR-Toledo] Antes tarde do que TLE']]],
-             ['Piauí', [[],
-                       ['[UFPI] Três caras numa moto', '[UFPI - Picos] No Coffee No Life'],
-                       []]],
-             ['Rio de Janeiro', [['[IMPA] Last Chance','[IME] Nada &eacute; trivial','[UFRJ] desCE ouTro BaLÃo, MelAnCia!!@!1!'],
-                                ['[UERJ] UERJLJV', '[CEFET/RJ Petrópolis] random.choice(funny_names)  ', '[UFRRJ] O(n!) dá TLE?', '[PUC Rio de Janeiro] No such file'],
-                                []]],
-             ['Santa Catarina', [[],
-                                ['[UDESC] The Balloonatics', '[UF Santa Catarina] Bolonhesa'],
-                                []]],
-             ['São Paulo', [['[USP] Zikados', "[USP] Hoje tem 'In queue' do Ribamar", '[USP-São Carlos] gramando no deitado', '[Unicamp] EhNois_', '[USP-São Carlos] Se der bom não pergunta como', '[Unicamp] Moratonistas', '[ITA] GGH'],
-                            ['[UFABC] NJR10', '[UNESP-Bauru] UnespLRM', '[UNESP Rio Claro] Hell Claro 2', '[FATEC-Sorocaba] No Main No Gain', '[FFCLRP-USP] FrenchFries', '[UFSCar] seg em fentree olhe para o log'],
-                            []]]]);
-        var ssco = resultTable(
-            [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
-                                   ['[UnB/FGA] Confia no py'],
+        //              [[site, [list_rule1, list_rule2, list_rule3]]]
+        var limiar_ok = [['Bahia', [['[UFBA] SQLados'],
+                                    ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
+                                    ['[UESC] Gramado, eu te amo!']]],
+                         ['Ceará', [['[UFC-QXD] two thousands rubles trap'],
+                                    ['[UFC] AC(¬‿¬)WA', '[UECE] Jacarés e Grafinho Embriagados de Café'],
+                                    []]],
+                         ['Minas Gerais', [['[UFMG] Summerigimurne?', '[UFMG] Guloso k-dimensional'],
+                                          ['[DPI-UFV] O JOGO', '[UNIFEI] Pôneis de Guerra', '[UFU] Saideira ', '[            INATEL] Array do Gado ', '[UFV-Florestal] seila', '[CEFET-MG-C2] NO(f*ck)',             '[IFNMG - Montes Claros] Como assim a maratona é hoje?'],
+                                          []]],
+                         ['Paraíba', [['[UFCG] O amarelo foi ejetado'],
+                                     ['[IFPB-João Pessoa] 2 matemáticos e 2 flamenguistas'],
+                                     []]],
+                         ['Paraná', [[],
+                                    ['[UTFPR-CT] Programmeurs: end(0)', '[UFPR] Dupla de três'],
+                                    ['[UTFPR-Toledo] Antes tarde do que TLE']]],
+                         ['Piauí', [[],
+                                   ['[UFPI] Três caras numa moto', '[UFPI - Picos] No Coffee No Life'],
                                    []]],
-             ['Goiás', [[],
-                        ['[PUC-Goiás] (╯°□°)╯︵ ┻━┻'],
-                        ['[UFG] Monkeys: Rubiataba Edition']]],
-             ['Mato Grosso', [[],
-                              [],
-                              ['[UFMT] Filhos do Buraco']]],
-             ['Mato Grosso do Sul', [[],
-                                     ['[FACOM - UFMS] print "Batatinha Frita", 1, 2, 3'],
-                                     []]]]);
-        var ssne = resultTable(
-            [['Alagoas', [[],
-                          ['[UFAL] A query tá O(n) DE NOVO'],
-                          []]],
-             ['Maranhão', [[], [], []]],
-             ['Pernambuco', [['[UFPE] Amigos de Yuki  U・ᴥ・U'],
-                             [],
-                             []]],
-             ['Rio Grande do Norte', [['[UFRN] SegTreeste e Persistente'],
-                                      [],
-                                      []]],
-             ['Sergipe', [[], [], []]]]);
-        var ssno = resultTable(
-            [['Acre', [[],
-                       [],
-                       ['[UFAC] Wrong Answer 1000%']]],
-             ['Amapá', [[], [], []]],
-             ['Amazonas', [[],
-                           ['[UEA] Você é fraco, te falta O(1)'],
-                           ['[UFAM] Tuturu sem  O(1)']]],
-             ['Pará', [[],
-                       ['[UFPA] assert(greedier % 2 == 0);'],
-                       []]],
-             ['Rondônia', [[], [], []]],
-             ['Roraima', [[], [], []]],
-             ['Tocantins', [[], [], []]]]);
-        var ssbr = resultTable(
-            [['Espírito Santo', [['[UFES] man java'],
-                                 [],
+                         ['Rio de Janeiro', [['[IMPA] Last Chance','[IME] Nada &eacute; trivial','[UFRJ] desCE ouTro             BaLÃo, MelAnCia!!@!1!'],
+                                            ['[UERJ] UERJLJV', '[CEFET/RJ Petrópolis] random.choice(funny_names)  ', '[            UFRRJ] O(n!) dá TLE?', '[PUC Rio de Janeiro] No such file'],
+                                            []]],
+                         ['Santa Catarina', [[],
+                                            ['[UDESC] The Balloonatics', '[UF Santa Catarina] Bolonhesa'],
+                                            []]],
+                         ['São Paulo', [['[USP] Zikados', "[USP] Hoje tem 'In queue' do Ribamar", '[USP-São Carlos]             gramando no deitado', '[Unicamp] EhNois_', '[USP-São Carlos] Se der bom não pergunta como',             '[Unicamp] Moratonistas', '[ITA] GGH'],
+                                        ['[UFABC] NJR10', '[UNESP-Bauru] UnespLRM', '[UNESP Rio Claro] Hell Claro 2', '            [FATEC-Sorocaba] No Main No Gain', '[FFCLRP-USP] FrenchFries', '[UFSCar] seg             em fentree olhe para o log'],
+                                        []]]];
+        var ssco = [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
+                                          ['[UnB/FGA] Confia no py'],
+                                          []]],
+                    ['Goiás', [[],
+                               ['[PUC-Goiás] (╯°□°)╯︵ ┻━┻'],
+                               ['[UFG] Monkeys: Rubiataba Edition']]],
+                    ['Mato Grosso', [[],
+                                     [],
+                                     ['[UFMT] Filhos do Buraco']]],
+                    ['Mato Grosso do Sul', [[],
+                                            ['[FACOM - UFMS] print "Batatinha Frita", 1, 2, 3'],
+                                            []]]];
+        var ssne = [['Alagoas', [[],
+                                 ['[UFAL] A query tá O(n) DE NOVO'],
                                  []]],
-             ['Rio Grande do Sul', [[],
-                                    ['[UFRGS] Obtusos'],
-                                    []]]]);
-        var results = accordion('PhaseResults', [['limiar_ok', 'Sedes que atingiram o limiar de 10 times e 5 escolas', limiar_ok],
-                                                 ['ssco', 'Supersede Centro-Oeste (3 vagas)', ssco],
-                                                 ['ssne', 'Supersede Nordeste (3 vagas)', ssne],
-                                                 ['ssno', 'Supersede Norte (2 vagas)', ssno],
-                                                 ['ssbr', 'Supersede Brasil (2 vagas)', ssbr]
+                    ['Maranhão', [[], [], []]],
+                    ['Pernambuco', [['[UFPE] Amigos de Yuki  U・ᴥ・U'],
+                                    [],
+                                    []]],
+                    ['Rio Grande do Norte', [['[UFRN] SegTreeste e Persistente'],
+                                             [],
+                                             []]],
+                    ['Sergipe', [[], [], []]]];
+        var ssno = [['Acre', [[],
+                              [],
+                              ['[UFAC] Wrong Answer 1000%']]],
+                    ['Amapá', [[], [], []]],
+                    ['Amazonas', [[],
+                                  ['[UEA] Você é fraco, te falta O(1)'],
+                                  ['[UFAM] Tuturu sem  O(1)']]],
+                    ['Pará', [[],
+                              ['[UFPA] assert(greedier % 2 == 0);'],
+                              []]],
+                    ['Rondônia', [[], [], []]],
+                    ['Roraima', [[], [], []]],
+                    ['Tocantins', [[], [], []]]];
+        var ssbr = [['Espírito Santo', [['[UFES] man java'],
+                                        [],
+                                        []]],
+                    ['Rio Grande do Sul', [[],
+                                           ['[UFRGS] Obtusos'],
+                                           []]]];
+        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', siteResult(limiar_ok)],
+                                                 ['Supersede Centro-Oeste (3 vagas)', siteResult(ssco)],
+                                                 ['Supersede Nordeste (3 vagas)', siteResult(ssne)],
+                                                 ['Supersede Norte (2 vagas)', siteResult(ssno)],
+                                                 ['Supersede Brasil (2 vagas)', siteResult(ssbr)]
           ]);
 
       //======================================================================
@@ -125,12 +121,12 @@
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
-      <h1>Primeira Fase</h1>
       <script type="text/javascript">
+        document.write(`<h1>${thisYear()} - Primeira Fase</h1>\n`);
         document.write(initial_info);
-        document.write(accordion('Phase', [['Organization', 'Organização', organization],
-                                           ['Contest', 'Prova', contest_info('contest', contest_problems)],
-                                           ['Result', 'Resultados', contest_reports() + results]]));
+        document.write(accordion('Phase', [['Organização', organization],
+                                           ['Prova', contestInfo('contest', contest_problems)],
+                                           ['Resultados', contestReports() + results]]));
       </script>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>
