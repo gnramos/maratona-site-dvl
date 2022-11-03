@@ -1,5 +1,12 @@
 CURRENT_YEAR = '2021';
 
+/**
+ * Obfuscate an e-mail contact in link.
+ *
+ * @param  {Array}  text the text to show as link
+ * @param  {String} args parts of the string that compose de e-mail address
+ * @return {String}        the HTML with the formatted information
+ */
 function contact(text, ...args) {
     var mail = args.reduce((acc, cur) => acc + cur);
     return `<a href="mailto:${mail}">${text}</a>`;
@@ -11,6 +18,11 @@ function root() {
   // return '../'.repeat(url.length - 9);
 }
 
+/**
+ * Create page header.
+ *
+ * @return {String} the HTML with the formatted information
+ */
 function bodyHeader() {
   var url = window.location.pathname.split('/');
   var currentPage = url.at(-1);
@@ -36,6 +48,7 @@ function bodyHeader() {
               <li><a class="dropdown-item" href="${root()}sobre/regras.html">Regras</a></li>
               <li><a class="dropdown-item" href="${root()}sobre/ambiente_computacional.html">Ambiente Computacional</a></li>
               <li><a class="dropdown-item" href="${root()}sobre/organizacao.html">Organização</a></li>
+              <li><a class="dropdown-item" href="${root()}sobre/divulgacao.html">Divulgação</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -85,6 +98,11 @@ function bodyHeader() {
     </div>`;
 }
 
+/**
+ * Create page footer.
+ *
+ * @return {String} the HTML with the formatted information
+ */
 function bodyFooter() {
   return `
     <div class="container">
@@ -106,6 +124,16 @@ function bodyFooter() {
     </div`;
 }
 
+/**
+ * Create an accordion with the given items.
+ *
+ * Creates a Bootstrap Accordion (https://getbootstrap.com/docs/5.0/components/accordion/).
+ *
+ * @param  {String} name          the ID for the accordion
+ * @param  {Array}  items         an array with the content for each accordion item, which should be formatted as an Array [headerText, bodyText]
+ * @param  {Array}  headerClasses an array with additional class information for each item header
+ * @return {String}               the HTML with the formatted information
+ */
 function accordion(name, items, headerClasses=[]) {
   var accItems = '';
   for (i in items) {
@@ -130,6 +158,14 @@ function accordion(name, items, headerClasses=[]) {
 </div>`;
 }
 
+/**
+ * Create a carousel with the given images.
+ *
+ * Creates a Bootstrap Carousel (https://getbootstrap.com/docs/5.0/components/carousel/).
+ *
+ * @param  {Array}  images an array with the paths for each image
+ * @return {String}        the HTML with the formatted information
+ */
 function carousel(images) {
   var buttons = '', items = '';
   for (i in images) {
