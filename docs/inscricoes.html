@@ -12,9 +12,11 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // deadline, discount_deadline, discount_prices, full_prices.
+      // site_deadline, team_deadline, discount_deadline, discount_prices, full_prices.
       //====================================================================================================
-      var deadline = `26/9/2022`;
+      var site_deadline = `30/06/2022`;
+      var site_form = `https://forms.gle/wAVvSjN8nzHFec3N9`;
+      var team_deadline = `26/9/2022`;
       var discount_deadline = '26/08/2022';
       var discount_prices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
                              ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 /time']], // Instituição não associada.
@@ -31,7 +33,11 @@
       deadline_start.setDate(deadline_start.getDate() + 1);
       deadline_start = `${deadline_start.getDate()}/${deadline_start.getMonth()}/${deadline_start.getFullYear()}`;
 
+      var site = `Instituições interessadas em sediar a Primeira Fase da Maratona de Programação devem se inscrever <a href="${site_form}">neste formulário</a>.`;
+
       var team = `
+      <p>Se você deseja competir na Maratona, forme seu time! Procure um professor de seu curso para que ele ajude você e seu time sendo o técnico, e informe-o dos procedimentos de inscrição. Se você é professor de uma instituição de ensino superior da área de computação ou afim, reúna seus alunos e monte seus times! Se não tem havido sedes da Maratona na sua região candidate sua instituição para sediar a Maratona!
+      </p>
       <p>
         A inscrição é feita em dois passos, que podem ser feitos em qualquer ordem:
       </p>
@@ -57,7 +63,7 @@
               <tr><td>2</td> <td>${discount_prices[0][1]}</td><td>${discount_prices[1][1]}</td></tr>
               <tr><td>3+</td><td>${discount_prices[0][2]}</td><td>${discount_prices[1][2]}</td></tr>
               <tr>
-                <td rowspan="3" class="align-middle">De ${deadline_start} a ${deadline}</td>
+                <td rowspan="3" class="align-middle">De ${deadline_start} a ${team_deadline}</td>
                   <td>1</td> <td>${full_prices[0][0]}</td><td>${full_prices[1][0]}</td></tr>
               <tr><td>2</td> <td>${full_prices[0][1]}</td><td>${full_prices[1][1]}</td></tr>
               <tr><td>3+</td><td>${full_prices[0][2]}</td><td>${full_prices[1][2]}</td></tr>
@@ -70,6 +76,9 @@
       </p>
       <p>
         A inscrição na Maratona é Institucional, por isso é fortemente recomendado que seja feita a inscrição somente pelo cadastro da Instituição responsável para se inscrever como Associada Institucional da SBC, deve acessar o ECOS utilizando o cadastro da Instituição, somente assim o sistema reconhecerá a associação Institucional e liberará as categorias para associados. Caso não tenha conhecimento do e-mail que está cadastrado no sistema da SBC e se a associação institucional está vigente, pode ${contact("consultar a SBC", "s", "bc@sbc", ".org.", "b", "r")}.
+      </p>
+      <p>
+        A final brasileira da competição ocorrerá em três dias cheios, e a chegada é numa quinta-feira. Na sexta-feira ocorrem a abertura, a sessão de aquecimento e outros eventos importantes. <strong>É fundamental a participação dos times em todos os dias!</strong> No sábado ocorre a competição e a festa de encerramento do concurso. A organização do concurso oferecerá auxílio para os times de fora da sede para hospedagem durante as finais.
       </p>`;
               var ccl = `
       <p>
@@ -90,10 +99,11 @@
       <div class="container text-left">
         <h1>Inscrições</h1>
         <p class="text-danger">
-          O prazo de inscrição é <strong><script type="text/javascript">document.write(deadline);</script></strong>.
+          O prazo de inscrição é <strong><script type="text/javascript">document.write(team_deadline);</script></strong>.
         </p>
       <script type="text/javascript">
-        document.write(accordion('enroll', [['Time(s)', team],
+        document.write(accordion('enroll', [['Sede(s)', site],
+                                            ['Time(s)', team],
                                             ['Café-com-Leite', ccl],
                                             ['Desistência & Reembolso', refund]]));
         document.write(bodyFooter());
