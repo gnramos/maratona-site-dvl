@@ -75,8 +75,14 @@ function splitbyMedal(medalists) {
           medalists.slice(2 * teamsPerMedal, 3 * teamsPerMedal)];  // bronze
 }
 
-function siteResult(site_teams) {
-  // site_teams -> [siteName, [list_of_teams_rule1, list_of_teams_rule3, list_of_teams_rule3]]
+/**
+ * Builds the results for teams that advanced in the 1st phase for a contest site.
+ *
+ * @param  {Array}  siteTeams list of sites and teams
+ * @return {String}           the HTML with the formatted information
+ */
+function advancingTeams(results) {
+  // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
   var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
   function ruleHeaderCells() {
@@ -110,10 +116,10 @@ function siteResult(site_teams) {
         cell += `<span class="${RULE_COLORS[i]}">${team}</span><br>`;
     return cell;
   }
-  function makeRow(site_teams) {
+  function makeRow(siteTeams) {
     var row = '';
-    for (site_team of site_teams) {
-      var [site, teams] = site_team;
+    for (item of results) {
+      var [site, teams] = item;
       row += `
     <tr>
       <td scope="row">${site}</td>
@@ -133,8 +139,16 @@ function siteResult(site_teams) {
       <th scope="col">Times classificados</th>
     </tr>
   </thead>
-  ${makeRow(site_teams)}
+  ${makeRow(results)}
 </table>`;
 }
 
-function thisYear() { return window.location.pathname.split('/').at(-3); }
+/**
+ * Return the year for specific events from the dir structure.
+ *
+ * @return {String} the year.
+ */
+function thisYear() {
+  var url = window.location.pathname.split('/');
+  return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
+}

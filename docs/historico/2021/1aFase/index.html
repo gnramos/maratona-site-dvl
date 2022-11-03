@@ -106,11 +106,11 @@
                     ['Rio Grande do Sul', [[],
                                            ['[UFRGS] Obtusos'],
                                            []]]];
-        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', siteResult(limiar_ok)],
-                                                 ['Supersede Centro-Oeste (3 vagas)', siteResult(ssco)],
-                                                 ['Supersede Nordeste (3 vagas)', siteResult(ssne)],
-                                                 ['Supersede Norte (2 vagas)', siteResult(ssno)],
-                                                 ['Supersede Brasil (2 vagas)', siteResult(ssbr)]
+        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok)],
+                                                 ['Supersede Centro-Oeste', advancingTeams(ssco)],
+                                                 ['Supersede Nordeste', advancingTeams(ssne)],
+                                                 ['Supersede Norte', advancingTeams(ssno)],
+                                                 ['Supersede Brasil', advancingTeams(ssbr)]
           ]);
 
       //======================================================================
