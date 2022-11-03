@@ -9,28 +9,46 @@
 
     <script type="text/javascript" src="../../../maratona.js"></script>
     <script type="text/javascript" src="../../utils.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // initial_info, teams.
+      //====================================================================================================
+      var initial_info = `
+<p>
+  A Final Mundial do ICPC ocorreu em ??.
+</p>`;  // informações a serem apresentadas no topo da página (HTML).
+      var images = ['../Nacional/img/all_participants.jpeg', '../Nacional/img/salao21.jpg']; // imagens do carousel
+      var teams = ['Escola1', 'Escola2', 'Escola3'];  // na ordem de classificação da Nacional.
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+      var results = `
+<p>
+  Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-${thisYear()}">site do ICPC</a>.`;
+
+      var teamList = '<ul>', teamImages = [];
+      for (i in teams) {
+        teamList += `\n  <li>${teams[i]}</a>`;
+        teamImages.push(`../../Nacional/img/team${Number(i) + 1}.webp`);
+      }
+      teamList += `\n<ul>\n${gallery(teamImages)}`;
+    </script>
   </head>
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
     <div class="container text-left">
-      <h1>Final Mundial</h1>
-      Informações iniciais.
       <script type="text/javascript">
-        var signup = `
-<p>
-  Informações dos inscritos.
-</p>`;
-        var contest = `
-<p>
-  Informações da prova.
-</p>`;
-        var results = `
-<p>
-  Informações dos resultados.
-</p>`;
-        document.write(accordion('Phase', [['Signup', 'Inscrições', signup],
-                                           ['Contest', 'Prova', contest],
-                                           ['Result', 'Resultados', results]]));
+        document.write(`<h1>${thisYear()} - Final Mundial</h1>\n`);
+        document.write(initial_info);
+        document.write(accordion('Phase', [['Fotos', carousel(images)],
+                                           ['Participantes', teamList],
+                                           // ['Organização', organization],
+                                           // ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
+                                           // ['Prova', contestInfo('contest', contest_problems)],
+                                           ['Resultados', results],
+                                           // ['Caninos Loucos', extra]
+                                           ]));
       </script>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>

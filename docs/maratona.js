@@ -46,7 +46,6 @@ function bodyHeader() {
               <li><a class="dropdown-item" href="${root()}inscricoes.html">Inscrições</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/SummerSchool/index.html">Summer School</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>
             </ul>
           </li>
