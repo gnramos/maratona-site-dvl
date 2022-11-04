@@ -14,9 +14,9 @@
 
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, school, coach, team, phases, contest, site, spot, e appeal.
+      // pageStart, school, coach, team, phases, contest, site, spot, e appeal.
       //====================================================================================================
-      var initial_info = `
+      var pageStart = `
       <p>
         <strong class='text-danger'>O Comitê Diretor da Maratona de Programação, na reunião realizada em Gramado, aprovou as seguintes regras para vigorarem a partir do ano de 2022:</strong>
       </p>
@@ -143,7 +143,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
       <h1>Regras</h1>
 
       <script type="text/javascript">
-        document.write(initial_info);
+        document.write(pageStart);
         document.write(accordion('rules', [['Escolas', school],
                                            ['Técnicos/Coaches', coach],
                                            ['Time', team],

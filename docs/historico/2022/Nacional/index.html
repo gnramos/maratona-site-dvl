@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XXVI Maratona de Programação SBC</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../utils.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // pasgeStart, images, sponsor, organization, warmup_problems, contest_problems,
+      // champion_pic, medalists, regional_champs e ccl.
+      //====================================================================================================
+      var pageStart = `
+<p>
+  A Final Brasileira será realizada na em Campo Grande, MS.
+</p>`;  // informações a serem apresentadas no topo da página (HTML).
+      var images = []; // imagens do carousel
+      var sponsor = `
+<p>
+  A competição foi patrocinada por VTEX, SAP, CNPq, Americanas, BrDigital, beecrowd e Alura
+</p>`;  // informações sobre os patrocinadores.
+      var organization = `
+<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva.
+</p>`;  // geralmente a listagem dos envolvidos na organização do evento.
+      var warmup_problems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
+                             'Mountain Ranges - Vinicius Santos, Brasil',
+                             'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
+      var contest_problems = ['Ancient Towers - Giovanna Kobus Conrado, Brasil',
+                              'Because, Art! - Naim Shaikhzadeh Santos, Brasil',
+                              'Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil',
+                              'Daily Turnovers, Yan Silva, Brasil',
+                              'Expedition Plans, Daniel Bossle, Brasil',
+                              'Fields Division, Yan Silva, Brasil',
+                              'Generator Tree, Victor de Sousa Lamarca, Brasil',
+                              'Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil',
+                              'Invested Money, Alejandro Strejilevich de Loma, Argentina',
+                              'Joining Pairs, Giovanna Kobus Conrado, Brasil',
+                              'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
+                              'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
+                              'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+      var champion_pic = 'team1.webp';
+      var medalists = [// [teamName, [contestants], [coaches]]
+        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
+        ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
+        ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
+        ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
+        ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
+        ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
+        ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli']],
+        ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
+        ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
+        ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
+        ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
+        ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
+      var ccl = [['WAN TAAN SURI KILL', [], [], 'ccl.jpg']];
+
+      var regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
+                             ['UnB - Posso mandar um WA?', 'unb.webp'],
+                             ['UFPE - Amigos do Yuki U・ᴥ・U', 'team1.webp'],
+                             ['UFAM - tuturu sem O(1)', 'ufam.webp'],
+                             ['UFMG - Summerginmune?', 'team2.webp'],
+                             ['UDESC - The Ballonatics', 'udesc.webp']];
+      var extra = `
+ <p>
+ Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/">Caninos Loucos</a>, organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS). Os três melhores times foram:
+</p>
+<ul>
+  <li>CEFET-RJ - random.choice(funny_names)</li>
+  <li>UnB - Posso mandar um WA?</li>
+  <li>UFC-Quixadá - two thousands rubles trap</li>
+</ul>
+${gallery(['cefetrj.webp', 'unb.webp', 'ufcqxd.webp'])}`;
+
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+      function listTeams(teams, start) {
+        var items = ``, images = [];
+        for (i in teams){
+          items += `
+  <li><strong>${teams[i][0]}:</strong> ${teams[i][1].join(', ')}${teams[i][2].length > 0 ? ' e coach(es) ' + teams[i][2].join(', ') : ''}.</li>`;
+          images.push(teams[i][3] != undefined ? teams[i][3] : "team" + (Number(i) + start) + ".webp");
+        }
+        return `
+\n<ol start=${start}>
+  ${items}
+</ol>
+${gallery(images)}`;
+      }
+
+      var slides = `
+<a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
+
+      var champion = `
+<div class="card mb-3">
+  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
+  <div class="row g-0">
+  <!--  <div class="col-md-1">
+      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
+    </div>
+    <div class="col-md-11">
+      <div class="card-body">
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
+      </div>
+    </div>-->
+    <div class="col-md-9">
+      <h4 class='text-center'><strong>Campeões</strong></h4>
+      <div class="card-body">
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <img class="img-fluid img-thumbnail" src="img/${champion_pic}">
+    </div>
+  </div>
+</div>`;
+      var regional_champs = `
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0][0]}</strong></li>
+  <li class="list-group-item">Nordeste: <strong>${regional_champs[1][0]}</strong></li>
+  <li class="list-group-item">Norte: <strong>${regional_champs[2][0]}</strong></li>
+  <li class="list-group-item">Sudeste: <strong>${regional_champs[3][0]}</strong></li>
+  <li class="list-group-item">Sul: <strong>${regional_champs[4][0]}</strong></li>
+</ul>
+${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
+
+      var [gold, silver, bronze] = splitbyMedal(medalists);
+      var results = accordion('PhaseResults',
+                              [['Medalhas de Ouro', listTeams(gold, 1)],
+                               ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
+                               ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
+                               ['Campeões Regionais', regional_champs],
+                               ['Café com Leite', listTeams(ccl, 1)]],
+                              ['text-black" style="background-color: #FFD700;"',
+                               'text-black" style="background-color: #C0C0C0;"',
+                               'text-black" style="background-color: #CD7F32;"',
+                               'bg-success text-white',
+                               'bg-light text-black']);
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <script type="text/javascript">
+        document.write(`<h1>${thisYear()} - Final Nacional</h1>\n`);
+        document.write(pageStart);
+//         document.write(accordion('Phase', [['Fotos', carousel(images)],
+//                                            ['Patrocinadores', sponsor],
+//                                            ['Organização', organization],
+//                                            ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
+//                                            ['Prova', contestInfo('contest', contest_problems)],
+//                                            ['Resultados', contestReports() + champion + results],
+//                                            ['Caninos Loucos', extra]
+//                                            ]));
+//         document.write(`
+// <br>
+// <p>
+//   Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
+// </p>`);
+      </script>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>

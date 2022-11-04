@@ -13,9 +13,9 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, organization, contest_problems, results [limiar_ok + supersedes]
+      // pageStart, organization, contest_problems, results [limiar_ok + supersedes]
       //====================================================================================================
-      var initial_info = `
+      var pageStart = `
 <p>
   A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
 </p>`;
@@ -124,7 +124,7 @@
     <div class="container text-left">
       <script type="text/javascript">
         document.write(`<h1>${thisYear()} - Primeira Fase</h1>\n`);
-        document.write(initial_info);
+        document.write(pageStart);
         document.write(accordion('Phase', [['Organização', organization],
                                            ['Prova', contestInfo('contest', contest_problems)],
                                            ['Resultados', contestReports() + results]]));

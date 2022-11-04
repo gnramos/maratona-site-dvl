@@ -54,7 +54,7 @@ São fornecidos os links para os arquivos utilizados, que devem *necessariamente
 
 ### index.html
 O arquivo `index.html` determina o conteúdo. A formatação é praticamente toda definida automaticamente, via CSS e javascript, sendo necessário apenas definir alguns conteúdos como HTML. Especificamente:
-* `initial_info`: as informações a serem apresentadas no topo da página.
+* `pageStart`: as informações a serem apresentadas no topo da página.
 * `organization`: as informações a serem apresentadas no bloco de "organização", geralmente a listagem dos envolvidos na organização do evento.
 * contest_problems: a lista dos nomes dos problemas (e seus autores), na mesma ordem que aparecem na prova.
 * `results [limiar_ok + supersedes]`: os resultados dos times classificados em cada sede.

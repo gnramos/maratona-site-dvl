@@ -13,10 +13,10 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, images, sponsor, organization, warmup_problems, contest_problems,
+      // pageStart, images, sponsor, organization, warmup_problems, contest_problems,
       // champion_pic, medalists, regional_champs e ccl.
       //====================================================================================================
-      var initial_info = `
+      var pageStart = `
 <p>
   A Final Brasileira foi realizada na belíssima Gramado, Rio Grande do Sul, com realização da Universidade Federal do Rio Grande do Sul. O Prof. Weverton Cordeiro foi o diretor da Final.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
@@ -152,7 +152,7 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
     <div class="container text-left">
       <script type="text/javascript">
         document.write(`<h1>${thisYear()} - Final Nacional</h1>\n`);
-        document.write(initial_info);
+        document.write(pageStart);
         document.write(accordion('Phase', [['Fotos', carousel(images)],
                                            ['Patrocinadores', sponsor],
                                            ['Organização', organization],

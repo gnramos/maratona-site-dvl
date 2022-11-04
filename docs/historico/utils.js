@@ -48,9 +48,9 @@ function contestReports() {
  * @return {String}        the HTML with the formatted information
  */
 function gallery(images) {
-  var gal = '';
+  var items = '';
   for (img of images)
-    gal += `
+    items += `
   <div class="col-lg-3 col-md-4 col-6">
     <a href="img/${img}" class="d-block mb-4 h-100">
       <img class="img-fluid img-thumbnail" src="img/${img}">
@@ -58,7 +58,7 @@ function gallery(images) {
   </div>`;
         return `
 <div class="row text-center text-lg-start">
-${gal}
+${items}
 </div>`;
       }
 

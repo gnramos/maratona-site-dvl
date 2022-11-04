@@ -12,74 +12,180 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // site_deadline, team_deadline, discount_deadline, discount_prices, full_prices.
+      // date1Fase, dateNacional siteDeadline, siteForm, teamDeadline, discountDeadline, discountPrices, full_prices.
       //====================================================================================================
-      var site_deadline = `30/06/2022`;
-      var site_form = `https://forms.gle/wAVvSjN8nzHFec3N9`;
-      var team_deadline = `26/9/2022`;
-      var discount_deadline = '26/08/2022';
-      var discount_prices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
+      var date1Fase = '8/10/2022';
+      var dateNacional = '10/3/2023';
+      var placeNacional = 'Campo Grande, MS'
+      var siteDeadline = `30/6/2022`;
+      var siteForm = `https://forms.gle/wAVvSjN8nzHFec3N9`;
+      var teamDeadline = `26/9/2022`;
+      var discountDeadline = '26/8/2022';
+      var discountPrices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
                              ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 /time']], // Instituição não associada.
           full_prices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 /time'],  // Instituição associada.
                          ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 /time']]; // Instituição não associada.
+      var sites = [ //[regiao + cidade, local, diretor, e-mail]
+['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', 'juniorlimeiras@gmail.com'],
+['AM, Manaus', 'UFAM', 'Rosiane de Freitas', 'rosiane@icomp.ufam.br'],
+['BA, Juazeiro', 'UNIVASF', 'Marcelo Linder', 'marcelo.linder@univasf.edu.br'],
+['BA, Lauro de Freitas', 'UNIME-Lauro de Freitas', 'Alex Alves da Paixão', 'alex.paixao@kroton.com.br'],
+['CE, Fortaleza', 'UFC-Fortaleza', 'Nicolas Moreira', 'nicolas@ufc.br'],
+['CE, Juazeiro do Norte', 'Centro Univ. Paraíso', 'Fabricio C. Costa', 'fabricio.carneiro@fapce.edu.br'],
+['CE, Quixadá', 'UFC-Quixadá', 'Arthur R. Araruna', 'ararunaufc@gmail.com'],
+['DF, Brasília', 'Centro Universitário IESB', 'Patricia Moscariello Rodrigues', 'pmoscariello@iesb.br'],
+['ES, Vitoria', 'UFES', 'Giovanni V. Comarela', 'gc@inf.ufes.br'],
+['GO, Goiânia', 'UFG', 'Humberto Longo', 'longo@ufg.br'],
+['MA, Balsas', 'Faculdade de Balsas', 'Jakson F. de Souza', 'jakson.ferreira@prof.unibalsas.edu.br'],
+['MG, Belo Horizonte', 'PUC-Minas', 'Felipe Domingos da Cunha', 'felipe@pucminas.br'],
+['MG, Montes Claros', 'UNIMONTES', 'Heveraldo R. de Oliveira', 'heveraldo.oliveira@unimontes.br'],
+['MG, Ouro Branco', 'UFSJ-CAP', 'Alex Vidigal Bastos', 'alexvbh@ufsj.edu.br'],
+['MG, Santa Rita do Sapucaí', 'INATEL', 'Marcelo V.C. Aragão', 'marcelovca90@inatel.br'],
+['MG, Timoteo', 'CEFET-MG Timóteo', 'Alessio Miranda Junior', 'alessio@cefetmg.br'],
+['MG, Uberaba', 'IFTM - Uberaba', 'Daniela R.S. Orbolato', 'danielaorbolato@iftm.edu.br'],
+['MG, Uberlândia', 'UFU', 'João H.S. Pereira', 'joaohs@ufu.br'],
+['MS, Campo Grande', 'UFMS', 'Amaury A. de Castro Jr.', 'amaury.junior@ufms.br'],
+['MT, Cuiabá', 'UFMT', 'Thiago M. Ventura', 'thiago@ic.ufmt.br'],
+['PA, Belém', 'UNAMA', 'Wendel de O. Castro', 'computacao.alcindo@unama.br'],
+['PA, Santarém', 'UFOPA-Santarém', 'Flavia Pessoa Monteiro', 'flavia.monteiro@ufopa.edu.br'],
+['PB, João Pessoa', 'UNIESP e IFPB', 'Marcelo Fernandes de Sousa', 'marcelo@iesp.edu.br'],
+['PE, Olinda', 'AESO Barros Melo', 'Antonio Renato C. Gonçalves', 'renato.cruz@prof.uniaeso.edu.br'],
+['PI Picos', 'UFPI-Picos', 'Glauber D. Gonçalves', 'ggoncalves@ufpi.edu.br'],
+['PI, Teresina', 'UESPI', 'José de Ribamar M. Bringel Filho', 'bringelfilho@gmail.com'],
+['PR, Campo Mourão', 'CEI', 'Anderson Fernandes', 'anderson.fernandes@grupointegrado.br'],
+['PR, Curitiba', 'UTFPR-Curitiba', 'Leandro Zatesko', 'zatesko@utfpr.edu.br'],
+['RJ, Rio de Janeiro', 'Stone', 'Leonardo Guineli', 'leonardo.guineli@stone.com.br'],
+['RN, Natal', 'UFRN', 'André L.S. Brito', 'andre@imd.ufrn.br'],
+['RO, Porto Velho', 'UNAMA-PVH', 'Renata Luz', 'renatalluz@gmail.com'],
+['RS, Porto Alegre', 'UFRGS', 'Weverton Cordeiro', 'weverton.cordeiro@inf.ufrgs.br'],
+['RS, Rio Grande', 'FURG', 'Vinicius M. de Oliveira', 'vinicius@furg.br'],
+['SC, Chapecó', 'UNOESC', 'Tiago Zonta', 'tiago.zonta@unoesc.edu.br'],
+['SE, São Cristovão', 'UFS', 'André Britto', 'andre@dcomp.ufs.br'],
+['SP Bauru', 'ITE, Bauru', 'Anderson Talon', 'anderson.talon@ite.edu.br'],
+['SP, Piracicaba', 'EEP', 'Clerivaldo J. Roccia', 'clerivaldo.roccia@gmail.com'],
+['SP, Santos', 'Unisantos', 'Ciro C. Trindade', 'ciroct@unisantos.br'],
+['SP, São José dos Campos', 'FATEC-SJC', 'Reinado Gen Ishiro Arakaki', 'reinaldo.arakaki@fatec.sp.gov.br'],
+['SP, São Paulo', 'IPT', 'Alessandro Santiago dos Santos', 'alesan@ipt.br'],
+['SP, Sorocaba', 'FACENS', 'Andréa L. B. Vieira', 'andrea.braga@facens.br'],
+['TO, Palmas', 'UFT', 'Anna Paula de S.P. Rodrigues', 'anna.rodrigues@uft.edu.br']];
 
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      var deadline_start = new Date();
-      deadline_start.setDate(discount_deadline.substring(0, 2));
-      deadline_start.setMonth(discount_deadline.substring(3, 5));
-      deadline_start.setYear(discount_deadline.substring(6));
-      deadline_start.setDate(deadline_start.getDate() + 1);
-      deadline_start = `${deadline_start.getDate()}/${deadline_start.getMonth()}/${deadline_start.getFullYear()}`;
+      var deadlineStart = new Date();
+      var [d, m, y] = discountDeadline.split('/');
+      deadlineStart.setYear(y);
+      deadlineStart.setMonth(m);
+      deadlineStart.setDate(d);
+      deadlineStart.setDate(deadlineStart.getDate() + 1);
+      deadlineStart = `${deadlineStart.getDate()}/${deadlineStart.getMonth()}/${deadlineStart.getFullYear()}`;
+      var dateNacionalEnd = new Date();
+      [d, m, y] = dateNacional.split('/');
+      dateNacionalEnd.setYear(y);
+      dateNacionalEnd.setMonth(m);
+      dateNacionalEnd.setDate(d);
+      dateNacionalEnd.setDate(dateNacionalEnd.getDate() + 3);
+      dateNacionalEnd = `${dateNacionalEnd.getDate()}/${dateNacionalEnd.getMonth()}/${dateNacionalEnd.getFullYear()}`;
 
-      var site = `Instituições interessadas em sediar a Primeira Fase da Maratona de Programação devem se inscrever <a href="${site_form}">neste formulário</a>.`;
+      var site = `
+<p>
+  Instituições interessadas em sediar a Primeira Fase da Maratona de Programação devem se inscrever <a href="${siteForm}">neste formulário</a>.
+</p>
+<p>
+  Você pode solicitar a inscrição de sua instituição como sede da primeira fase da Maratona de Programação. A primeira fase ocorrerá em um único dia, e cabe ao diretor da sede garantir as condições para realização da prova. A organização da Maratona de Programação poderá repassar uma pequena verba às sedes para realização desta primeira fase. Veja nas <a href="sobre/regras.html">regras da competição</a> como será a classificação dos melhores times das sedes para a final brasileira da competição.
+</p>
+<p>
+  Para solicitar a inscrição de sua instituição você preencher o formulário <strong>até o dia ${siteDeadline}</strong>. <span class="text-danger">Você deverá informar seu nome, instituição em que trabalha, endereço completo para receber material da Maratona, telefones e emails de contato, e fazer um pequeno histórico de sua experiência anterior na competição</span>.
+</p>
+<p>
+  Haverá também um teste de instalação básica do sistema. As sedes aceitas pelo Comitê estarão cadastradas no <a href="http://icpc.global/">site do ICPC</a> até meados de julho. A cada sede da primeira será atribuída uma região geográfica, e todos os times desta região deverão disputar a competição naquela sede.
+</p>
+<h4>Condições para sediar a primeira fase</h4>
+<p>
+  Espera-se que sua instituição receba pelo menos 10 times de 5 diferentes escolas na primeira fase. Lembre-se que o número de vagas na final brasileira atribuídas à sede depende do número de escolas participantes nesta sede. O laboratório que receberá a competição deve dispor de n + 3 máquinas de configuração semelhante para os n times que lá disputarão a competição (3 máquinas de backup). Cada máquina deverá estar em uma bancada com espaço suficiente para que os três membros do time possam trabalhar em conjunto nos problemas.
+</p>
+<p>
+  Esperamos que cada sede local receba pelo menos 10 times de pelo menos 5 escolas de sua região. É importante ajudar na <a href="sobre/divulgacao.html">divulgação local do evento</a>.
+</p>
+<p>
+  Todas as sedes participarão da correção centralizada. Você deverá garantir as condições para que a correção ocorra em sua sede sem problemas, e deverá participar dos testes solicitados pelo pessoal de sistemas. Em particular, as máquinas locais devem ser capazes de hospedar a configuração <a href="sobre/ambiente_computacional.html">definida pela organização</a>.
+</p>
+<p>
+  Na inscrição a sede deverá cumprir um procedimento técnico elaborado pelo Diretor de Sistemas para que a sede seja habilitada a hospedar a primeira fase. Todos os interessados em sediar a Maratona de Programação devem ler o <a href="historico/${CURRENT_YEAR}/1aFase/manual_diretor.pdf">Manual do Diretor de Sede</a> que traz mais detalhes a respeito dos preparativos necessários para a realização do evento.
+</p>`;
 
       var team = `
-      <p>Se você deseja competir na Maratona, forme seu time! Procure um professor de seu curso para que ele ajude você e seu time sendo o técnico, e informe-o dos procedimentos de inscrição. Se você é professor de uma instituição de ensino superior da área de computação ou afim, reúna seus alunos e monte seus times! Se não tem havido sedes da Maratona na sua região candidate sua instituição para sediar a Maratona!
-      </p>
-      <p>
-        A inscrição é feita em dois passos, que podem ser feitos em qualquer ordem:
-      </p>
-      <ol>
-        <li>
-          O técnico deve inscrever os times no <a href=http://icpc.global>site do ICPC</a>, na <a href=1aFase.html>sede da sua região</a> (conforme as <a href="../../sobre/regras.html">regras do concurso</a>) do subcontest <em>South America/Brazil First Phase</em>.
-        </li>
-        <li>
-          O técnico deve providenciar o pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site do ECOS da SBC</a>. Veja abaixo os valores para inscrever os times de sua instituição:
-          <center>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Data</th>
-                  <th scope="col">Times</th>
-                  <th scope="col">Instituição Associada</th>
-                  <th scope="col">Instituição <strong>Não</strong> Associada</th>
-                </tr>
-              </thead>
-              <tr>
-                  <td rowspan="3" class="align-middle">Até ${discount_deadline}</td>
-                  <td>1</td> <td>${discount_prices[0][0]}</td><td>${discount_prices[1][0]}</td></tr>
-              <tr><td>2</td> <td>${discount_prices[0][1]}</td><td>${discount_prices[1][1]}</td></tr>
-              <tr><td>3+</td><td>${discount_prices[0][2]}</td><td>${discount_prices[1][2]}</td></tr>
-              <tr>
-                <td rowspan="3" class="align-middle">De ${deadline_start} a ${team_deadline}</td>
-                  <td>1</td> <td>${full_prices[0][0]}</td><td>${full_prices[1][0]}</td></tr>
-              <tr><td>2</td> <td>${full_prices[0][1]}</td><td>${full_prices[1][1]}</td></tr>
-              <tr><td>3+</td><td>${full_prices[0][2]}</td><td>${full_prices[1][2]}</td></tr>
-            </table>
-          </center>
-        </li>
-      </ol>
-      <p>
-        <strong class="text-danger">IMPORTANTE:</strong> Verifique no site do ICPC que o status de seus times passe de <em>pending</em> para <em>accepted</em> quando os passos acima forem cumpridos. Caso isso não ocorra, entre em contato com <a href="contato.html"> a organização do evento.</a>
-      </p>
-      <p>
-        A inscrição na Maratona é Institucional, por isso é fortemente recomendado que seja feita a inscrição somente pelo cadastro da Instituição responsável para se inscrever como Associada Institucional da SBC, deve acessar o ECOS utilizando o cadastro da Instituição, somente assim o sistema reconhecerá a associação Institucional e liberará as categorias para associados. Caso não tenha conhecimento do e-mail que está cadastrado no sistema da SBC e se a associação institucional está vigente, pode ${contact("consultar a SBC", "s", "bc@sbc", ".org.", "b", "r")}.
-      </p>
-      <p>
-        A final brasileira da competição ocorrerá em três dias cheios, e a chegada é numa quinta-feira. Na sexta-feira ocorrem a abertura, a sessão de aquecimento e outros eventos importantes. <strong>É fundamental a participação dos times em todos os dias!</strong> No sábado ocorre a competição e a festa de encerramento do concurso. A organização do concurso oferecerá auxílio para os times de fora da sede para hospedagem durante as finais.
-      </p>`;
+<p>Se você deseja competir na Maratona, forme seu time! Procure um professor de seu curso para que ele ajude você e seu time sendo o técnico, e informe-o dos procedimentos de inscrição. Se você é professor de uma instituição de ensino superior da área de computação ou afim, reúna seus alunos e monte seus times! Se não tem havido sedes da Maratona na sua região candidate sua instituição para sediar a Maratona!
+</p>
+<p>
+  A inscrição é feita em dois passos, que podem ser feitos em qualquer ordem:
+</p>
+<ol>
+  <li>
+    O técnico deve inscrever os times no <a href=http://icpc.global>site do ICPC</a>, na <a href=1aFase.html>sede da sua região</a> (conforme as <a href="../../sobre/regras.html">regras do concurso</a>) do subcontest <em>South America/Brazil First Phase</em>.
+  </li>
+  <li>
+    O técnico deve providenciar o pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site do ECOS da SBC</a>. Veja abaixo os valores para inscrever os times de sua instituição:
+    <center>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Times</th>
+            <th scope="col">Instituição Associada</th>
+            <th scope="col">Instituição <strong>Não</strong> Associada</th>
+          </tr>
+        </thead>
+        <tr>
+            <td rowspan="3" class="align-middle">Até ${discountDeadline}</td>
+            <td>1</td> <td>${discountPrices[0][0]}</td><td>${discountPrices[1][0]}</td></tr>
+        <tr><td>2</td> <td>${discountPrices[0][1]}</td><td>${discountPrices[1][1]}</td></tr>
+        <tr><td>3+</td><td>${discountPrices[0][2]}</td><td>${discountPrices[1][2]}</td></tr>
+        <tr>
+          <td rowspan="3" class="align-middle">De ${deadlineStart} a ${teamDeadline}</td>
+            <td>1</td> <td>${full_prices[0][0]}</td><td>${full_prices[1][0]}</td></tr>
+        <tr><td>2</td> <td>${full_prices[0][1]}</td><td>${full_prices[1][1]}</td></tr>
+        <tr><td>3+</td><td>${full_prices[0][2]}</td><td>${full_prices[1][2]}</td></tr>
+      </table>
+    </center>
+  </li>
+</ol>
+<p>
+  <strong class="text-danger">IMPORTANTE:</strong> Verifique no site do ICPC que o status de seus times passe de <em>pending</em> para <strong class="text-sucess">accepted</strong> quando os passos acima forem cumpridos. Caso isso não ocorra, entre em contato com <a href="contato.html"> a organização do evento.</a>
+</p>
+<p>
+  A inscrição na Maratona é Institucional, por isso é fortemente recomendado que seja feita a inscrição somente pelo cadastro da Instituição responsável para se inscrever como Associada Institucional da SBC, deve acessar o ECOS utilizando o cadastro da Instituição, somente assim o sistema reconhecerá a associação Institucional e liberará as categorias para associados. Caso não tenha conhecimento do e-mail que está cadastrado no sistema da SBC e se a associação institucional está vigente, pode ${contact("consultar a SBC", "s", "bc@sbc", ".org.", "b", "r")}.
+</p>
+<p>
+  A final brasileira da competição ocorrerá em três dias cheios, e a chegada é numa quinta-feira. Na sexta-feira ocorrem a abertura, a sessão de aquecimento e outros eventos importantes. <strong>É fundamental a participação dos times em todos os dias!</strong> No sábado ocorre a competição e a festa de encerramento do concurso. A organização do concurso oferecerá auxílio para os times de fora da sede para hospedagem durante as finais.
+</p>
+<p>
+  A escola deve inscrever seus times na sede da cidade mais próxima. Caso seu time deseje competir em uma sede que não seja a mais próxima, entre em contato com a organização.
+<p>`;
+          var siteTable = '';
+          if (sites != []) {
+            siteTable = '';
+            for (info of sites)
+              siteTable += `\n
+    <tr>
+      <td scope="row">${info[0]}</td>
+      <td>${info[1]}</td>
+      <td>${contact(info[2], info[3].slice(0, 2), info[3].slice(2, -1), info[3].slice(-1))}</td>
+    </tr>`;
+      siteTable = `
+<table class="table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Sede</th>
+      <th scope="col">Local</th>
+      <th scope="col">Diretor</th>
+    </tr>
+  </thead>
+  <tbody>
+${siteTable}
+  </tbody>
+</table>`
+          };
               var ccl = `
       <p>
         Algumas sedes oferecem vagas para times <em>café-com-leite</em> - que não podem se classificar para as fases seguintes. Os participantes destes times não precisar ser elegíveis ou mesmo alunos de instituições de ensino superior. A inscrição também se dá em dois passos:
@@ -98,12 +204,15 @@
     <script type="text/javascript">document.write(bodyHeader());</script>
       <div class="container text-left">
         <h1>Inscrições</h1>
+        <p>
+          A Maratona de Programação ocorrere em duas fases. A primeira fase será eliminatória em <script type="text/javascript">document.write(date1Fase);</script> com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de <script type="text/javascript">document.write(`${dateNacional} a ${dateNacionalEnd}`);</script> em <script type="text/javascript">document.write();</script>.
+        </p>
         <p class="text-danger">
-          O prazo de inscrição é <strong><script type="text/javascript">document.write(team_deadline);</script></strong>.
+          O prazo de inscrição é <strong><script type="text/javascript">document.write(teamDeadline);</script></strong>.
         </p>
       <script type="text/javascript">
         document.write(accordion('enroll', [['Sede(s)', site],
-                                            ['Time(s)', team],
+                                            ['Time(s)', team + siteTable],
                                             ['Café-com-Leite', ccl],
                                             ['Desistência & Reembolso', refund]]));
         document.write(bodyFooter());

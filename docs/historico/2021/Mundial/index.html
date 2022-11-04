@@ -13,9 +13,9 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // initial_info, teams.
+      // pageStart, teams.
       //====================================================================================================
-      var initial_info = `
+      var pageStart = `
 <p>
   A Final Mundial do ICPC ocorreu em ??.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
@@ -41,7 +41,7 @@
     <div class="container text-left">
       <script type="text/javascript">
         document.write(`<h1>${thisYear()} - Final Mundial</h1>\n`);
-        document.write(initial_info);
+        document.write(pageStart);
         document.write(accordion('Phase', [['Fotos', carousel(images)],
                                            ['Participantes', teamList],
                                            // ['Organização', organization],

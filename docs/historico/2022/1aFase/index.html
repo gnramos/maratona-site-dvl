@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XXVI Maratona de Programação SBC</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../utils.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // pageStart, organization, contest_problems, results [limiar_ok + supersedes], pageEnd
+      //====================================================================================================
+      var pageStart = `
+<p>
+  A primeira fase da Maratona de Programação ocorre no dia 8 de outubro de 2022, em 42 sedes no Brasil: 4 no Centro-Oeste, 12 no Nordeste, 6 no Norte, 15 no Sudeste e 5 no Sul. Participaram <strong>556 times de 170 instituições</strong> brasileiras. Simultaneamente a equipe ocorreu na Argentina (87 times), Bolivia (116 times), América Central (11 times) e México (623 times)
+</p>`;
+      var organization = `<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas:  Claudio Leonardo Lucchesi, Paulo Cezar Pereira Costa, Ricardo Anido, Célio Passos, Arthur Nascimento, Vinicius Fernandes dos Santos, Rafael Assis, Jonathan Queiroz, Francisco Arcos Filho, Dâmi Henrique Pelegrino, Cristhian Bonilha, Naum Azeredo, Mauricio Collares, Juan Pablo Marin Rosas, Lina Rosales, Gabriel Rivera Safadi, Agustín Santiago Gutiérrez, Pablo Blanc, e Teodoro Freund.
+</p>`;
+      var contest_problems = ['Achando os Monótonos Não-Triviais Maximais - Célio Passos',
+                              'Brincando com Pedras - Célio Passos',
+                              'Cortes a Laser - Ricardo Anido',
+                              'Deslocando Partículas - Vinicius Fernandes dos Santos',
+                              'Estourando Balões - Ricardo Anido',
+                              'Força Multidimensional - Vinicius Fernandes dos Santos',
+                              'Geometria Triangular - Vinicius Fernandes dos Santos',
+                              'Habilitando a Movimentação - Cláudio Leonardo Lucchesi',
+                              'Interceptando Informações - Vinícius Fernandes dos Santos',
+                              'Jogando 23 - Ricardo Anido',
+                              'Kalel o Sapo Saltador - Célio Passos',
+                              'Listando Caminhos Tediosos - Célio Passos',
+                              'Maratona de Amarelinha - Jonathan Queiroz',
+                              'Números Virados - Christian Bonilha'];
+
+        //              [[site, [list_rule1, list_rule2, list_rule3]]]
+        var limiar_ok = [['BA, Lauro de Freitas', [[],
+                                                   ['[UFBA] Monarca do Palpite'],
+                                                   []]],
+                         ['CE, Fortaleza', [[],
+                                            ['[UFC] AC(¬‿¬)WA'],
+                                            ['[IFCE/Fortaleza] O último CPF (Carregados Pelo Flamenguista', '[UECE] Freddie Mercury e banda']]],
+                         ['DF, Brasília', [['[UnB] Rocklee não manda WA', '[UnB] FLAMENGO'],
+                                           ['[UnB/FGA] Engenheiros da Railuque toda equipada'],
+                                           []]],
+                         ['MG, Belo Horizonte', [["[UFMG] Humuhumunukunukuapua'a"],
+                                                 ['[UFV/Florestal] passa em 1ms?', '[CEFET-MG/C2] #include<confia>'],
+                                                 []]],
+                         ['MG, Montes Claros', [[], ['[IFNMG/Campus Monte] IFNMG 1'], []]],
+                         ['MG, Santa Rita de Sapucaí', [[], ['[INATEL] Balões da Pisadinha', '[UNIFEI/Itajubá] Poetas da Roça'], []]],
+                         ['MG, Uberaba', [[], ['[IFTM/Uberaba] Code::Boys', '[Uni-FACEF] BCD'], []]],
+                         ['MG, Uberlândia', [['[UFU] Pinguins de Madagascar'], [], []]],
+                         ['PA, Santarém', [[], ['[UFOPA] Deu a louca no Couch'], []]],
+                         ['PB, João Pessoa', [[],
+                                              ['[UFCG] A ascensão e queda do buldogue francês'],
+                                              ['[IFPB/João Pessoa] Hoje à noite dá certo?']]],
+                         ['PI, Teresina', [[], ['[UFPI] Três caras numa moto'], ['[IFMA] Orion Coders']]],
+                         ['PR, Campo Mourão', [[], ['[UTFPR/Toledo] Quem não tem BIT caça com Seg'], []]],
+                         ['PR, Curitiba', [['[UDESC] Como Treinar o Seu João'],
+                                           ['[UFPR] Jump and Link to the Past'],
+                                           ['[UFSC] Bolonhesa']]],
+                         ['RJ, Rio de Janeiro', [['[UFRJ] Lebenslangerschicksalsschatz', '[IME] 12k Club'],
+                                                 ['[UFRRJ] Neon Genesis Capivara', '[CEFET-RJ/Petrópolis] Crias do Douglas'],
+                                                 []]],
+                         ['SC, Chapecó', [[], ['[UNOESC/Chapecó] Xurastei'], []]],
+                         ['SP, Bauru', [[], ['[UNESP/Bauru] Dijkstroçados', '[IFSP/Birigui] Return Zé Ruela', '[UNOESTE] Unoeste EAX'], []]],
+                         ['SP, Piracicaba', [['[Unicamp] Você beijaria Matheus Leal Viana?', '[Unicamp] Inimigos do Hungaro', '[USP-São Carlos] o de sempre'],
+                                             ['[UNESP-RC] HELL CLARO'],
+                                             ['[Unicamp] STEAM Girls']]],
+                         ['SP, São José dos Campos', [[], ['[ITA] KFM'], []]],
+                         ['SP, São Paulo', [['[USP] MWNWMWNNWMWNWN', '[USP] zzz'], ['[UFABC] Inimigos do Wesley'], []]],
+                         ['SP, Sorocaba', [[], ['[FACENS] Time 7'], []]]];
+        var ssmg = [['MG, Ouro Branco', [[], ['[UFV] Senza Verza'], []]],
+                    ['MG, Timoteo', [[], [], []]]];
+
+        var ssco = [['GO, Goiânia ', [['[UFG] As crônicas de Goiáis: a tampinha, o farofeiro e o macaco-velho'],
+                                      [],
+                                      ['[PUC-GO] (╯°□°)╯︵ ┻━┻']]],
+                    ['MS, Campo Grande', [[], ['[UFMS/FACOM] NEYMARto Grosso DO SUUUULLL'], []]],
+                    ['MT, Cuiabá', [[], [], ['[UFMT/Cuiabá] The Last Code']]]];
+        var ssne = [['BA, Juazeiro', [[], ['[UNIVASF] Ghostbuggers'], []]],
+                    ['CE, Juazeiro do Norte ', [[], [], []]],
+                    ['CE, Quixadá ', [[], ['[UFC/Quixadá] Bala'], []]],
+                    ['MA, Balsas', [[], [], []]],
+                    ['PE, Olinda', [[], ['[UFPE] Desculpa, Beto'], []]],
+                    ['PI, Picos', [[], ['[UFPI/Picos] The Last of CalvUS'], []]],
+                    ['RN, Natal ', [['[UFRN] SegTreeste sem Malheiros'], [], []]],
+                    ['SE, São Cristovão ', [['[UFAL] Geração EAD Coda Y Coda'], [], ['[UFS] Agora Bateu']]]];
+        var ssno = [['AC, Rio Branco', [[], [], ['[IFAC] Last Dance (obs 3)']]],
+                    ['AM, Manaus', [[], ['[UFAM/ICOMP] Tuturu'], []]],
+                    ['PA, Belém ', [[], ['[UEPA] Três Tigres Tristes'], []]],
+                    ['RO, Porto Velho ', [[], ['[UNIR] Candiru'], []]],
+                    ['TO, Palmas  ', [[], [], []]]];
+        var ssse = [['ES, Vitória', [[], [], []]],
+                    ['SP, Santos', [[], ['[FEI] AILEL'], []]]];
+        var ssbr = [['RS, Porto Alegre', [[], ['[UFRGS] cacetinho instanceof PãoFrancês'], []]],
+                    ['RS, Rio Grande', [[], [], []]]];
+        var obsLimiarOK = `
+<ul>
+  <li>O time <strong>[UFU Monte Carmelo] if (){}</strong> não se qualifica para as finais brasileiras pois estava incompleto no início da competição. O time seguinte na classificação não resolveu pelo menos 3 problemas.</li>
+  <li>O time <strong>[Unicamp] STEAM Girls</strong> foi o time composto por três competidoras com a melhor colocação.</li>
+</ul>`;
+        var obsSSNO = `
+<ul>
+  <li>O time [UFAC] Army Ants tinha um competidor inelegível e portanto foi desclassificado.</li>
+</ul>`;
+        var obsSSE = `
+<ul>
+  <li>Devido à falta de energia elétrica não ocorreu a competição em Vitória. O comitê decidiu realizar uma nova competição e dar uma vaga para o campeão da sede.</li>
+</ul>`;
+        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok) + obsLimiarOK],
+                                                 ['Supersede Minas Gerais', advancingTeams(ssmg)],
+                                                 ['Supersede Centro-Oeste', advancingTeams(ssco)],
+                                                 ['Supersede Nordeste', advancingTeams(ssne)],
+                                                 ['Supersede Norte', advancingTeams(ssno) + obsSSNO],
+                                                 ['Supersede Sudeste', advancingTeams(ssse) + obsSSE],
+                                                 ['Supersede Brasil', advancingTeams(ssbr)]
+          ]);
+        results +=`
+<ul>
+  <li>Foram chamados os melhores times de estados não classificados e os times de instituições não classificadas com pelo menos 6 problemas.</li>
+</ul>`;
+       var pageEnd = '';
+
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <script type="text/javascript">
+        document.write(`<h1>${thisYear()} - Primeira Fase</h1>\n`);
+        document.write(pageStart);
+        document.write(accordion('Phase', [['Organização', organization],
+                                           ['Prova', contestInfo('contest', contest_problems)],
+                                           ['Resultados', contestReports() + results]]));
+        document.write(pageEnd);
+      </script>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>

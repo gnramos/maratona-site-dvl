@@ -1,4 +1,4 @@
-CURRENT_YEAR = '2021';
+CURRENT_YEAR = '2022';
 
 /**
  * Obfuscate an e-mail contact in link.
@@ -59,7 +59,7 @@ function bodyHeader() {
               <li><a class="dropdown-item" href="${root()}inscricoes.html">Inscrições</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>
+              <!--<li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>-->
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -134,22 +134,23 @@ function bodyFooter() {
  * @param  {Array}  headerClasses an array with additional class information for each item header
  * @return {String}               the HTML with the formatted information
  */
-function accordion(name, items, headerClasses=[]) {
+function accordion(name, items, headerClasses=[], collapseFirst=true) {
   var accItems = '';
   for (i in items) {
     accItems += `
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading${name + i}">
-      <button class="accordion-button collapsed ${headerClasses[i] != undefined ? headerClasses[i] : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${name + i}" aria-expanded="false" aria-controls="collapse${name + i}">
+      <button class="accordion-button ${collapseFirst ? 'collapsed' : ''} ${headerClasses[i] != undefined ? headerClasses[i] : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${name + i}" aria-expanded="false" aria-controls="collapse${name + i}">
         ${items[i][0]}
       </button>
     </h2>
-    <div id="collapse${name + i}" class="accordion-collapse collapse" aria-labelledby="heading${name + i}" data-bs-parent="#accordion${name}">
+    <div id="collapse${name + i}" class="accordion-collapse collapse ${collapseFirst ? '' : 'show'}" aria-labelledby="heading${name + i}" data-bs-parent="#accordion${name}">
       <div class="accordion-body">
         ${items[i][1]}
       </div>
     </div>
   </div>`;
+  if (!collapseFirst) collapseFirst = true;
   }
 
   return `
