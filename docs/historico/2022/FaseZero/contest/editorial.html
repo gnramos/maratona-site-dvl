@@ -1,0 +1,838 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-10-05 qua 14:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1ª Fase Zero da Maratona de Programação</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="zatesko" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<meta name="viewport" content="initial-scale=1">
+
+<script type="text/javascript" src="org-info.js">
+/**
+ *
+ * @source: org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in org-info.js.
+ *
+ * Copyright (C) 2012-2019 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "2");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">1ª Fase Zero da Maratona de Programação</h1>
+
+<div id="outline-container-org3871584" class="outline-2">
+<h2 id="org3871584">Comentários sobre os problemas</h2>
+<div class="outline-text-2" id="text-org3871584">
+<p>
+Os problemas foram realizados pelos competidores na seguinte ordem (do
+problema mais feito para o problema menos feito):
+</p>
+
+<div class="org-center">
+<p>
+E J A H K D I C F L B G
+</p>
+</div>
+
+<p>
+A seguir, comentários sobre cada problema, seguindo a ordem
+acima.
+</p>
+
+<p>
+<i>Edição</i>: Leandro Zatesko
+</p>
+</div>
+
+<div id="outline-container-org10b9618" class="outline-3">
+<h3 id="org10b9618">Eu Quero Cafééé</h3>
+<div class="outline-text-3" id="text-org10b9618">
+<p>
+A resposta é simplesmente
+</p>
+\begin{equation*}
+L \times \Bigl\lceil\frac{ N \times D}{ 1000 \times L}\Bigr\rceil\,.
+\end{equation*}
+</div>
+</div>
+
+<div id="outline-container-org68c4469" class="outline-3">
+<h3 id="org68c4469">José e a Súmula</h3>
+<div class="outline-text-3" id="text-org68c4469">
+<p>
+A resposta é simplesmente:
+</p>
+<ul class="org-ul">
+<li>o valor de \(O_i\), se \(O_i \leq 45\) é seguido de "<code>1T</code>";</li>
+<li>o valor de \(O_i+45\), se \(O_i \leq 45\) é seguido de "<code>2T</code>";</li>
+<li>a string "<code>45+</code>" seguida do valor de \(O_i-45\), se \(O_i > 45\) é seguido
+de "<code>1T</code>";</li>
+<li>a string "<code>90+</code>" seguida do valor de \(O_i-45\), se \(O_i > 45\) é seguido
+de "<code>2T</code>".</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1133504" class="outline-3">
+<h3 id="org1133504">Avaliações de Algoritmos</h3>
+<div class="outline-text-3" id="text-org1133504">
+<p>
+Primeiramente, precisamos saber, para cada estudante, se há uma, duas,
+três, ou quatro notas atribuídas. Para tanto, uma possibilidade, em
+C/C++, é ler a linha das notas toda com <code>fgets()</code>, e depois usar
+<code>sscanf()</code> para tentar ler as quatro notas \(N_1,N_2,N_3,N_4\)
+ da linha lida, algo como:
+</p>
+
+<pre class="example">
+char line[100]; double n1, n2, n3, n4;
+fgets(line, 100, stdin);
+sscanf(line, "%lf %lf %lf %lf", &amp;n1, &amp;n2, &amp;n3, &amp;n4);
+</pre>
+
+<p>
+Como a função <code>sscanf()</code> retorna quantos números foram lidos com
+sucesso, podemos colocar a linha do <code>sscanf()</code> dentro de um <code>switch</code>
+para selecionar, com base no valor de retorno do <code>sscanf()</code>, a resposta
+que deve ser dada junto com o nome do estudante, a qual é:
+</p>
+<ul class="org-ul">
+<li>\(N_1 / 2\), se foi lida apenas \(N_1\);</li>
+<li>\((N_1 + N_2) / 2\), se foram lidas \(N_1\) e \(N_2\);</li>
+<li>\((N_1 + N_2+N_3) / 3\), se foram lidas \(N_1,N_2,N_3\);</li>
+<li>\((N_1 + N_2+N_3+N_4-min(N_1,N_2,N_3,N_4)) / 3\),
+se foram lidas \(N_1,N_2,N_3,N_4\).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org84e7a2d" class="outline-3">
+<h3 id="org84e7a2d">House of Cards</h3>
+<div class="outline-text-3" id="text-org84e7a2d">
+<p>
+Consideremos uma  torre com \(N\) pares
+de cartas na base. Logo, na base temos \(2N\) cartas. Um nível acima da
+base, temos \(2(N-1)\) cartas formando V's invertidos, além de outras
+\(N-1\) cartas separando os dois níveis; portanto, um total de \(3(N-1)\)
+cartas para um nível acima da base. Mais um nível acima, temos \(3(N-2)\)
+cartas e, assim por diante, até o último nível, em que temos \(3(1)\)
+cartas. Logo, o número de cartas usadas numa pode ser dado pela fórmula
+</p>
+\begin{equation*}
+C = 2N + 3(N-1) + 3(N-2) +  \dotsb + 3(1) = 3\sum_{i=1}^N i - N
+=3\frac{N(N+1)}2 - N\,.
+\end{equation*}
+<p>
+No entanto, o problema não é calcular \(C\) em função de \(N\), mas calcular
+\(N\) em função de \(C\). Há duas soluções eficientes possíveis:
+</p>
+
+<ol class="org-ol">
+<li>Como \(C\) é crescente em função de \(N\), podemos aplicar uma busca
+binária para, em função do valor de \(C\) fornecido na entrada,
+encontrar o maior valor de \(N\) no intervalo \([1..C]\) que satisfaz
+\(3N(N+1)/2 - N\leq C\). Esta solução realiza um número de operações
+proporcional a \(\lg 10^{18} \sim 60\) por cada caso de teste, portanto
+é suficientemente eficiente, dado que o número de casos de teste é no
+máximo \(10^3\).</li>
+
+<li><p>
+Podemos utilizar a Fórmula de Bhaskara para resolver a equação e
+escrever \(N\) em função de \(C\), obtendo
+</p>
+\begin{equation*}
+N = \Bigl\lfloor \frac{\sqrt{1+24C}-1}{6}\Bigr \rfloor\,.
+\end{equation*}
+<p>
+já que queremos \(N\) inteiro. No seu código, não esqueça de somar o
+valor com um \(\varepsilon\) pequeno (e.g. \(10^-9\)) antes de realizar a operação de
+piso, para que a imprecisão do ponto flutuante não afete a corretude
+da resposta.
+</p></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbc63bdf" class="outline-3">
+<h3 id="orgbc63bdf">Kimi Räikkönen</h3>
+<div class="outline-text-3" id="text-orgbc63bdf">
+<p>
+Precisamos computar para cada piloto as seguintes informações:
+</p>
+<ul class="org-ul">
+<li>\(t\): a soma dos tempos em que o piloto completou todas as voltas;</li>
+<li>\(best\): o tempo da melhor volta realizada pelo piloto;</li>
+<li>\(tbest\): o instante em que o piloto completou sua melhor volta.</li>
+</ul>
+<p>
+Todas essas informações podem ser computadas durante a leitura da
+entrada.  Ajuda se convertemos todos os tempos da entrada para a menor
+das unidades de medida, no caso, o milisegundo.  Assim, ordenando os
+pilotos em referência a \(t\), e sabendo também qual foi o tempo
+\(best^{\ast}\) da melhor volta realizada por algum piloto, podemos
+percorrer as dez primeiras posições da ordem que estabelecemos para os
+pilotos e identificar quais possuem \(best=best^{\ast}\). Dentre os que
+possuem \(best=best^{\ast}\), desempatamos olhando para seus valores
+\(tbest\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org37b401b" class="outline-3">
+<h3 id="org37b401b">Ditados</h3>
+<div class="outline-text-3" id="text-org37b401b">
+<p>
+Para cada palavra ditada pela professora e cada uma das cinco palavras
+escritas pelos estudantes, resolvemos o clássico problema de <i>distância
+de edição</i> associado às duas palavras, com Programação Dinâmica. Assim,
+podemos computar a pontuação dos estudantes e imprimir a resposta.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org48d3c71" class="outline-3">
+<h3 id="org48d3c71">Infinita String de Dígitos</h3>
+<div class="outline-text-3" id="text-org48d3c71">
+<p>
+Seja \(P\) o maior valor \(\leq L\) em que em \(\mathbf D[P]\) estamos
+começando a escrever uma potência de \(10\). Como entre duas potências
+consecutivas de \(10\) os números possuem todos o mesmo número de dígitos,
+podemos encontrar \(P\) em tempo \(O(\log L)\) computando o índice em
+\(\mathbf D[]\) em que começamos a escrever \(10^1\), e na sequência
+computando os índices correspondendo a \(10^2, 10^3, 10^4,\dotsc\) até
+ultrapassarmos \(L\). Como entre \(P\) e \(L\) todos os números escritos em
+\(\mathbf D[]\) possuem o mesmo número de dígitos, podemos também, em
+\(O(1)\), encontraro maior valor \(Q\leq L\) em que em \(\mathbf D[Q]\)
+começamos a escrever um número novo. Deste modo, podemos obter toda a
+string \(\mathbf D[Q..R]\), observando que não se trata de uma string
+muito grande, já que \(R-L\leq 2\times 10^5\). Percorrendo toda a string
+\(\mathbf D[L..R]\), podemos utilizar uma <i>janela deslizante</i> para
+encontrar em \(O(R-L)\) todos os números que são formados por
+\(\min(K,R-L)\) dígitos consecutivos, deste modo obtendo a resposta.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf1d6edb" class="outline-3">
+<h3 id="orgf1d6edb">Chimambu</h3>
+<div class="outline-text-3" id="text-orgf1d6edb">
+<p>
+Seja \(I \in [0 .. 2^N - 1]\). Toda vez que escolhemos o barril \(I\), estamos
+multiplicando \(I\) por \(2\pmod{ 2^N}\). Como, com isso, estamos fazendo um
+shift à esquerda de uma posição em \(I\) (passando pela máscara \(2^N - 1\)),
+após algum número de passos chegaremos em \(0\). Como isso vale para todo \(I\),
+temos que todos os resíduos módulo \(2^N\) se organizam numa árvore
+enraizada em \(0\), de modo que multiplicando cada valor por \(2 \pmod {2^N}\),
+estamos subindo nessa árvore. O que queremos, portanto, é encontrar,
+para cada query \(I, J\), o comprimento do caminho entre os vértices \(I\) e \(J\)
+nessa árvore. Podemos realizar a tarefa do seguinte modo.
+</p>
+
+<ol class="org-ol">
+<li>Identificamos qual dos dois valores possui mais zeros à direita, i.e.
+estão mais próximas de \(0\) na árvore. Seja \(I\), sem perda de
+generalidade, o que possui mais zeros à direita.</li>
+
+<li>Depois, multiplicamos \(J\) por \(2 \pmod{ 2^N}\) tantas vezes quantas
+necessárias para que as quantidades de zeros à direita de \(I\) e de \(J\)
+sejam iguais, i.e. vamos subindo \(J\) na árvore até que \(J\) e \(I\) estejam no
+mesmo nível.</li>
+
+<li>Depois, multiplicamos tanto \(I\) quanto \(J\) por \(2 \pmod{ 2^n}\) tantas vezes
+quantas necessárias até que sejam iguais, i.e. vamos subindo ambos \(I\)
+e \(J\) na árvore até que ambos se encontrem.</li>
+</ol>
+
+<p>
+Como a distância de cada nó da árvore até a raiz é no máximo \(N\),
+realizamos, portanto, para cada query, \(O(N)\) operações. Assim, a
+complexidade total é \(O(QN)\), suficiente para passar no limite de tempo,
+ainda mais se as operações são implementadas com operadores bit a bit.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org28d47f2" class="outline-3">
+<h3 id="org28d47f2">Falcatrua</h3>
+<div class="outline-text-3" id="text-org28d47f2">
+<p>
+(<i>Solução TIME LIMIT EXCEEDED</i>) Considere o grafo dirigido acíclico \(G\) em
+que os vértices são os meses e
+existe a aresta \(uv\) se e só se o mês \(v\) pode suceder o mês \(u\) numa escolha
+de Carlos, i.e. \(u < v\), \(a_u < a_v\), e \(b_u < b_v\).
+ Para todo mês \(u\) (\(1 \leq u \leq N\)) e todo \(0 \leq i \leq 3\),
+seja \(paths[i][u]\) a quantidade de caminhos em \(G\) que
+terminam em \(u\) e que têm exatamente \(i\) arestas. Evidentemente, a resposta
+do problema é a soma de \(paths[3][u]\) para todo \(u\). Note que os estados
+\(paths[i][u]\) para todo \(i\) e todo \(u\) podem ser calculados através de
+Programação Dinâmica.
+</p>
+
+<p>
+Por exemplo, de modo bottom–up, podemos fazer primeiramente, para todo \(i\)
+e todo \(u\), \(paths[i][u] = 1\) se \(i = 0\), e \(paths[i][u] = 0\) se
+\(i > 0\). Então,
+para \(0 \leq i \leq 2\) e para toda aresta \(uv\), aninhando-se os
+laços de modo que
+o laço em \(i\) seja o mais externo e crescente, basta fazer
+\(paths[i + 1][v] \mathbin{+\!\!=} paths[i][u]\).
+ Todas as operações devem ser realizadas módulo \(10^8\) e,
+para lidarmos corretamente com a impressão ou não dos zeros à esquerda,
+basta associar a cada estado uma flag que controla quando a soma dá
+overflow módulo \(10^8\).
+</p>
+
+<p>
+Embora esta solução seja correta, e imediata para quem conhece a técnica
+de contar caminhos em grafos dirigidos acíclicos com Programação
+Dinâmica, a complexidade é \(O(4E)\), sendo \(E\) o número de arestas de \(G\), que
+pode ser quadrático em \(N > 10^5\). Logo, esta solução <i>não</i> é eficiente o
+suficiente para passar no time limit.
+</p>
+
+<p>
+(<i>Solução ACCEPTED</i>) Para todo mês \(u\), seja \(ans[u]\) o número de seleções de 4 meses
+satisfazendo as restrições do problema em que \(u\) é o 3º mês na seleção.
+Evidentemente, a resposta do problema é a soma de \(ans[u]\) para todo \(u\).
+Vamos, portanto, discorrer sobre como calcular \(ans[u]\) para todo \(u\).
+</p>
+
+<p>
+Para cada \(u\), seja \(nxt[u]\) o número de meses \(v > u\) tais que \(a_u < a_v\) e
+\(b_u < b_v\). Seja também \(prv[u]\) o número de pares de meses \((x, y)\) tais que
+\(x < y < u\), \(a_x < a_y < a_u\), e \(b_x < b_y < b_u\). Note que
+ \(ans[u] = nxt[u] \times prv[u]\). Importante ressaltar que, embora esta
+e outras multiplicações
+sejam feitas módulo \(10^8\), os resultados intermediários podem não caber
+em 32 bits.
+</p>
+
+<p>
+Para calcular \(nxt[u]\) para todo \(u\), percorremos a lista de meses na ordem
+reversa. Para cada \(u\) tomado, \(nxt[u]\) é o valor da soma acumulada para
+todo \(a > a_u\) e todo \(b > b_u\), do número de meses \(v > u\) que têm \(a_v = a\) e
+\(b_v = b\). Como a faixa de valores para \(a\) e \(b\) é pequena
+ (\(-10^3 \leq a, b \leq 10^3\)),
+essa soma acumulada pode ser calculada em um número de operações
+no máximo proporcional a \((\log (2\times10^3))^2\) através de uma
+ BIT 2D (BIT = Binary Indexed Tree, ou Árvore de Fenwick).
+ Na implementação, precisamos
+tomar o cuidado de não indexar posições da BIT com valores
+não-positivos. Para tanto, basta somar cada valor \(a\) e cada valor \(b\) na
+entrada com 1001. Ainda, na organização da BIT, como queremos o número
+de meses em que \(a > a_u\) e \(b > b_u\) (quando o natural seria \(a < a_u\)
+e
+ \(b < b_u\)),
+ basta fazermos o update na BIT na posição
+ \((\mathrm{BIT\_MAX} - a_u, \mathrm{BIT\_MAX}- b_u)\),
+ ao invés de na posição \((a_u, b_u)\). Assim, a consulta pode ser
+feita sobre a posição
+ \((\mathrm{BIT\_MAX} - a_u-1, \mathrm{BIT\_MAX}- b_u-1)\).
+</p>
+
+<p>
+Agora, para calcular \(prv[u]\) para todo \(u\), percorremos a lista de meses na
+ordem direta iterando sobre \(u\). Para todo \(a\) e todo \(b\), seja \(p[a, b]\) o
+número de pares \((x, y)\) tais que \(x < y < u\), \(a_x < a_y = a\), e
+\(b_x < b_y = b\). Evidentemente, \(prv[u]\)
+ é o valor da soma acumulada de \(p[a, b]\) para
+todo \(a < a_u\) e todo \(b < b_u\). Calculamos essa soma acumulada também
+através de uma BIT 2D, que organiza os valores de \(p[a, b]\) conforme
+percorremos a lista de meses iterando sobre \(u\). Conseguimos que a
+atualização dos valores dessa BIT seja eficiente com auxílio de uma
+outra BIT 2D que organiza, para todo \(a\) e todo \(b\), o número \(q[a, b]\) de
+meses anteriores \(x\) que satisfazem \(a_x = a\) e \(b_x = b\). Assim, quando
+iteramos sobre \(u\), precisamos atualizar \(p[a_u, b_u]\) e, para tanto,
+pegamos a soma acumulada de \(q[a, b]\) para todo \(a < a_u\) e todo \(b < b_u\).
+</p>
+
+<p>
+Assim, o número de operações total é no máximo proporcional a
+ \(N × (\log (2\times 10^3))^2\), suficiente para passar no time limit.
+ Para gerenciar as flags
+que controlam quando há overflow módulo \(10^8\), uma possibilidade é
+guardar a flag junto com o valor de cada célula da BIT, calculada
+através de um OR acumulado sobre as flags relacionadas pela própria
+estrutura da BIT.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga97c972" class="outline-3">
+<h3 id="orga97c972">La Chaleur</h3>
+<div class="outline-text-3" id="text-orga97c972">
+<p>
+Se existe uma base \(D\) em que \(N\) pode ser escrito apenas como \(44\)
+(dois dígitos), é imediato que essa base \(D=(N-4)/4\) é a maior possível que
+atinge a proporção de \(100\%\) dos dígitos iguais a \(4\). Note que este
+caso é possível se e somente se \(N\) é múltiplo de \(4\) e estritamente
+maior que \(20\), uma vez que precisamos ter \(D\geq 5\).
+</p>
+
+
+<p>
+Agora, se \(9\leq N\leq 20\), ou se \(N > 20\) não é múltiplo de \(4\),
+a base \(D=N-4\) sempre
+serve como uma base em que atingimos metade dos dígitos iguais a \(4\),
+pois \(N=(14)_D\). Note que, dentre todas as bases em que \(N\) tem dois
+dígitos, sendo um deles igual a \(4\), a base \(D\) é a maior
+possível. Para \(9\leq N\leq 20\), essa base \(D\) é a resposta do problema. Para
+\(N > 20\), já sabemos que \(N\) não possui nenhuma base em que atingimos
+\(100\%\) dos dígitos iguais a \(4\), pois \(N\) não é múltiplo de \(4\). Mas
+pode ser que haja alguma base \(B\) em que \(N\) tenha pelo menos
+três dígitos e, nessa base, atinja uma proporção de quatros maior que
+\(1/2\). No entanto, para toda base \(B\) em que \(N\) tem pelo menos três
+dígitos, \(B\leq \sqrt N\). Assim, como \(N\leq 10^{14}\),
+podemos <i>brutar</i> sobre todas as bases
+\(B\leq\sqrt N\) e descobrir qual a maior delas que maximiza a proporção
+de quatros. Como, para cada base \(B\), encontrar a representação de \(N\)
+leva tempo \(O(\log_B N)\), a complexidade total é \(O((\sqrt N)\log N)\).
+</p>
+
+<p>
+Os casos não tratados são aqueles em que \(6\leq N < 9\), para os quais a
+ resposta é \(D=N-1\), que atinge a proporção ótima de quatros: no caso, a
+ proporção nula.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org059db07" class="outline-3">
+<h3 id="org059db07">Baita Desafio Complexo</h3>
+<div class="outline-text-3" id="text-org059db07">
+<p>
+Podemos observar que \(f(0) = 0\) e \(f(1) = 1\). Vamos deduzir uma recorrência
+para \(f(N)\) para \(N \geq 2\). Ora, \((1 + R)/2\) e \((1 - R)/2\) são as raízes de
+</p>
+\begin{equation*}
+x^2 = x - T
+\end{equation*}
+<p>
+que é a equação característica da recorrência
+</p>
+\begin{equation*}
+f(N) = f(N - 1) - T  f(N - 2)
+\end{equation*}
+
+<p>
+Note ainda que é possível obter uma transformação linear \(\mathsf A\) de
+\({\mathbb C}^2\) em \({\mathbb C}^2\)
+de modo que \(\mathsf A\) aplicada a \((f(N - 2), f(N - 1))^{\top}\) resulta em
+\((f(N - 1), f(N))^{\top}\).
+ Para tanto, basta tomar
+</p>
+\begin{equation*}
+\mathsf A = \begin{pmatrix}
+ 0& 1\\
+-T &1
+\end{pmatrix}
+\end{equation*}
+<p>
+Deste modo, para calcularmos \(f(N)\) em \(O(\log N)\) operações aritméticas
+envolvendo apenas inteiros, basta elevarmos a matriz \(\mathsf A\) a \(N - 1\)
+utilizando exponenciação binária, e depois aplicar a matriz resultante
+sobre  \((f(0), f(1))^{\top} = (0, 1)^{\top}\).
+ O resultado será
+</p>
+\begin{equation*}
+ \begin{pmatrix}
+ 0& 1\\
+-T &1
+\end{pmatrix}^{N-1}\begin{pmatrix}
+0\\1
+\end{pmatrix}=\begin{pmatrix}
+f(N-1)\\f(N)
+\end{pmatrix}
+\end{equation*}
+<p>
+Devemos lembrar de realizar todas as
+operações módulo \(10^9 + 9\).
+</p>
+
+<p>
+Para termos todos os elementos da solução do problema, ainda é
+necessário calcular \(S(N)\) eficientemente. Mas é só observar que
+</p>
+\begin{equation*}
+-Tf(i) = f(i + 2) - f(i + 1)\qquad\text{para todo }i
+\end{equation*}
+<p>
+Assim,
+</p>
+\begin{equation*}
+-TS(N) = (-Tf(0)) + (-Tf(1)) + \dotsb + (-Tf(N)) = f(N + 2) - 1
+\end{equation*}
+
+<p>
+Portanto, \(S(N)\) é dado por \(f(N + 2) - 1\) vezes o inverso multiplicativo
+de \(-T\) módulo \(10^9 + 9\), o qual seguramente existe porque \(10^9 + 9\)
+é primo
+e \(T\) não é múltiplo de \(10^9 + 9\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fd8abc" class="outline-3">
+<h3 id="org0fd8abc">Gostos Peculiares</h3>
+<div class="outline-text-3" id="text-org0fd8abc">
+<p>
+O problema consiste em, dado um dicionário de palavras (a lista das \(Q\)
+palavras a serem encontradas) e um conjunto de strings (as strings que
+podem ser extraídas do grid, conforme esclarecido a seguir), encontrar
+as palavras no grid. Podemos transformar o conjunto de strings
+concatenando todas as strings numa única string \(T\), usando um caracter
+especial como separador (que não ocorra nas palavras do dicionário, por
+exemplo, '<code>@</code>'). Assim, temos o clássico problema de encontrar palavras de
+um dicionário numa string de texto \(T\), o qual pode ser resolvido
+eficientemente com o Autômato de Aho–Corasick. Devemos tomar o cuidado
+de memorizar, para cada posição de \(T\), a posição correspondente no grid
+original, bem como em qual das direções estávamos seguindo (U, D, L, R)
+naquele momento ao montarmos \(T\). Assim, ao processarmos \(T\), toda vez que,
+numa posição \(i\) de \(T\), identificamos a ocorrência de uma palavra \(w\) do
+dicionário, podemos subtrair \(\lvert w\rvert\) de \(i\)
+ e descobrir a partir de qual
+posição do grid \(w\) começou a ser lida, e que direção estávamos
+seguindo. Registramos isso associando à palavra \(w\) uma string-solução da
+forma "\(I\) \(J\) \(C\)" (usando <code>sprintf()</code>, por exemplo), seguindo as restrições do
+enunciado. Isso facilita para podermos usar, por exemplo, <code>strcmp()</code>, e
+assim saber quando substituir a string-solução associada a uma palavra
+do dicionário.
+</p>
+
+<p>
+Vamos agora abordar como construir \(T\). O fato de não haver ciclos no grid
+(nem mesmo ciclos formados só por símbolos especiais) facilita bastante
+o problema. Ainda assim, é necessário que a string \(T\) seja longa o
+suficiente para incluir tudo o que precisa ser incluso, mas não longa
+além do necessário. Uma estratégia que podemos empregar para construir
+\(T\) é
+a seguinte. Vamos construir um grafo em que os vértices são triplas
+ \((I, J, C)\), para toda posição \((I, J)\) do grid e toda direção \(C\),
+ de modo que as
+arestas (dirigidas) desse grafo identifiquem, para cada \((I, J, C)\),
+ qual
+é a próxima posição a ir, e se devemos continuar na direção \(C\) ou mudar
+de direção. Para todo vértice \((I, J, C)\) nesse grafo que tenha grau de
+entrada zero, adicionamos o caractere especial (e.g. '<code>@</code>') à string \(T\),
+identificando que estamos "começando uma nova" string, e disparamos um
+passeio no grafo. A cada vértice visitado cujo símbolo não seja
+especial, adicionamos o símbolo a \(T\).
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: zatesko</p>
+<p class="date">Created: 2022-10-05 qua 14:51</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
