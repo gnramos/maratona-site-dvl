@@ -1,4 +1,4 @@
-CURRENT_YEAR = '2022';
+var CURRENT_YEAR = '2022';
 
 /**
  * Obfuscate an e-mail contact in link.

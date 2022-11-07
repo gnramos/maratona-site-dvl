@@ -1,4 +1,16 @@
-function drawVisualization(rows) {
+var RESULT_LEN = 5;
+
+/**
+ * Draw a graphic with the results.
+ *
+ * Assumes the results are ordered and that each result is in the following format:
+ * [year, rank1stPhase, rankNationalFinals, rankWorldFinals]. Always shows the last
+ * resultLen values.
+ *
+ * @param  {Array}  rows      the results
+ * @param  {Int}    resultLen the number of results to show
+ */
+function drawVisualization(rows, resultLen=RESULT_LEN) {
   function rankImg(year, phase, heightPx, rank, reverse=false) {
     var multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
     images = [], imgHTML = "";
@@ -26,6 +38,8 @@ function drawVisualization(rows) {
     return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
 
+  rows = rows.slice(-resultLen);
+
   google.charts.load('current', {packages: ['corechart', 'line']});
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Year');
@@ -40,7 +54,7 @@ function drawVisualization(rows) {
                  row[3], toolTip(row[0], 'Mundial', row[3] == null ? '': row[3])]);
 
   var options = {hAxis: {title: 'Ano'},
-                 vAxis: {title: 'Rank', baseline: 1},
+                 vAxis: {title: 'Rank', baseline: 1, direction: -1},
                  legend: {position: 'top'},
                  tooltip: {isHtml: true}};
 
