@@ -21,17 +21,16 @@
                    'Campinas', 'São Paulo', 'Rio de Janeiro',
                    'São Paulo', 'Campinas', 'Belo Horizonte']; // ordem cronológica inversa
 
-      var ul = '<ul class="list-group">', items = [];
+      var lis = '', items = [], year;
       for (let i = 0; i < sites.length; i++) {
-        var year = 1996 + sites.length - i - 1;
-        ul += `<li class="list-group-item"><a href="${year}/index.html">${year} - ${sites[i]}</a></li>`;
+        year = 1995 + sites.length - i;  // O 1o evento ocorreu em 1996
+        lis += `<li class="list-group-item"><a href="${year}/index.html">${year} - ${sites[i]}</a></li>`;
         if (year % 10 == 0) {
-          items.push([`${year} ~`, ul + '\n</ul>']);
-          ul = '<ul class="list-group">';
+          items.push([`${year} ~`, `\n<ul class="list-group">\n${lis}\n</ul>`]);
+          lis = '';
         }
       }
-  // 1996
-  items.push([`${year} ~`, ul + '\n</ul>']);
+      items.push([`${year} ~`, `\n<ul class="list-group">\n${lis}\n</ul>`]);
     </script>
   </head>
   <body>

@@ -53,7 +53,7 @@ function gallery(images) {
     items += `
   <div class="col-lg-3 col-md-4 col-6">
     <a href="img/${img}" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/${img}">
+      <img class="img-fluid img-thumbnail" src="img/${img}" alt="${img}">
     </a>
   </div>`;
         return `
@@ -72,7 +72,7 @@ function splitbyMedal(medalists) {
   var teamsPerMedal = medalists.length / 3;
   return [medalists.slice(0, teamsPerMedal),                       // gold
           medalists.slice(teamsPerMedal, 2 * teamsPerMedal),       // silver
-          medalists.slice(2 * teamsPerMedal, 3 * teamsPerMedal)];  // bronze
+          medalists.slice(2 * teamsPerMedal)];                     // bronze
 }
 
 /**
@@ -83,16 +83,13 @@ function splitbyMedal(medalists) {
  */
 function advancingTeams(results) {
   // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
-  var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
-
   function ruleHeaderCells() {
     var cells = '';
     for (i in RULE_COLORS)
-      cells += `
-        <th class='${RULE_COLORS[i]}' scope="col">regra ${Number(i) + 1}</th>`;
+      cells += `\n        <th class='${RULE_COLORS[i]}' scope="col">Regra ${Number(i) + 1}</th>`;
 
     // A decidir se fica ou não
-    return `<th scope="col">Vaga</th>`;
+    return `<th scope="col">Tipo</th>`;
 
     return cells;
   }
@@ -100,7 +97,7 @@ function advancingTeams(results) {
     var cells = '<td>';
     for (i in RULE_COLORS)
       for (team of teams[i])
-        cells += `<span class="${RULE_COLORS[i]}">regra ${Number(i) + 1}</span><br>`;
+        cells += `<span class="${RULE_COLORS[i]}"><strong>Regra ${Number(i) + 1}</strong></span><br>`;
     cells += "</td>";
     // A decidir se fica ou não
     // for (i in RULE_COLORS)
@@ -120,10 +117,9 @@ function advancingTeams(results) {
     var row = '';
     for (item of results) {
       var [site, teams] = item;
-      row += `
-    <tr>
+      row += `\n    <tr>
       <td scope="row">${site}</td>
-      ${ruleRowCells(teams)}
+        ${ruleRowCells(teams)}
       <td>${teamsCell(teams)}</td>
     </tr>`;
     }
@@ -135,7 +131,7 @@ function advancingTeams(results) {
   <thead>
     <tr>
       <th scope="col">Sede</th>
-      ${ruleHeaderCells()}
+        ${ruleHeaderCells()}
       <th scope="col">Times classificados</th>
     </tr>
   </thead>
