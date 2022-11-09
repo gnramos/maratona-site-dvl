@@ -1,6 +1,6 @@
-var CURRENT_YEAR = '2022';
+const CURRENT_YEAR = '2022';
 
-var RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
+const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**
  * Obfuscate an e-mail contact in link.
@@ -198,4 +198,23 @@ function carousel(images) {
     <span class="visually-hidden">Next</span>
   </button>
 </div>`;
-  }
+}
+
+/**
+ * Return the number in Roman format.
+ *
+ * Assumes 0 < number < 100.
+ *
+ * @param  {Int}  num integer value
+ * @return {String}   the roman number for num .
+ */
+function toRoman(num) {
+const NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
+                     ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
+  // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
+  var numeral = '';
+  var digits = num.toString().split('').reverse();
+  for (var i = 0; i < digits.length; i++)
+    numeral = NUMERAL_CODES[i][parseInt(digits[i])] + numeral;
+  return numeral;
+}

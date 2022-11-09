@@ -10,6 +10,9 @@
 
     <script type="text/javascript" src="../maratona.js"></script>
     <script type="text/javascript">
+      //======================================================================
+      // Editar a partir daqui.
+      //======================================================================
       var sites = [ // 'Campo Grande',
                    'Gramado', 'Online',
                    'Campina Grande', 'Salvador', 'Foz do Iguaçu',
@@ -21,16 +24,20 @@
                    'Campinas', 'São Paulo', 'Rio de Janeiro',
                    'São Paulo', 'Campinas', 'Belo Horizonte']; // ordem cronológica inversa
 
-      var lis = '', items = [], year;
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+
+      var listItems = '', accordionItems = [], year;
       for (let i = 0; i < sites.length; i++) {
         year = 1995 + sites.length - i;  // O 1o evento ocorreu em 1996
-        lis += `<li class="list-group-item"><a href="${year}/index.html">${year} - ${sites[i]}</a></li>`;
+        listItems += `<li class="list-group-item"><a href="${year}/index.html">${toRoman(year - 1995)} Maratona - ${sites[i]} (${year})</a></li>`;
         if (year % 10 == 0) {
-          items.push([`${year} ~`, `\n<ul class="list-group">\n${lis}\n</ul>`]);
-          lis = '';
+          accordionItems.push([`${year} ~`, `\n<ul class="list-group">\n${listItems}\n</ul>`]);
+          listItems = '';
         }
       }
-      items.push([`${year} ~`, `\n<ul class="list-group">\n${lis}\n</ul>`]);
+      accordionItems.push([`${year} ~`, `\n<ul class="list-group">\n${listItems}\n</ul>`]);
     </script>
   </head>
   <body>
@@ -38,7 +45,7 @@
     <div class="container text-left">
       <h1>Histórico</h1>
       <script type="text/javascript">
-        document.write(accordion('History', items, [], false));
+        document.write(accordion('History', accordionItems, [], false));
       </script>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>
