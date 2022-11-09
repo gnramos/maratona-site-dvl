@@ -76,7 +76,7 @@ function bodyHeader() {
             </ul>
           </li>
           <li class="nav-item">
-            <a href="${root()}contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
+            <a href="${root()}sobre/contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
           </li>
           <li class="nav-item">
             <a href="https://www.facebook.com/maratona/" class="nav-link">
