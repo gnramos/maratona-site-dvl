@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XXVI Maratona de Programação SBC</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../utils.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // pasgeStart, images, sponsor, organization, warmup_problems, contest_problems,
+      // champion_pic, medalists, regional_champs e ccl.
+      //====================================================================================================
+      var pageStart = `<h1>1996 - I Consun, Belo Horizonte</h1>
+<p>
+  A Maratona de Programação foi organizada pela primeira vez na Universidade Federal de Minas Gerais, nos dias 28 e 29 de novembro de 1996. Os resultados foram divulgados em 2 de dezembro daquele ano. <a href="96_inicial.html"> Página da primeira maratona.</a>
+</p>
+<p>
+  A comissão organizadora era formada pelos Prof. Claudionor Coelho (DCC-UFMG), Carlos Camar&atilde;o (DCC-UFMG), Nilton de Oliveira Junior (Softex 2000), Ricardo Dahab (IC-Unicamp) e Rosângela Fernandes (CNpq). A iniciativa do evento  que ocorreu na UFMG foi do Softex, com patroc&iacute;nio do CNPq. Apesar de n&atilde;o ser uma regional oficial do ICPC, o organizador do evento entrou em contato com o diretor executivo do ICPC e o vencedor da Maratona de Programa&ccedil;&atilde;o foi convidado para participar das finais mundiais do ICPC em 1997.
+</p>
+<p>
+  O Consun tinha duas modalidades: um concurso de software e uma competição de programação. A competição ocorreu nos moldes tradicionais do Concurso de Programação do ICPC. Nessa primeira edição, sem um software de apoio, com a correção sendo feita por disquetes que eram levados dos times aos juízes e, destes de volta aos times, por uma equipe de estudantes voluntários, correndo.
+</p>`;  // informações a serem apresentadas no topo da página (HTML).
+      var images = ['img/team1.webp', 'img/p28.jpg', 'img/cbrazil.jpg']; // imagens do carousel
+      var prova = `<ul>
+  <li><a href="contest/maratona.pdf">Problemas</a></li>
+</ul>`;
+      var score = `<ul>
+  <li><a href="contest/score.html">Placar final</a></li>
+</ul>`;
+      var champion_pic = 'team1.webp';
+      var medalists = [// [teamName, [contestants], [coaches]]
+        ['IC Unicamp', ['Alexandre Oliva', 'Alexandre Volpim', 'André Augusto Cesta'], ['Ricardo Anido']],
+        ['UnB', ['Luciano da Silva Coelho', 'Marcelo Santiago Guedes', 'Rodrigo Rossi Fernandes Lima'], ['Maria Elenita Nascimento']],
+        ['IME-USP', ['Aritanan B. Garcia Gruber', 'Eduardo Teixeira Dias', 'Paulo José da Silva e Silva'], ['Carlos E. Ferreira']]];
+
+      var extra = `
+ <p>
+  O único time brasileiro (e sul-americano) convidado para as finais mundiais do ICPC foi o time do IC-Unicamp, formado pelos alunos Alexandre Oliva, Alexandre Volpim e André Augusto Cesta e pelo técnico Ricardo Anido. As finais ocorreram em 2 de março de 1997 em San Jose, California.
+</p>`;
+
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+      var champion = `
+<div class="card mb-3">
+  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
+  <div class="row g-0">
+  <!--  <div class="col-md-1">
+      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
+    </div>
+    <div class="col-md-11">
+      <div class="card-body">
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
+      </div>
+    </div>-->
+    <div class="col-md-9">
+      <h4 class='text-center'><strong>Campeões</strong></h4>
+      <div class="card-body">
+        <h5 class="card-title">${medalists[0][0]}</h5>
+        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <img class="img-fluid img-thumbnail" src="img/${champion_pic}">
+    </div>
+  </div>
+</div>`;
+
+      var [gold, silver, bronze] = splitbyMedal(medalists);
+      var results = showChampion(medalists[0], champion_pic) +
+                    accordion('PhaseResults',
+                              [['Medalhas de Ouro', listTeams(gold, 1)],
+                               ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
+                               ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)]],
+                              ['text-black" style="background-color: #FFD700;"',
+                               'text-black" style="background-color: #C0C0C0;"',
+                               'text-black" style="background-color: #CD7F32;"',
+                               'bg-success text-white',
+                               'bg-light text-black']);
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">document.write(bodyHeader());</script>
+    <div class="container text-left">
+      <script type="text/javascript">
+        document.write(pageStart);
+        document.write(accordion('Phase', [['Fotos', carousel(images)],
+                                           ['Prova', prova],
+                                           ['Resultados', score + results + extra]
+                                           ]));
+      </script>
+    </div>
+    <script type="text/javascript">document.write(bodyFooter());</script>
+  </body>
+</html>

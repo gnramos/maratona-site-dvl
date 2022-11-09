@@ -81,20 +81,6 @@ ${gallery(['cefetrj.webp', 'unb.webp', 'ufcqxd.webp'])}`;
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      function listTeams(teams, start) {
-        var items = ``, images = [];
-        for (i in teams){
-          items += `
-  <li><strong>${teams[i][0]}:</strong> ${teams[i][1].join(', ')}${teams[i][2].length > 0 ? ' e coach(es) ' + teams[i][2].join(', ') : ''}.</li>`;
-          images.push(teams[i][3] != undefined ? teams[i][3] : "team" + (Number(i) + start) + ".webp");
-        }
-        return `
-\n<ol start=${start}>
-  ${items}
-</ol>
-${gallery(images)}`;
-      }
-
       var slides = `
 <a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
 
@@ -134,8 +120,9 @@ ${gallery(images)}`;
 ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
       var [gold, silver, bronze] = splitbyMedal(medalists);
-      var results = accordion('PhaseResults',
-                              [['Medalhas de Ouro', listTeams(gold, 1)],
+      var results = showChampion(medalists[0], champion_pic) +
+                    accordion('PhaseResults',
+                              [['Medalhas de Ouro', listTeams(gold)],
                                ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
                                ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
                                ['Campeões Regionais', regional_champs],
@@ -158,7 +145,7 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
                                            ['Organização', organization],
                                            ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
                                            ['Prova', contestInfo('contest', contest_problems)],
-                                           ['Resultados', contestReports() + champion + results],
+                                           ['Resultados', contestReports() + results],
                                            ['Caninos Loucos', extra]
                                            ]));
         document.write(`

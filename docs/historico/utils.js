@@ -53,7 +53,7 @@ function gallery(images) {
     items += `
   <div class="col-lg-3 col-md-4 col-6">
     <a href="img/${img}" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail" src="img/${img}" alt="${img}">
+      <img class="img-fluid img-thumbnail" src="img/${img}" alt="${img}" onerror="this.style.display='none'"/>
     </a>
   </div>`;
         return `
@@ -140,6 +140,68 @@ function advancingTeams(results) {
 }
 
 /**
+ * Builds a formatted ordered list of the teams.
+ *
+ * Assumes each team is defined as the array: [teamName, [contestants], [coaches]].
+ * Assumes each team has a webp image of its members named according to its position in the list. For
+ * example, that the first team has a picture named "team1.webp".
+ *
+ * @param  {Array}  teams list of teams
+ * @param  {Int}    start starting number
+ * @return {String}       the HTML with the formatted information
+ */
+function listTeams(teams, start=1) {
+  var items = ``, images = [];
+  for (i in teams){
+    items += `
+<li><strong>${teams[i][0]}:</strong> ${teams[i][1].join(', ')}${teams[i][2].length > 0 ? ' e coach(es) ' + teams[i][2].join(', ') : ''}.</li>`;
+        images.push(teams[i][3] != undefined ? teams[i][3] : "team" + (Number(i) + start) + ".webp");
+  }
+  return `
+\n<ol start=${start}>
+${items}
+</ol>
+${gallery(images)}`;
+}
+
+/**
+ * Builds a formatted presentation of the champion team.
+ *
+ * Assumes the team is defined as the array: [teamName, [contestants], [coaches]].
+ *
+ * @param  {Array}  team list of team information
+ * @param  {Int}    img path to file with a picture of the team members
+ * @return {String}       the HTML with the formatted information
+ */
+function showChampion(team, img) {
+  return `
+<div class="card mb-3">
+  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
+  <div class="row g-0">
+  <!--  <div class="col-md-1">
+      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
+    </div>
+    <div class="col-md-11">
+      <div class="card-body">
+        <h5 class="card-title">${team[0]}</h5>
+        <p class="card-text">${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</p>
+      </div>
+    </div>-->
+    <div class="col-md-9">
+      <h4 class='text-center'><strong>Campeões</strong></h4>
+      <div class="card-body">
+        <h5 class="card-title">${team[0]}</h5>
+        <p class="card-text">${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <img class="img-fluid img-thumbnail" src="img/${img}">
+    </div>
+  </div>
+</div>`;
+}
+
+/**
  * Return the year for specific events from the dir structure.
  *
  * @return {String} the year.
@@ -147,4 +209,26 @@ function advancingTeams(results) {
 function thisYear() {
   var url = window.location.pathname.split('/');
   return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
+}
+
+
+var NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
+                          ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
+
+
+/**
+ * Return the number in Roman format.
+ *
+ * Assumes 0 < number < 100.
+ *
+ * @param  {Int}  num integer value
+ * @return {String}   the roman number for num .
+ */
+function toRoman(num) {
+  // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
+  var numeral = '';
+  var digits = num.toString().split('').reverse();
+  for (var i=0; i < digits.length; i++)
+    numeral = NUMERAL_CODES[i][parseInt(digits[i])] + numeral;
+  return numeral;
 }

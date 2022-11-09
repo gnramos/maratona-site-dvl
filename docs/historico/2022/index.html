@@ -10,19 +10,6 @@
 
     <script type="text/javascript" src="../../maratona.js"></script>
     <script type="text/javascript" src="../utils.js"></script>
-    <script type="text/javascript">
-      // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
-      var numeralCodes = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
-                          ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
-
-      function toRoman(num) {
-        var numeral = '';
-        var digits = num.toString().split('').reverse();
-        for (var i=0; i < digits.length; i++)
-          numeral = numeralCodes[i][parseInt(digits[i])] + numeral;
-        return numeral;
-      }
-    </script>
   </head>
   <body>
     <script type="text/javascript">document.write(bodyHeader());</script>
