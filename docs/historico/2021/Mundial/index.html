@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>XXVI Maratona de Programação SBC</title>
+    <title>Maratona SBC de Programação</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
       //====================================================================================================
       var pageStart = `
 <p>
-  A Final Mundial do ICPC ocorreu em ??.
+  A Final Mundial do ICPC ocorrá no Egito.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
       var images = ['../Nacional/img/all_participants.jpeg', '../Nacional/img/salao21.jpg']; // imagens do carousel
       var teams = ['Escola1', 'Escola2', 'Escola3'];  // na ordem de classificação da Nacional.
@@ -37,21 +37,18 @@
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <script type="text/javascript">
-        document.write(`<h1>${thisYear()} - Final Mundial</h1>\n`);
-        document.write(pageStart);
-        document.write(accordion('Phase', [['Fotos', carousel(images)],
-                                           ['Participantes', teamList],
-                                           // ['Organização', organization],
-                                           // ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
-                                           // ['Prova', contestInfo('contest', contest_problems)],
-                                           ['Resultados', results],
-                                           // ['Caninos Loucos', extra]
-                                           ]));
-      </script>
-    </div>
-    <script type="text/javascript">document.write(bodyFooter());</script>
+    <script type="text/javascript">
+      document.write(bodyHeader(`${thisYear()} - Final Mundial`));
+      document.write(pageStart);
+      // document.write(accordion('Phase', [['Fotos', carousel(images)],
+      //                                    ['Participantes', teamList],
+      //                                    // ['Organização', organization],
+      //                                    // ['Warm Up', slides + contestInfo('warmup', warmup_problems)],
+      //                                    // ['Prova', contestInfo('contest', contest_problems)],
+      //                                    ['Resultados', results],
+      //                                    // ['Caninos Loucos', extra]
+      //                                    ]));
+      document.write(bodyFooter());
+    </script>
   </body>
 </html>

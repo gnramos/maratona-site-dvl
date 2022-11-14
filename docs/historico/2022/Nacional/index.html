@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>XXVI Maratona de Programação SBC</title>
+    <title>Maratona SBC de Programação</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -148,11 +148,9 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <script type="text/javascript">
-        document.write(`<h1>${thisYear()} - Final Nacional</h1>\n`);
-        document.write(pageStart);
+    <script type="text/javascript">
+      document.write(bodyHeader(`${thisYear()} - Final Nacional`));
+      document.write(pageStart);
 //         document.write(accordion('Phase', [['Fotos', carousel(images)],
 //                                            ['Patrocinadores', sponsor],
 //                                            ['Organização', organization],
@@ -166,8 +164,7 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
 // <p>
 //   Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
 // </p>`);
-      </script>
-    </div>
-    <script type="text/javascript">document.write(bodyFooter());</script>
+      document.write(bodyFooter());
+    </script>
   </body>
 </html>

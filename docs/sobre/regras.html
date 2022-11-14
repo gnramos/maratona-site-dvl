@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maratona de Programação SBC</title>
+    <title>Maratona SBC de Programação</title>
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -120,7 +120,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
   <strong class="${RULE_COLORS[1]}">[regra 2]</strong> cerca de <strong>65% das vagas</strong> serão distribuídas entre as sedes com pelo menos <strong>10 times e pelo menos 5 escolas</strong>. No caso de supersede, cada sede pode classificar apenas um time por esta regra. A quantidade é definida pela fórmula:
   <p class="text-center">
 \\begin{equation*}
-Vagas = \\Bigl\\lfloor\\frac{VagasRegra2 \\times NumerodeEscolasNaSede}{TotalDeEscolas}\\Bigr\\rceil\.
+Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDeEscolas}\\Biggr\\rceil\.
 \\end{equation*}
   </p>
 
@@ -147,23 +147,19 @@ Vagas = \\Bigl\\lfloor\\frac{VagasRegra2 \\times NumerodeEscolasNaSede}{TotalDeE
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <h1>Regras</h1>
-
-      <script type="text/javascript">
-        document.write(pageStart);
-        document.write(accordion('rules', [['Escolas', school],
-                                           ['Técnicos/Coaches', coach],
-                                           ['Time', team],
-                                           ['Fases', phases],
-                                           ['Competição', contest],
-                                           ['Sede', site],
-                                           ['Vagas na Final Brasileira', advancingToNextPhase],
-                                           ['Recursos', appealing],
-                                           ]));
-      </script>
-    </div>
-    <script type="text/javascript">document.write(bodyFooter());</script>
+    <script type="text/javascript">
+      document.write(bodyHeader('Regras'));
+      document.write(pageStart);
+      document.write(accordion('rules', [['Escolas', school],
+                                         ['Técnicos/Coaches', coach],
+                                         ['Time', team],
+                                         ['Fases', phases],
+                                         ['Competição', contest],
+                                         ['Sede', site],
+                                         ['Vagas na Final Brasileira', advancingToNextPhase],
+                                         ['Recursos', appealing],
+                                         ]));
+      document.write(bodyFooter());
+    </script>
   </body>
 </html>

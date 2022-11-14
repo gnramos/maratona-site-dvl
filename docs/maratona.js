@@ -25,7 +25,7 @@ function root() {
  *
  * @return {String} the HTML with the formatted information
  */
-function bodyHeader() {
+function bodyHeader(pageTitle='') {
   var url = window.location.pathname.split('/');
   var currentPage = url.at(-1);
   var selected = `class="nav-link active" aria-current="page"`,
@@ -98,7 +98,9 @@ function bodyHeader() {
           </li>
         </ul>
       </header>
-    </div>`;
+    </div>
+    <div class="container text-left">
+      <h1>${pageTitle}</h1>`;
 }
 
 /**
@@ -108,6 +110,7 @@ function bodyHeader() {
  */
 function bodyFooter() {
   return `
+    </div>
     <div class="container">
       <footer class="footer mt-auto py-3 justify-content-center border-top">
         <div class="container">
@@ -171,21 +174,15 @@ function accordion(name, items, headerClasses=[], collapseFirst=true) {
  * @return {String}        the HTML with the formatted information
  */
 function carousel(images) {
-  var buttons = '', items = '';
-  for (i in images) {
-    buttons += `
-  <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="${i}" ${i == 0 ? 'class="active" aria-current="true"' : '' } aria-label="Slide ${Number(i)+1}"></button>`;
+  var items = '';
+  for (i in images)
     items += `
   <div class="carousel-item ${i == 0 ? 'active' : ''}">
     <img src="${images[i]}" class="d-block w-100">
   </div>`;
-  }
 
   return `
 <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    ${buttons}
-  </div>
   <div class="carousel-inner">
     ${items}
   </div>

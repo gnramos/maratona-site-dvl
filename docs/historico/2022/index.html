@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>XXVI Maratona de Programação SBC</title>
+    <title>Maratona SBC de Programação</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -12,27 +12,22 @@
     <script type="text/javascript" src="../utils.js"></script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <script type="text/javascript">
-        document.write(`<h1>${thisYear()} - ${toRoman(thisYear() - 1995)} Maratona SBC de Programação</h1>\n`);
-      </script>
-      <div class="d-flex align-items-stretch">
-        <div class="col-lg-2 col-md-4 col-6">
-          <img class="img-fluid" src="Nacional/img/poster.png">
-        </div>
-        <div class="container text-left">
-          <ul class="list-group">
-            <li class="list-group"><a href="FaseZero/index.html">Fase Zero</a></li>
-            <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
-            <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>
-            <script type="text/javascript">
-              var url = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
-              document.write(`\n<li class="list-group"><a href="${url}">Summer School</a></li>`);
-            </script>
-            <li class="list-group"><a href="Mundial/index.html">Final Mundial</a></li>
-          </ul>
-        </div>
+    <script type="text/javascript">document.write(bodyHeader(`${thisYear()} - ${toRoman(thisYear() - 1995)} Maratona SBC de Programação`));</script>
+    <div class="d-flex align-items-stretch">
+      <div class="col-lg-2 col-md-4 col-6">
+        <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
+      </div>
+      <div class="container text-left">
+        <ul class="list-group">
+          <li class="list-group"><a href="FaseZero/index.html">Fase Zero</a></li>
+          <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
+          <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>
+          <script type="text/javascript">
+            var url = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
+            document.write(`\n<li class="list-group"><a href="${url}">Summer School</a></li>`);
+          </script>
+          <li class="list-group"><a href="Mundial/index.html">Final Mundial</a></li>
+        </ul>
       </div>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>

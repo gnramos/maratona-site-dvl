@@ -34,30 +34,34 @@ A estrutura de diretório definida é:
   `- index.html
 ```
 
-A página  apresenta, a princípio, 3 blocos de informações distintos. Mais informações podem ser acrescentadas se necessário (seguindo o padrão de formatação).
+A página apresenta, a princípio, 3 blocos de informações distintos. Mais informações podem ser acrescentadas se necessário (seguindo o padrão de formatação).
 
 ### Organização
+
 As informações sobre a organização do evento.
 
 ### Prova
-São fornecidos os links para os arquivos utilizados, que devem *necessariamente* ser como previsto na estrutura:
-* Folha de Informações em `info_maratona.pdf`,
-* Problemas da Prova em `maratona.pdf`, e
-* Entradas e Saídas em `packages.tar.gz`.
+
+Detalhes sobre o evento, com a listagem dos problemas e com arquivos associados à prova no diretório `contest`, que devem *necessariamente* ser nomeados como previsto na estrutura:
+* folha de Informações em `info_maratona.pdf`,
+* problemas da Prova em `maratona.pdf`, e
+* entradas e Saídas em `packages.tar.gz`.
 
 ### Resultados
-São fornecidos os links para os arquivos utilizados, que devem *necessariamente* ser como previsto na estrutura:
-* Placar final em `score.html`,
-* Lista de submissões em `runs.html`,
-* Lista de perguntas em `clarifications.html`, e
-* Estatísticas em `statistic.html`.
+
+Detalhes sobre o resultado evento, com a listagem dos problemas e com arquivos associados à prova no diretório `contest`, que devem *necessariamente* ser nomeados como previsto na estrutura:
+* página web com o placar final em `score.html`,
+* página web com as submissões em `runs.html`,
+* página web com as _clarifications_ em `clarifications.html`, e
+* página web com as estatísticas do evento em `statistics.html`.
 
 ### index.html
+
 O arquivo `index.html` determina o conteúdo. A formatação é praticamente toda definida automaticamente, via CSS e javascript, sendo necessário apenas definir alguns conteúdos como HTML. Especificamente:
 * `pageStart`: as informações a serem apresentadas no topo da página.
 * `organization`: as informações a serem apresentadas no bloco de "organização", geralmente a listagem dos envolvidos na organização do evento.
-* contest_problems: a lista dos nomes dos problemas (e seus autores), na mesma ordem que aparecem na prova.
-* `results [limiar_ok + supersedes]`: os resultados dos times classificados em cada sede.
+* `contest_problems`: a lista dos nomes dos problemas (e seus autores), na mesma ordem que aparecem na prova.
+* `results`: os resultados dos times classificados em cada sede.
 
 ## Final Brasileira
 
@@ -65,10 +69,6 @@ A estrutura do diretório é:
 ```
 Nacional
   +- contest
-  |    +- clarifications_arquivos
-  |    +- runs_arquivos
-  |    +- statistics_arquivos
-  |    +- score-admin_arquivos
   |    +- clarifications.html
   |    +- info_maratona.pdf
   |    +- maratona.pdf
@@ -77,8 +77,9 @@ Nacional
   |    +- score.html
   |    `- statistics.html
   +- img
-  |    +- poster.jpg
-  |    +- teamX.webp  // 1 <= X <= 12 (total de medalhistas)
+  |    +- poster_low.png
+  |    +- poster_high.png
+  |    +- teamX.webp  // 1 <= X <= {9, 12} (total de medalhistas)
   +- warmup
   |    +- info_maratona.pdf
   |    +- maratona.pdf
@@ -86,6 +87,46 @@ Nacional
   |    `- slides.pdf
   `- index.html
 ```
+
+A página apresenta, a princípio, 6 blocos de informações distintos. Mais informações podem ser acrescentadas se necessário (seguindo o padrão de formatação).
+
+### Fotos
+
+Carrossel com imagens do evento.
+
+### Patrocinadores
+
+Informações sobre os patrocinadores.
+
+### Organização
+
+As informações sobre a organização do evento.
+
+### Warm Up
+
+Detalhes sobre o Warm Up, com a listagem dos problemas e com arquivos associados à prova no diretório `warmup`, que devem *necessariamente* ser nomeados como previsto na estrutura:* arquivo com os slides apresentados na abertura do evento em `slides.pdf`,
+* folha de Informações em `info_maratona.pdf`,
+* problemas da Prova em `maratona.pdf`, e
+* entradas e Saídas em `packages.tar.gz`.
+
+### Prova
+
+Detalhes sobre o evento, com a listagem dos problemas e com arquivos associados à prova no diretório `contest`, que devem *necessariamente* ser nomeados como previsto na estrutura:
+* folha de Informações em `info_maratona.pdf`,
+* problemas da Prova em `maratona.pdf`, e
+* entradas e Saídas em `packages.tar.gz`.
+
+### Resultados
+
+Detalhes sobre o resultado evento, com a listagem dos problemas e com arquivos associados à prova no diretório `contest`, que devem *necessariamente* ser nomeados como previsto na estrutura:
+* página web com o placar final em `score.html`,
+* página web com as submissões em `runs.html`,
+* página web com as _clarifications_ em `clarifications.html`, e
+* página web com as estatísticas do evento em `statistics.html`.
+
+### Outros
+
+O diretório `img` contém as imagens do evento. O arquivo `img/poster_low.png` é de menor resolução para gerar a página web, já o `img/poster_high.png` serve para download e impressão do poster do evento.
 
 ## Summer School
 

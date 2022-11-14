@@ -12,7 +12,7 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // date1Fase, dateNacional siteDeadline, siteForm, teamDeadline, discountDeadline, discountPrices, full_prices.
+      // date1Fase, dateNacional siteDeadline, siteForm, teamDeadline, discountDeadline, discountPrices, fullPrices.
       //====================================================================================================
       var date1Fase = '8/10/2022';
       var dateNacional = '10/3/2023';
@@ -23,8 +23,8 @@
       var discountDeadline = '26/8/2022';
       var discountPrices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
                              ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 /time']], // Instituição não associada.
-          full_prices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 /time'],  // Instituição associada.
-                         ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 /time']]; // Instituição não associada.
+          fullPrices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 /time'],  // Instituição associada.
+                        ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 /time']]; // Instituição não associada.
       var sites = [ //[regiao + cidade, local, diretor, e-mail]
 ['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', 'juniorlimeiras@gmail.com'],
 ['AM, Manaus', 'UFAM', 'Rosiane de Freitas', 'rosiane@icomp.ufam.br'],
@@ -143,9 +143,9 @@
         <tr><td>3+</td><td>${discountPrices[0][2]}</td><td>${discountPrices[1][2]}</td></tr>
         <tr>
           <td rowspan="3" class="align-middle">De ${deadlineStart} a ${teamDeadline}</td>
-            <td>1</td> <td>${full_prices[0][0]}</td><td>${full_prices[1][0]}</td></tr>
-        <tr><td>2</td> <td>${full_prices[0][1]}</td><td>${full_prices[1][1]}</td></tr>
-        <tr><td>3+</td><td>${full_prices[0][2]}</td><td>${full_prices[1][2]}</td></tr>
+            <td>1</td> <td>${fullPrices[0][0]}</td><td>${fullPrices[1][0]}</td></tr>
+        <tr><td>2</td> <td>${fullPrices[0][1]}</td><td>${fullPrices[1][1]}</td></tr>
+        <tr><td>3+</td><td>${fullPrices[0][2]}</td><td>${fullPrices[1][2]}</td></tr>
       </table>
     </center>
   </li>
@@ -201,22 +201,19 @@ ${siteTable}
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-      <div class="container text-left">
-        <h1>Inscrições</h1>
-        <p>
-          A Maratona de Programação ocorrere em duas fases. A primeira fase será eliminatória em <script type="text/javascript">document.write(date1Fase);</script> com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de <script type="text/javascript">document.write(`${dateNacional} a ${dateNacionalEnd}`);</script> em <script type="text/javascript">document.write();</script>.
-        </p>
-        <p class="text-danger">
-          O prazo de inscrição é <strong><script type="text/javascript">document.write(teamDeadline);</script></strong>.
-        </p>
-      <script type="text/javascript">
-        document.write(accordion('enroll', [['Sede(s)', site],
-                                            ['Time(s)', team + siteTable],
-                                            ['Café-com-Leite', ccl],
-                                            ['Desistência & Reembolso', refund]]));
-        document.write(bodyFooter());
-      </script>
-    </div>
+    <script type="text/javascript">document.write(bodyHeader('Inscrições'));</script>
+    <p>
+      A Maratona de Programação ocorre em duas fases. A Primeira Fase será eliminatória em <script type="text/javascript">document.write(date1Fase);</script> com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de <script type="text/javascript">document.write(`${dateNacional} a ${dateNacionalEnd}`);</script> em <script type="text/javascript">document.write();</script>.
+    </p>
+    <p class="text-danger">
+      O prazo de inscrição é <strong><script type="text/javascript">document.write(teamDeadline);</script></strong>.
+    </p>
+    <script type="text/javascript">
+      document.write(accordion('enroll', [['Sede(s)', site],
+                                          ['Time(s)', team + siteTable],
+                                          ['Café-com-Leite', ccl],
+                                          ['Desistência & Reembolso', refund]]));
+      document.write(bodyFooter());
+  </script>
   </body>
 </html>
