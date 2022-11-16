@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona SBC de Programação</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../utils.js"></script>
+    <script type="text/javascript">
+      //====================================================================================================
+      // Atualizar as informações abaixo:
+      // pageStart, organization, contestProblems, results [limiar_ok + supersedes], pageEnd
+      //====================================================================================================
+      var pageStart = `
+<p>
+ A primeira fase da XXV Maratona de Programação ocorrerá online. Os times devem se inscrever nas sedes correspondentes aos seus estados (ou Distrito Federal).
+Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeira fase 2020.
+</p>
+<p>
+  Cronograma de atividades:
+</p>
+<ul>
+  <li>7 de novembro, das 14:00 às 17:00 Aquecimento</li>
+  <li>14 de novembro, das 14:00 às 19:00 Primeira Fase 2020</li>
+</ul>
+<p>
+  O aquecimento e a primeira fase serão transmitidas no canal de Youtube da Maratona de Programação. Na semana de 7 a 14 de novembro teremos transmissões ao vivo com os patrocinadores do evento. <strong>Neste ano temos 799 times aceitos de 196 escolas.</strong>
+</p>`;
+      var organization = `<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez (Argentina), André Amaral de Sousa, Claudio Leonardo Lucchesi, Dâmi Henrique Pelegrino (Brasil Sudeste), Francisco Arcos Filho (Brasil Norte), Juan Pablo Marin Rosas (México), Lina Rosales (Costa Rica), Lucas Hermann Negri (Brasil Sul), Maurício Collares, Mário H. S. da Silva (Brasil Nordeste), Pablo Blanc (Argentina), Paulo Cezar Pereira Costa (juiz chefe da América Latina), Rafael Assis (Brasil Centro-Oeste), Ricardo Anido, Teodoro Freund (Argentina), e Vinicius Fernandes dos Santos (juiz chefe no Brasil).
+</p>
+<p>
+  Agradecemos também a equipe de "testers" da prova: Dilson Almeida Guimarães, Fernando Fonseca Andrade Oliveira, Naum Azeredo Fernandes Barreira, Carlos Miguel Soto, Ivo Pajor, e Lautaro Lasorsa.
+</p>`;
+      var warmUpProblems = [];
+      var contestProblems = ['Álbum de Figurinhas - Mário H. S. da Silva',
+                             'Batalha Naval - Vinicius Fernandes dos Santos',
+                             'Concatenando Times - Agustín Santiago Gutiérrez',
+                             'Dança da Divisibilidade - Francisco Arcos Filho',
+                             'Empresa de Festas - André Amaral de Souza',
+                             'Fastminton - Lucas Hermann Negri',
+                             'Game Show! - Vinicius Fernandes dos Santos',
+                             'Hangar do SBC - Francisco Arcos Filho',
+                             'Interatividade - Mário H. S. da Silva',
+                             'Juntando Dados - Mário H. S. da Silva',
+                             'Ká entre Nós - Vinicius Fernandes dos Santos',
+                             'Lavaspar - Dâmi Henrique Pelegrino',
+                             'Metralhadora - Agustín Santiago Gutiérrez',
+                             'Números Multiplicados - Teodoro Freund',
+                             'Ônibus Venusiano - Mário H. S. da Silva'];
+
+        //              [[site, [list_rule1, list_rule2, list_rule3]]]
+        var limiar_ok = [['Amazonas', [[],
+                                       ['[UEA] Você é fraco, te falta O(1)'],
+                                       ['[IComp/UFAM] NP-Compeixe']]],
+                         ['Bahia', [['[UFBA] União Fiasco'],
+                                    ['[UEFS] Vêm tranquilo, afoba não', '[UESB] Qual o nome do time?'],
+                                    []]],
+                         ['Ceará', [['UFC-Quixadá] :ultra_fast_parrot:'],
+                                    ['[UFC] AC(¬‿¬)WA', '[UECE] Abacate Atômico', '[IFCE] CPA - Carregados Pelo Alyson'],
+                                    []]],
+                         ['Distrito Federal', [[],
+                                               ['[UnB] Rock Lee Casado Não Vai + Pra Pagode'],
+                                               ['[UnB/FGA] Mensageiros do à main']]],
+                         ['Espírito Santo', [[], ['[UFES] man java'], []]],
+                         ['Goiás', [[], ['[UFG - INF] Monkeys'], ['[PUC - Goiás] BalloonField']]],
+                         ['Minas Gerais', [['[UFMG] Xerebêlerebébis', '[UNIFEI] The droids you are looking for', "[UFMG] GTA: Grover's Street Algorithms"],
+                                           ['[UFU] Home Off C++', '[IFSULMG/Muzambinho] Amigos da Aracele', '[DPI-UFV] Bagre Branco, Branco Bagre', '[INATEL] Code Zwang', '[CEFET-MG/C2] O(f*ck)', '[UFV/Florestal] seila'],
+                                           []]],
+                         ['Paraíba', [['[UFCG] vae victis', '[UFCG] O amarelo é impostor'],
+                                      ['[IFPB/João Pessoa] 2 matemáticos e 2 flamenguistas'],
+                                      []]],
+                          ['Paraná', [[], ['[UFPR] YouShallNot.stay', '[UTFPR-CT] Programadores: continue'], []]],
+                          ['Piauí', [[], ['[UFPI] Três caras numa moto'], []]],
+                          ['Rio de Janeiro', [[],
+                                              ['[UFRJ] Que time?', '[IME] WA em O(1)'],
+                                              ['[PUC Rio de Janeiro] NP-Lúcia', '[CEFET/RJ Petrópolis] PD pá']]],
+                          ['Rio Grande do Sul', [[], ['[UFRGS] [nome_do_time]'], []]],
+                          ['Santa Catarina', [[], ['[UDESC] Mews Lovers', '[UFSC] Bolonhesa', '[UNESC] Code Distancing'], []]],
+                          ['São Paulo', [['[UNICAMP] namae wa??', '[USP - São Carlos] deitando no gramado', '[USP] KondZhiLa', '[UNICAMP] $wa', '[USP] Hoje tem AC do Ribamar', '[USP - São Carlos] cuscuz com cachaça'],
+                                         ['[ITA] GGG', '[UFABC] anarquia às 8', '[UNESP-Bauru] UnespRPM', '[UNOESTE] Alquimistas', '[FATEC - Sorocaba] No Main No Gain', '[IFSP] RGB IFSP-ARQ Team', '[UFSCar] S -> aSa | a', '[UNIVEM] Overclock'],
+                                         []]]
+                                         ];
+        var ssco = [['Mato Grosso', [[], [], ['[UFMT - Cuiabá] Vamu vense']]],
+                    ['Mato Grosso do Sul', [[], ['[UFMS - FACOM] Quero café'], []]]];
+        var ssne = [['Alagoas', [[], ['[UFAL] A query tá on'], ['[UFAL - Arapiraca] Os k-ésimos']]],
+                    ['Maranhão', [[], [], ['[UFMA] UFMA Time 1']]],
+                    ['Pernambuco ', [['[UFPE] Beto was ejected'], [], []]],
+                    ['Rio Grande do Norte', [[], ['[UFRN] Que bixiga é essa?'], []]],
+                    ['Sergipe', [['[UFS] Dorime'], [], []]]];
+        var ssno = [['Acre', [[], ['[UFAC] Wrong Answer 1000%'], []]],
+                    ['Amapá *', [[], [], []]],
+                    ['Pará', [[], ['[UFPA] Sem TLE irmão'], []]],
+                    ['Rondônia', [[], [], ['[UNIR] EM3.1415NA']]],
+                    ['Roraima', [[], [], ['[UFRR] KLM']]],
+                    ['Tocantins', [[], [], []]]];
+        var obsLimiarOK = `
+<ul>
+  <li>Os times [IFSP Birigui] BK Lovers, [IFSP Birigui] Sei fazer mas não quero, [UniSantos] Osmungos e [UniSantos] Black Dragons foram desclassificados por conduta em desacordo com o Código de Conduta da competição.</li>
+</ul>`;
+        var obsSSNO = `
+<ul>
+  <li>Não foi possível realizar a competição no Amapá por conta da situação de emergência que o estado se encontra, há vários dias sem energia elétrica. Será realizada uma seleção entre os times do estado, e o time selecionado será convidado a participar da Final Brasileira.</li>
+</ul>`;
+        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok) + obsLimiarOK],
+                                                 ['Supersede Centro-Oeste', advancingTeams(ssco)],
+                                                 ['Supersede Nordeste', advancingTeams(ssne)],
+                                                 ['Supersede Norte', advancingTeams(ssno) + obsSSNO]]);
+      var awards = `
+<p>
+  A SAP patrocinou a primeira fase na região sul, e enviou aos participantes uma caixa-enigma com brindes.
+</p>
+<p>
+  A B2W patrocinou as regiões nordeste e sudeste, premiando os 3 primeiros colocados de cada região:
+</p>
+<ul>
+  <li>Sudeste:</li>
+    <ul>
+      <li>[Unicamp] namae wa??: Naim Shaikhzadeh, Tiago Souza, Matheus Viana, coach Fabio Usberti.</li>
+      <li>[USP - São Carlos] deitando no gramado: Lucas Turci, Frederico Ribeiro, André Fakhoury, coach Samuel Santos.</li>
+      <li>[UFMG] Xerebêlerebébis: Bruno Monteiro, Emanuel Silva, Rafael Grandsire Oliveira, coach Pedro Papa Paniago.</li>
+    </ul>
+  <li>Nordeste:</li>
+    <ul>
+      <li>[UFBA] União Fiasco: Thalles Medrado, Vinicius Hirschle, Bernardo Salmeron, coach Rubisley Lemes.</li>
+      <li>[UFCG] vae victis: Felipe Mota dos Santos, Matheus Coutinho, Ícaro Lima, coach Isabel Fontgalland.</li>
+      <li>[UFCG] O amarelo é impostor: Emerson Lucena, João Marcos Medeiros, Daniel Figueiredo, coach Rohit Gheyi.</li>
+    </ul>
+</ul>
+<p>
+  A VTEX patrocinou todas as sedes e premiou os 3 primeiros colocados de todas as regiões do país. Assim, além dos listados acima, temos:
+</p>
+<ul>
+  <li>Centro-Oeste:</li>
+    <ul>
+      <li>[UFG] Monkeys: Rafael de Castro Silva, Leandro Vianna, Gustavo Leal, coach Paulo Kataki.</li>
+      <li>[UnB] Rock Lee Casado Não Vai + Pra Pagode: Thiago Machado, Leonardo Riether, Mikael Mello, coach Guilherme Ramos.</li>
+      <li>[UnB/FGA] Mensageiros do à main: Thiago Ferreira, João Carvalho, Gustavo Marques, coach Edson Junior.</li>
+    </ul>
+  <li>Norte:</li>
+    <ul>
+      <li>[UEA] Você é fraco, te falta O(1): William Silva, Levi Lima, Eduardo Lima, coach Wesley Rocha.</li>
+      <li>[UFAM] Hashadinha: João Alfredo Bessa Neto, Jackson Fernandes, Thailsson Andrade, coach Rosiane Freitas.</li>
+      <li>[UFAM] Tuturubis: Lucas Rocha dos Santos, Felipe Pereira Franco, Lucas Castro de Souza, coach Rosiane Freitas.</li>
+    </ul>
+  <li>Sul:</li>
+    <ul>
+      <li>[UDESC] Mews Lovers: Felipe Weiss, Felipe Marchi, Vinicius Gasparini, coach Karina Roggia.</li>
+      <li>[UFPR] YouShallNot.stay: Fernando Kiotheka, Bruno Tissei, Talita Halboth, coach André Guedes.</li>
+      <li>[UDESC] The Balloonatics: João Victor Fröhlich, Elton Machado da Silva, Rafael Granza de Mello, coach Karina Roggia.</li>
+    </ul>
+</ul> `;
+
+      //======================================================================
+      // Não editar a partir daqui.
+      //======================================================================
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.write(bodyHeader(`${thisYear()} - Primeira Fase`));
+      document.write(pageStart);
+      document.write(accordion('Phase', [['Organização', organization],
+                                         ['Warm Up', contestInfo('warmup', warmUpProblems)],
+                                         ['Prova', contestInfo('contest', contestProblems, true)],
+                                         ['Resultados', contestReports() + results],
+                                         ['Premiação', awards]]
+                                         ));
+      document.write(bodyFooter());
+    </script>
+  </body>
+</html>

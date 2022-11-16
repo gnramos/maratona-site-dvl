@@ -13,7 +13,7 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // pageStart, organization, contest_problems, results [limiar_ok + supersedes], pageEnd
+      // pageStart, organization, contestProblems, results [limiar_ok + supersedes], pageEnd
       //====================================================================================================
       var pageStart = `
 <p>
@@ -22,7 +22,7 @@
       var organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas:  Claudio Leonardo Lucchesi, Paulo Cezar Pereira Costa, Ricardo Anido, Célio Passos, Arthur Nascimento, Vinicius Fernandes dos Santos, Rafael Assis, Jonathan Queiroz, Francisco Arcos Filho, Dâmi Henrique Pelegrino, Cristhian Bonilha, Naum Azeredo, Mauricio Collares, Juan Pablo Marin Rosas, Lina Rosales, Gabriel Rivera Safadi, Agustín Santiago Gutiérrez, Pablo Blanc, e Teodoro Freund.
 </p>`;
-      var contest_problems = ['Achando os Monótonos Não-Triviais Maximais - Célio Passos',
+      var contestProblems = ['Achando os Monótonos Não-Triviais Maximais - Célio Passos',
                               'Brincando com Pedras - Célio Passos',
                               'Cortes a Laser - Ricardo Anido',
                               'Deslocando Partículas - Vinicius Fernandes dos Santos',
@@ -137,7 +137,7 @@
       document.write(bodyHeader(`${thisYear()} - Primeira Fase`));
       document.write(pageStart);
       document.write(accordion('Phase', [['Organização', organization],
-                                         ['Prova', contestInfo('contest', contest_problems)],
+                                         ['Prova', contestInfo('contest', contestProblems)],
                                          ['Resultados', contestReports() + results]]));
       document.write(pageEnd);
       document.write(bodyFooter());

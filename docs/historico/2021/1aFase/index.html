@@ -13,7 +13,7 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // pageStart, organization, contest_problems, results [limiar_ok + supersedes]
+      // pageStart, organization, contestProblems, results [limiar_ok + supersedes]
       //====================================================================================================
       var pageStart = `
 <p>
@@ -22,7 +22,7 @@
       var organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
 </p>`;
-      var contest_problems = ['Alocação de Prêmios - Clodes Silva',
+      var contestProblems = ['Alocação de Prêmios - Clodes Silva',
                               'Belas Palavras - Rafael Assis',
                               'Criando Multiplos - Cláudio Lucchesi',
                               'Dividindo o Reino - Matias Hunicken',
@@ -124,7 +124,7 @@
       document.write(bodyHeader(`${thisYear()} - Primeira Fase`));
       document.write(pageStart);
       document.write(accordion('Phase', [['Organização', organization],
-                                         ['Prova', contestInfo('contest', contest_problems)],
+                                         ['Prova', contestInfo('contest', contestProblems)],
                                          ['Resultados', contestReports() + results]]));
       document.write(bodyFooter());
     </script>

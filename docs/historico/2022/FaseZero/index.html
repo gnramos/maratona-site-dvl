@@ -14,7 +14,7 @@
     <script type="text/javascript">
       //====================================================================================================
       // Atualizar as informações abaixo:
-      // pageStart, organization, contest_problems, results [limiar_ok + supersedes], pageEnd
+      // pageStart, organization, contestProblems, results [limiar_ok + supersedes], pageEnd
       //====================================================================================================
       var pageStart = `
 <p>
@@ -28,7 +28,7 @@
 <p>
   Participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Carlos Ferreira, Ciro Cirne Trindade, Edson Alves, Emílio Wuerges, João Lúcio Azevedo, Leandro Zatesko, Leonardo Deliyannis, Lucy Mari Tabuti, Neilor Tonin, Rosiane Freitas, e Weverton Cordeiro.
 </p>`;
-      var contest_problems= ['Avaliações de Algoritmos (autor: Neilor Tonin)',
+      var contestProblems= ['Avaliações de Algoritmos (autor: Neilor Tonin)',
                              'Baita Desafio Complexo (autor: Leandro Zatesko)',
                              'Chimambu (autor: Leandro Zatesko)',
                              'Ditados (autor: Neilor Tonin)',
@@ -105,7 +105,7 @@ var em = ['ceferno (CEFET-MG)', 'Fibolalic (COESI) <em>[melhor time de Sergipe]<
       return `<${type} ${typeClass}>${lis}</${type}>`;
     }
 
-    var contestInfo = `<ul><li><a href="contest/editorial.html">Editorial</a></li></ul>\n${makeList('ol', contest_problems, 'type="A"')}`;
+    var contestInfo = `<ul><li><a href="contest/editorial.html">Editorial</a></li></ul>\n${makeList('ol', contestProblems, 'type="A"')}`;
 
       var pu = '';
       for (uf of perUF) {

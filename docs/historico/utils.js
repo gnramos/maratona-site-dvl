@@ -5,21 +5,26 @@
  * @param  {Array}  problems list of problem names
  * @return {String}          the HTML with the formatted information
  */
-function contestInfo(contest, problems) {
-  var info = '';
+function contestInfo(contest, problems, hasEditorial=false) {
+  var lis = '';
   for (problem of problems)
-    info += `\n  <li>${problem}</li>`;
-  return `
-<ul>
-  <li><a href=${contest}/info_maratona.pdf">Informações</a></li>
-  <li><a href=${contest}/maratona.pdf">Problemas</a></li>
-  <li><a href=${contest}/packages.tar.gz">Entradas e Saídas</a></li>
-</ul>
+    lis += `\n  <li>${problem}</li>`;
+  if (lis != '')
+    lis = `
 <p>
   Autores dos problemas:
 </p>
-<ol type="A">${info}
+<ol type="A">${lis}
 </ol>`;
+  var editorial = (hasEditorial ? `<li><a href="${contest}/editorial.pdf">Editorial</a></li>` : '');
+  return `
+<ul>
+  <li><a href="${contest}/info_maratona.pdf">Informações</a></li>
+  <li><a href="${contest}/maratona.pdf">Problemas</a></li>
+  <li><a href="${contest}/packages.tar.gz">Entradas e Saídas</a></li>
+  ${editorial}
+</ul>
+${lis}`;
 }
 
 /**
@@ -35,7 +40,7 @@ function contestReports() {
   <li><a href="contest/score.html">Placar final</a></li>
   <li><a href="contest/runs.html">Lista de submissões</a></li>
   <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
-  <li><a href="contest/statistic.html">Estatísticas</a></li>
+  <li><a href="contest/statistics.html">Estatísticas</a></li>
 </ul>`;
 }
 
@@ -210,3 +215,32 @@ function thisYear() {
   var url = window.location.pathname.split('/');
   return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
 }
+
+var oldBodyHeader = bodyHeader;
+
+bodyHeader = function(title) {
+  function breadcrumbs() {
+    var url = window.location.pathname.split('/');
+    var breadcrumbItems = [];
+    var i = url.at(-1) == 'index.html' ? -3 : -2;
+    var prefix = url.at(-1) == 'index.html' ? '../../' : '../';
+    while (url.at(i) != 'historico') {
+      breadcrumbItems.push([prefix + url.at(i) + '/index.html', url.at(i)]);
+      prefix += '../';
+      i -= 1;
+    }
+    breadcrumbItems.push([prefix + url.at(i) + '/index.html', 'Passadas']);
+    breadcrumbItems.reverse();
+    var lis = '';
+    for (item of breadcrumbItems)
+      lis += `\n<li class="breadcrumb-item"><a href="${item[0]}">${item[1]}</a></li>`;
+    return `
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              ${lis}
+            </ol>
+          </nav>`;
+  }
+
+  return oldBodyHeader() + breadcrumbs() + `<h1>${title}</h1>`;
+};

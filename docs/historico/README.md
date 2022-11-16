@@ -9,8 +9,7 @@ YYYY
   +- FaseZero
   +- 1aFase
   +- Nacional
-  +- SummerSchool
-  +- Mundial
+  `- Mundial
 ```
 
 Ela é replicada para cada ano (`YYYY`), e as informações organizadas em subdiretórios, um para cada fase. O arquivo `index.html` mostra o poster do evento e um índice para cada fase.
@@ -60,7 +59,7 @@ Detalhes sobre o resultado evento, com a listagem dos problemas e com arquivos a
 O arquivo `index.html` determina o conteúdo. A formatação é praticamente toda definida automaticamente, via CSS e javascript, sendo necessário apenas definir alguns conteúdos como HTML. Especificamente:
 * `pageStart`: as informações a serem apresentadas no topo da página.
 * `organization`: as informações a serem apresentadas no bloco de "organização", geralmente a listagem dos envolvidos na organização do evento.
-* `contest_problems`: a lista dos nomes dos problemas (e seus autores), na mesma ordem que aparecem na prova.
+* `contestProblems`: a lista dos nomes dos problemas (e seus autores), na mesma ordem que aparecem na prova.
 * `results`: os resultados dos times classificados em cada sede.
 
 ## Final Brasileira
@@ -124,10 +123,10 @@ Detalhes sobre o resultado evento, com a listagem dos problemas e com arquivos a
 * página web com as _clarifications_ em `clarifications.html`, e
 * página web com as estatísticas do evento em `statistics.html`.
 
+Os times medalhistas devem ter fotos no formato `img/teamX.webp`, onde `X` indica o ranking de cada time.
+
 ### Outros
 
 O diretório `img` contém as imagens do evento. O arquivo `img/poster_low.png` é de menor resolução para gerar a página web, já o `img/poster_high.png` serve para download e impressão do poster do evento.
-
-## Summer School
 
 ## Final Mundial
