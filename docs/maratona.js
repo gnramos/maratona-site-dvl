@@ -58,7 +58,8 @@ function bodyHeader(pageTitle='') {
               Participe!
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}inscricoes.html">Inscrições</a></li>
+              <li><a class="dropdown-item" href="${root()}inscricoes.html"><strong>Inscrições</strong></a></li>
+              <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero/index.html">Fase Zero</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
               <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
