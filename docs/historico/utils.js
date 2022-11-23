@@ -216,14 +216,18 @@ function thisYear() {
   return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
 }
 
+/** Override maraonta.js' bodyHeader function to include breadcrumbs before title. */
 var oldBodyHeader = bodyHeader;
 
 bodyHeader = function(title) {
   function breadcrumbs() {
     var url = window.location.pathname.split('/');
+    if (url.at(-3) == CURRENT_YEAR)
+      return '';
+
     var breadcrumbItems = [];
-    var i = url.at(-1) == 'index.html' ? -3 : -2;
-    var prefix = url.at(-1) == 'index.html' ? '../../' : '../';
+    var prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
+    var i = (url.at(-1) == 'index.html' ? -3 : -2);
     while (url.at(i) != 'historico') {
       breadcrumbItems.push([prefix + url.at(i) + '/index.html', url.at(i)]);
       prefix += '../';
