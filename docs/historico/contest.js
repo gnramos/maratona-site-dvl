@@ -229,11 +229,11 @@ bodyHeader = function(title) {
     var prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
     var i = (url.at(-1) == 'index.html' ? -3 : -2);
     while (url.at(i) != 'historico') {
-      breadcrumbItems.push([prefix + url.at(i) + '/index.html', url.at(i)]);
+      breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, url.at(i)]);
       prefix += '../';
       i -= 1;
     }
-    breadcrumbItems.push([prefix + url.at(i) + '/index.html', 'Passadas']);
+    breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Passadas']);
     breadcrumbItems.reverse();
     var lis = '';
     for (item of breadcrumbItems)
