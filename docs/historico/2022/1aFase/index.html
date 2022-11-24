@@ -112,13 +112,19 @@
 <ul>
   <li>Devido à falta de energia elétrica não ocorreu a competição em Vitória. O comitê decidiu realizar uma nova competição e dar uma vaga para o campeão da sede.</li>
 </ul>`;
+        var teamsVitoria = [['ES, Vitória', [[], ['[UFES] TopCão '], []]]];
+        var siteVitoria = `
+<p>
+  A primeira fase em Vitória, ES ocorreu em 19 de novembro, online. Os problemas da prova foram os mesmos elaborados para a Maratona de Programação da Escola Regional de Informática do Rio de Janeiro (ERI-RJ) de 2011. A prova foi originalmente elaborada por André Abrantes, Debora Silva, Denilson Sá, Eduardo Cardoso e Vinicius dos Santos e foi adaptada para reutilização por Paulo Cezar Costa e Vinicius dos Santos.
+</p>`;
         var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok) + obsLimiarOK],
                                                  ['Supersede Minas Gerais', advancingTeams(ssmg)],
                                                  ['Supersede Centro-Oeste', advancingTeams(ssco)],
                                                  ['Supersede Nordeste', advancingTeams(ssne)],
                                                  ['Supersede Norte', advancingTeams(ssno) + obsSSNO],
                                                  ['Supersede Sudeste', advancingTeams(ssse) + obsSSE],
-                                                 ['Supersede Brasil', advancingTeams(ssbr)]
+                                                 ['Supersede Brasil', advancingTeams(ssbr)],
+                                                 ['Sede Vitória*', siteVitoria + contestInfo('vitoria') + contestReports('vitoria') + advancingTeams(teamsVitoria)]
           ]);
         results +=`
 <br>
