@@ -5,7 +5,7 @@
  * @param  {Array}  problems list of problem names
  * @return {String}          the HTML with the formatted information
  */
-function contestInfo(contest, problems, hasEditorial=false) {
+function contestInfo(contest, problems=[], hasEditorial=false) {
   var problemList = '';
   for (p of problems)
     problemList += `\n  <li>${p}</li>`;
@@ -34,13 +34,13 @@ ${problemList}`;
  *
  * @return {String} the HTML with the formatted information
  */
-function contestReports() {
+function contestReports(contest='contest') {
   return`
 <ul>
-  <li><a href="contest/score.html">Placar final</a></li>
-  <li><a href="contest/runs.html">Lista de submissões</a></li>
-  <li><a href="contest/clarifications.html">Lista de perguntas</a></li>
-  <li><a href="contest/statistics.html">Estatísticas</a></li>
+  <li><a href="${contest}/score.html">Placar final</a></li>
+  <li><a href="${contest}/runs.html">Lista de submissões</a></li>
+  <li><a href="${contest}/clarifications.html">Lista de perguntas</a></li>
+  <li><a href="${contest}/statistics.html">Estatísticas</a></li>
 </ul>`;
 }
 
