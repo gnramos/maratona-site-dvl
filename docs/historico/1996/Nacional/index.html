@@ -16,12 +16,12 @@
       // pasgeStart, images, sponsor, organization, warmUpProblems, contestProblems,
       // champion_pic, medalists, regional_champs e ccl.
       //====================================================================================================
-      var pageStart = `<h1>1996 - I Consun, Belo Horizonte</h1>
+      var pageStart = `
 <p>
   A Maratona de Programação foi organizada pela primeira vez na Universidade Federal de Minas Gerais, nos dias 28 e 29 de novembro de 1996. Os resultados foram divulgados em 2 de dezembro daquele ano. <a href="96_inicial.html"> Página da primeira maratona.</a>
 </p>
 <p>
-  A comissão organizadora era formada pelos Prof. Claudionor Coelho (DCC-UFMG), Carlos Camar&atilde;o (DCC-UFMG), Nilton de Oliveira Junior (Softex 2000), Ricardo Dahab (IC-Unicamp) e Rosângela Fernandes (CNpq). A iniciativa do evento  que ocorreu na UFMG foi do Softex, com patroc&iacute;nio do CNPq. Apesar de n&atilde;o ser uma regional oficial do ICPC, o organizador do evento entrou em contato com o diretor executivo do ICPC e o vencedor da Maratona de Programa&ccedil;&atilde;o foi convidado para participar das finais mundiais do ICPC em 1997.
+  A comissão organizadora era formada pelos Prof. Claudionor Coelho (DCC-UFMG), Carlos Camarão (DCC-UFMG), Nilton de Oliveira Junior (Softex 2000), Ricardo Dahab (IC-Unicamp) e Rosângela Fernandes (CNpq). A iniciativa do evento  que ocorreu na UFMG foi do Softex, com patrocínio do CNPq. Apesar de n&atilde;o ser uma regional oficial do ICPC, o organizador do evento entrou em contato com o diretor executivo do ICPC e o vencedor da Maratona de Programa&ccedilão foi convidado para participar das finais mundiais do ICPC em 1997.
 </p>
 <p>
   O Consun tinha duas modalidades: um concurso de software e uma competição de programação. A competição ocorreu nos moldes tradicionais do Concurso de Programação do ICPC. Nessa primeira edição, sem um software de apoio, com a correção sendo feita por disquetes que eram levados dos times aos juízes e, destes de volta aos times, por uma equipe de estudantes voluntários, correndo.
@@ -87,16 +87,14 @@
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <script type="text/javascript">
-        document.write(pageStart);
-        document.write(accordion('Phase', [['Fotos', carousel(images)],
-                                           ['Prova', prova],
-                                           ['Resultados', score + results + extra]
-                                           ]));
-      </script>
-    </div>
-    <script type="text/javascript">document.write(bodyFooter());</script>
+    <script type="text/javascript">
+      document.write(bodyHeader('I Consun, Belo Horizonte (1996)', makeBreadcrumbs()));
+      document.write(pageStart);
+      document.write(accordion('Phase', [['Fotos', carousel(images)],
+                                         ['Prova', prova],
+                                         ['Resultados', score + results + extra]
+                                         ]));
+      document.write(bodyFooter());
+    </script>
   </body>
 </html>

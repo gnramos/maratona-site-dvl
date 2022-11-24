@@ -25,12 +25,13 @@ function root() {
  *
  * @return {String} the HTML with the formatted information
  */
-function bodyHeader(pageTitle='') {
+function bodyHeader(pageTitle='', breadcrumbs='') {
   var url = window.location.pathname.split('/');
   var currentPage = url.at(-1);
   var selected = `class="nav-link active" aria-current="page"`,
       unselected = `class="nav-link"`;
   var isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
+  var isContact = (currentPage == 'contato.html');
   var isInfo = !isParticipate && (url.includes('historico') || url.includes('escolas'));
 
   return`
@@ -42,7 +43,7 @@ function bodyHeader(pageTitle='') {
         </a>
         <ul class="nav nav-pills">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${url.includes('sobre') ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle ${url.includes('sobre') && !isContact ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sobre
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -77,7 +78,7 @@ function bodyHeader(pageTitle='') {
             </ul>
           </li>
           <li class="nav-item">
-            <a href="${root()}sobre/contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
+            <a href="${root()}contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
           </li>
           <li class="nav-item">
             <a href="https://www.facebook.com/maratona/" class="nav-link">
@@ -101,6 +102,7 @@ function bodyHeader(pageTitle='') {
       </header>
     </div>
     <div class="container text-left">
+      ${breadcrumbs}
       <h1>${pageTitle}</h1>`;
 }
 

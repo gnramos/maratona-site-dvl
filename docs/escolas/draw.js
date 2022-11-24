@@ -5,12 +5,11 @@ var RESULT_LEN = 5;
  *
  * Assumes the results are ordered and that each result is in the following format:
  * [year, rank1stPhase, rankNationalFinals, rankWorldFinals]. Always shows the last
- * resultLen values.
+ * RESULT_LEN values.
  *
- * @param  {Array}  rows      the results
- * @param  {Int}    resultLen the number of results to show
+ * @param  {Array}  rows  the results
  */
-function drawVisualization(rows, resultLen=RESULT_LEN) {
+function drawVisualization(rows) {
   function rankImg(year, phase, heightPx, rank, reverse=false) {
     var multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
     images = [], imgHTML = "";
@@ -38,7 +37,7 @@ function drawVisualization(rows, resultLen=RESULT_LEN) {
     return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
 
-  rows = rows.slice(-resultLen);
+  rows = rows.slice(-RESULT_LEN);
 
   google.charts.load('current', {packages: ['corechart', 'line']});
   var data = new google.visualization.DataTable();

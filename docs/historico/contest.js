@@ -6,15 +6,15 @@
  * @return {String}          the HTML with the formatted information
  */
 function contestInfo(contest, problems, hasEditorial=false) {
-  var lis = '';
-  for (problem of problems)
-    lis += `\n  <li>${problem}</li>`;
-  if (lis != '')
-    lis = `
+  var problemList = '';
+  for (p of problems)
+    problemList += `\n  <li>${p}</li>`;
+  if (problemList != '')
+    problemList = `
 <p>
   Autores dos problemas:
 </p>
-<ol type="A">${lis}
+<ol type="A">${problemList}
 </ol>`;
   var editorial = (hasEditorial ? `<li><a href="${contest}/editorial.pdf">Editorial</a></li>` : '');
   return `
@@ -24,7 +24,7 @@ function contestInfo(contest, problems, hasEditorial=false) {
   <li><a href="${contest}/packages.tar.gz">Entradas e Saídas</a></li>
   ${editorial}
 </ul>
-${lis}`;
+${problemList}`;
 }
 
 /**
@@ -216,35 +216,33 @@ function thisYear() {
   return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
 }
 
-/** Override maraonta.js' bodyHeader function to include breadcrumbs before title. */
-var oldBodyHeader = bodyHeader;
+/**
+ * Returns breadcrumbs for a contest from the dir structure.
+ *
+ * @return {String} the breadcrumbs.
+ */
+function makeBreadcrumbs() {
+  var url = window.location.pathname.split('/');
+  if (url.at(-3) == CURRENT_YEAR)
+    return '';
 
-bodyHeader = function(title) {
-  function breadcrumbs() {
-    var url = window.location.pathname.split('/');
-    if (url.at(-3) == CURRENT_YEAR)
-      return '';
-
-    var breadcrumbItems = [];
-    var prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
-    var i = (url.at(-1) == 'index.html' ? -3 : -2);
-    while (url.at(i) != 'historico') {
-      breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, url.at(i)]);
-      prefix += '../';
-      i -= 1;
-    }
-    breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Passadas']);
-    breadcrumbItems.reverse();
-    var lis = '';
-    for (item of breadcrumbItems)
-      lis += `\n<li class="breadcrumb-item"><a href="${item[0]}">${item[1]}</a></li>`;
-    return `
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              ${lis}
-            </ol>
-          </nav>`;
+  var breadcrumbItems = [];
+  var prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
+  var i = (url.at(-1) == 'index.html' ? -3 : -2);
+  while (url.at(i) != 'historico') {
+    breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, url.at(i)]);
+    prefix += '../';
+    i -= 1;
   }
-
-  return oldBodyHeader() + breadcrumbs() + `<h1>${title}</h1>`;
-};
+  breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Passadas']);
+  breadcrumbItems.reverse();
+  var lis = '';
+  for (item of breadcrumbItems)
+    lis += `\n<li class="breadcrumb-item"><a href="${item[0]}">${item[1]}</a></li>`;
+  return `
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            ${lis}
+          </ol>
+        </nav>`;
+}

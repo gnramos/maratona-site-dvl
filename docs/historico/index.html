@@ -41,13 +41,10 @@
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <h1>Histórico</h1>
-      <script type="text/javascript">
-        document.write(accordion('History', accordionItems, [], false));
-      </script>
-    </div>
-    <script type="text/javascript">document.write(bodyFooter());</script>
+    <script type="text/javascript">
+      document.write(bodyHeader('Histórico'));
+      document.write(accordion('History', accordionItems, [], false));
+      document.write(bodyFooter());
+    </script>
   </body>
 </html>

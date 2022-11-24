@@ -136,7 +136,7 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
   </head>
   <body>
     <script type="text/javascript">
-      document.write(bodyHeader(`${thisYear()} - Final Nacional`));
+      document.write(bodyHeader(`Final Nacional (${thisYear()})`, makeBreadcrumbs()));
       document.write(pageStart);
       document.write(accordion('Phase', [['Fotos', carousel(images)],
                                          ['Patrocinadores', sponsor],
