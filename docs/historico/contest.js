@@ -1,3 +1,6 @@
+RULE_TOOLTIP = ['Top 15!',
+                'Distribuição por sedes.',
+                'Vagas discricionárias.'];
 /**
  * Format the basic information for a contest.
  *
@@ -88,28 +91,16 @@ function splitbyMedal(medalists) {
  */
 function advancingTeams(results) {
   // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
-  function ruleHeaderCells() {
-    var cells = '';
-    for (i in RULE_COLORS)
-      cells += `\n        <th class='${RULE_COLORS[i]}' scope="col">Regra ${Number(i) + 1}</th>`;
-
-    // A decidir se fica ou não
-    return `<th scope="col">Tipo</th>`;
-
-    return cells;
+  function tooltip(i) {
+    return `data-toggle="tooltip" data-html="true" title="${RULE_TOOLTIP[i]}"`;
   }
-  function ruleRowCells(teams) {
-    var cells = '<td>';
+  function ruleCell(teams) {
+    var cell = '';
     for (i in RULE_COLORS)
       for (team of teams[i])
-        cells += `<span class="${RULE_COLORS[i]}"><strong>Regra ${Number(i) + 1}</strong></span><br>`;
-    cells += "</td>";
-    // A decidir se fica ou não
-    // for (i in RULE_COLORS)
-    //   cells += `
-    //   <td class='${RULE_COLORS[i]}'>${teams[i].length}</td>`;
+        cell += `<strong class="${RULE_COLORS[i]}" ${tooltip(i)}>Regra ${Number(i) + 1}</strong><br>`;
 
-    return cells;
+    return cell;
   }
   function teamsCell(teams) {
     var cell = '';
@@ -118,17 +109,18 @@ function advancingTeams(results) {
         cell += `<span class="${RULE_COLORS[i]}">${team}</span><br>`;
     return cell;
   }
-  function makeRow(siteTeams) {
-    var row = '';
+  function makeRows(siteTeams) {
+    var rows = '';
     for (item of results) {
       var [site, teams] = item;
-      row += `\n    <tr>
+      rows += `
+    <tr>
       <td scope="row">${site}</td>
-        ${ruleRowCells(teams)}
+      <td>${ruleCell(teams)}</td>
       <td>${teamsCell(teams)}</td>
     </tr>`;
     }
-    return row;
+    return rows;
   }
 
   return `
@@ -136,11 +128,11 @@ function advancingTeams(results) {
   <thead>
     <tr>
       <th scope="col">Sede</th>
-        ${ruleHeaderCells()}
-      <th scope="col">Times classificados</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Classificados</th>
     </tr>
   </thead>
-  ${makeRow(results)}
+  ${makeRows(results)}
 </table>`;
 }
 
