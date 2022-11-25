@@ -29,11 +29,11 @@
 
         var school = `
 <p>
-  Uma escola é definida pela instituição de ensino superior e a cidade de onde vêm os alunos participantes. Assim, por exemplo, a USP poderá ter times de várias escolas: USP-São Paulo, USP-São Carlos, etc. Se a instituição preferir, pode inscrever times com alunos de diferentes cidades - neste caso, a instituição contará como uma escola apenas para fins de alocação de <em>vagas</em> na final brasileira. No caso de um <em>curso a distância</em>, a escola poderá ser definida pela instituição de ensino superior e o polo de onde provêm os estudantes ou, no caso do time combinar alunos de vários polos, a instituição de ensino superior e o adjetivo "virtual" para caracterizar que são alunos de EAD.
+  Uma escola é definida pela instituição de ensino superior e a cidade de onde vêm os alunos participantes. Assim, por exemplo, a USP poderá ter times de várias escolas: USP-São Paulo, USP-São Carlos, etc. Se a instituição preferir, pode inscrever times com alunos de diferentes cidades - neste caso, a instituição contará como uma escola apenas para fins de alocação de <em>vagas</em> na Final Nacional. No caso de um <em>curso a distância</em>, a escola poderá ser definida pela instituição de ensino superior e o polo de onde provêm os estudantes ou, no caso do time combinar alunos de vários polos, a instituição de ensino superior e o adjetivo "virtual" para caracterizar que são alunos de EAD.
 </p>`;
         var coach = `
 <p>
-  O técnico será o representante do time junto à organização do concurso e deve ser um docente da escola. Alternativamente, um docente poderá indicar um técnico preenchendo <a href="carta-coach.pdf">este formulário</a> e enviando para o <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Uma mesma pessoa pode ser registrada como técnico de vários times e uma mesma escola pode ter vários técnicos.
+  O técnico será o representante do time junto à organização do concurso e deve ser um docente da escola. Alternativamente, um docente poderá indicar um técnico enviando <a href="carta-coach.pdf">este formulário</a> preenchido para o <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Uma mesma pessoa pode ser registrada como técnico de mais de um time e uma mesma escola pode ter vários técnicos.
 </p>
 <p>
   O técnico é responsável pela inscrição dos times no evento. <strong>Os times de uma escola devem ser inscritos em uma mesma sede, definida para sua região geográfica pelo Comitê Diretor da Maratona de Programação</strong>. A aceitação de mais de dois times de uma escola está sujeita à capacidade da sede em que a inscrição se realiza e será atendida por ordem de chegada.
@@ -152,10 +152,10 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
       document.write(pageStart);
       document.write(accordion('rules', [['Escolas', school],
                                          ['Técnicos/Coaches', coach],
-                                         ['Time', team],
+                                         ['Times', team],
                                          ['Fases', phases],
                                          ['Competição', contest],
-                                         ['Sede', site],
+                                         ['Sedes', site],
                                          ['Vagas na Final Brasileira', advancingToNextPhase],
                                          ['Recursos', appealing],
                                          ]));
