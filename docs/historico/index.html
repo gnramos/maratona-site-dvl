@@ -13,7 +13,7 @@
       //======================================================================
       // Editar a partir daqui.
       //======================================================================
-      var sites = [ // 'Campo Grande',
+      let sites = [ // 'Campo Grande',
                    'Gramado', 'Online',
                    'Campina Grande', 'Salvador', 'Foz do Iguaçu',
                    'Belo Horizonte', 'São Paulo', 'Fortaleza',
@@ -28,7 +28,7 @@
       // Não editar a partir daqui.
       //======================================================================
 
-      var listItems = '', accordionItems = [], year;
+      let listItems = '', accordionItems = [], year;
       for (let i = 0; i < sites.length; i++) {
         year = 1995 + sites.length - i;  // O 1o evento ocorreu em 1996
         listItems += `<li class="list-group-item"><a href="${year}/index.html">${toRoman(year - 1995)} Maratona - ${sites[i]} (${year})</a></li>`;

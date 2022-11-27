@@ -15,20 +15,20 @@
       // Atualizar as informações abaixo:
       // pageStart, teams.
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   A Final Mundial do ICPC ocorrá no Egito.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
-      var images = ['../Nacional/img/all_participants.jpeg', '../Nacional/img/salao21.jpg']; // imagens do carousel
-      var teams = ['Escola1', 'Escola2', 'Escola3'];  // na ordem de classificação da Nacional.
+      let images = ['../Nacional/img/all_participants.jpeg', '../Nacional/img/salao21.jpg']; // imagens do carousel
+      let teams = ['Escola1', 'Escola2', 'Escola3'];  // na ordem de classificação da Nacional.
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      var results = `
+      let results = `
 <p>
   Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-${thisYear()}">site do ICPC</a>.`;
 
-      var teamList = '<ul>', teamImages = [];
+      let teamList = '<ul>', teamImages = [];
       for (i in teams) {
         teamList += `\n  <li>${teams[i]}</a>`;
         teamImages.push(`../../Nacional/img/team${Number(i) + 1}.webp`);

@@ -1,4 +1,4 @@
-var RESULT_LEN = 5;
+const RESULT_LEN = 5;
 
 /**
  * Draw a graphic with the results.
@@ -11,7 +11,7 @@ var RESULT_LEN = 5;
  */
 function drawVisualization(rows) {
   function rankImg(year, phase, heightPx, rank, reverse=false) {
-    var multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
+    let multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
     images = [], imgHTML = "";
 
     if (rank > 0)
@@ -40,7 +40,7 @@ function drawVisualization(rows) {
   rows = rows.slice(-RESULT_LEN);
 
   google.charts.load('current', {packages: ['corechart', 'line']});
-  var data = new google.visualization.DataTable();
+  let data = new google.visualization.DataTable();
   data.addColumn('string', 'Year');
   for (let phase of ['1aFase', 'Nacional', 'Mundial']) {
     data.addColumn('number', phase);
@@ -52,11 +52,23 @@ function drawVisualization(rows) {
                  row[2], toolTip(row[0], 'Nacional', row[2] == null ? '': row[2]),
                  row[3], toolTip(row[0], 'Mundial', row[3] == null ? '': row[3])]);
 
-  var options = {hAxis: {title: 'Ano'},
+  let options = {hAxis: {title: 'Ano'},
                  vAxis: {title: 'Rank', baseline: 1, direction: -1},
                  legend: {position: 'top'},
                  tooltip: {isHtml: true}};
 
-  var lineChart = new google.visualization.LineChart(chart);
+  let lineChart = new google.visualization.LineChart(chart);
   lineChart.draw(data, options);
+}
+
+function makeBreadcrumbs(items) {
+  let bcItems = '';
+  for (item of items)
+    bcItems += `\n<li class="breadcrumb-item">${item}</li>`
+  return `
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    ${bcItems}
+  </ol>
+</nav>`
 }

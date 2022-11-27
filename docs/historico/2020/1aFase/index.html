@@ -15,7 +15,7 @@
       // Atualizar as informações abaixo:
       // pageStart, organization, contestProblems, results [limiar_ok + supersedes], pageEnd
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
  A primeira fase da XXV Maratona de Programação ocorrerá online. Os times devem se inscrever nas sedes correspondentes aos seus estados (ou Distrito Federal).
 Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeira fase 2020.
@@ -30,14 +30,14 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
 <p>
   O aquecimento e a primeira fase serão transmitidas no canal de Youtube da Maratona de Programação. Na semana de 7 a 14 de novembro teremos transmissões ao vivo com os patrocinadores do evento. <strong>Neste ano temos 799 times aceitos de 196 escolas.</strong>
 </p>`;
-      var organization = `<p>
+      let organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez (Argentina), André Amaral de Sousa, Claudio Leonardo Lucchesi, Dâmi Henrique Pelegrino (Brasil Sudeste), Francisco Arcos Filho (Brasil Norte), Juan Pablo Marin Rosas (México), Lina Rosales (Costa Rica), Lucas Hermann Negri (Brasil Sul), Maurício Collares, Mário H. S. da Silva (Brasil Nordeste), Pablo Blanc (Argentina), Paulo Cezar Pereira Costa (juiz chefe da América Latina), Rafael Assis (Brasil Centro-Oeste), Ricardo Anido, Teodoro Freund (Argentina), e Vinicius Fernandes dos Santos (juiz chefe no Brasil).
 </p>
 <p>
   Agradecemos também a equipe de "testers" da prova: Dilson Almeida Guimarães, Fernando Fonseca Andrade Oliveira, Naum Azeredo Fernandes Barreira, Carlos Miguel Soto, Ivo Pajor, e Lautaro Lasorsa.
 </p>`;
-      var warmUpProblems = [];
-      var contestProblems = ['Álbum de Figurinhas - Mário H. S. da Silva',
+      let warmUpProblems = [];
+      let contestProblems = ['Álbum de Figurinhas - Mário H. S. da Silva',
                              'Batalha Naval - Vinicius Fernandes dos Santos',
                              'Concatenando Times - Agustín Santiago Gutiérrez',
                              'Dança da Divisibilidade - Francisco Arcos Filho',
@@ -54,7 +54,7 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
                              'Ônibus Venusiano - Mário H. S. da Silva'];
 
         //              [[site, [list_rule1, list_rule2, list_rule3]]]
-        var limiar_ok = [['Amazonas', [[],
+        let limiar_ok = [['Amazonas', [[],
                                        ['[UEA] Você é fraco, te falta O(1)'],
                                        ['[IComp/UFAM] NP-Compeixe']]],
                          ['Bahia', [['[UFBA] União Fiasco'],
@@ -85,32 +85,32 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
                                          ['[ITA] GGG', '[UFABC] anarquia às 8', '[UNESP-Bauru] UnespRPM', '[UNOESTE] Alquimistas', '[FATEC - Sorocaba] No Main No Gain', '[IFSP] RGB IFSP-ARQ Team', '[UFSCar] S -> aSa | a', '[UNIVEM] Overclock'],
                                          []]]
                                          ];
-        var ssco = [['Mato Grosso', [[], [], ['[UFMT - Cuiabá] Vamu vense']]],
+        let ssco = [['Mato Grosso', [[], [], ['[UFMT - Cuiabá] Vamu vense']]],
                     ['Mato Grosso do Sul', [[], ['[UFMS - FACOM] Quero café'], []]]];
-        var ssne = [['Alagoas', [[], ['[UFAL] A query tá on'], ['[UFAL - Arapiraca] Os k-ésimos']]],
+        let ssne = [['Alagoas', [[], ['[UFAL] A query tá on'], ['[UFAL - Arapiraca] Os k-ésimos']]],
                     ['Maranhão', [[], [], ['[UFMA] UFMA Time 1']]],
                     ['Pernambuco ', [['[UFPE] Beto was ejected'], [], []]],
                     ['Rio Grande do Norte', [[], ['[UFRN] Que bixiga é essa?'], []]],
                     ['Sergipe', [['[UFS] Dorime'], [], []]]];
-        var ssno = [['Acre', [[], ['[UFAC] Wrong Answer 1000%'], []]],
+        let ssno = [['Acre', [[], ['[UFAC] Wrong Answer 1000%'], []]],
                     ['Amapá *', [[], [], []]],
                     ['Pará', [[], ['[UFPA] Sem TLE irmão'], []]],
                     ['Rondônia', [[], [], ['[UNIR] EM3.1415NA']]],
                     ['Roraima', [[], [], ['[UFRR] KLM']]],
                     ['Tocantins', [[], [], []]]];
-        var obsLimiarOK = `
+        let obsLimiarOK = `
 <ul>
   <li>Os times [IFSP Birigui] BK Lovers, [IFSP Birigui] Sei fazer mas não quero, [UniSantos] Osmungos e [UniSantos] Black Dragons foram desclassificados por conduta em desacordo com o Código de Conduta da competição.</li>
 </ul>`;
-        var obsSSNO = `
+        let obsSSNO = `
 <ul>
   <li>Não foi possível realizar a competição no Amapá por conta da situação de emergência que o estado se encontra, há vários dias sem energia elétrica. Será realizada uma seleção entre os times do estado, e o time selecionado será convidado a participar da Final Brasileira.</li>
 </ul>`;
-        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok) + obsLimiarOK],
+        let results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok) + obsLimiarOK],
                                                  ['Supersede Centro-Oeste', advancingTeams(ssco)],
                                                  ['Supersede Nordeste', advancingTeams(ssne)],
                                                  ['Supersede Norte', advancingTeams(ssno) + obsSSNO]]);
-      var awards = `
+      let awards = `
 <p>
   A SAP patrocinou a primeira fase na região sul, e enviou aos participantes uma caixa-enigma com brindes.
 </p>

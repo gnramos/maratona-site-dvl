@@ -15,12 +15,12 @@
       // Atualizar as informações abaixo:
       // pageStart, teams.
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   A Final Mundial do ICPC ocorreu em novembro de 2022 em Dhaka, Bangladesh.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
-      var images = ['img/brazilians.webp', 'img/comite.webp']; // imagens do carousel
-      var teams = [['Universidade Federal de Campina Grande', 58],
+      let images = ['img/brazilians.webp', 'img/comite.webp']; // imagens do carousel
+      let teams = [['Universidade Federal de Campina Grande', 58],
                    ['Universidade Estadual de Campinas', 64],
                    ['Universidade de São Paulo - Campus de São Carlos', 88],
                    ['Universidade de São Paulo', 90],
@@ -28,11 +28,11 @@
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      var results = `
+      let results = `
 <p>
   Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-${thisYear()}">site do ICPC</a>.`;
 
-      var teamList = '<ul>', teamImages = [];
+      let teamList = '<ul>', teamImages = [];
       for (i in teams) {
         teamList += `\n  <li style="list-style-type: '${teams[i][1]}. '">${teams[i][0]}</a></li>`;
         teamImages.push(`team${Number(i) + 1}.webp`);

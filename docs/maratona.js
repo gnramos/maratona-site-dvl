@@ -10,12 +10,12 @@ const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
  * @return {String}        the HTML with the formatted information
  */
 function contact(text, ...args) {
-    var mail = args.reduce((acc, cur) => acc + cur);
+    let mail = args.reduce((acc, cur) => acc + cur);
     return `<a href="mailto:${mail}">${text}</a>`;
 }
 
 function root() {
-  var url = window.location.pathname.split('/');
+  let url = window.location.pathname.split('/');
   return '../'.repeat(url.length - 3);
   // return '../'.repeat(url.length - 9);
 }
@@ -26,13 +26,13 @@ function root() {
  * @return {String} the HTML with the formatted information
  */
 function bodyHeader(pageTitle='', breadcrumbs='') {
-  var url = window.location.pathname.split('/');
-  var currentPage = url.at(-1);
-  var selected = `class="nav-link active" aria-current="page"`,
+  let url = window.location.pathname.split('/');
+  let currentPage = url.at(-1);
+  let selected = `class="nav-link active" aria-current="page"`,
       unselected = `class="nav-link"`;
-  var isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
-  var isContact = (currentPage == 'contato.html');
-  var isInfo = !isParticipate && (url.includes('historico') || url.includes('escolas'));
+  let isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
+  let isContact = (currentPage == 'contato.html');
+  let isInfo = !isParticipate && (url.includes('historico') || url.includes('escolas'));
 
   return`
     <div class="container">
@@ -144,7 +144,7 @@ function bodyFooter() {
  * @return {String}               the HTML with the formatted information
  */
 function accordion(name, items, headerClasses=[], collapseFirst=true) {
-  var accItems = '';
+  let accItems = '';
   for (i in items) {
     accItems += `
   <div class="accordion-item">
@@ -177,7 +177,7 @@ function accordion(name, items, headerClasses=[], collapseFirst=true) {
  * @return {String}        the HTML with the formatted information
  */
 function carousel(images) {
-  var items = '';
+  let items = '';
   for (i in images)
     items += `
   <div class="carousel-item ${i == 0 ? 'active' : ''}">
@@ -212,9 +212,9 @@ function toRoman(num) {
 const NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
                      ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
   // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
-  var numeral = '';
-  var digits = num.toString().split('').reverse();
-  for (var i = 0; i < digits.length; i++)
+  let numeral = '';
+  let digits = num.toString().split('').reverse();
+  for (let i = 0; i < digits.length; i++)
     numeral = NUMERAL_CODES[i][parseInt(digits[i])] + numeral;
   return numeral;
 }

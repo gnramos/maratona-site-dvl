@@ -1,33 +1,44 @@
-RULE_TOOLTIP = ['Top 15!',
-                'Distribuição por sedes.',
-                'Vagas discricionárias.'];
+const RULE_TOOLTIP = ['Top 15!',
+                      'Distribuição por sedes.',
+                      'Vagas discricionárias.'];
+
+function makeList(type, items, options='', header='', footer='') {
+  let listItems = '';
+  for (item of items)
+    listItems += `\n<li>${item}</li>`;
+  return `
+${header}
+<${type} ${options}>${listItems}\n</${type}>
+${footer}`;
+}
+
+function listProblems(problems) {
+  let header = `
+<p>
+  Autores dos problemas:
+</p>`;
+  return makeList('ol', problems, 'type="A"', header);
+}
+
+function listLinks(links, type='ul') {
+  let items = [];
+  for (link of links)
+    items.push(`<a href="${link[0]}">${link[1]}</a>`);
+  return makeList(type, items);
+}
+
 /**
  * Format the basic information for a contest.
  *
  * @param  {String} contest  name of directory with the contest files
- * @param  {Array}  problems list of problem names
+ * @param  {Array}  problems list of contest problems.
  * @return {String}          the HTML with the formatted information
  */
-function contestInfo(contest, problems=[], hasEditorial=false) {
-  var problemList = '';
-  for (p of problems)
-    problemList += `\n  <li>${p}</li>`;
-  if (problemList != '')
-    problemList = `
-<p>
-  Autores dos problemas:
-</p>
-<ol type="A">${problemList}
-</ol>`;
-  var editorial = (hasEditorial ? `<li><a href="${contest}/editorial.pdf">Editorial</a></li>` : '');
-  return `
-<ul>
-  <li><a href="${contest}/info_maratona.pdf">Informações</a></li>
-  <li><a href="${contest}/maratona.pdf">Problemas</a></li>
-  <li><a href="${contest}/packages.tar.gz">Entradas e Saídas</a></li>
-  ${editorial}
-</ul>
-${problemList}`;
+function defaultInfo(contest, problems) {
+  problems = (problems === undefined ? '' : listProblems(problems));
+  return listLinks([[`${contest}/info_maratona.pdf`, 'Informações'],
+                    [`${contest}/maratona.pdf`, 'Problemas'],
+                    [`${contest}/packages.tar.gz`, 'Entradas e Saídas']]) + problems;
 }
 
 /**
@@ -35,16 +46,14 @@ ${problemList}`;
  *
  * Links are hard-coded and files are expected to exist.
  *
+ * @param  {String} contest  name of directory with the contest files
  * @return {String} the HTML with the formatted information
  */
-function contestReports(contest='contest') {
-  return`
-<ul>
-  <li><a href="${contest}/score.html">Placar final</a></li>
-  <li><a href="${contest}/runs.html">Lista de submissões</a></li>
-  <li><a href="${contest}/clarifications.html">Lista de perguntas</a></li>
-  <li><a href="${contest}/statistics.html">Estatísticas</a></li>
-</ul>`;
+function defaultReport(contest) {
+  return listLinks([[`${contest}/Score.html`, 'Placar final'],
+                    [`${contest}/Runs.html`, 'Lista de submissões'],
+                    [`${contest}/Clarifications.html`, 'Lista de perguntas'],
+                    [`${contest}/Statistics.html`, 'Estatísticas']]);
 }
 
 /**
@@ -56,7 +65,7 @@ function contestReports(contest='contest') {
  * @return {String}        the HTML with the formatted information
  */
 function gallery(images) {
-  var items = '';
+  let items = '';
   for (img of images)
     items += `
   <div class="col-lg-3 col-md-4 col-6">
@@ -77,7 +86,7 @@ ${items}
  * @return {Array}            [gold, silver, bronze] groups
  */
 function splitbyMedal(medalists) {
-  var teamsPerMedal = medalists.length / 3;
+  let teamsPerMedal = medalists.length / 3;
   return [medalists.slice(0, teamsPerMedal),                       // gold
           medalists.slice(teamsPerMedal, 2 * teamsPerMedal),       // silver
           medalists.slice(2 * teamsPerMedal)];                     // bronze
@@ -91,11 +100,8 @@ function splitbyMedal(medalists) {
  */
 function advancingTeams(results) {
   // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
-  function tooltip(i) {
-    return `data-toggle="tooltip" data-html="true" title="${RULE_TOOLTIP[i]}"`;
-  }
   function ruleCell(teams) {
-    var cell = '';
+    let cell = '';
     for (i in RULE_COLORS)
       for (team of teams[i])
         cell += `<strong class="${RULE_COLORS[i]}" ${tooltip(i)}>Regra ${Number(i) + 1}</strong><br>`;
@@ -103,16 +109,16 @@ function advancingTeams(results) {
     return cell;
   }
   function teamsCell(teams) {
-    var cell = '';
+    let cell = '';
     for (i in RULE_COLORS)
       for (team of teams[i])
         cell += `<span class="${RULE_COLORS[i]}">${team}</span><br>`;
     return cell;
   }
   function makeRows(siteTeams) {
-    var rows = '';
+    let rows = '';
     for (item of results) {
-      var [site, teams] = item;
+      let [site, teams] = item;
       rows += `
     <tr>
       <td scope="row">${site}</td>
@@ -139,7 +145,7 @@ function advancingTeams(results) {
 /**
  * Builds a formatted ordered list of the teams.
  *
- * Assumes each team is defined as the array: [teamName, [contestants], [coaches]].
+ * Assumes each team is defined as the array: [teamName, [contestants], [coaches], teamPicture].
  * Assumes each team has a webp image of its members named according to its position in the list. For
  * example, that the first team has a picture named "team1.webp".
  *
@@ -148,11 +154,14 @@ function advancingTeams(results) {
  * @return {String}       the HTML with the formatted information
  */
 function listTeams(teams, start=1) {
-  var items = ``, images = [];
-  for (i in teams){
+  let items = '', images = [];
+  for (i in teams) {
+    let [name, contestants, coaches, img] = teams[i];
+    contestants = contestants.join(', ');
+    coaches = (coaches.length > 0 ? ' e coach(es) ' + coaches.join(', ') : '');
     items += `
-<li><strong>${teams[i][0]}:</strong> ${teams[i][1].join(', ')}${teams[i][2].length > 0 ? ' e coach(es) ' + teams[i][2].join(', ') : ''}.</li>`;
-        images.push(teams[i][3] != undefined ? teams[i][3] : "team" + (Number(i) + start) + ".webp");
+<li><strong>${name}:</strong> ${contestants}${coaches}.</li>`;
+        images.push(img != undefined ? img : "team" + (Number(i) + start) + ".webp");
   }
   return `
 \n<ol start=${start}>
@@ -171,24 +180,17 @@ ${gallery(images)}`;
  * @return {String}       the HTML with the formatted information
  */
 function showChampion(team, img) {
+  let [name, contestants, coaches] = team;
+  contestants = contestants.join(', ');
+  coaches = (coaches.length > 0 ? ' e coach(es) ' + coaches.join(', ') : '');
   return `
 <div class="card mb-3">
-  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
   <div class="row g-0">
-  <!--  <div class="col-md-1">
-      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
-    </div>
-    <div class="col-md-11">
-      <div class="card-body">
-        <h5 class="card-title">${team[0]}</h5>
-        <p class="card-text">${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</p>
-      </div>
-    </div>-->
     <div class="col-md-9">
       <h4 class='text-center'><strong>Campeões</strong></h4>
       <div class="card-body">
-        <h5 class="card-title">${team[0]}</h5>
-        <p class="card-text">${team[1].join(', ')}${team[2].length > 0 ? ' e coach(es) ' + team[2].join(', ') : ''}.</p>
+        <h5 class="card-title">${name}</h5>
+        <p class="card-text">${contestants}${coaches}.</p>
       </div>
     </div>
     <div class="col-md-3">
@@ -204,7 +206,7 @@ function showChampion(team, img) {
  * @return {String} the year.
  */
 function thisYear() {
-  var url = window.location.pathname.split('/');
+  let url = window.location.pathname.split('/');
   return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
 }
 
@@ -214,13 +216,13 @@ function thisYear() {
  * @return {String} the breadcrumbs.
  */
 function makeBreadcrumbs() {
-  var url = window.location.pathname.split('/');
+  let url = window.location.pathname.split('/');
   if (url.at(-3) == CURRENT_YEAR)
     return '';
 
-  var breadcrumbItems = [];
-  var prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
-  var i = (url.at(-1) == 'index.html' ? -3 : -2);
+  let breadcrumbItems = [];
+  let prefix = (url.at(-1) == 'index.html' ? '../../' : '../');
+  let i = (url.at(-1) == 'index.html' ? -3 : -2);
   while (url.at(i) != 'historico') {
     breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, url.at(i)]);
     prefix += '../';
@@ -228,7 +230,7 @@ function makeBreadcrumbs() {
   }
   breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Passadas']);
   breadcrumbItems.reverse();
-  var lis = '';
+  let lis = '';
   for (item of breadcrumbItems)
     lis += `\n<li class="breadcrumb-item"><a href="${item[0]}">${item[1]}</a></li>`;
   return `
@@ -237,4 +239,13 @@ function makeBreadcrumbs() {
             ${lis}
           </ol>
         </nav>`;
+}
+
+/**
+ * Returns a tooltip.
+ *
+ * @return {String} the tooltip.
+ */
+function tooltip(i) {
+  return `data-toggle="tooltip" data-html="true" title="${RULE_TOOLTIP[i]}"`;
 }

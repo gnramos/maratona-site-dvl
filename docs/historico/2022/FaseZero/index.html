@@ -16,7 +16,7 @@
       // Atualizar as informações abaixo:
       // pageStart, organization, contestProblems, results [limiar_ok + supersedes], pageEnd
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   A <a href="https://www.beecrowd.com.br/judge/en/contests/view/683">1ª Fase Zero da Maratona de Programação da SBC</a> ocorreu em 24 desetembro de 2022, no <a href="https://www.beecrowd.com.br/">Beecrowd</a>, com <a href="https://www.youtube.com/watch?v=5AGEzvf0MwI">transmissão ao vivo no YouTube</a>, contando com o apoio de: Mendelics, VTEX, Compass, e Stone. Nosso sincero agradecimento a todos os apoiadores e a todos os que trabalharam para que o sonho da 1ª edição da Fase Zero da <a href="http://maratona.sbc.org.br/">Maratona de Programação</a> se tornasse realidade!
 </p>
@@ -24,11 +24,11 @@
   A 1ª Fase Zero da Maratona de Programação também foi a 2ª Maratona de Programação do Sul e a 5ª Maratona de Programação do Norte. Inscreveram-se para a competição, gratuitamente, 341 times de 26 estados do Brasil.
 </p>
 <img src="img/fasezero22.png" class="img-responsive center-block d-block col-lg-3 mx-auto" alt="Logo da Fase Zero 2022"><br>`;
-      var organization = `
+      let organization = `
 <p>
   Participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Carlos Ferreira, Ciro Cirne Trindade, Edson Alves, Emílio Wuerges, João Lúcio Azevedo, Leandro Zatesko, Leonardo Deliyannis, Lucy Mari Tabuti, Neilor Tonin, Rosiane Freitas, e Weverton Cordeiro.
 </p>`;
-      var contestProblems= ['Avaliações de Algoritmos (autor: Neilor Tonin)',
+      let contestProblems= ['Avaliações de Algoritmos (autor: Neilor Tonin)',
                              'Baita Desafio Complexo (autor: Leandro Zatesko)',
                              'Chimambu (autor: Leandro Zatesko)',
                              'Ditados (autor: Neilor Tonin)',
@@ -40,10 +40,7 @@
                              'José e a Súmula (autor: Ciro Cirne Trindade)',
                              'Kimi Räikkönen (autor: Ciro Cirne Trindade)',
                              'La Chaleur (autor: Leandro Zatesko)'];
-      var results = `
-<ul>
-  <li><a href="contest/score.html">Placar final</a></li>
-</ul>
+      let results = listLinks([['contest/Score.html', 'Placar final']]) + `
 <p>
   Os quatro melhores times no placar geral foram:
 </p>
@@ -71,7 +68,7 @@
   <li>Bolonhesa (UFSC - Florianópolis)</li>
   <li>Tropa dos Calvos (UFRGS)</li>
 </ol>`;
-      var perUF= [['Acre', ['Inimigos do C (UFAC)', 'If () {Sem Condição} (UFAC)']],
+      let perUF= [['Acre', ['Inimigos do C (UFAC)', 'If () {Sem Condição} (UFAC)']],
                   ['Alagoas', ['Geração EAD Coda Y Coda (UFAL)']],
                   ['Amazonas', ['Knuth Knights (UFAM)', 'Shine like A* (UFAM)']],
                   ['Bahia', ['Monarcas dos Palpites (UFBA)']],
@@ -96,23 +93,17 @@
                   ['Santa Catarina', ['Como treinar o seu João (UDESC)', 'Bolonhesa (UFSC - Florianópolis)']],
                   ['São Paulo', ['Você beijaria Matheus Leal Viana (UNICAMP)']],
                   ['Sergipe', ['Fibolalic (COESI)']]];
-var girls = ['AsMeninasDoBairroDasPitangueiras (UnB)', 'Comprincesas (UNICAMP)', 'Bragiaki (MACKENZIE)'];
-var em = ['ceferno (CEFET-MG)', 'Fibolalic (COESI) <em>[melhor time de Sergipe]</em>', 'input("que pariu") (IFRS - Campus Vacaria)', 'Na minha máquina funciona (IFPB)'];
-    function makeList(type, items, typeClass='') {
-      var lis = '';
-      for (item of items)
-        lis += `<li>${item}</li>`;
-      return `<${type} ${typeClass}>${lis}</${type}>`;
-    }
+      let girls = ['AsMeninasDoBairroDasPitangueiras (UnB)', 'Comprincesas (UNICAMP)', 'Bragiaki (MACKENZIE)'];
+      let em = ['ceferno (CEFET-MG)', 'Fibolalic (COESI) <em>[melhor time de Sergipe]</em>', 'input("que pariu") (IFRS - Campus Vacaria)', 'Na minha máquina funciona (IFPB)'];
 
-    var contestInfo = `<ul><li><a href="contest/editorial.html">Editorial</a></li></ul>\n${makeList('ol', contestProblems, 'type="A"')}`;
+      let contestInfo = listLinks([['contest/Editorial.html', 'Editorial']]) + listProblems(contestProblems);
 
-      var pu = '';
+      let pu = '';
       for (uf of perUF) {
         pu += `<li>${uf[0]}\n${makeList('ol', uf[1])}\n</li>`;
       }
       pu = `<ul>${pu}</ul>`
-      var awards = 'A seguir, a lista dos times que foram premiados de acordo com a Organização.\n' +
+      let awards = 'A seguir, a lista dos times que foram premiados de acordo com a Organização.\n' +
                    accordion('Awards', [['Times compostos apenas por meninas', makeList('ol', girls)],
                                         ['Times compostos apenas por estudantes do Ensino Médio', makeList('ol', em)],
                                         ['Por Unidade da Federação', pu]]);
@@ -120,7 +111,7 @@ var em = ['ceferno (CEFET-MG)', 'Fibolalic (COESI) <em>[melhor time de Sergipe]<
   </head>
   <body>
     <script type="text/javascript">
-      document.write(bodyHeader(`Fase Zero(${thisYear()})`));
+      document.write(bodyHeader(`Fase Zero (${thisYear()})`));
       document.write(pageStart);
       document.write(accordion('Phase', [['Organização', organization],
                                          ['Prova', contestInfo],

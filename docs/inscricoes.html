@@ -14,18 +14,18 @@
       // Atualizar as informações abaixo:
       // date1Fase, dateNacional siteDeadline, siteForm, teamDeadline, discountDeadline, discountPrices, fullPrices.
       //====================================================================================================
-      var date1Fase = '8/10/2022';
-      var dateNacional = '10/3/2023';
-      var placeNacional = 'Campo Grande, MS'
-      var siteDeadline = `30/6/2022`;
-      var siteForm = `https://forms.gle/wAVvSjN8nzHFec3N9`;
-      var teamDeadline = `26/9/2022`;
-      var discountDeadline = '26/8/2022';
-      var discountPrices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
+      let date1Fase = '8/10/2022';
+      let dateNacional = '10/3/2023';
+      let placeNacional = 'Campo Grande, MS'
+      let siteDeadline = `30/6/2022`;
+      let siteForm = `https://forms.gle/wAVvSjN8nzHFec3N9`;
+      let teamDeadline = `26/9/2022`;
+      let discountDeadline = '26/8/2022';
+      let discountPrices = [['R$ 160,00', 'R$ 297,00', 'R$ 104,00 /time'],  // Instituição associada.
                              ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 /time']], // Instituição não associada.
           fullPrices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 /time'],  // Instituição associada.
                         ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 /time']]; // Instituição não associada.
-      var sites = [ //[regiao + cidade, local, diretor, e-mail]
+      let sites = [ //[regiao + cidade, local, diretor, e-mail]
 ['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', 'juniorlimeiras@gmail.com'],
 ['AM, Manaus', 'UFAM', 'Rosiane de Freitas', 'rosiane@icomp.ufam.br'],
 ['BA, Juazeiro', 'UNIVASF', 'Marcelo Linder', 'marcelo.linder@univasf.edu.br'],
@@ -72,14 +72,14 @@
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      var deadlineStart = new Date();
-      var [d, m, y] = discountDeadline.split('/');
+      let deadlineStart = new Date();
+      let [d, m, y] = discountDeadline.split('/');
       deadlineStart.setYear(y);
       deadlineStart.setMonth(m);
       deadlineStart.setDate(d);
       deadlineStart.setDate(deadlineStart.getDate() + 1);
       deadlineStart = `${deadlineStart.getDate()}/${deadlineStart.getMonth()}/${deadlineStart.getFullYear()}`;
-      var dateNacionalEnd = new Date();
+      let dateNacionalEnd = new Date();
       [d, m, y] = dateNacional.split('/');
       dateNacionalEnd.setYear(y);
       dateNacionalEnd.setMonth(m);
@@ -87,7 +87,7 @@
       dateNacionalEnd.setDate(dateNacionalEnd.getDate() + 3);
       dateNacionalEnd = `${dateNacionalEnd.getDate()}/${dateNacionalEnd.getMonth()}/${dateNacionalEnd.getFullYear()}`;
 
-      var site = `
+      let site = `
 <p>
   Instituições interessadas em sediar a Primeira Fase da Maratona de Programação devem se inscrever <a href="${siteForm}">neste formulário</a>.
 </p>
@@ -114,7 +114,7 @@
   Na inscrição a sede deverá cumprir um procedimento técnico elaborado pelo Diretor de Sistemas para que a sede seja habilitada a hospedar a primeira fase. Todos os interessados em sediar a Maratona de Programação devem ler o <a href="historico/${CURRENT_YEAR}/1aFase/manual_diretor.pdf">Manual do Diretor de Sede</a> que traz mais detalhes a respeito dos preparativos necessários para a realização do evento.
 </p>`;
 
-      var team = `
+      let team = `
 <p>Se você deseja competir na Maratona, forme seu time! Procure um professor de seu curso para que ele ajude você e seu time sendo o técnico, e informe-o dos procedimentos de inscrição. Se você é professor de uma instituição de ensino superior da área de computação ou afim, reúna seus alunos e monte seus times! Se não tem havido sedes da Maratona na sua região candidate sua instituição para sediar a Maratona!
 </p>
 <p>
@@ -162,7 +162,7 @@
 <p>
   A escola deve inscrever seus times na sede da cidade mais próxima. Caso seu time deseje competir em uma sede que não seja a mais próxima, entre em contato com a organização.
 <p>`;
-          var siteTable = '';
+          let siteTable = '';
           if (sites != []) {
             siteTable = '';
             for (info of sites)
@@ -186,7 +186,7 @@ ${siteTable}
   </tbody>
 </table>`
           };
-              var ccl = `
+              let ccl = `
       <p>
         Algumas sedes oferecem vagas para times <em>café-com-leite</em> - que não podem se classificar para as fases seguintes. Os participantes destes times não precisar ser elegíveis ou mesmo alunos de instituições de ensino superior. A inscrição também se dá em dois passos:
       </p>
@@ -194,7 +194,7 @@ ${siteTable}
         <li>O representante do time deve preencher os dados do time <a href="">neste formulário.</a></li>
         <li>Pagamento da taxa de inscrição no <a href="https://centraldesistemas.sbc.org.br/ecos/">site da SBC</a> (como no item anterior).</li>
       </ol>`;
-              var refund = `
+              let refund = `
       <p>
         Caso haja desistência de participação até o dia ??? pode-se fazer a devolução de 80% do valor pago pela inscrição. Após esta data não haverá devolução de qualquer valor pago. Para solicitar o cancelamento, enviar um e-mail a ${contact("faturamento da SBC", "faturamento", "@sb", "c.o", "rg", ".br")}.
       </p>`;

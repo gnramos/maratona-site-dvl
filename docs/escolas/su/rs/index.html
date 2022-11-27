@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maratona de Programação SBC</title>
+    <title>Maratona SBC de Programação</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../../../maratona.js"></script>
-    <script type="text/javascript" src="../../draw.js"></script>
+    <script type="text/javascript" src="../../escola.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      var results = [
+      let results = [
 ['2016', 13, 18, null],
 ['2017', 16, 23, null],
 ['2018', 42, 45, null],
@@ -21,19 +21,12 @@
 ['2022', 49, null, null]];
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+
+      let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Sul</span>'];
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader());</script>
-    <div class="container text-left">
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.html">Escolas</a></li>
-          <li class="breadcrumb-item active">SU</li>
-        </ol>
-      </nav>
-      <h1>Rio Grande do Sul</h1>
-    </div>
+    <script type="text/javascript">document.write(bodyHeader("Rio Grande do Sul", makeBreadcrumbs(bcItems)));</script>
     <div class="container text-center">
       <div class="row align-items-center">
         <div class="col-sm-2">
@@ -46,13 +39,12 @@
       </div>
     </div>
     <br>
-    <div class="container text-left">
-      <div class="dropdown">
-         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
-           Instituições Participantes
-         </button>
-         <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-                      <li><a class="dropdown-item" href="unifra.html">Centro Universitário Franciscano</a></li>
+    <div class="dropdown">
+       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
+         Instituições Participantes
+       </button>
+       <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
+                    <li><a class="dropdown-item" href="unifra.html">Centro Universitário Franciscano</a></li>
            <li><a class="dropdown-item" href="imed.html">Faculdade Meridional - IMED</a></li>
            <li><a class="dropdown-item" href="fatec-pelotas.html">Faculdade de Tecnologia Senac Pelotas</a></li>
            <li><a class="dropdown-item" href="santarita.html">Faculdades Santa Rita</a></li>
@@ -76,18 +68,18 @@
            <li><a class="dropdown-item" href="ufpel.html">Universidade Federal de Pelotas</a></li>
            <li><a class="dropdown-item" href="ufsantacatarina.html">Universidade Federal de Santa Catarina</a></li>
            <li><a class="dropdown-item" href="ufsm.html">Universidade Federal de Santa Maria</a></li>
-           <li><a class="dropdown-item" href="universidadefederaldopampa-campusalegrete.html">Universidade Federal do Pampa - Campus Alegrete</a></li>
+           <li><a class="dropdown-item" href="ufp-ca.html">Universidade Federal do Pampa - Campus Alegrete</a></li>
            <li><a class="dropdown-item" href="ufrgs.html">Universidade Federal do Rio Grande do Sul</a></li>
            <li><a class="dropdown-item" href="uri-erechim.html">Universidade Regional Integrada - Campus de Erechim</a></li>
-           <li><a class="dropdown-item" href="universidaderegionalintegrada-campusdesantoangelo.html">Universidade Regional Integrada - Campus de Santo Ângelo</a></li>
+           <li><a class="dropdown-item" href="uri-csa.html">Universidade Regional Integrada - Campus de Santo Ângelo</a></li>
            <li><a class="dropdown-item" href="unijui.html">Universidade Regional do Noroeste do Estado do Rio Grande do Sul</a></li>
            <li><a class="dropdown-item" href="utfpr-dv.html">Universidade Tecnológica Federal do Paraná (UTFPR) - Campus Dois Vizinhos</a></li>
            <li><a class="dropdown-item" href="upf.html">Universidade de Passo Fundo</a></li>
            <li><a class="dropdown-item" href="upf-casca.html">Universidade de Passo Fundo - Campus Casca</a></li>
            <li><a class="dropdown-item" href="unisinos.html">Universidade do Vale do Rio dos Sinos</a></li>
-         </ul>
-       </div>
-    </div>
+       </ul>
+     </div>
+    <br>
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

@@ -15,53 +15,53 @@
       // Atualizar as informações abaixo:
       // pageStart, organization, contest_problems, results [limiar_ok + supersedes], pageEnd
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   No ano de 2020, por conta da pandemia, a primeira fase da Maratona de Programação ocorrerá online. Os competidores poderão estar em lugares separados, ou no mesmo local, como preferirem, e poderão utilizar cada um o seu computador pessoal. Os times deverão estar completos (3 componentes) no início da competição. Os times não devem usar mais do que três computadores durante o evento.  O acesso a material disponível na Internet também será possível, de acordo com as diretrizes abaixo. Não será dado tratamento especial em caso de falha de qualquer natureza, como problemas de rede ou elétricos. Recomenda-se a utilização de sistemas com o máximo de redundância disponível.
 </p>
 <p>
   Tendo em vista a necessidade de realização de uma primeira fase online, este documento busca esclarecer quais condutas são apropriadas ou não para este formato de competição, seguindo os princípios usuais deste tipo de competição.
 </p>`;
-      var goodFaith = `
+      let goodFaith = `
 <p>
   A participação da competição presume o entendimento e concordância com todas as condições deste documento. Confiamos que as mudanças necessárias não impedirão a realização de uma competição com os princípios usuais da Maratona de Programação e do ICPC e contamos com a colaboração de todos para uma competição divertida e enriquecedora. Anormalidades que não estejam alinhadas a estes princípios devem ser comunicadas à organização.
 <p>`;
-      var communication = `
+      let communication = `
 <p>
   Durante a competição, só é permitida a comunicação com os integrantes da equipe. É vedada a comunicação com qualquer outra pessoa, incluindo o técnico (coach). O uso de redes sociais também é proibido. Recomenda-se o uso de canais de comunicação que não permitam interferência externa.
 </p>`;
-      var contestInfo = `
+      let contestInfo = `
 <p>
   Não é permitido o compartilhamento de nenhuma informação da prova ou do sistema com pessoas externas ao time durante toda a competição. Isso inclui os enunciados das questões, códigos-fonte, casos de teste e dados de acesso ao BOCA. Nem mesmo os técnicos deverão ter acesso aos enunciados durante a realização da prova.
 </p>`;
-      var codeSharing = `
+      let codeSharing = `
 <p>
   Para o caso de compartilhamento de código entre integrantes de uma mesma equipe que não estejam fisicamente no mesmo local, é importante que sejam utilizadas ferramentas que garantam o sigilo do código. Algumas ferramentas web não possuem tal garantia em suas versões gratuitas. Uma equipe que utilize tais ferramentas está expondo seu código a terceiros e poderá ser desclassificada por isso, ainda que tal compartilhamento não seja intencional. Recomenda-se, portanto, o uso de ferramentas com criptografia, como servidores de versionamento, ferramentas de compartilhamento de arquivo ou mesmo serviços de mensagens instantâneas.
 </p>`;
-      var tools = `
+      let tools = `
 <p>
   É permitido uso código escrito previamente pelos integrantes da equipe. É também permitido o uso de códigos escritos por terceiros, desde este código esteja disponível online antes do início da prova. Não é permitido o uso de ferramentas de forma a se obter vantagens injustas. Isso inclui o acesso a serviços de computação de alto desempenho, o uso de juízes online ou outras ferramentas online de validação ou execução de código.
 </p>`;
-      var system = `
+      let system = `
 <p>
   Será utilizado o mesmo sistema de outras edições da Maratona de Programação, o BOCA. O acesso deve ser feito seguindo as instruções fornecidas pela organização da competição, e é proibida qualquer outra tentativa de acesso ou comunicação com os servidores da competição. Como sempre, toda submissão deve ser uma tentativa legítima de resolução de um problema. Não são permitidas submissões que busquem obter informações sobre os casos de teste ou que desestabilizem o sistema.
 </p>`;
-      var reserves = `
+      let reserves = `
 <p>
   Em caso de necessidade, são permitidas substituições de integrantes de uma equipe até o dia 12 de novembro, desde que comunicadas à organização. O coach deve cadastrar os dados dos novos integrantes no site do ICPC até, no máximo, o dia 15 de novembro. Caso isso não seja feito, ou o time se torne inelegível, não poderá se classificar para a final brasileira.
 </p>`;
-      var others = `
+      let others = `
 <p>
   Se for considerado que uma equipe se comportou de forma que fere os princípios deste  código de conduta, a mesma poderá ser desclassificada. Todas as decisões a respeito e casos omissos estão a cargo do Comitê Diretor da Maratona de Programação.
 </p>`;
-      var icpc = `
+      let icpc = `
 <p>
   Contestants are not to converse with anyone except members of their team and personnel designated by the Finals Director. Systems support staff may advise contestants on system-related problems such as explaining system error messages.
 </p>
 <p>
 A team may be disqualified by the Finals Director for any activity that jeopardizes the World Finals such as dislodging extension cords, unauthorized modification of contest materials, or distracting behavior.
 </p>`;
-      var codeforces = `
+      let codeforces = `
 <p>
   Can-do's and Can't-do's: during the round the contestants are allowed to use any books and personal notes as well as a code written beforehand by you
 personally.
@@ -91,7 +91,7 @@ about it.
 <p>
 Any violation of these rules, rules from the FAQ section, rules from the contest announcement or rules that were accepted during the registration will lead to penalty provisions, including disqualification.
 </p>`;
-      var google = `
+      let google = `
 <p>
   7. Disqualification.<br>
   7.1 You may be disqualified from a Contest and forfeit any prizes you may be eligible to receive if Google reasonably believes that you have
@@ -114,7 +114,7 @@ attempted to undermine the legitimate operation of a Contest, including by:
 <p>
   7.2 You may report to Google, using the applicable Contest administrator email address specified on the applicable Contest website, any harassment, cheating, or violation of any Terms or Rules by another contestant. Google may investigate any such allegations and all decisions by Google in these matters are final and binding (and in each case, at Google’s sole discretion). If you are asked to stop any harassing behavior, you are expected to comply immediately.
 </p>`;
-      var topcoder = `
+      let topcoder = `
 <p>WHAT CONSTITUTES CHEATING?</p>
 <p>
   If you make a submission (code, algorithm, user interface design) that was not written or designed by you. In some cases, such as third party
@@ -138,13 +138,13 @@ libraries, starter packs or open source code, there are exceptions. Find out mor
 <p>
   If you provide any false information (Name, Address, Tax information, etc.)
 </p>`;
-      var appendix = accordion('Appendix', [['ICPC World Finals', icpc],
+      let appendix = accordion('Appendix', [['ICPC World Finals', icpc],
                                             ['CodeForces', codeforces],
                                             ['Google Code Competitions', google],
                                             ['TopCoder', topcoder]
                                             ]);
 
-      var directives = accordion('Directives', [['Premissa de boa fé', goodFaith],
+      let directives = accordion('Directives', [['Premissa de boa fé', goodFaith],
                                                 ['Comunicação', communication],
                                                 ['Informações sobre a prova', contestInfo],
                                                 ['Compartilhamento de código', codeSharing],

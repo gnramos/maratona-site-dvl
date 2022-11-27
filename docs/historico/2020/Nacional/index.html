@@ -16,23 +16,23 @@
       // pageStart, images, sponsor, organization, warmUpProblems, contestProblems,
       // champion_pic, medalists, regional_champs e ccl.
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   A Final Brasileira foi realizada online, nos dias 9 e 10 de julho. A Profa. Lucy Tabuti foi a diretora da final.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
-      var images = ['img/image76.png', 'img/image77.png', 'img/image78.png', 'img/image79.png']; // imagens do carousel
-      var sponsor = `
+      let images = ['img/image76.png', 'img/image77.png', 'img/image78.png', 'img/image79.png']; // imagens do carousel
+      let sponsor = `
 <p>
   A Final Brasileira teve patrocínio mundial da Jetbrains e, no Brasil, de Vtex, B2W, Itaú Asset Management, Alura, Caelum, Loggi e Google. Todo o evento foi transmitido no canal do <a href="https://www.youtube.com/c/MaratonaSBC/">Youtube da Maratona SBC de Programação</a>.
 </p>`;  // informações sobre os patrocinadores.
-      var organization = `
+      let organization = `
 <p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Argentina; Giovanna Kobus Conrado, Brasil; Gabriel Poesia, Brasil; Cristhian Bonilha, Brasil; Teodoro Freund, Argentina; Marcelo Fornet, Cuba; Vinicius Fernandes dos Santos, Brasil; Maurício Collares, Brasil e Mário H. S. da Silva, Brasil.
 </p>`;  // geralmente a listagem dos envolvidos na organização do evento.
-      var warmUpProblems = ['Building a Field - Ricardo Anido',
+      let warmUpProblems = ['Building a Field - Ricardo Anido',
                              'Database of Clients - Paulo Cezar Pereira Costa',
                              'Mountain Ranges - Vinicius Fernandes dos Santos'];
-      var contestProblems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
+      let contestProblems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
                               'Beautiful Mountains - André Amaral de Sousa, Brasil',
                               'Crisis at the Wedding - Ricardo Anido, Brasil',
                               'Dividing Candy - Arthur Nascimento, Brasil',
@@ -46,8 +46,8 @@
                               "Lola's Schedule - Paulo Cezar Pereira Costa, Brasil",
                               'May I Add a Letter? - Arthur Nascimento, Brasil',
                               'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
-      var champion_pic = 'team1.webp';
-      var medalists = [// [teamName, [contestants], [coaches]]
+      let champion_pic = 'team1.webp';
+      let medalists = [// [teamName, [contestants], [coaches]]
 ['UFCG - O amarelo é impostor', ['Emerson Leonardo Lucena', 'Daniel Figueiredo', 'João Marcos Lima Medeiros'], ['Rohit Gheyi', 'Lucas de Matos Figueiredo']],
 ['Unicamp - namae wa', ['Matheus Leal Viana', 'Tiago Souza', 'Naim Shaikhzadeh'], ['Fabio Luiz Usberti', 'Arthur Pratti Dadalto']],
 ['UFBA - União Fiasco', ['Bernardo Salmeron', 'Vinicius Teixeira Hirschle', 'Thalles Medrado'], ['Rubisley Lemes', 'Ubiratan Barbosa']],
@@ -59,13 +59,13 @@
 ["UFMG - GTA: Grover's Street Algorithm", ['Matheus Guedes', 'Matheus Aquino Motta', 'Celio Passos'], ['Pedro Paniago']],
 ['UFG - Monkeys', ['Leandro Alves Vianna', 'Rafael de Castro Silva', 'Gustavo Leal'], ['Paulo Kataki', 'Humberto Longo']]];
 
-      var regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
+      let regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
                              ['UFG - Monkeys', 'team10.webp'],
                              ['UFCG - O amarelo é impostor', 'team1.webp'],
                              ['UEA - Você é fraco, te falta O(1)', 'uea.webp'],
                              ['Unicamp - namae wa', 'team2.webp'],
                              ['UDESC - Mews Lovers', 'udesc.webp']];
-      var awards = `
+      let awards = `
 <p>
   Outros prêmios:
 </p>
@@ -81,10 +81,10 @@
 
       // Não editar a partir daqui.
       //======================================================================
-      var slides = `
+      let slides = `
 <a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
 
-      var champion = `
+      let champion = `
 <div class="card mb-3">
   <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
   <div class="row g-0">
@@ -109,7 +109,7 @@
     </div>
   </div>
 </div>`;
-      var regional_champs = `
+      let regional_champs = `
 <ul class="list-group list-group-flush">
   <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0][0]}</strong></li>
   <li class="list-group-item">Nordeste: <strong>${regional_champs[1][0]}</strong></li>
@@ -119,8 +119,8 @@
 </ul>
 ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
-      var [gold, silver, bronze] = splitbyMedal(medalists);
-      var results = showChampion(medalists[0], champion_pic) +
+      let [gold, silver, bronze] = splitbyMedal(medalists);
+      let results = showChampion(medalists[0], champion_pic) +
                     accordion('PhaseResults',
                               [['Medalhas de Ouro', listTeams(gold)],
                                ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],

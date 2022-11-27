@@ -15,14 +15,14 @@
       // Atualizar as informações abaixo:
       // pageStart, organization, contestProblems, results [limiar_ok + supersedes]
       //====================================================================================================
-      var pageStart = `
+      let pageStart = `
 <p>
   A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
 </p>`;
-      var organization = `<p>
+      let organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
 </p>`;
-      var contestProblems = ['Alocação de Prêmios - Clodes Silva',
+      let contestProblems = ['Alocação de Prêmios - Clodes Silva',
                               'Belas Palavras - Rafael Assis',
                               'Criando Multiplos - Cláudio Lucchesi',
                               'Dividindo o Reino - Matias Hunicken',
@@ -38,7 +38,7 @@
                               'Na Trave! - Vinicius dos Santos'];
 
         //              [[site, [list_rule1, list_rule2, list_rule3]]]
-        var limiar_ok = [['Bahia', [['[UFBA] SQLados'],
+        let limiar_ok = [['Bahia', [['[UFBA] SQLados'],
                                     ['[UESB] /watch?v=dQw4w9WgXcQ', '[UNIVASF] Team A UNIVASF'],
                                     ['[UESC] Gramado, eu te amo!']]],
                          ['Ceará', [['[UFC-QXD] two thousands rubles trap'],
@@ -65,7 +65,7 @@
                          ['São Paulo', [['[USP] Zikados', "[USP] Hoje tem 'In queue' do Ribamar", '[USP-São Carlos]             gramando no deitado', '[Unicamp] EhNois_', '[USP-São Carlos] Se der bom não pergunta como',             '[Unicamp] Moratonistas', '[ITA] GGH'],
                                         ['[UFABC] NJR10', '[UNESP-Bauru] UnespLRM', '[UNESP Rio Claro] Hell Claro 2', '            [FATEC-Sorocaba] No Main No Gain', '[FFCLRP-USP] FrenchFries', '[UFSCar] seg             em fentree olhe para o log'],
                                         []]]];
-        var ssco = [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
+        let ssco = [['Distrito Federal', [['[UnB] Posso mandar um WA?'],
                                           ['[UnB/FGA] Confia no py'],
                                           []]],
                     ['Goiás', [[],
@@ -77,7 +77,7 @@
                     ['Mato Grosso do Sul', [[],
                                             ['[FACOM - UFMS] print "Batatinha Frita", 1, 2, 3'],
                                             []]]];
-        var ssne = [['Alagoas', [[],
+        let ssne = [['Alagoas', [[],
                                  ['[UFAL] A query tá O(n) DE NOVO'],
                                  []]],
                     ['Maranhão', [[], [], []]],
@@ -88,7 +88,7 @@
                                              [],
                                              []]],
                     ['Sergipe', [[], [], []]]];
-        var ssno = [['Acre', [[],
+        let ssno = [['Acre', [[],
                               [],
                               ['[UFAC] Wrong Answer 1000%']]],
                     ['Amapá', [[], [], []]],
@@ -101,13 +101,13 @@
                     ['Rondônia', [[], [], []]],
                     ['Roraima', [[], [], []]],
                     ['Tocantins', [[], [], []]]];
-        var ssbr = [['Espírito Santo', [['[UFES] man java'],
+        let ssbr = [['Espírito Santo', [['[UFES] man java'],
                                         [],
                                         []]],
                     ['Rio Grande do Sul', [[],
                                            ['[UFRGS] Obtusos'],
                                            []]]];
-        var results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok)],
+        let results = accordion('PhaseResults', [['Sedes que atingiram o limiar de 10 times e 5 escolas', advancingTeams(limiar_ok)],
                                                  ['Supersede Centro-Oeste', advancingTeams(ssco)],
                                                  ['Supersede Nordeste', advancingTeams(ssne)],
                                                  ['Supersede Norte', advancingTeams(ssno)],
