@@ -36,7 +36,6 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
 <p>
   Agradecemos também a equipe de "testers" da prova: Dilson Almeida Guimarães, Fernando Fonseca Andrade Oliveira, Naum Azeredo Fernandes Barreira, Carlos Miguel Soto, Ivo Pajor, e Lautaro Lasorsa.
 </p>`;
-      let warmUpProblems = [];
       let contestProblems = ['Álbum de Figurinhas - Mário H. S. da Silva',
                              'Batalha Naval - Vinicius Fernandes dos Santos',
                              'Concatenando Times - Agustín Santiago Gutiérrez',
@@ -154,6 +153,11 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
       <li>[UDESC] The Balloonatics: João Victor Fröhlich, Elton Machado da Silva, Rafael Granza de Mello, coach Karina Roggia.</li>
     </ul>
 </ul> `;
+let contestLinks = [[`contest/info_maratona.pdf`, 'Informações'],
+                    [`contest/maratona.pdf`, 'Problemas'],
+                    [`contest/packages.tar.gz`, 'Entradas e Saídas'],
+                    [`contest/editorial.pdf`, 'Editorial'],
+                    ];
 
       //======================================================================
       // Não editar a partir daqui.
@@ -165,9 +169,9 @@ Veja o <a href="conduta.html">código de conduta</a> dos times durante a primeir
       document.write(bodyHeader(`Primeira Fase (${thisYear()})`, makeBreadcrumbs()));
       document.write(pageStart);
       document.write(accordion('Phase', [['Organização', organization],
-                                         ['Warm Up', contestInfo('warmup', warmUpProblems)],
-                                         ['Prova', contestInfo('contest', contestProblems, true)],
-                                         ['Resultados', contestReports() + results],
+                                         ['Warm Up', defaultInfo('warmup')],
+                                         ['Prova', listLinks(contestLinks) + listProblems(contestProblems)],
+                                         ['Resultados', defaultReport('contest') + results],
                                          ['Premiação', awards]]
                                          ));
       document.write(bodyFooter());

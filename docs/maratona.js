@@ -72,7 +72,7 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
               Informações
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}historico/index.html">Competições Passadas</a></li>
+              <li><a class="dropdown-item" href="${root()}historico/index.html">Histórico</a></li>
               <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
               <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
             </ul>

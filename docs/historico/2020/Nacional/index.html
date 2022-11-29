@@ -119,7 +119,7 @@
 </ul>
 ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
-      let [gold, silver, bronze] = splitbyMedal(medalists);
+      let [gold, silver, bronze] = splitByMedal(medalists);
       let results = showChampion(medalists[0], champion_pic) +
                     accordion('PhaseResults',
                               [['Medalhas de Ouro', listTeams(gold)],
@@ -145,11 +145,11 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
                                          ['Prova', contestInfo('contest', contestProblems)],
                                          ['Resultados', contestReports() + results]
                                          ]));
-      </script>
-      <br>
-      <p>
-        Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
-      </p>
+    </script>
+    <br>
+    <p>
+      Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
+    </p>
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>
 </html>

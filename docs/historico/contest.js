@@ -2,24 +2,41 @@ const RULE_TOOLTIP = ['Top 15!',
                       'Distribuição por sedes.',
                       'Vagas discricionárias.'];
 
-function makeList(type, items, options='', header='', footer='') {
+/**
+ * Return a list with the given items.
+ *
+ * @param  {String} type    type of list (ul, ol)
+ * @param  {Array}  items   array with items to be listed
+ * @param  {String} options list options
+ * @return {String}          the HTML with the formatted information
+ */
+function makeList(type, items, options='') {
   let listItems = '';
   for (item of items)
     listItems += `\n<li>${item}</li>`;
-  return `
-${header}
-<${type} ${options}>${listItems}\n</${type}>
-${footer}`;
+  return `\n<${type} ${options}>${listItems}\n</${type}>`;
 }
 
+/**
+ * Return a list with the given problems.
+ *
+ * @param  {Array}  problems array with problems to be listed
+ * @return {String}          the HTML with the formatted information
+ */
 function listProblems(problems) {
   let header = `
 <p>
   Autores dos problemas:
 </p>`;
-  return makeList('ol', problems, 'type="A"', header);
+  return header + makeList('ol', problems, 'type="A"');
 }
 
+/**
+ * Return a list  of links.
+ *
+ * @param  {Array}  links array with links to be listed, each in the [link, text] format
+ * @return {String}       the HTML with the formatted information
+ */
 function listLinks(links, type='ul') {
   let items = [];
   for (link of links)
@@ -31,7 +48,7 @@ function listLinks(links, type='ul') {
  * Format the basic information for a contest.
  *
  * @param  {String} contest  name of directory with the contest files
- * @param  {Array}  problems list of contest problems.
+ * @param  {Array}  problems list of contest problems
  * @return {String}          the HTML with the formatted information
  */
 function defaultInfo(contest, problems) {
@@ -85,7 +102,7 @@ ${items}
  * @param  {Array}  medalists list of medalist objects
  * @return {Array}            [gold, silver, bronze] groups
  */
-function splitbyMedal(medalists) {
+function splitByMedal(medalists) {
   let teamsPerMedal = medalists.length / 3;
   return [medalists.slice(0, teamsPerMedal),                       // gold
           medalists.slice(teamsPerMedal, 2 * teamsPerMedal),       // silver

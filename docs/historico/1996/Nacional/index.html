@@ -21,7 +21,7 @@
   A Maratona de Programação foi organizada pela primeira vez na Universidade Federal de Minas Gerais, nos dias 28 e 29 de novembro de 1996. Os resultados foram divulgados em 2 de dezembro daquele ano. <a href="96_inicial.html"> Página da primeira maratona.</a>
 </p>
 <p>
-  A comissão organizadora era formada pelos Prof. Claudionor Coelho (DCC-UFMG), Carlos Camarão (DCC-UFMG), Nilton de Oliveira Junior (Softex 2000), Ricardo Dahab (IC-Unicamp) e Rosângela Fernandes (CNpq). A iniciativa do evento  que ocorreu na UFMG foi do Softex, com patrocínio do CNPq. Apesar de n&atilde;o ser uma regional oficial do ICPC, o organizador do evento entrou em contato com o diretor executivo do ICPC e o vencedor da Maratona de Programa&ccedilão foi convidado para participar das finais mundiais do ICPC em 1997.
+  A comissão organizadora era formada pelos Prof. Claudionor Coelho (DCC-UFMG), Carlos Camarão (DCC-UFMG), Nilton de Oliveira Junior (Softex 2000), Ricardo Dahab (IC-Unicamp) e Rosângela Fernandes (CNpq). A iniciativa do evento  que ocorreu na UFMG foi do Softex, com patrocínio do CNPq. Apesar de não ser uma regional oficial do ICPC, o organizador do evento entrou em contato com o diretor executivo do ICPC e o vencedor da Maratona de Programação foi convidado para participar das finais mundiais do ICPC em 1997.
 </p>
 <p>
   O Consun tinha duas modalidades: um concurso de software e uma competição de programação. A competição ocorreu nos moldes tradicionais do Concurso de Programação do ICPC. Nessa primeira edição, sem um software de apoio, com a correção sendo feita por disquetes que eram levados dos times aos juízes e, destes de volta aos times, por uma equipe de estudantes voluntários, correndo.
@@ -40,48 +40,23 @@
         ['IME-USP', ['Aritanan B. Garcia Gruber', 'Eduardo Teixeira Dias', 'Paulo José da Silva e Silva'], ['Carlos E. Ferreira']]];
 
       let extra = `
- <p>
+<br>
+<p>
   O único time brasileiro (e sul-americano) convidado para as finais mundiais do ICPC foi o time do IC-Unicamp, formado pelos alunos Alexandre Oliva, Alexandre Volpim e André Augusto Cesta e pelo técnico Ricardo Anido. As finais ocorreram em 2 de março de 1997 em San Jose, California.
 </p>`;
 
       //======================================================================
       // Não editar a partir daqui.
       //======================================================================
-      let champion = `
-<div class="card mb-3">
-  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
-  <div class="row g-0">
-  <!--  <div class="col-md-1">
-      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
-    </div>
-    <div class="col-md-11">
-      <div class="card-body">
-        <h5 class="card-title">${medalists[0][0]}</h5>
-        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
-      </div>
-    </div>-->
-    <div class="col-md-9">
-      <h4 class='text-center'><strong>Campeões</strong></h4>
-      <div class="card-body">
-        <h5 class="card-title">${medalists[0][0]}</h5>
-        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <img class="img-fluid img-thumbnail" src="img/${champion_pic}">
-    </div>
-  </div>
-</div>`;
-
-      let [gold, silver, bronze] = splitbyMedal(medalists);
+      let [gold, silver, bronze] = splitByMedal(medalists);
       let results = showChampion(medalists[0], champion_pic) +
                     accordion('PhaseResults',
                               [['Medalhas de Ouro', listTeams(gold, 1)],
                                ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
                                ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)]],
-                              ['text-black" style="background-color: #FFD700;"',
-                               'text-black" style="background-color: #C0C0C0;"',
-                               'text-black" style="background-color: #CD7F32;"',
+                              ['text-black" style="background-color: #FFD700;',
+                               'text-black" style="background-color: #C0C0C0;',
+                               'text-black" style="background-color: #CD7F32;',
                                'bg-success text-white',
                                'bg-light text-black']);
     </script>
