@@ -83,33 +83,7 @@
       //======================================================================
       let slides = `
 <a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
-
-      let champion = `
-<div class="card mb-3">
-  <!-- <h4 class='text-center'><strong>Campeões</strong></h4>-->
-  <div class="row g-0">
-  <!--  <div class="col-md-1">
-      <img src="../../../img/trophy.png" class="img-fluid" style="max-height: 50px;" alt="...">
-    </div>
-    <div class="col-md-11">
-      <div class="card-body">
-        <h5 class="card-title">${medalists[0][0]}</h5>
-        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
-      </div>
-    </div>-->
-    <div class="col-md-9">
-      <h4 class='text-center'><strong>Campeões</strong></h4>
-      <div class="card-body">
-        <h5 class="card-title">${medalists[0][0]}</h5>
-        <p class="card-text">${medalists[0][1].join(', ')}${medalists[0][2].length > 0 ? ' e coach(es) ' + medalists[0][2].join(', ') : ''}.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <img class="img-fluid img-thumbnail" src="img/${champion_pic}">
-    </div>
-  </div>
-</div>`;
-      let regional_champs = `
+      regional_champs = `
 <ul class="list-group list-group-flush">
   <li class="list-group-item">Centro Oeste: <strong>${regional_champs[0][0]}</strong></li>
   <li class="list-group-item">Nordeste: <strong>${regional_champs[1][0]}</strong></li>
@@ -141,9 +115,9 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
       document.write(accordion('Phase', [['Fotos', carousel(images)],
                                          ['Patrocinadores', sponsor],
                                          ['Organização', organization],
-                                         ['Warm Up', slides + contestInfo('warmup', warmUpProblems)],
-                                         ['Prova', contestInfo('contest', contestProblems)],
-                                         ['Resultados', contestReports() + results]
+                                         ['Warm Up', slides + defaultInfo('warmup', warmUpProblems)],
+                                         ['Prova', defaultInfo('contest', contestProblems)],
+                                         ['Resultados', defaultReport('contest') + results]
                                          ]));
     </script>
     <br>
