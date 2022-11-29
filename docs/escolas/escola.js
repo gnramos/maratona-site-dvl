@@ -61,6 +61,12 @@ function drawVisualization(rows) {
   lineChart.draw(data, options);
 }
 
+/**
+ * Builds breadcrumbs for given items.
+ *
+ * @param  {Array}  items Array of items
+ * @return {String}       the HTML with the formatted information
+ */
 function makeBreadcrumbs(items) {
   let bcItems = '';
   for (item of items)
