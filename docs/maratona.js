@@ -18,9 +18,9 @@ function contact(text, ...args) {
  * Returns the relative path to the root of the files.
  */
 function root() {
-  // let url = window.location.pathname.split('/');
-  return '../'.repeat(url.length - 3);
-  // return '../'.repeat(url.length - 9);
+  let url = window.location.pathname.split('/');
+  // return '../'.repeat(url.length - 3);
+  return '../'.repeat(url.length - 9);
 }
 
 /**
