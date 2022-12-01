@@ -19,8 +19,8 @@ function contact(text, ...args) {
  */
 function root() {
   let url = window.location.pathname.split('/');
-  // return '../'.repeat(url.length - 3);
-  return '../'.repeat(url.length - 9);
+  return '../'.repeat(url.length - 3);
+  // return '../'.repeat(url.length - 9);
 }
 
 /**
