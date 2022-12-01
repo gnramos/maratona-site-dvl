@@ -20,35 +20,35 @@
       //====================================================================================================
       let pageStart = `
 <p>
-  <strong class='text-danger'>O Comitê Diretor da Maratona de Programação, na reunião realizada em Gramado, aprovou as seguintes regras para vigorarem a partir do ano de 2022:</strong>
+  <strong class='text-danger'>O <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a>, na reunião realizada em Gramado, aprovou as seguintes regras para vigorarem a partir do ano de 2022:</strong>
 </p>
-<ul>
-  <li class='text-danger'><strong class='text-danger'>Possibilidade de indicar um segundo time de uma mesma escola pela regra 3 em casos excepcionais.</strong></li>
-  <li class='text-danger'><strong class='text-danger'>Vaga para o melhor time feminino na final brasileira, independentemente da instituição.</strong></li>
+<ul class='text-danger'>
+  <li><strong>Possibilidade de indicar um segundo time de uma mesma escola pela regra 3 em casos excepcionais.</strong></li>
+  <li><strong>Vaga para o melhor time feminino na final brasileira, independentemente da instituição.</strong></li>
 </ul>`;
 
         let school = `
 <p>
-  Uma escola é definida pela instituição de ensino superior e a cidade de onde vêm os alunos participantes. Assim, por exemplo, a USP poderá ter times de várias escolas: USP-São Paulo, USP-São Carlos, etc. Se a instituição preferir, pode inscrever times com alunos de diferentes cidades - neste caso, a instituição contará como uma escola apenas para fins de alocação de <em>vagas</em> na Final Nacional. No caso de um <em>curso a distância</em>, a escola poderá ser definida pela instituição de ensino superior e o polo de onde provêm os estudantes ou, no caso do time combinar alunos de vários polos, a instituição de ensino superior e o adjetivo "virtual" para caracterizar que são alunos de EAD.
+  A instituição de ensino superior e a cidade de onde vêm os alunos participantes definem uma <em>escola</em>. Uma instituição pode, portanto, ter diversas escolas - por exemplo a instituição USP tem as escolas USP-São Paulo, USP-São Carlos, etc. A instituição também pode optar por inscrever alunos de diferentes cidades em um mesmo time e, neste caso, ela é considerada como uma escola para fins de alocação das <em>vagas</em> na Final Nacional. No caso de um <em>curso a distância</em>, a escola poderá ser definida pela instituição de ensino superior e o polo de onde provêm os estudantes ou, no caso do time combinar alunos de vários polos, a instituição de ensino superior e o adjetivo "virtual" caracterizando que são alunos de EAD.
+</p>
+<p>
+  <strong>Os times de uma escola devem ser inscritos em uma mesma sede, definida para sua região geográfica pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a></strong>. A aceitação de mais de dois times de uma escola está sujeita à capacidade da sede em que a inscrição se realiza e será atendida por ordem de chegada.
 </p>`;
         let coach = `
 <p>
-  O técnico será o representante do time junto à organização do concurso e deve ser um docente da escola. Alternativamente, um docente poderá indicar um técnico enviando <a href="carta-coach.pdf">este formulário</a> preenchido para o <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Uma mesma pessoa pode ser registrada como técnico de mais de um time e uma mesma escola pode ter vários técnicos.
-</p>
-<p>
-  O técnico é responsável pela inscrição dos times no evento. <strong>Os times de uma escola devem ser inscritos em uma mesma sede, definida para sua região geográfica pelo Comitê Diretor da Maratona de Programação</strong>. A aceitação de mais de dois times de uma escola está sujeita à capacidade da sede em que a inscrição se realiza e será atendida por ordem de chegada.
+  O técnico é o representante do time junto à organização da competição e deve ser um docente da escola. Alternativamente, um docente da escola pode indicar um técnico enviando <a href="carta-coach.pdf">este formulário</a> preenchido ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Uma mesma pessoa pode ser registrada como técnico de mais de um time e uma mesma escola pode ter vários técnicos. <strong>O técnico é responsável pela inscrição dos times no evento.</strong>
 </p>`;
         let team = `
 <p>
-  Um time representa uma escola, sendo formado por um técnico e os alunos competidores. Cada time é composto por três competidores e, opcionalmente, um reserva. Todos devem ser alunos regulares de cursos de graduação ou pós-graduação da mesma escola. A participação do reserva se dará apenas em caso de problema com um dos demais competidores antes da realização do concurso, e a substituição deverá ser comunicada ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a> até a véspera da Primeira Fase. <strong>Um time com menos de três competidores não qualifica para fases posteriores.</strong>
+  Cada time representa uma escola, sendo formado por um técnico e os três alunos competidores e, opcionalmente, um reserva - sendo que todos devem ser alunos regulares de cursos de graduação ou pós-graduação da escola. A participação do reserva se dará apenas em caso de problema com um dos demais competidores antes da realização da competição, e a substituição deverá ser comunicada ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a> até a véspera da Primeira Fase. <strong>Um time com menos de três competidores não qualifica para fases posteriores.</strong>
 </p>
 <p>
-  Um time é elegível se <strong>todos os competidores (e reserva)</strong> satisfazem às <a href="https://icpc.global/regional/rules">regras do ICPC</a>. Especificamente:
+  Um time é elegível se <strong>todos os competidores (e reserva)</strong> satisfazem às <a href="https://icpc.global/regionals/rules">regras do ICPC</a>. Especificamente:
 </p>
 <ul>
 <li>Limite de participações:
   <ul>
-    <li>Se o competidor já participou de cinco etapass regionais (incluindo a Primeira Fase), <strong class="text-danger">ele não é elegível</strong>.</li>
+    <li>Se o competidor já participou de cinco etapas regionais (incluindo a Primeira Fase), <strong class="text-danger">ele não é elegível</strong>.</li>
     <li>Se o competidor já participou de duas finais mundiais, <strong class="text-danger">ele não é elegível</strong>.</li>
   </ul>
 </li>
@@ -60,7 +60,7 @@
 <li>Caso contrário, <strong class="text-success">o competidor é elegível.</strong></li>
 </ul>
 <p>
-Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pode participar, mesmo que tenha nascido em ${yearsAgo(27)}. Outro exemplo, se você nasceu em ${yearsAgo(23)} pode participar, mesmo tendo iniciado sua graduação em ${yearsAgo(7)}.
+Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pode participar, mesmo que tenha nascido em ${yearsAgo(27)}. Se você nasceu em ${yearsAgo(23)} também pode participar, mesmo tendo iniciado sua graduação em ${yearsAgo(7)}.
 </p>
 <p>
 <strong>A participação na regional de 2020 não é contada para o máximo de 5 participações em regionais, e a participação na Final Mundial de Moscou não conta para o máximo de duas participações em mundiais.</strong>
@@ -69,7 +69,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
   Ao se inscreverem no evento, os times permitem o uso e divulgação de suas imagens e dos programas submetidos pelo Comitê Diretor da Maratona de Programação <strong>para fins acadêmicos e de divulgação</strong>
 </p>
 <p>
-<strong class="text-danger">ATENÇÃO:</strong> Há a possibilidade de, em casos excepcionais (afastamentos por motivo de saúde, serviço militar, etc.), ser concedida uma extensão no período de elegibilidade de um competidor. Para isso o técnico deverá encaminhar um pedido ao comitê de elegibilidade do ICPC (detalhes <a href="https://icpc.global/regional/rules">aqui</a>). Caso seu pedido seja atendido, envie uma cópia da mensagem do Comitê de Elegibilidade do ICPC ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>.
+<strong class="text-danger">ATENÇÃO:</strong> Há a possibilidade de, em casos excepcionais (afastamentos por motivo de saúde, serviço militar, etc.), ser concedida uma extensão no período de elegibilidade de um competidor. Para isso o técnico deverá encaminhar um pedido ao comitê de elegibilidade do ICPC (detalhes <a href="https://icpc.global/regionals/rules">aqui</a>). Caso seu pedido seja atendido, envie uma cópia da mensagem do Comitê de Elegibilidade do ICPC ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>.
 </p>`;
         let phases = `
 <p>
@@ -80,10 +80,10 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
   Os times recebem uma prova com diversos problemas computacionais que devem ser resolvidos durante 5 horas de competição - vence o que resolve a maior quantidade de problemas no menor tempo.
 </p>
 <p>
-  O desempate no número de problemas resolvidos é definido pelo <em>tempo corrigido</em> do time, que é dado pela soma dos tempos corrigidos dos problemas corretamente resolvidos pelo time. Para um problema, este tempo é determinado pelo número de minutos decorridos desde o início da competição até o momento da <em>primeira submissão correta</em> somado à uma penalidade de 20 minutos para cada submissão incorreta feita anteriormente neste problema. Se houver outro o empate, considera-se vencedor o time cuja última submissão correta tenha sido feita mais cedo. Mantido o empate, considera-se a penúltima submissão correta, e assim por diante para todos os problemas corretamente resolvidos. Persistindo empate, o Comitê Diretor da Maratona de Programação fará um sorteio entre os times envolvidos.
+  O desempate no número de problemas resolvidos é definido pelo <em>tempo corrigido</em> do time, que é dado pela soma dos tempos corrigidos dos problemas corretamente resolvidos pelo time. Para cada problema, este tempo é determinado pelo número de minutos decorridos desde o início da competição até o momento da <em>primeira submissão correta</em> somado à uma penalidade de 20 minutos para cada submissão incorreta feita anteriormente neste problema. Se houver outro o empate, considera-se vencedor o time cuja última submissão correta tenha sido feita mais cedo. Mantido o empate, considera-se a penúltima submissão correta, e assim por diante para todos os problemas corretamente resolvidos. Persistindo empate, o <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> fará um sorteio entre os times envolvidos.
 </p>
 <p>
-  A prova da Primeira Fase poderá ser em português, a da Final Brasileira será em inglês. Os problemas devem ser resolvidos em qualquer das linguagens de programação disponíveis (C, C++, Python, Java ou Kotlin). Para a implementação, os times têm à sua disposição um computador e todo o <strong>material escrito</strong> que desejarem - <em>não podem fazer uso de material digital ou ter acesso à Internet durante a competição</em>. O Comitê Diretor da Maratona de Programação é responsável pela decisão de qualquer caso não previsto..
+  A prova da Primeira Fase geralmente é apresentada em português, a da Final Brasileira é sempre em inglês. Os problemas devem ser resolvidos em qualquer das linguagens de programação disponíveis (C, C++, Python, Java ou Kotlin). Para a implementação, os times têm à sua disposição um computador e todo o material escrito que desejarem - <em>não podem fazer uso de material digital ou ter acesso à Internet durante a competição</em>. O Comitê Diretor da Maratona de Programação é responsável pela decisão de qualquer caso não previsto.
 </p>
 <p>
   <strong>Toda competição começa às 14:00 de Brasília, e a correção é centralizada.</strong> Se houver queda de energia durante a competição e a energia voltar ainda durante o período da prova, adiciona-se 60% do tempo de parada (limitado a uma hora). <strong>O cronômetro não para.</strong>
@@ -102,7 +102,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 </p>
 <ul>
   <li><em>Supersede Estadual</em>, que junta as sedes da mesma unidade de federação que não atingiram o limiar.</li>
-  <li><em>Supersede Regional</em>, que junta as supersedes estaduais da mesma região, que ainda não atingiram o limiar.</li>
+  <li><em>Supersede Regional</em>, que junta as supersedes estaduais da mesma região que ainda não atingiram o limiar.</li>
   <li><em>Supersede Nacional</em>, que junta as supersedes regionais que não atingem o limiar.</li>
 </ul>
 <h4>Sede da Final Nacional</h4>
@@ -126,7 +126,7 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
 
 </p>
 <p>
-  <strong class="${RULE_COLORS[2]}">[regra 3]</strong> cerca de <strong>10% das vagas</strong> serão atribuídas entre as sedes pelo Comitê Diretor da Maratona de Programação sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional. <strong>O melhor time composto apenas por meninas terá uma vaga garantida, independentemente das regras anteriores.</strong>
+  <strong class="${RULE_COLORS[2]}">[regra 3]</strong> cerca de <strong>10% das vagas</strong> serão atribuídas entre as sedes pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional. <strong>O melhor time composto apenas por meninas terá uma vaga garantida, independentemente das regras anteriores.</strong>
 </p>
 <p>
   As porcentagens acima indicam o número aproximado de vagas de cada tipo. As vagas não usadas por uma das regras serão distribuídas automaticamente entre as demais, a critério do Comitê Diretor da Maratona de Programação.
@@ -134,15 +134,15 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
 
         let appealing = `
 <p>
-  Apenas o técnico do time poderá recorrer à organização do evento caso julgue que seu time tenha sido prejudicado durante a competição. Qualquer recurso deve ser inicialmente enviado ao <a href="../contato.html">Diretor da Maratona de Programação</a> dentro de dois dias úteis a contar do dia da realização do concurso. O Comitê Diretor da Maratona de Programação decidirá sobre o caso nos três dias úteis seguintes e encaminhará o recurso e a decisão local ao diretor da super-região Latino-Americana do ICPC. Os resultados da Maratona de Programação serão finais apenas quando todos os recursos tiverem sido julgados. <strong>As decisões dos juízes são finais. Não cabe recurso quanto a julgamento de problemas.</strong>
+  Apenas o técnico do time pode recorrer à organização do evento caso julgue que seu time tenha sido prejudicado durante a competição. Qualquer recurso deve ser inicialmente enviado ao <a href="../contato.html">Diretor da Maratona de Programação</a> dentro de dois dias úteis a contar do dia da realização da competição. O <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> decidirá sobre o caso nos três dias úteis seguintes e encaminhará o recurso e a decisão local ao diretor da super região latino-americana do ICPC. Os resultados da Maratona de Programação serão finais apenas quando todos os recursos tiverem sido julgados. <strong>As decisões dos juízes são finais. Não cabe recurso quanto a julgamento de problemas.</strong>
 </p>
 <p>
-  Um recurso deve estar baseado em uma ou mais das circunstâncias a seguir:
+  Um recurso deve estar baseado em pelo menos uma das circunstâncias a seguir:
 </p>
 <ul>
   <li>violação de regra,</li>
-  <li>má conduta de um time,</li>
-  <li>má conduta da administração do concurso com intenção de prejudicar o time.</li>
+  <li>má conduta de um time, e</li>
+  <li>má conduta da administração da competição com intenção de prejudicar o time.</li>
 </ul>`;
     </script>
   </head>

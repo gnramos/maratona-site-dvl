@@ -3,21 +3,6 @@ const RULE_TOOLTIP = ['Top 15!',
                       'Vagas discricionárias.'];
 
 /**
- * Return a list with the given items.
- *
- * @param  {String} type    type of list (ul, ol)
- * @param  {Array}  items   array with items to be listed
- * @param  {String} options list options
- * @return {String}          the HTML with the formatted information
- */
-function makeList(type, items, options='') {
-  let listItems = '';
-  for (item of items)
-    listItems += `\n<li>${item}</li>`;
-  return `\n<${type} ${options}>${listItems}\n</${type}>`;
-}
-
-/**
  * Return a list with the given problems.
  *
  * @param  {Array}  problems array with problems to be listed
@@ -29,19 +14,6 @@ function listProblems(problems) {
   Autores dos problemas:
 </p>`;
   return header + makeList('ol', problems, 'type="A"');
-}
-
-/**
- * Return a list  of links.
- *
- * @param  {Array}  links array with links to be listed, each in the [link, text] format
- * @return {String}       the HTML with the formatted information
- */
-function listLinks(links, type='ul') {
-  let items = [];
-  for (link of links)
-    items.push(`<a href="${link[0]}">${link[1]}</a>`);
-  return makeList(type, items);
 }
 
 /**

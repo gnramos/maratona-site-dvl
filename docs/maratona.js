@@ -14,8 +14,11 @@ function contact(text, ...args) {
     return `<a href="mailto:${mail}">${text}</a>`;
 }
 
+/**
+ * Returns the relative path to the root of the files.
+ */
 function root() {
-  let url = window.location.pathname.split('/');
+  // let url = window.location.pathname.split('/');
   return '../'.repeat(url.length - 3);
   // return '../'.repeat(url.length - 9);
 }
@@ -198,6 +201,34 @@ function carousel(images) {
     <span class="visually-hidden">Next</span>
   </button>
 </div>`;
+}
+
+/**
+ * Return a list with the given items.
+ *
+ * @param  {String} type    type of list (ul, ol)
+ * @param  {Array}  items   array with items to be listed
+ * @param  {String} options list options
+ * @return {String}          the HTML with the formatted information
+ */
+function makeList(type, items, options='') {
+  let listItems = '';
+  for (item of items)
+    listItems += `\n<li>${item}</li>`;
+  return `\n<${type} ${options}>${listItems}\n</${type}>`;
+}
+
+/**
+ * Return a list  of links.
+ *
+ * @param  {Array}  links array with links to be listed, each in the [link, text] format
+ * @return {String}       the HTML with the formatted information
+ */
+function listLinks(links, type='ul') {
+  let items = [];
+  for (link of links)
+    items.push(`<a href="${link[0]}">${link[1]}</a>`);
+  return makeList(type, items);
 }
 
 /**
