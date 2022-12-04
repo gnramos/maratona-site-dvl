@@ -10,8 +10,8 @@ const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
  * @return {String}        the HTML with the formatted information
  */
 function contact(text, ...args) {
-    let mail = args.reduce((acc, cur) => acc + cur);
-    return `<a href="mailto:${mail}">${text}</a>`;
+    let email = args.reduce((acc, cur) => acc + cur);
+    return `<a href="mailto:${email}">${text}</a>`;
 }
 
 /**
