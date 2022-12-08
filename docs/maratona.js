@@ -31,11 +31,76 @@ function root() {
 function bodyHeader(pageTitle='', breadcrumbs='') {
   let url = window.location.pathname.split('/');
   let currentPage = url.at(-1);
-  let selected = `class="nav-link active" aria-current="page"`,
-      unselected = `class="nav-link"`;
-  let isParticipate = (currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR));
-  let isContact = (currentPage == 'contato.html');
-  let isInfo = !isParticipate && (url.includes('historico') || url.includes('escolas'));
+
+  function aboutItem(isActive) {
+    return `
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Sobre
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="${root()}sobre/index.html">O que é?</a></li>
+    <li><a class="dropdown-item" href="${root()}sobre/regras.html">Regras</a></li>
+    <li><a class="dropdown-item" href="${root()}sobre/ambiente_computacional.html">Ambiente Computacional</a></li>
+    <li><a class="dropdown-item" href="${root()}sobre/organizacao.html">Organização</a></li>
+    <li><a class="dropdown-item" href="${root()}sobre/divulgacao.html">Divulgação</a></li>
+  </ul>
+</li>`;
+  }
+  function participateItem(isActive) {
+    return `
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Participe!
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="${root()}inscricoes.html"><strong>Inscrições</strong></a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero/index.html">Fase Zero</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
+    <!--<li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>-->
+  </ul>
+</li>`;
+}
+  function infoItem(isActive) {
+    return `
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Informações
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="${root()}historico/index.html">Histórico</a></li>
+    <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
+    <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
+  </ul>
+</li>`;
+}
+  function contactItem(isActive) {
+    return `
+<li class="nav-item">
+  <a href="${root()}contato.html" class="nav-link${isActive ? ' active" aria-current="page"' : ''}">Contato</a>
+</li>`;
+}
+  let socialMediaItems = `
+<li class="nav-item">
+  <a href="https://www.facebook.com/maratona/" class="nav-link">
+    <i class="bi bi-facebook" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+      </svg>
+    </i>
+  </a>
+</li>
+<li class="nav-item">
+  <a href="https://www.youtube.com/channel/UCuLfhw7dJoKYbzBktNRgAkA" class="nav-link">
+    <i class="bi bi-youtube" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+      </svg>
+    </i>
+  </a>
+</li>`;
 
   return`
     <div class="container">
@@ -45,62 +110,11 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
           <span class="fs-4">Maratona de Programação</span>
         </a>
         <ul class="nav nav-pills">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${url.includes('sobre') && !isContact ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Sobre
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}sobre/index.html">O que é?</a></li>
-              <li><a class="dropdown-item" href="${root()}sobre/regras.html">Regras</a></li>
-              <li><a class="dropdown-item" href="${root()}sobre/ambiente_computacional.html">Ambiente Computacional</a></li>
-              <li><a class="dropdown-item" href="${root()}sobre/organizacao.html">Organização</a></li>
-              <li><a class="dropdown-item" href="${root()}sobre/divulgacao.html">Divulgação</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${isParticipate ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Participe!
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}inscricoes.html"><strong>Inscrições</strong></a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero/index.html">Fase Zero</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
-              <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
-              <!--<li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>-->
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ${isInfo ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Informações
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="${root()}historico/index.html">Histórico</a></li>
-              <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
-              <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="${root()}contato.html" ${currentPage == 'contato.html' ? selected : unselected}>Contato</a>
-          </li>
-          <li class="nav-item">
-            <a href="https://www.facebook.com/maratona/" class="nav-link">
-              <i class="bi bi-facebook" fill="currentColor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                </svg>
-              </i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://www.youtube.com/channel/UCuLfhw7dJoKYbzBktNRgAkA" class="nav-link">
-              <i class="bi bi-youtube" fill="currentColor">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-                  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
-                </svg>
-              </i>
-            </a>
-          </li>
+          ${aboutItem(url.includes('sobre'))}
+          ${participateItem(currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR))}
+          ${infoItem(!url.includes(CURRENT_YEAR) && (url.includes('historico') || url.includes('escolas')))}
+          ${contactItem(currentPage == 'contato.html')}
+          ${socialMediaItems}
         </ul>
       </header>
     </div>
@@ -221,14 +235,18 @@ function makeList(type, items, options='') {
 /**
  * Return a list  of links.
  *
- * @param  {Array}  links array with links to be listed, each in the [link, text] format
- * @return {String}       the HTML with the formatted information
+ * Assumes the links are formatted as a list of [url, text] items.
+ *
+ * @param  {Array}  links   array with links to be listed, each in the [link, text] format
+ * @param  {String} type    type of list (ul, ol)
+ * @param  {String} options list options
+ * @return {String}         the HTML with the formatted information
  */
-function listLinks(links, type='ul') {
+function listLinks(links, type='ul', options='') {
   let items = [];
   for (link of links)
     items.push(`<a href="${link[0]}">${link[1]}</a>`);
-  return makeList(type, items);
+  return makeList(type, items, options);
 }
 
 /**
@@ -240,8 +258,8 @@ function listLinks(links, type='ul') {
  * @return {String}   the roman number for num .
  */
 function toRoman(num) {
-const NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
-                     ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
+  const NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
+                         ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
   // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
   let numeral = '';
   let digits = num.toString().split('').reverse();
