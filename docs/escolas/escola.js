@@ -65,7 +65,7 @@ function drawVisualization(rows) {
   //                       pointSize: 10,
   //                       tooltip: {isHtml: true}});
 
-  let data = dataTable();
+  let data = dataTable(rows);
   let lastYear = parseInt(rows.slice(-1)[0][0]);
   let firstYear = parseInt(rows[0][0]);
   if (firstYear < lastYear - YEARS_TO_SHOW + 1)
@@ -87,7 +87,8 @@ function drawVisualization(rows) {
     options: {
               filterColumnLabel: 'Year',
               minRangeSize: 1,
-              ui: {chartOptions: { vAxis: {direction: -1}}}
+              ui: {chartOptions: { hAxis: {title: 'Ano', format: '0'},
+                                   vAxis: {direction: -1}}}
             },
     state: {
             range: {start: firstYear,
