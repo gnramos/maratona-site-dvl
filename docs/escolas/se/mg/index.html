@@ -12,14 +12,14 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let results = [
-['2016', 9, 5, 84],
-['2017', 4, 14, null],
-['2018', 8, 10, null],
-['2019', 9, 5, 55],
-['2020', 3, 7, null],
-['2021', 2, 2, null],
-['2022', 2, null, null]];
-      google.charts.load('current', {packages: ['corechart', 'line']});
+['2016', 115, 13, 84],
+['2017', 106, 14, null],
+['2018', 100, 10, null],
+['2019', 132, 16, 55],
+['2020', 104, 15, null],
+['2021', 116, 2, null],
+['2022', 123, null, null]];
+      google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
 
       let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Sudeste</span>'];
@@ -34,7 +34,8 @@
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
-          <div id="chart" class="row"></div>
+          <div id="chart_div" class="row"></div><br>
+          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
         </div>
       </div>
     </div>
@@ -117,7 +118,7 @@
            <li><a class="dropdown-item" href="uftm.html">Universidade Federal do Triângulo Mineiro </a></li>
            <li><a class="dropdown-item" href="unifenas.html">Universidade José do Rosário Vellano</a></li>
            <li><a class="dropdown-item" href="universidadesalgadodeoliveira-universo.html">Universidade Salgado de Oliveira - UNIVERSO</a></li>
-           <li><a class="dropdown-item" href="universidadedeuberaba-campusuberaba.html">Universidade de Uberaba - Campus Uberaba</a></li>
+           <li><a class="dropdown-item" href="uu-cu.html">Universidade de Uberaba - Campus Uberaba</a></li>
            <li><a class="dropdown-item" href="uniube-uraec.html">Universidade de Uberaba - Campus Uberaba - Engenharia de Computação</a></li>
            <li><a class="dropdown-item" href="uniube-urasi.html">Universidade de Uberaba - Campus Uberaba - Sistemas de Informação</a></li>
            <li><a class="dropdown-item" href="uniube-udi.html">Universidade de Uberaba - Campus Uberlândia</a></li>

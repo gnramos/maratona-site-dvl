@@ -15,11 +15,11 @@
 ['2016', 177, null, null],
 ['2017', 115, 46, null],
 ['2018', 116, 38, null],
-['2019', 48, 28, null],
-['2020', 96, 33, null],
-['2021', 28, 33, null],
+['2019', 170, 28, null],
+['2020', 348, 33, null],
+['2021', 197, 33, null],
 ['2022', 119, null, null]];
-      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
 
       let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Norte</span>'];
@@ -34,7 +34,8 @@
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
-          <div id="chart" class="row"></div>
+          <div id="chart_div" class="row"></div><br>
+          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
         </div>
       </div>
     </div>
@@ -54,7 +55,7 @@
            <li><a class="dropdown-item" href="iftm-patrocinioads.html">Instituto Federal do Triangulo Mineiro - Análise e Desenvolvimento Sistemas - Patrocínio</a></li>
            <li><a class="dropdown-item" href="ufopaoriximina.html">Universidade Federal do Oeste do Para - Campus Oriximina</a></li>
            <li><a class="dropdown-item" href="ufopa.html">Universidade Federal do Oeste do Pará</a></li>
-           <li><a class="dropdown-item" href=".html">Universidade Federal do Pará</a></li>
+           <li><a class="dropdown-item" href="ufpa.html">Universidade Federal do Pará</a></li>
            <li><a class="dropdown-item" href="unama.html">Universidade da Amazônia</a></li>
            <li><a class="dropdown-item" href="uepa.html">Universidade do Estado do Pará</a></li>
        </ul>

@@ -13,10 +13,10 @@
     <script type="text/javascript">
       let results = [
 ['2017', 174, 60, null],
-['2018', 64, 47, null],
+['2018', 278, 47, null],
 ['2019', 157, 57, null],
 ['2020', 463, 63, null]];
-      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
 
       let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Norte</span>'];
@@ -31,7 +31,8 @@
         </div>
         <div class="col-sm-10">
           <!-- Data chart vai aqui, nada a fazer. -->
-          <div id="chart" class="row"></div>
+          <div id="chart_div" class="row"></div><br>
+          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
         </div>
       </div>
     </div>
