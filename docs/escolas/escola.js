@@ -1,5 +1,5 @@
-const RESULT_LEN = 5;
-const PHASES = ['1aFase', 'Nacional', /* 'Programadores', */ 'Mundial'];
+const PHASES = ['1ªFase', 'Nacional', /* 'Programadores', */ 'Mundial'];
+const YEARS_TO_SHOW = 5;
 
 /**
  * Draw a graphic with the results.
@@ -36,14 +36,14 @@ function drawVisualization(rows) {
   }
   function dataTable(rows) {
     let data = new google.visualization.DataTable();
-    data.addColumn('string', 'Year');
+    data.addColumn('number', 'Year');
     for (let phase of PHASES) {
       data.addColumn('number', phase);
       data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
     }
 
     for (let row of rows) {
-      let thisRow = [row[0]];
+      let thisRow = [parseInt(row[0])];
       for (let phase in PHASES) {
         phase = Number(phase) + 1;
         thisRow.push(row[phase]);
@@ -55,16 +55,48 @@ function drawVisualization(rows) {
     return data;
   }
 
-  google.charts.load('current', {packages: ['corechart', 'line']});
+  google.charts.load('current', {packages: ['corechart', 'line', 'controls']});
 
-  let options = {hAxis: {title: 'Ano'},
-                 vAxis: {title: 'Rank', baseline: 1, direction: -1},
-                 legend: {position: 'top'},
-                 pointSize: 10,
-                 tooltip: {isHtml: true}};
+  // let data = dataTable(rows.slice(-YEARS_TO_SHOW));
+  // let lineChart = new google.visualization.LineChart(chart_div);
+  // lineChart.draw(data, {hAxis: {title: 'Ano', format: '0'},
+  //                       vAxis: {title: 'Rank', baseline: 1, direction: -1},
+  //                       legend: {position: 'top'},
+  //                       pointSize: 10,
+  //                       tooltip: {isHtml: true}});
 
-  let lineChart = new google.visualization.LineChart(chart);
-  lineChart.draw(dataTable(rows.slice(-RESULT_LEN)), options);
+  let data = dataTable(rows.slice(-YEARS_TO_SHOW));
+  let lastYear = parseInt(rows.slice(-1)[0][0]);
+  let firstYear = parseInt(rows[0][0]);
+  if (firstYear < lastYear - YEARS_TO_SHOW + 1)
+    firstYear = lastYear - YEARS_TO_SHOW + 1;
+  let chart = new google.visualization.ChartWrapper({
+    chartType: 'LineChart',
+    containerId: 'chart_div',
+    options: {hAxis: {title: 'Ano', format: '0'},
+              vAxis: {title: 'Rank', baseline: 1, direction: -1},
+              legend: {position: 'top'},
+              pointSize: 10,
+              tooltip: {isHtml: true}
+            }
+  })
+
+  let control = new google.visualization.ControlWrapper({
+    controlType: 'ChartRangeFilter',
+    containerId: 'control_div',
+    options: {
+              filterColumnLabel: 'Year',
+              minRangeSize: 1,
+              ui: {chartOptions: { vAxis: {direction: -1}}}
+            },
+    state: {
+            range: {start: firstYear,
+                    end: lastYear}},
+  });
+
+  var dashboard = new google.visualization.Dashboard();
+  dashboard.bind([control], [chart]);
+  dashboard.draw(data);
 }
 
 /**
