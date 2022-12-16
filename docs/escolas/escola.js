@@ -87,8 +87,7 @@ function drawVisualization(rows) {
     options: {
               filterColumnLabel: 'Year',
               minRangeSize: 1,
-              ui: {chartOptions: { hAxis: {title: 'Ano', format: '0'},
-                                   vAxis: {direction: -1}}}
+              ui: {chartOptions: { hAxis: {format: '0'}, vAxis: {direction: -1}}}
             },
     state: {
             range: {start: firstYear,
