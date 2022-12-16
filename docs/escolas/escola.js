@@ -65,7 +65,7 @@ function drawVisualization(rows) {
   //                       pointSize: 10,
   //                       tooltip: {isHtml: true}});
 
-  let data = dataTable(rows.slice(-YEARS_TO_SHOW));
+  let data = dataTable();
   let lastYear = parseInt(rows.slice(-1)[0][0]);
   let firstYear = parseInt(rows[0][0]);
   if (firstYear < lastYear - YEARS_TO_SHOW + 1)
