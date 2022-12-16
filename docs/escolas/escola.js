@@ -1,4 +1,5 @@
 const RESULT_LEN = 5;
+const PHASES = ['1aFase', 'Nacional', /* 'Programadores', */ 'Mundial'];
 
 /**
  * Draw a graphic with the results.
@@ -10,7 +11,7 @@ const RESULT_LEN = 5;
  * @param  {Array}  rows  the results
  */
 function drawVisualization(rows) {
-  function rankImg(year, phase, heightPx, rank, reverse=false) {
+  function rankImg(year, phase, heightPx, rank) {
     let multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
     images = [], imgHTML = "";
 
@@ -25,9 +26,6 @@ function drawVisualization(rows) {
     if (phase == "Nacional" && rank == 1)
       images.push("trophy");
 
-    if (reverse)
-      images = images.slice().reverse();
-
     for (let img of images)
       imgHTML += ` <img src="${root()}img/${img}.png" style="height:${heightPx}px; width: auto;"> `;
 
@@ -36,29 +34,37 @@ function drawVisualization(rows) {
   function toolTip(year, phase, rank) {
     return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
+  function dataTable(rows) {
+    let data = new google.visualization.DataTable();
+    data.addColumn('string', 'Year');
+    for (let phase of PHASES) {
+      data.addColumn('number', phase);
+      data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+    }
 
-  rows = rows.slice(-RESULT_LEN);
+    for (let row of rows) {
+      let thisRow = [row[0]];
+      for (let phase in PHASES) {
+        phase = Number(phase) + 1;
+        thisRow.push(row[phase]);
+        thisRow.push(toolTip(row[0], PHASES[phase - 1], row[phase] == null ? '' : row[phase]));
+      }
+      data.addRow(thisRow);
+    }
+
+    return data;
+  }
 
   google.charts.load('current', {packages: ['corechart', 'line']});
-  let data = new google.visualization.DataTable();
-  data.addColumn('string', 'Year');
-  for (let phase of ['1aFase', 'Nacional', 'Mundial']) {
-    data.addColumn('number', phase);
-    data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
-  }
-  for (let row of rows)
-    data.addRow([row[0], // year
-                 row[1], toolTip(row[0], '1aFase', row[1] == null ? '' : row[1]),
-                 row[2], toolTip(row[0], 'Nacional', row[2] == null ? '': row[2]),
-                 row[3], toolTip(row[0], 'Mundial', row[3] == null ? '': row[3])]);
 
   let options = {hAxis: {title: 'Ano'},
                  vAxis: {title: 'Rank', baseline: 1, direction: -1},
                  legend: {position: 'top'},
+                 pointSize: 10,
                  tooltip: {isHtml: true}};
 
   let lineChart = new google.visualization.LineChart(chart);
-  lineChart.draw(data, options);
+  lineChart.draw(dataTable(rows.slice(-RESULT_LEN)), options);
 }
 
 /**
