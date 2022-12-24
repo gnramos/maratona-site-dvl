@@ -14,6 +14,21 @@ YYYY
 
 Ela é replicada para cada ano (`YYYY`), e as informações organizadas em subdiretórios, um para cada fase. O arquivo `index.html` mostra o poster do evento e um índice para cada fase.
 
+## Contest Info
+
+Cada fase implica a aplicação de uma prova, cujas informações pertinentes devem estar contida no diretórios `contest` com *exatamente* os arquivos definidos a seguir:
+```
++- contest
+|    +- clarifications.html (html com as informações dos esclarecimentos solicitados - BOCA)
+|    +- editorial.pdf       (tutorial para a solução dos problemas - opcional)
+|    +- info_maratona.pdf   (folha de informações da prova)
+|    +- maratona.pdf        (folha de problemas da prova)
+|    +- packages.tar.gz     (arquivos de entrada/saída para os problemas)
+|    +- runs.html           (html com as informações das submissões realizadas - BOCA)
+|    +- score.html          (html com o placar final do evento - BOCA)
+|    `- statistics.html     (html com as estatísticas do evento - BOCA)
+```
+
 ## Fase Zero
 
 
@@ -23,13 +38,7 @@ A estrutura de diretório definida é:
 ```
 1aFase
   +- contest
-  |    +- clarifications.html
-  |    +- info_maratona.pdf
-  |    +- maratona.pdf
-  |    +- packages.tar.gz
-  |    +- runs.html
-  |    +- score.html
-  |    `- statistics.html
+  +- warmup
   `- index.html
 ```
 

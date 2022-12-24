@@ -18,4 +18,4 @@ A criação de um novo evento é simples:
 
 #### Instituições
 
-Caso queira que a página da sua instituição seja atualizada com a marca própria e o link para um site externo, basta criar um [pull request](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) com estas atualizações. O nome do arquivo da imagem deve ser igual ao da página da instituição (geralmente a sigla).
+A página de cada instituição é gerada automaticamente a partir dos relatórios de resultados. Caso queira que a página da sua instituição seja atualizada com a marca própria, basta criar um [pull request](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) incluindo o arquivo. Este deve ser uma imagem no formato [png](https://pt.wikipedia.org/wiki/PNG) com nome igual ao da página da instituição (geralmente a sigla - confira na página HTML criada para sua instituição).
