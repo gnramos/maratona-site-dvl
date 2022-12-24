@@ -1,4 +1,4 @@
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 import os
 import re
 from maratona import report
@@ -18,11 +18,11 @@ PHASES = ['PrimeiraFase', 'Nacional', 'Mundial']
 
 class Result:
     def __init__(self, year, **ranks):
-        self.year = year
-        self.ranks = {phase: ranks.get(phase, 'null') for phase in PHASES}
+        self.year = int(year)
+        self.ranks = {phase: str(ranks.get(phase, 'null')) for phase in PHASES}
 
     def __setitem__(self, key, value):
-        self.ranks[key] = value
+        self.ranks[key] = str(value)
 
     def __getitem__(self, key):
         return self.ranks[key]
@@ -38,35 +38,34 @@ class Result:
                     return False
                 if self.ranks[phase] != 'null' and other.ranks[phase] == 'null':
                     return True
-                return self.ranks[phase] > other.ranks[phase]
+                return int(self.ranks[phase]) > int(other.ranks[phase])
         return False
 
     def __str__(self):
-        s = ', '.join(str(self.ranks[phase]) for phase in PHASES)
+        s = ', '.join(self.ranks.values())
         return f"[{self.year}, {s}]"
 
     @staticmethod
     def fill(results):
         if results:
-            years = tuple(result.year for result in results)
+            years = tuple(r.year for r in results)
             results.extend(Result(y)
                            for y in range(min(years) + 1, max(years))
                            if y not in years)
-            results.sort()
 
     @staticmethod
-    def find_in_list(results, year):
-        for result in results:
-            if result.year == year:
-                return result
+    def find_in_list(result_list, year):
+        for r in result_list:
+            if r.year == year:
+                return r
         return None
 
 
 class HTML:
     @staticmethod
     def path(uf):
-        region = report.UF_REGION[uf.upper()]
-        return os.path.join('..', 'docs', 'escolas', REGION_DIR[region], uf.lower())
+        region = REGION_DIR[report.UF_REGION[uf.upper()]]
+        return os.path.join('..', 'docs', 'escolas', region, uf.lower())
 
     @staticmethod
     def replace(template, file, replacements):
@@ -81,7 +80,7 @@ class HTML:
     def get_results(content):
         m = re.search(r'let results = \[([.\s\S]*?)\];', content)
         results = []
-        for year, ranks in re.findall(r"\[(.*?), (.*?)\]", m.group(0)):
+        for year, ranks in re.findall(r"\[(.*?), (.*?)\]", m.group(1)):
             kw_args = {phase: rank
                        for phase, rank in zip(PHASES, ranks.split(', '))}
             results.append(Result(year, **kw_args))
@@ -144,39 +143,43 @@ def update_school(uf, inst_short, year, phase, rank):
 
     for result in results:
         if result.year == year:
-            result[phase] = str(rank)
+            result[phase] = rank
             break
     else:
         results.append(eval(f'Result({year}, {phase}={rank})'))
 
     create_school(uf, inst_short, inst_full, results)
 
-    # TO-DO
-    # If school being updated was the top ranking and update is to lower its rank,
-    # UF rank IS NOT CHANGED
+    # If school being updated was the top ranking one and the update lowers its
+    # rank, UF rank IS NOT CHANGED!
     file = os.path.join(HTML.path(uf), f'index.html')
 
     with open(file, 'r') as f:
         content = f.read()
 
     results = HTML.get_results(content)
-    institutions = HTML.get_dropdown_institutions(content)
 
     updated = True
-
     if result := Result.find_in_list(results, year):
-        if result[phase] == 'null' or (result[phase] != 'null' and result[phase] > rank):
+        if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > int(rank)):
             result[phase] = rank
         else:
             updated = False
     else:
-        results.append(result)
+        results.append(eval(f'Result({year}, {phase}={rank})'))
 
     if updated:
+        institutions = HTML.get_dropdown_institutions(content)
         create_uf(uf, results, institutions)
 
 
 def df2dict(df):
+    def normalize(name):
+        name = re.sub(r'[^\w]', '', name.lower())
+        return (unicodedata.normalize('NFD', name)
+                .encode('ASCII', 'ignore')
+                .decode('utf-8'))
+
     df = df[(df['role'] == 'CONTESTANT') & (df['teamRank'] > 0)]
     GROUPS = ['UF', 'instName', 'Year', 'Phase']
     df = df.sort_values(by=GROUPS + ['teamRank'])
@@ -184,13 +187,15 @@ def df2dict(df):
     for group, group_df in df.groupby(GROUPS):
         uf, inst, year, phase = group
         best_rank, year = int(group_df.iloc[0]['teamRank']), int(year)
-        short_name = unicodedata.normalize('NFD', group_df.iloc[0]['instShortName'].lower().replace(' ', '').replace('/', '')).encode('ASCII', 'ignore').decode('utf-8')
-        if short_name not in df_dict[uf]:
-            df_dict[uf][short_name] = {'Name': group_df.iloc[0]['instName'], 'Results': []}
-        if result := Result.find_in_list(df_dict[uf][short_name]['Results'], year):
+        short = normalize(group_df.iloc[0]['instShortName'])
+        if short not in df_dict[uf]:
+            df_dict[uf][short] = {'Name': group_df.iloc[0]['instName'],
+                                  'Results': []}
+        if result := Result.find_in_list(df_dict[uf][short]['Results'], year):
             result[phase] = best_rank
         else:
-            df_dict[uf][short_name]['Results'].append(eval(f'Result({year}, {phase}={best_rank})'))
+            df_dict[uf][short]['Results'].append(
+                eval(f'Result({year}, {phase}={best_rank})'))
 
     return df_dict
 
@@ -198,14 +203,14 @@ def df2dict(df):
 def create_files(df):
     for uf, inst_dict in df2dict(df).items():
         institutions, uf_results = [], []
-        for short_name, info in inst_dict.items():
-            create_school(uf, short_name, info['Name'], info['Results'])
+        for short, info in inst_dict.items():
+            create_school(uf, short, info['Name'], info['Results'])
 
-            institutions.append((short_name, info['Name']))
+            institutions.append((short, info['Name']))
             for result in info['Results']:
                 if uf_result := Result.find_in_list(uf_results, result.year):
                     for phase in PHASES:
-                        if uf_result[phase] == 'null' or (result[phase] != 'null' and uf_result[phase] > result[phase]):
+                        if uf_result[phase] == 'null' or (result[phase] != 'null' and int(uf_result[phase]) > int(result[phase])):
                             uf_result[phase] = result[phase]
                 else:
                     uf_results.append(result)
@@ -226,7 +231,7 @@ def create_files(df):
 
 
 if __name__ == '__main__':
-    # update_school('df', 'unb', '2022', 'Nacional', '7')
+    # update_school('df', 'unb', 2018, 'Nacional', 5)
     # exit(0)
     guess_uf = quiet = True
 

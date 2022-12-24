@@ -1,7 +1,7 @@
 UF,Institution short name,Institution
 AC,FAMETA,Faculdade Meta
 AC,IFAC,Instituto Federal de Educação, Ciência e Tecnologia do Acre
-AC,U:VERSE,Centro Universitário U:VERSE
+AC,UVERSE,Centro Universitário U:VERSE
 AC,UFAC,Universidade Federal do Acre
 AL,UFAL Arapiraca,Universidade Federal de Alagoas - Campus Arapiraca
 AL,UFAL,Universidade Federal de Alagoas
@@ -53,12 +53,14 @@ ES,UFES,Universidade Federal do Espirito Santo
 ES,UFES-CCENS-Alegre,UFES-Campus Alegre
 ES,UVV,Centro Universitário Vila Velha
 GO,CAJ/UFG,Universidade Federal de Goiás - Câmpus Jataí
-GO,IFGoiano - Campus Ri,Instituto Federal Goiano - Campus Rio Verde
-GO,PUC-Goiás,Pontifícia Universidade Católica de Goiás
+GO,IFGo-RV,Instituto Federal Goiano - Campus Rio Verde
+GO,PUC-GO,Pontifícia Universidade Católica de Goiás
 GO,UCG,Universidade Católica de Goiás
 GO,UEG,Unidade Universitária de Ciências Exatas e Tecnológicas - UEG
 GO,UFG,Instituto de Informática - UFG
 GO,UniRV,Universidade de Rio Verde
+GO,IFG-CI,Instituto Federal de Educação, Ciência e Tecnologia Goiano - Câmpus Iporá
+GO,IFG-CU,Instituto Federal Goiano - Campus Urutaí
 MA,IFMA,Instituto Federal de Educação, Ciência e Tecnologia do Maranhão
 MA,UFMA,Universidade Federal do Maranhão
 MA,UNDB,Unidade de Ensino Superior Dom Bosco - UNDB
