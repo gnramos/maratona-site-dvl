@@ -12,13 +12,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let results = [
-['2016', 350, null, null],
-['2017', 535, null, null],
-['2018', 413, 71, null],
-['2019', 665, null, null],
-['2020', 179, 62, null],
-['2021', null, null, null],
-['2022', 349, null, null]];
+[2016, 350, null, null],
+[2017, 535, null, null],
+[2018, 413, 71, null],
+[2019, 665, null, null],
+[2020, 179, 62, null],
+[2021, null, null, null],
+[2022, 349, null, null]];
       google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
 
@@ -31,18 +31,10 @@
       <div class="row align-items-center">
         <div class="col-sm-2">
           <img src="ro.svg" class="img-fluid" style="border: 1px solid #555;">
-        </div>
-        <div class="col-sm-10">
-          <!-- Data chart vai aqui, nada a fazer. -->
-          <div id="chart_div" class="row"></div><br>
-          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
-        </div>
-      </div>
-    </div>
-    <br>
+    <br><br>
     <div class="dropdown">
        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownInstitutions" data-bs-toggle="dropdown" aria-expanded="false">
-         Instituições Participantes
+         Instituições
        </button>
        <ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
            <li><a class="dropdown-item" href="ceulji-ulbra.html">Centro Universitário Luterano de Ji-Paraná da ULBRA</a></li>
@@ -51,6 +43,13 @@
            <li><a class="dropdown-item" href="ifro.html">Instituto Federal de Educação, Ciência e Tecnologia de Rondônia</a></li>
        </ul>
      </div>
+        </div>
+        <div class="col-sm-10">
+          <div id="chart_div" class="row"></div>
+          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
+        </div>
+      </div>
+    </div>
     <br>
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>

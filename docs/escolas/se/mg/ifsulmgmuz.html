@@ -12,13 +12,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let results = [
-['2016', 45, 44, null],
-['2017', 81, null, null],
-['2018', 101, 39, null],
-['2019', 89, null, null],
-['2020', 54, 46, null],
-['2021', 139, null, null],
-['2022', 97, null, null]];
+[2016, 45, 44, null],
+[2017, 81, null, null],
+[2018, 101, 39, null],
+[2019, 89, null, null],
+[2020, 54, 46, null],
+[2021, 139, null, null],
+[2022, 97, null, null]];
       google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
       google.charts.setOnLoadCallback(function() { drawVisualization(results); });
 
@@ -33,7 +33,6 @@
           <img src="ifsulmgmuz.png" class="img-fluid" onerror="this.src='../../../img/maratona-logo.jpg'">
         </div>
         <div class="col-sm-10">
-          <!-- Data chart vai aqui, nada a fazer. -->
           <div id="chart_div" class="row"></div>
           <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
         </div>

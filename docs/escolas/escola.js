@@ -12,16 +12,19 @@ const YEARS_TO_SHOW = 5;
  */
 function drawVisualization(rows) {
   function rankImg(year, phase, heightPx, rank) {
-    let multiplier = (phase == "Nacional") ? (year > 2020 ? 4 : 3) : 1,
-    images = [], imgHTML = "";
+    let multiplier = 4, images = [], imgHTML = "";
 
-    if (rank > 0)
-      if (rank <= 1 * multiplier)
-        images.push("gold_medal");
-      else if (rank <= 2 * multiplier)
-        images.push("silver_medal");
-      else if (rank <= 3 * multiplier)
-        images.push("bronze_medal");
+    if (phase == '1ªFase')
+      multiplier = 1;
+    if (phase == 'Nacional' && year < 2021)
+      multiplier = 3;
+
+    if (rank <= 1 * multiplier)
+      images.push("gold_medal");
+    else if (rank <= 2 * multiplier)
+      images.push("silver_medal");
+    else if (rank <= 3 * multiplier)
+      images.push("bronze_medal");
 
     if (phase == "Nacional" && rank == 1)
       images.push("trophy");
@@ -31,9 +34,11 @@ function drawVisualization(rows) {
 
     return imgHTML;
   }
+
   function toolTip(year, phase, rank) {
     return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
+
   function dataTable(rows) {
     let data = new google.visualization.DataTable();
     data.addColumn('number', 'Year');
@@ -60,7 +65,7 @@ function drawVisualization(rows) {
   // let data = dataTable(rows.slice(-YEARS_TO_SHOW));
   // let lineChart = new google.visualization.LineChart(chart_div);
   // lineChart.draw(data, {hAxis: {title: 'Ano', format: '0'},
-  //                       vAxis: {title: 'Rank', baseline: 1, direction: -1},
+  //                       vAxis: {title: 'Rank', baseline: 1, direction: -1, format: '0'},
   //                       legend: {position: 'top'},
   //                       pointSize: 10,
   //                       tooltip: {isHtml: true}});
@@ -74,7 +79,7 @@ function drawVisualization(rows) {
     chartType: 'LineChart',
     containerId: 'chart_div',
     options: {hAxis: {title: 'Ano', format: '0'},
-              vAxis: {title: 'Rank', baseline: 1, direction: -1},
+              vAxis: {title: 'Rank', baseline: 1, direction: -1, format: '0'},
               legend: {position: 'top'},
               pointSize: 10,
               tooltip: {isHtml: true}
@@ -87,7 +92,7 @@ function drawVisualization(rows) {
     options: {
               filterColumnLabel: 'Year',
               minRangeSize: 1,
-              ui: {chartOptions: { hAxis: {format: '0'}, vAxis: {direction: -1}}}
+              ui: {chartOptions: { hAxis: {format: '0'}, vAxis: {direction: -1, format: '0'}}}
             },
     state: {
             range: {start: firstYear,
