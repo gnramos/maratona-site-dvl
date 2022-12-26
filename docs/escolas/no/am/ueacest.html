@@ -14,7 +14,7 @@
       let results = [
 [2020, 681, null, null]];
       google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
-      google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+      google.charts.setOnLoadCallback(function() { drawEventResults(results); });
 
       let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Norte</span>', '<a href="index.html">Amazonas</a>'];
     </script>
@@ -27,15 +27,12 @@
           <img src="ueacest.png" class="img-fluid" onerror="this.src='../../../img/maratona-logo.jpg'">
         </div>
         <div class="col-sm-10">
-          <div id="chart_div" class="row"></div>
-          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
+          <div id="dashboard_div">
+            <div id="chart_div" class="row"></div>
+            <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container text-left">
-      <p>
-        <!--<a href="#">Site da ueacest sobre a Maratona</a>.-->
-      </p>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>

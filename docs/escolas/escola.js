@@ -10,7 +10,7 @@ const YEARS_TO_SHOW = 5;
  *
  * @param  {Array}  rows  the results
  */
-function drawVisualization(rows) {
+function drawEventResults(rows) {
   function rankImg(year, phase, heightPx, rank) {
     let multiplier = 4, images = [], imgHTML = "";
 

@@ -18,7 +18,7 @@
 [2019, 312, null, null],
 [2020, 108, 59, null]];
       google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
-      google.charts.setOnLoadCallback(function() { drawVisualization(results); });
+      google.charts.setOnLoadCallback(function() { drawEventResults(results); });
 
       let bcItems = ['<a href="../../index.html">Escolas</a>', '<span class="breadcrumb-item active">Sudeste</span>', '<a href="index.html">São Paulo</a>'];
     </script>
@@ -31,15 +31,12 @@
           <img src="ifsp.png" class="img-fluid" onerror="this.src='../../../img/maratona-logo.jpg'">
         </div>
         <div class="col-sm-10">
-          <div id="chart_div" class="row"></div>
-          <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
+          <div id="dashboard_div">
+            <div id="chart_div" class="row"></div>
+            <div id="control_div" class="img-fluid center-block d-block mx-auto w-50" style="height: 50px;"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container text-left">
-      <p>
-        <!--<a href="#">Site da ifsp sobre a Maratona</a>.-->
-      </p>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>
   </body>

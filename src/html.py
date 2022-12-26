@@ -46,16 +46,19 @@ class Result:
         return f"[{self.year}, {s}]"
 
     @staticmethod
-    def fill(results):
-        if results:
-            years = tuple(r.year for r in results)
-            results.extend(Result(y)
-                           for y in range(min(years) + 1, max(years))
-                           if y not in years)
+    def fill_and_list(results):
+        if not results:
+            return ''
+
+        years = tuple(r.year for r in results)
+        results.extend(Result(y)
+                       for y in range(min(years) + 1, max(years))
+                       if y not in years)
+        return ',\n'.join(str(r) for r in sorted(results))
 
     @staticmethod
-    def find_in_list(result_list, year):
-        for r in result_list:
+    def find_in_list(results, year):
+        for r in results:
             if r.year == year:
                 return r
         return None
@@ -92,9 +95,14 @@ class HTML:
         return m.group(1)
 
     @staticmethod
-    def get_dropdown_institutions(content):
+    def get_dropdown_items(content):
         p = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
         return [(short, full) for short, full in re.findall(p, content)]
+
+    @staticmethod
+    def dropdown_items(institutions):
+        return '\n'.join(f'           <li><a class="dropdown-item" href="{short}.html">{full}</a></li>'
+                         for short, full in sorted(institutions, key=lambda x: x[1]))
 
 
 def create_school(uf, inst_short, inst_full, results):
@@ -104,8 +112,7 @@ def create_school(uf, inst_short, inst_full, results):
         os.makedirs(path)
 
     file = os.path.join(path, f'{inst_short}.html')
-    Result.fill(results)
-    results = ',\n'.join(str(r) for r in sorted(results))
+    results = Result.fill_and_list(results)
 
     HTML.replace('school_index.html', file,
                  {r'{BOOTSTRAP}': BOOTSTRAP, r'{RESULTS}': results,
@@ -120,16 +127,13 @@ def create_uf(uf, results, institutions):
         os.makedirs(path)
 
     file = os.path.join(path, 'index.html')
-    Result.fill(results)
-    results = ',\n'.join(str(r) for r in sorted(results))
-    dropdown = '\n'.join(f'           <li><a class="dropdown-item" href="{short}.html">{full}</a></li>'
-                         for short, full in sorted(institutions, key=lambda x: x[1]))
+    results = Result.fill_and_list(results)
 
     HTML.replace('uf_index.html', file,
                  {r'{BOOTSTRAP}': BOOTSTRAP, r'{RESULTS}': results,
                   r'{REGION}': report.UF_REGION[uf],
                   r'{UF_FULL}': UF_STATE[uf], r'{UF_SHORT}': uf.lower(),
-                  r'{DROPDOWN_ITEMS}': dropdown})
+                  r'{DROPDOWN_ITEMS}': HTML.dropdown_items(institutions)})
 
 
 def update_school(uf, inst_short, year, phase, rank):
@@ -150,8 +154,8 @@ def update_school(uf, inst_short, year, phase, rank):
 
     create_school(uf, inst_short, inst_full, results)
 
-    # If school being updated was the top ranking one and the update lowers its
-    # rank, UF rank IS NOT CHANGED!
+    # If school being updated was the UF top ranking one and the update lowers
+    # its rank, UF rank IS NOT CHANGED!
     file = os.path.join(HTML.path(uf), f'index.html')
 
     with open(file, 'r') as f:
@@ -169,7 +173,7 @@ def update_school(uf, inst_short, year, phase, rank):
         results.append(eval(f'Result({year}, {phase}={rank})'))
 
     if updated:
-        institutions = HTML.get_dropdown_institutions(content)
+        institutions = HTML.get_dropdown_items(content)
         create_uf(uf, results, institutions)
 
 
@@ -180,7 +184,6 @@ def df2dict(df):
                 .encode('ASCII', 'ignore')
                 .decode('utf-8'))
 
-    df = df[(df['role'] == 'CONTESTANT') & (df['teamRank'] > 0)]
     GROUPS = ['UF', 'instName', 'Year', 'Phase']
     df = df.sort_values(by=GROUPS + ['teamRank'])
     df_dict = {uf: defaultdict(dict) for uf in UF_STATE}
@@ -201,6 +204,13 @@ def df2dict(df):
 
 
 def create_files(df):
+    # GROUP = ['Year', 'Phase', 'Region']
+    # male = df.groupby(GROUP).username.count()
+    # # print(male)
+    # female = df[df.sex == 'FEMALE'].groupby(GROUP).username.count()
+    # print(female)
+
+    # return None
     for uf, inst_dict in df2dict(df).items():
         institutions, uf_results = [], []
         for short, info in inst_dict.items():
@@ -233,12 +243,15 @@ def create_files(df):
 if __name__ == '__main__':
     # update_school('df', 'unb', 2018, 'Nacional', 5)
     # exit(0)
+    # raise 'Dashboard! Pie-chart de participantes por região, distribuição de desepenho por região?'
+    #https://developers.google.com/chart/interactive/docs/gallery/controls
+    # https://stackoverflow.com/questions/21411438/combining-two-types-of-category-filter-in-google-charts-api
     guess_uf = quiet = True
 
     pattern = re.compile(r'.*\d{4}_(1aFase|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(19|20|21|22)_(1aFase|Nacional|Mundial)\.csv$')
     # pattern = re.compile(r'.*20(16|17|18|19)_(1aFase|Nacional|Programadores|Mundial)\.csv$')
-    pattern = re.compile(r'.*20(16|17)_(1aFase|Nacional|Mundial)\.csv$')
+    pattern = re.compile(r'.*20(21)_(1aFase|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(1aFase|Nacional|Mundial)\.csv$')
     files = [os.path.join(root, f)
              for root, dirs, files in os.walk('../reports')
@@ -246,16 +259,15 @@ if __name__ == '__main__':
 
     df = None
     for file in sorted(files, reverse=True):
-        year, phase, contest_df = report.process(file, guess_uf, not quiet)
+        year, phase, contest = report.process(file, guess_uf, not quiet)
+        contest['Phase'] = phase if phase != '1aFase' else 'PrimeiraFase'
+        contest['Year'] = year
+        if df is None:
+            df = contest
+        else:
+            df = df.append(contest, verify_integrity=True, ignore_index=True)
 
-        if contest_df is not None:
-            contest_df['Phase'] = phase if phase != '1aFase' else 'PrimeiraFase'
-            contest_df['Year'] = year
-            if df is None:
-                df = contest_df
-            else:
-                df = df.append(contest_df, verify_integrity=True, ignore_index=True)
-
+    df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
     create_files(df)
     exit(0)
 
