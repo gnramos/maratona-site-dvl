@@ -233,13 +233,14 @@ def create_files(df):
 #     exit(0)
 
 def gender_report(df):
-    GROUPS = ['Year', 'Phase', 'Region', 'sex']
-    df = df[GROUPS + ['username']]
     # É necessário ter todas as regiões, na mesma ordem, para garantir que as
     # cores serão iguais nos gráficos.
     d = {year: {'MALE': {phase: {region: 0 for region in REGION_DIR} for phase in PHASES},
                 'FEMALE': {phase: {region: 0 for region in REGION_DIR} for phase in PHASES}}
          for year in df['Year'].unique()}
+
+    GROUPS = ['Year', 'Phase', 'Region', 'sex']
+    df = df[GROUPS + ['username']]
     for group, group_df in df.groupby(GROUPS):
         year, phase, region, gender = group
         d[year][gender][phase][region] = group_df.username.count()
@@ -291,6 +292,7 @@ if __name__ == '__main__':
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
     # create_files(df)
     gender_report(df)
+
     exit(0)
 
     # df = df[(df['role'] == 'CONTESTANT') & (df['teamRank'] > 0)]
