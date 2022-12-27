@@ -10,24 +10,115 @@
 
     <script type="text/javascript" src="../../maratona.js"></script>
     <script type="text/javascript" src="../contest.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      let male = [
+['Phase', 'Region', 'Participants'],
+['1ªFase', 'CO', 134],
+['1ªFase', 'NE', 354],
+['1ªFase', 'NO', 75],
+['1ªFase', 'SE', 696],
+['1ªFase', 'SU', 185]];
+      let female = [
+['Phase', 'Region', 'Participants'],
+['1ªFase', 'CO', 19],
+['1ªFase', 'NE', 42],
+['1ªFase', 'NO', 20],
+['1ªFase', 'SE', 106],
+['1ªFase', 'SU', 27]];
+
+      google.charts.load('current', {'packages':['corechart', 'controls']});
+      google.charts.setOnLoadCallback(drawMaleDashboard);
+      google.charts.setOnLoadCallback(drawFemaleDashboard);
+
+      let phasePicker = undefined;
+      let malePieChart = undefined;
+      let femalePieChart = undefined;
+
+      function createPhasePicker() {
+        if (phasePicker === undefined)
+          phasePicker = new google.visualization.ControlWrapper({
+            'controlType': 'CategoryFilter',
+            'containerId': 'phasePicker_div',
+            'options': {
+              'filterColumnIndex': 0,
+              'ui': {
+                'sortValues': false,
+                'label': 'Fase:',
+                'allowTyping': false,
+                'allowMultiple': false,
+                'allowNone': false
+              }
+            },
+            'state': {'selectedValues': ['1ªFase']}
+          });
+      }
+
+      function pieChartWrapper(containerId, title) {
+        return new google.visualization.ChartWrapper({
+          chartType: 'PieChart',
+          'containerId': containerId,
+          'options': {
+            'legend': 'none',
+            'pieSliceText': 'label',
+            'title': `Participação ${title}`
+          },
+          'view': {'columns': [1, 2]}
+        });
+      }
+
+      function drawMaleDashboard() {
+        createPhasePicker();
+
+        malePieChart = pieChartWrapper('male_chart_div', 'Masculina');
+        let dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+        dashboard.bind(phasePicker, malePieChart);
+        dashboard.draw(male);
+      }
+
+      function drawFemaleDashboard() {
+        createPhasePicker();
+
+        femalePieChart = pieChartWrapper('female_chart_div', 'Feminina');
+        google.visualization.events.addListener(malePieChart, 'ready', function () {
+          let data = google.visualization.arrayToDataTable(female);
+          let view = new google.visualization.DataView(data);
+          let phase = phasePicker.getState().selectedValues[0];
+          view.setRows(data.getFilteredRows([{column: 0, value: phase}]));
+          femalePieChart.setDataTable(view);
+          femalePieChart.draw();
+          });
+      }
+      </script>
   </head>
   <body>
     <script type="text/javascript">document.write(bodyHeader(`${toRoman(thisYear() - 1995)} Maratona SBC de Programação (${thisYear()})`, makeBreadcrumbs()));</script>
-    <div class="d-flex align-items-stretch">
-      <div class="col-lg-2 col-md-4 col-6">
-        <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
-      </div>
-      <div class="container text-left">
-        <ul class="list-group">
-          <li class="list-group"><a href="FaseZero/index.html">Fase Zero</a></li>
-          <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
-          <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>
-          <script type="text/javascript">
-            let url = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
-            document.write(`\n<li class="list-group"><a href="${url}">Summer School</a></li>`);
-          </script>
-          <li class="list-group"><a href="Mundial/index.html">Final Mundial</a></li>
-        </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
+        </div>
+        <div id="male_dashboard_div" class="col-3">
+          <div id="male_chart_div"></div>
+          <div id="phasePicker_div"></div><br>
+        </div>
+        <div id="female_dashboard_div" class="col-3">
+          <div id="female_chart_div"></div>
+        </div>
+        <div class="col-4">
+          <ul class="list-group">
+            <li class="list-group"><a href="FaseZero/index.html">Fase Zero</a></li>
+            <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
+            <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>
+            <script type="text/javascript">
+              let url = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
+              document.write(`\n<li class="list-group"><a href="${url}">Summer School</a></li>`);
+            </script>
+            <li class="list-group"><a href="Mundial/index.html">Final Mundial</a></li>
+          </ul>
+        </div>
       </div>
     </div>
     <script type="text/javascript">document.write(bodyFooter());</script>

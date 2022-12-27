@@ -14,28 +14,32 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let male = [['Phase', 'Region', 'Participants'],
-                  ['PrimeiraFase', 'CO', 135],
-                  ['PrimeiraFase', 'NE', 380],
-                  ['PrimeiraFase', 'NO', 45],
-                  ['PrimeiraFase', 'SE', 830],
-                  ['PrimeiraFase', 'SU', 210],
-                  ['Nacional', 'CO', 18],
-                  ['Nacional', 'NE', 42],
-                  ['Nacional', 'NO', 12],
-                  ['Nacional', 'SE', 90],
-                  ['Nacional', 'SU', 18]
-                  ];
+['PrimeiraFase', 'CO', 198],
+['PrimeiraFase', 'NE', 475],
+['PrimeiraFase', 'NO', 142],
+['PrimeiraFase', 'SE', 965],
+['PrimeiraFase', 'SU', 251],
+['Nacional', 'CO', 18],
+['Nacional', 'NE', 48],
+['Nacional', 'NO', 15],
+['Nacional', 'SE', 84],
+['Nacional', 'SU', 14],
+['Mundial', 'CO', 0],
+['Mundial', 'NE', 6],
+['Mundial', 'NO', 0],
+['Mundial', 'SE', 9],
+['Mundial', 'SU', 0]];
       let female = [['Phase', 'Region', 'Participants'],
-                    ['PrimeiraFase', 'CO', 16],
-                    ['PrimeiraFase', 'NE', 43],
-                    ['PrimeiraFase', 'NO', 5],
-                    ['PrimeiraFase', 'SE', 118],
-                    ['PrimeiraFase', 'SU', 28],
-                    ['Nacional', 'CO', 0],
-                    ['Nacional', 'NE', 1],
-                    ['Nacional', 'NO', 0],
-                    ['Nacional', 'SE', 5],
-                    ['Nacional', 'SU', 1]];
+['PrimeiraFase', 'CO', 24],
+['PrimeiraFase', 'NE', 77],
+['PrimeiraFase', 'NO', 56],
+['PrimeiraFase', 'SE', 180],
+['PrimeiraFase', 'SU', 28],
+['Nacional', 'CO', 0],
+['Nacional', 'NE', 3],
+['Nacional', 'NO', 6],
+['Nacional', 'SE', 3],
+['Nacional', 'SU', 1]];
 
       google.charts.load('current', {'packages':['corechart', 'controls']});
       google.charts.setOnLoadCallback(drawMaleDashboard);
@@ -60,7 +64,7 @@
                 'allowNone': false
               }
             },
-            'state': {'selectedValues': ['PrimeiraFase']}
+            'state': {'selectedValues': ['1ªFase']}
           });
       }
 
@@ -109,14 +113,14 @@
         <div class="col-2">
           <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
         </div>
-        <div id="male_dashboard_div" class="col-4">
+        <div id="male_dashboard_div" class="col-3">
           <div id="male_chart_div"></div>
           <div id="phasePicker_div"></div><br>
         </div>
-        <div id="female_dashboard_div" class="col-4">
+        <div id="female_dashboard_div" class="col-3">
           <div id="female_chart_div"></div>
         </div>
-        <div class="col-2">
+        <div class="col-4">
           <ul class="list-group">
             <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
             <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>

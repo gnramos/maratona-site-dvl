@@ -204,13 +204,6 @@ def df2dict(df):
 
 
 def create_files(df):
-    # GROUP = ['Year', 'Phase', 'Region']
-    # male = df.groupby(GROUP).username.count()
-    # # print(male)
-    # female = df[df.sex == 'FEMALE'].groupby(GROUP).username.count()
-    # print(female)
-
-    # return None
     for uf, inst_dict in df2dict(df).items():
         institutions, uf_results = [], []
         for short, info in inst_dict.items():
@@ -239,6 +232,34 @@ def create_files(df):
 #         print(r)
 #     exit(0)
 
+def gender_report(df):
+    GROUPS = ['Year', 'Phase', 'Region', 'sex']
+    df = df[GROUPS + ['username']]
+    # É necessário ter todas as regiões, na mesma ordem, para garantir que as
+    # cores serão iguais nos gráficos.
+    d = {year: {'MALE': {phase: {region: 0 for region in REGION_DIR} for phase in PHASES},
+                'FEMALE': {phase: {region: 0 for region in REGION_DIR} for phase in PHASES}}
+         for year in df['Year'].unique()}
+    for group, group_df in df.groupby(GROUPS):
+        year, phase, region, gender = group
+        d[year][gender][phase][region] = group_df.username.count()
+
+    empty_phases = tuple((year, gender, phase)
+                         for year, gender_d in d.items()
+                         for gender, phases_d in gender_d.items()
+                         for phase, regions_d in phases_d.items()
+                         if sum(regions_d.values()) == 0)
+    for year, gender, phase in empty_phases:
+        del d[year][gender][phase]
+
+    for year, gender_d in d.items():
+        print(year)
+        for gender, phases_d in gender_d.items():
+            participants = ','.join(f"\n['{phase if phase != 'PrimeiraFase' else '1ªFase'}', '{REGION_DIR[r].upper()}', {count}]"
+                                    for phase, regions_d in phases_d.items()
+                                    for r, count in regions_d.items())
+            print(f"let {gender.lower()} = [\n['Phase', 'Region', 'Participants'],{participants}];")
+
 
 if __name__ == '__main__':
     # update_school('df', 'unb', 2018, 'Nacional', 5)
@@ -251,8 +272,8 @@ if __name__ == '__main__':
     pattern = re.compile(r'.*\d{4}_(1aFase|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(19|20|21|22)_(1aFase|Nacional|Mundial)\.csv$')
     # pattern = re.compile(r'.*20(16|17|18|19)_(1aFase|Nacional|Programadores|Mundial)\.csv$')
-    pattern = re.compile(r'.*20(21)_(1aFase|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(1aFase|Nacional|Mundial)\.csv$')
+    pattern = re.compile(r'.*20(20|21|22)_(1aFase|Nacional|Mundial)\.csv$')
     files = [os.path.join(root, f)
              for root, dirs, files in os.walk('../reports')
              for f in files if pattern.match(f)]
@@ -268,7 +289,8 @@ if __name__ == '__main__':
             df = df.append(contest, verify_integrity=True, ignore_index=True)
 
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
-    create_files(df)
+    # create_files(df)
+    gender_report(df)
     exit(0)
 
     # df = df[(df['role'] == 'CONTESTANT') & (df['teamRank'] > 0)]
