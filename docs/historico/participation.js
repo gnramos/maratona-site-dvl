@@ -26,7 +26,7 @@ function createPhasePicker() {
 
 function pieChartWrapper(containerId, title) {
   return new google.visualization.ChartWrapper({
-    chartType: 'PieChart',
+    'chartType': 'PieChart',
     'containerId': containerId,
     'options': {
       'legend': 'none',
@@ -40,6 +40,8 @@ function pieChartWrapper(containerId, title) {
 function drawMaleDashboard() {
   if (phasePicker === undefined)
     phasePicker = createPhasePicker();
+    male.unshift(['Phase', 'Region', 'Participants']);
+    female.unshift(['Phase', 'Region', 'Participants']);
 
   malePieChart = pieChartWrapper('male_chart_div', 'Masculina');
   let dashboard = new google.visualization.Dashboard(
@@ -48,7 +50,7 @@ function drawMaleDashboard() {
   dashboard.draw(male);
 }
 
-function drawFemaleDashboard() {
+function drawFemaleDashboard(){
   femalePieChart = pieChartWrapper('female_chart_div', 'Feminina');
   google.visualization.events.addListener(malePieChart, 'ready', function () {
     let data = google.visualization.arrayToDataTable(female);
@@ -61,7 +63,7 @@ function drawFemaleDashboard() {
 }
 
 function contestIndex() {
-  let zero = (thisYear() >= 2022 ? '<li class="list-group"><a href="FaseZero/index.html">Fase Zero</a></li>' : '');
+  let zero = (thisYear() >= 2022 ? '<li><a href="FaseZero/index.html">Fase Zero</a></li>' : '');
   let summer = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
   return `<div class="container">
   <div class="row">
@@ -75,13 +77,14 @@ function contestIndex() {
     <div id="female_dashboard_div" class="col-3">
       <div id="female_chart_div"></div>
     </div>
-    <div class="col-4">
+    <div class="col-4 d-flex align-items-center">
       <ul class="list-group">
+        <li class="list-group"><strong>Informações:</strong></li>
         ${zero}
-        <li class="list-group"><a href="1aFase/index.html">Primeira Fase</a></li>
-        <li class="list-group"><a href="Nacional/index.html">Final Nacional</a></li>
-        <li class="list-group"><a href="${summer}">Summer School</a></li>
-        <li class="list-group"><a href="Mundial/index.html">Final Mundial</a></li>
+        <li><a href="1aFase/index.html">Primeira Fase</a></li>
+        <li><a href="Nacional/index.html">Final Nacional</a></li>
+        <li><a href="${summer}">Summer School</a></li>
+        <li><a href="Mundial/index.html">Final Mundial</a></li>
       </ul>
     </div>
   </div>
