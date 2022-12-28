@@ -217,7 +217,7 @@ function makeBreadcrumbs() {
     prefix += '../';
     i -= 1;
   }
-  breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Passadas']);
+  breadcrumbItems.push([`${prefix}${url.at(i)}/index.html`, 'Maratonas']);
   breadcrumbItems.reverse();
   let lis = '';
   for (item of breadcrumbItems)

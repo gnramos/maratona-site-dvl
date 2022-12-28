@@ -67,11 +67,10 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
     return `
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Informações
+    Histórico
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="${root()}historico/index.html">Histórico</a></li>
-    <li><a class="dropdown-item" href="https://gnramos.github.io/maratona-site">Estatísticas</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/index.html">Maratonas</a></li>
     <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
   </ul>
 </li>`;
