@@ -256,7 +256,7 @@ def gender_report(df):
     for year, gender_d in d.items():
         print(year)
         for gender, phases_d in gender_d.items():
-            participants = ','.join(f"\n['{phase if phase != 'PrimeiraFase' else '1ªFase'}', '{REGION_DIR[r].upper()}', {count}]"
+            participants = ','.join(f"\n['{phase if phase != 'PrimeiraFase' else '1ª Fase'}', '{REGION_DIR[r].upper()}', {count}]"
                                     for phase, regions_d in phases_d.items()
                                     for r, count in regions_d.items())
             print(f"let {gender.lower()} = [\n{participants}];")

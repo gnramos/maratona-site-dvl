@@ -20,7 +20,7 @@ function createPhasePicker() {
           'allowNone': false
         }
       },
-      'state': {'selectedValues': ['1ªFase']}
+      'state': {'selectedValues': ['1ª Fase']}
     });
 }
 
@@ -65,7 +65,9 @@ function drawFemaleDashboard(){
 function contestIndex() {
   let zero = (thisYear() >= 2022 ? '<li><a href="FaseZero/index.html">Fase Zero</a></li>' : '');
   let summer = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
-  return `<div class="container">
+  let header = bodyHeader(`${toRoman(thisYear() - 1995)} Maratona SBC de Programação (${thisYear()})`, makeBreadcrumbs());
+  return `${header}
+<div class="container">
   <div class="row">
     <div class="col-2">
       <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
@@ -88,5 +90,6 @@ function contestIndex() {
       </ul>
     </div>
   </div>
-</div>`;
+</div>
+${bodyFooter()}`;
 }
