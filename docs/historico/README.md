@@ -6,8 +6,8 @@ A estrutura de diretório definida é:
 ```
 YYYY
   +- index.html
-  +- FaseZero
-  +- 1aFase
+  +- Zero
+  +- Primeira
   +- Nacional
   `- Mundial
 ```
@@ -36,7 +36,7 @@ Cada fase implica a aplicação de uma prova, cujas informações pertinentes de
 
 A estrutura de diretório definida é:
 ```
-1aFase
+Primeira
   +- contest
   +- warmup
   `- index.html

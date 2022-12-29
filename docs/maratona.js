@@ -1,5 +1,6 @@
 const CURRENT_YEAR = '2022';
 
+const PHASES = [/* 'Zero', */ '1ª Fase', 'Nacional', /* 'Programadores', */ 'Mundial'];
 const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**
@@ -56,8 +57,8 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li><a class="dropdown-item" href="${root()}inscricoes.html"><strong>Inscrições</strong></a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/FaseZero/index.html">Fase Zero</a></li>
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/1aFase/index.html">Primeira Fase</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Zero/index.html">Fase Zero</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Primeira/index.html">Primeira Fase</a></li>
     <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
     <!--<li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>-->
   </ul>

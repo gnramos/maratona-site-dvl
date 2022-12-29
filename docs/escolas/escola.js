@@ -1,4 +1,3 @@
-const PHASES = ['1ªFase', 'Nacional', /* 'Programadores', */ 'Mundial'];
 const YEARS_TO_SHOW = 5;
 
 /**

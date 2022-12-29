@@ -20,7 +20,7 @@ function createPhasePicker() {
           'allowNone': false
         }
       },
-      'state': {'selectedValues': ['1ª Fase']}
+      'state': {'selectedValues': [PHASES[0]]}
     });
 }
 
@@ -62,15 +62,26 @@ function drawFemaleDashboard(){
     });
 }
 
-function contestIndex() {
-  let zero = (thisYear() >= 2022 ? '<li><a href="FaseZero/index.html">Fase Zero</a></li>' : '');
-  let summer = `http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}`;
+function phaseItems() {
+  let links = '';
+  if (thisYear() >= 2022)
+    links += '\n<li><a href="Zero/index.html">Fase 0</a></li>'
+  if (thisYear() >= 2004)
+    links += '\n<li><a href="Primeira/index.html">Primeira Fase</a></li>';
+  links += '\n<li><a href="Nacional/index.html">Final Nacional</a></li>';
+  if (thisYear() >= 2012 && thisYear() != 2021)
+    links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}">Summer School</a></li>`;
+  links += '\n<li><a href="Mundial/index.html">Final Mundial</a></li>';
+  return links;
+}
+
+function contestIndex(primeira=true) {
   let header = bodyHeader(`${toRoman(thisYear() - 1995)} Maratona SBC de Programação (${thisYear()})`, makeBreadcrumbs());
   return `${header}
 <div class="container">
   <div class="row">
     <div class="col-2">
-      <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png"></a>
+      <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png" onerror="this.src='../../img/maratona-logo.jpg'"></a>
     </div>
     <div id="male_dashboard_div" class="col-3">
       <div id="male_chart_div"></div>
@@ -82,11 +93,7 @@ function contestIndex() {
     <div class="col-4 d-flex align-items-center">
       <ul class="list-group">
         <li class="list-group"><strong>Informações:</strong></li>
-        ${zero}
-        <li><a href="1aFase/index.html">Primeira Fase</a></li>
-        <li><a href="Nacional/index.html">Final Nacional</a></li>
-        <li><a href="${summer}">Summer School</a></li>
-        <li><a href="Mundial/index.html">Final Mundial</a></li>
+        ${phaseItems(primeira)}
       </ul>
     </div>
   </div>

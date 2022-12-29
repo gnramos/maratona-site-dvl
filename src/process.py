@@ -19,7 +19,7 @@ def main():
                         help='Sobrescrever arquivos.')
     args = parser.parse_args()
 
-    pattern = re.compile(r'.*\d{4}_(1aFase|Nacional)\.csv')
+    pattern = re.compile(r'.*\d{4}_(Primeira|Nacional)\.csv')
     files = [f for f in args.files if pattern.match(f)]
 
     df_part = None
