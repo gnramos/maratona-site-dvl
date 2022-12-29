@@ -117,6 +117,13 @@ def create_event(df):
             return '1ª Fase'
         return phase
 
+    def title(phase):
+        if phase == 'Zero':
+            return 'Fase 0'
+        if phase == 'Primeira':
+            return '1ª Fase'
+        return f'Final {phase.capitalize()}'
+
     def get_gender_dict(df):
         # É necessário ter todas as regiões, na mesma ordem, para garantir que
         # as cores serão iguais nos gráficos.
@@ -131,14 +138,30 @@ def create_event(df):
             d[year][gender][phase][region] = group_df.username.count()
         return d
 
-    def makedirs(path):
+    def makedirs(path, year):
         if not os.path.isdir(path):
             os.makedirs(path)
 
         for phase in PHASES:
+            if (phase == 'Zero' and year < '2022') or (phase == 'Primeira' and year < '2004'):
+                continue
             phase_path = os.path.join(path, phase)
             if not os.path.isdir(phase_path):
                 os.makedirs(phase_path)
+
+            file = os.path.join(phase_path, 'index.html')
+            if not os.path.isfile(file):
+                replacement_dict = {'{PHASE}': title(phase)}
+                if phase == 'Mundial':
+                    replacement_dict["let results = '';"] = f'''let results = `
+<p>
+  Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-{int(year) + 1}">site do ICPC</a>.
+</p>
+`;'''
+
+                HTML.replace('phase_template.html',
+                             os.path.join(phase_path, 'index.html'),
+                             replacement_dict)
 
     def empty_phases(d):
         # Fase sem participação implica em gráfico vazio. A remoção desta resulta
@@ -151,7 +174,7 @@ def create_event(df):
         for year, gender, phase in empty:
             del d[year][gender][phase]
 
-    def create_file():
+    def event_file():
         file = os.path.join(path, 'index.html')
         replacement_dict = {r'{BOOTSTRAP}': BOOTSTRAP}
         for year, gender_d in d.items():
@@ -164,11 +187,12 @@ def create_event(df):
 
     for year in df['Year'].unique():
         path = HTML.path_to_event(year)
-        makedirs(path)
+        makedirs(path, year)
 
         d = get_gender_dict(df[df['Year'] == year])
         empty_phases(d)
-        create_file()
+        event_file()
+
 
 def create_school(uf, inst_short, inst_full, results):
     uf, path = uf.upper(), HTML.path_to_school(uf)
