@@ -118,10 +118,8 @@ def create_event(df):
         return phase
 
     def title(phase):
-        if phase == 'Zero':
-            return 'Fase 0'
-        if phase == 'Primeira':
-            return '1ª Fase'
+        if phase in ('Zero', 'Primeira'):
+            return label(phase)
         return f'Final {phase.capitalize()}'
 
     def get_gender_dict(df):
@@ -174,7 +172,7 @@ def create_event(df):
         for year, gender, phase in empty:
             del d[year][gender][phase]
 
-    def event_file():
+    def write_event_file():
         file = os.path.join(path, 'index.html')
         replacement_dict = {r'{BOOTSTRAP}': BOOTSTRAP}
         for year, gender_d in d.items():
@@ -191,7 +189,7 @@ def create_event(df):
 
         d = get_gender_dict(df[df['Year'] == year])
         empty_phases(d)
-        event_file()
+        write_event_file()
 
 
 def create_school(uf, inst_short, inst_full, results):
@@ -333,8 +331,8 @@ if __name__ == '__main__':
     pattern = re.compile(r'.*\d{4}_(Primeira|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
     # pattern = re.compile(r'.*20(16|17|18|19)_(Primeira|Nacional|Programadores|Mundial)\.csv$')
-    pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(17)_(Primeira|Nacional|Mundial)\.csv$')
+    pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
     files = [os.path.join(root, f)
              for root, dirs, files in os.walk('../reports')
              for f in files if pattern.match(f)]
@@ -350,8 +348,7 @@ if __name__ == '__main__':
             df = df.append(contest, verify_integrity=True, ignore_index=True)
 
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
-    # create_files(df)
-    # gender_report(df)
+    create_files(df)
     create_event(df)
 
     exit(0)

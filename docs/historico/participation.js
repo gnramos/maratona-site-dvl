@@ -6,7 +6,12 @@ let phasePicker = undefined;
 let malePieChart = undefined;
 let femalePieChart = undefined;
 
-function createPhasePicker() {
+/**
+ * Returns a control wrapper object for filtering results by phase.
+ *
+ * @return {ControlWrapper} the wrapper object
+ */
+function phasePickerWrapper() {
   return new google.visualization.ControlWrapper({
       'controlType': 'CategoryFilter',
       'containerId': 'phasePicker_div',
@@ -14,7 +19,7 @@ function createPhasePicker() {
         'filterColumnIndex': 0,
         'ui': {
           'sortValues': false,
-          'label': 'Fase:',
+          'label': 'Filtro:',
           'allowTyping': false,
           'allowMultiple': false,
           'allowNone': false
@@ -24,6 +29,11 @@ function createPhasePicker() {
     });
 }
 
+/**
+ * Returns a pie chart object.
+ *
+ * @return {ControlWrapper} the wrapper object
+ */
 function pieChartWrapper(containerId, title) {
   return new google.visualization.ChartWrapper({
     'chartType': 'PieChart',
@@ -37,9 +47,12 @@ function pieChartWrapper(containerId, title) {
   });
 }
 
+/**
+ * Draws the pie chart for male participation results.
+ */
 function drawMaleDashboard() {
   if (phasePicker === undefined)
-    phasePicker = createPhasePicker();
+    phasePicker = phasePickerWrapper();
     male.unshift(['Phase', 'Region', 'Participants']);
     female.unshift(['Phase', 'Region', 'Participants']);
 
@@ -50,6 +63,11 @@ function drawMaleDashboard() {
   dashboard.draw(male);
 }
 
+/**
+ * Draws the pie chart for female participation results.
+ *
+ * Binds the results to the phasePicker object.
+ */
 function drawFemaleDashboard(){
   femalePieChart = pieChartWrapper('female_chart_div', 'Feminina');
   google.visualization.events.addListener(malePieChart, 'ready', function () {
@@ -62,25 +80,43 @@ function drawFemaleDashboard(){
     });
 }
 
-function phaseItems() {
+/**
+ * Builds a list with the phase links.
+ *
+ * @param  {Number} year year of the contest
+ * @return {String}      the HTML with the formatted information
+ */
+function phaseList(year) {
   let links = '';
-  if (thisYear() >= 2022)
+  if (year >= 2022)
     links += '\n<li><a href="Zero/index.html">Fase 0</a></li>'
-  if (thisYear() >= 2004)
+  if (year >= 2004)
     links += '\n<li><a href="Primeira/index.html">Primeira Fase</a></li>';
   links += '\n<li><a href="Nacional/index.html">Final Nacional</a></li>';
-  if (thisYear() >= 2012 && thisYear() != 2021)
-    links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(thisYear()) + 1}">Summer School</a></li>`;
+  if (year >= 2012 && year != 2021)
+    links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${year + 1}">Summer School</a></li>`;
   links += '\n<li><a href="Mundial/index.html">Final Mundial</a></li>';
-  return links;
+  return `<ul class="list-group">
+  <li class="list-group"><strong>Informações:</strong></li>
+  ${links}
+</ul>`;
 }
 
-function contestIndex(primeira=true) {
-  let header = bodyHeader(`${toRoman(thisYear() - 1995)} Maratona SBC de Programação (${thisYear()})`, makeBreadcrumbs());
+/**
+ * Builds the page body for an event.
+ *
+ * There are 3 parts: the folder, the pie chars with contestant statistics, and
+ * the links for each phase's HTML page.
+ *
+ * @return {String} the HTML with the formatted information
+ */
+function eventPageBody() {
+  let year = thisYear();
+  let header = bodyHeader(`${toRoman(year - 1995)} Maratona SBC de Programação (${year})`, makeBreadcrumbs());
   return `${header}
 <div class="container">
   <div class="row">
-    <div class="col-2">
+    <div class="col-2 d-flex align-items-center">
       <a href="Nacional/img/poster_high.png"><img class="img-fluid" src="Nacional/img/poster_low.png" onerror="this.src='../../img/maratona-logo.jpg'"></a>
     </div>
     <div id="male_dashboard_div" class="col-3">
@@ -91,10 +127,7 @@ function contestIndex(primeira=true) {
       <div id="female_chart_div"></div>
     </div>
     <div class="col-4 d-flex align-items-center">
-      <ul class="list-group">
-        <li class="list-group"><strong>Informações:</strong></li>
-        ${phaseItems(primeira)}
-      </ul>
+      ${phaseList(year)}
     </div>
   </div>
 </div>

@@ -4,12 +4,11 @@ const YEARS_TO_SHOW = 5;
  * Draw a graphic with the results.
  *
  * Assumes the results are ordered and that each result is in the following format:
- * [year, rank1stPhase, rankNationalFinals, rankWorldFinals]. Always shows the last
- * RESULT_LEN values.
+ * [year, PHASES]. Always shows the last RESULT_LEN values.
  *
  * @param  {Array}  rows  the results
  */
-function drawEventResults(rows) {
+function drawHistory(rows) {
   function rankImg(year, phase, heightPx, rank) {
     let multiplier = 4, images = [], imgHTML = "";
 
@@ -78,7 +77,7 @@ function drawEventResults(rows) {
     chartType: 'LineChart',
     containerId: 'chart_div',
     options: {hAxis: {title: 'Ano', format: '0'},
-              vAxis: {title: 'Rank', baseline: 1, direction: -1, format: '0'},
+              vAxis: {title: 'Rank', format: '0', baseline: 1, direction: -1},
               legend: {position: 'top'},
               pointSize: 10,
               tooltip: {isHtml: true}
@@ -91,14 +90,16 @@ function drawEventResults(rows) {
     options: {
               filterColumnLabel: 'Year',
               minRangeSize: 1,
-              ui: {chartOptions: { hAxis: {format: '0'}, vAxis: {direction: -1, format: '0'}}}
+              ui: {chartOptions: { hAxis: {format: '0'},
+                                   vAxis: {format: '0', direction: -1}}}
             },
     state: {
             range: {start: firstYear,
                     end: lastYear}},
   });
 
-  var dashboard = new google.visualization.Dashboard();
+  var dashboard = new google.visualization.Dashboard(
+      document.getElementById('dashboard_div'));
   dashboard.bind([control], [chart]);
   dashboard.draw(data);
 }
