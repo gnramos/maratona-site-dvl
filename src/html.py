@@ -58,6 +58,7 @@ class Result:
 
     @staticmethod
     def find_in_list(results, year):
+        year = int(year)
         for r in results:
             if r.year == year:
                 return r
@@ -308,6 +309,23 @@ def create_files(df):
         create_uf(uf, uf_results, institutions)
 
 
+def create_event_history(df):
+    d = defaultdict(dict)
+    GROUPS = ['Year', 'Phase']
+    for g, gdf in df.groupby(GROUPS):
+        year, phase = g
+        d[int(year)][phase] = gdf.teamName.count() // 3
+
+    file = os.path.join('..', 'docs', 'historico', 'index.html')
+    with open(file, 'r') as f:
+        content = f.read()
+
+    results = [Result(year, **phases_d) for year, phases_d in d.items()]
+    results = ',\n'.join(',\n'.join(f"[{r.year}, '{key if key != 'Primeira' else '1ªFase'}', {value}]" for key, value in r.ranks.items()) for r in sorted(results))
+    content = re.sub(r'(let results = \[[.\s\S]*?\];)', f'let results = [\n{results}];', content)
+    with open(file, 'w') as f:
+        f.write(content)
+
 #     df = df[['Region', 'UF', 'Year', 'Phase', 'teamRank']]
 #     df = df.drop_duplicates()
 #     GROUPS = ['Region', 'UF', 'Year', 'Phase']
@@ -342,14 +360,17 @@ if __name__ == '__main__':
         year, phase, contest = report.process(file, guess_uf, not quiet)
         contest['Phase'] = phase if phase != 'Primeira' else 'Primeira'
         contest['Year'] = year
+
         if df is None:
             df = contest
         else:
             df = df.append(contest, verify_integrity=True, ignore_index=True)
 
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
-    create_files(df)
-    create_event(df)
+
+    # create_files(df)
+    # create_event(df)
+    # create_event_history(df)
 
     exit(0)
 
