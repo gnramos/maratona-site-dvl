@@ -40,11 +40,15 @@
         let YEARS_TO_SHOW = 5;
         let cols = ['Year', 'Phase', 'Teams'];
         results.unshift(cols);
-        let data = google.visualization.arrayToDataTable(results);
         let lastYear = parseInt(results.slice(-1)[0][0]);
         let firstYear = parseInt(results[0][0]);
         if (firstYear < lastYear - YEARS_TO_SHOW + 1)
           firstYear = lastYear - YEARS_TO_SHOW + 1;
+
+        let data = google.visualization.arrayToDataTable(results);
+        let formatNumber = new google.visualization.NumberFormat({pattern: "0"});
+        formatNumber.format(data, 0);
+
         let chart = new google.visualization.ChartWrapper({
           chartType: 'LineChart',
           containerId: 'chart_div',

@@ -368,9 +368,9 @@ if __name__ == '__main__':
 
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
 
-    # create_files(df)
-    # create_event(df)
-    # create_event_history(df)
+    create_files(df)
+    create_event(df)
+    create_event_history(df)
 
     exit(0)
 
