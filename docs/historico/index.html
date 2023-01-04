@@ -12,76 +12,29 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let results = [
-[2016, '1ªFase', 777],
-[2016, 'Nacional', 60],
-[2016, 'Mundial', 6],
-[2017, '1ªFase', 814],
-[2017, 'Nacional', 72],
-[2017, 'Mundial', 7],
-[2018, '1ªFase', 745],
-[2018, 'Nacional', 71],
-[2018, 'Mundial', 6],
-[2019, '1ªFase', 721],
-[2019, 'Nacional', 60],
-[2019, 'Mundial', 9],
-[2020, '1ªFase', 798],
-[2020, 'Nacional', 64],
-[2020, 'Mundial', 5],
-[2021, '1ªFase', 532],
-[2021, 'Nacional', 60],
-[2021, 'Mundial', null],
-[2022, '1ªFase', 554],
-[2022, 'Nacional', null],
-[2022, 'Mundial', null]];
-      google.charts.load('current', {packages: ['controls', 'corechart', 'line']});
+[2016, 777, 60, 6],
+[2017, 814, 72, 7],
+[2018, 745, 71, 6],
+[2019, 721, 60, 9],
+[2020, 798, 64, 5],
+[2021, 532, 60, null],
+[2022, 554, null, null]];
+      google.charts.load('current', {packages: ['corechart']});
       google.charts.setOnLoadCallback(function() { drawParticipationResults(results); });
 
       function drawParticipationResults(results) {
-        let YEARS_TO_SHOW = 5;
-        let cols = ['Year', 'Phase', 'Teams'];
+        let cols = ['Ano'];
+        cols.push(...PHASES);
         results.unshift(cols);
-        let lastYear = parseInt(results.slice(-1)[0][0]);
-        let firstYear = parseInt(results[0][0]);
-        if (firstYear < lastYear - YEARS_TO_SHOW + 1)
-          firstYear = lastYear - YEARS_TO_SHOW + 1;
-
         let data = google.visualization.arrayToDataTable(results);
         let formatNumber = new google.visualization.NumberFormat({pattern: "0"});
         formatNumber.format(data, 0);
-
-        let chart = new google.visualization.ChartWrapper({
-          chartType: 'LineChart',
-          containerId: 'chart_div',
-          options: {hAxis: {title: 'Ano', format: '0'},
-                    vAxis: {title: 'Times', format: '0', baseline: 1},
-                    legend: 'none',//{position: 'top'},
-                    pointSize: 10
-                  },
-          view: {'columns': [0, 2]}
-        })
-
-        let phasePicker = new google.visualization.ControlWrapper({
-              'controlType': 'CategoryFilter',
-              'containerId': 'phasePicker_div',
-              'options': {
-                'filterColumnIndex': 1,
-                'ui': {
-                  'sortValues': false,
-                  'label': 'Filtro:',
-                  'allowTyping': false,
-                  'allowMultiple': false,
-                  'allowNone': false
-                }
-              },
-              'state': {'selectedValues': [PHASES[0]]}
-            });
-
-        var dashboard = new google.visualization.Dashboard(
-            document.getElementById('dashboard_div'));
-        dashboard.bind([phasePicker], [chart]);
-        dashboard.draw(data);
+        let options = {hAxis: {title: 'Ano', format: '0'},
+                       vAxis: {title: 'Times'},
+                       isStacked: true};
+        let chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+        chart.draw(data, options);
       }
-
 
     </script>
     <script type="text/javascript">
@@ -118,13 +71,9 @@
   <body>
     <script type="text/javascript">
       document.write(bodyHeader('Maratonas Passadas'));
-    </script>
-    <div id="dashboard_div">
-      <div id="chart_div" class="row"></div>
-      <div id="phasePicker_div"></div>
-    </div>
-    <br>
-    <script type="text/javascript">
+      document.write(`
+<div id="chart_div" class="row"></div>
+<br>`);
       document.write(accordion('History', accordionItems, [], false));
       document.write(bodyFooter());
     </script>

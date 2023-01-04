@@ -321,7 +321,8 @@ def create_event_history(df):
         content = f.read()
 
     results = [Result(year, **phases_d) for year, phases_d in d.items()]
-    results = ',\n'.join(',\n'.join(f"[{r.year}, '{key if key != 'Primeira' else '1ªFase'}', {value}]" for key, value in r.ranks.items()) for r in sorted(results))
+    # results = ',\n'.join(',\n'.join(f"[{r.year}, '{key if key != 'Primeira' else '1ªFase'}', {value}]" for key, value in r.ranks.items()) for r in sorted(results))
+    results = ',\n'.join(str(r) for r in sorted(results))
     content = re.sub(r'(let results = \[[.\s\S]*?\];)', f'let results = [\n{results}];', content)
     with open(file, 'w') as f:
         f.write(content)
@@ -349,8 +350,8 @@ if __name__ == '__main__':
     pattern = re.compile(r'.*\d{4}_(Primeira|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
     # pattern = re.compile(r'.*20(16|17|18|19)_(Primeira|Nacional|Programadores|Mundial)\.csv$')
-    pattern = re.compile(r'.*20(17)_(Primeira|Nacional|Mundial)\.csv$')
     pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
+    pattern = re.compile(r'.*20(17)_(Primeira|Nacional|Mundial)\.csv$')
     files = [os.path.join(root, f)
              for root, dirs, files in os.walk('../reports')
              for f in files if pattern.match(f)]
@@ -368,8 +369,8 @@ if __name__ == '__main__':
 
     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
 
-    create_files(df)
-    create_event(df)
+    # create_files(df)
+    # create_event(df)
     create_event_history(df)
 
     exit(0)
