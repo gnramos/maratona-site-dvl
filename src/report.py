@@ -78,7 +78,7 @@ CONTESTANTS_PER_TEAM = 3  # número mágico
 
 
 def _alias(institution):
-    return ALIASES.get(_normalize(institution), institution)
+    return ALIASES.get(normalize(institution), institution)
 
 
 def _capitalize(string):
@@ -113,7 +113,7 @@ def _check_data(df, is_1st_phase):
 
 
 def _get_institution_UF(institution):
-    if info := INSTITUTIONS.get(_normalize(institution), False):
+    if info := INSTITUTIONS.get(normalize(institution), False):
         return info[0]
 
     return NATIONAL_UF
@@ -124,11 +124,11 @@ def _get_region(uf):
         return UF_REGION[uf]
 
     UF_REGION[STATE_UF[ALIAS_STATE]]
-    return ALIAS_STATE.get(_normalize(uf), NATIONAL_UF)
+    return ALIAS_STATE.get(normalize(uf), NATIONAL_UF)
 
 
 def _get_short_name(institution):
-    if info := INSTITUTIONS.get(_normalize(institution), False):
+    if info := INSTITUTIONS.get(normalize(institution), False):
         return info[1]
 
     return institution
@@ -141,7 +141,7 @@ def _get_UF(uf_or_statename):
     if uf_or_statename in ALIAS_STATE:
         return STATE_UF[ALIAS_STATE[uf_or_statename]]
 
-    n_institution = _normalize(_alias(uf_or_statename))
+    n_institution = normalize(_alias(uf_or_statename))
     if info := INSTITUTIONS.get(n_institution, False):
         return info[0]
 
@@ -163,8 +163,8 @@ def _guess_institution_UF(institution, site=''):
 
     for state, uf in STATE_UF.items():
         if (re.search(f'\\b{state}\\b', institution, re.IGNORECASE) or
-                re.search(f'\\b{_normalize(state, False)}\\b',
-                          _normalize(institution, False), re.IGNORECASE) or
+                re.search(f'\\b{normalize(state, False)}\\b',
+                          normalize(institution, False), re.IGNORECASE) or
                 re.search(f'\\b{uf}\\b', institution, re.IGNORECASE) or
                 re.search(f'\\buf{uf[0]}[{uf[1]}]{{0,1}}\\b',
                           institution, re.IGNORECASE) or
@@ -189,21 +189,11 @@ def _log(messages, level=0):
         print(f'{"  " * level} {msg}')
 
 
-def _normalize(text, remove_spaces=True):
-    import unicodedata
-
-    if remove_spaces:
-        text = ''.join(text.split())
-
-    text = unicodedata.normalize('NFD', text.lower()).encode('ascii', 'ignore')
-    return str(text.decode('utf-8'))
-
-
 def _get_site(site):
     parts = [p.strip() for p in site.split('-')]
     if len(parts) == 1:
-        return ALIAS_STATE.get(_normalize(parts[0]), parts[0])
-    return ALIAS_STATE.get(_normalize(parts[1]), parts[1])
+        return ALIAS_STATE.get(normalize(parts[0]), parts[0])
+    return ALIAS_STATE.get(normalize(parts[1]), parts[1])
 
 
 def _preprocess(df, guess_uf=False, verbose=True):
@@ -295,6 +285,20 @@ def _show_site_best(df):
         _log(f'{r["Region"]} > {r["UF"]} > {r["siteName"]} > {r["teamName"]}', 1)
 
 
+def normalize(text, remove_spaces=True):
+    import unicodedata
+
+    if remove_spaces:
+        text = ''.join(text.split())
+
+    text = re.sub(r'[^\w]', '', text.lower())
+    return (unicodedata.normalize('NFD', text)
+            .encode('ASCII', 'ignore')
+            .decode('utf-8'))
+
+    # text = unicodedata.normalize('NFD', text.lower()).encode('ascii', 'ignore')
+    # return str(text.decode('utf-8'))
+
 # Função principal.
 def process(file, guess_uf=False, verbose=True):
     """Processa o arquivo, gerando um DataFrame com as informações.
@@ -343,7 +347,7 @@ with open(INSTITUTIONS_CSV) as file:
     next(file)  # Remove header.
     for line in file:
         uf, short_name, institution = line.rstrip().split(',', 2)
-        INSTITUTIONS[_normalize(institution)] = (uf, short_name, institution)
+        INSTITUTIONS[normalize(institution)] = (uf, short_name, institution)
 
         if short_name:
-            INSTITUTIONS[_normalize(short_name)] = (uf, short_name, institution)
+            INSTITUTIONS[normalize(short_name)] = (uf, short_name, institution)

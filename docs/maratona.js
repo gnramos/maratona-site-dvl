@@ -1,6 +1,6 @@
 const CURRENT_YEAR = '2022';
 
-const PHASES = [/* 'Zero', */ '1ª Fase', 'Nacional', /* 'Programadores', */ 'Mundial'];
+const PHASES = ['Fase 0', '1ª Fase', 'Nacional', /* 'Programadores', */ 'Mundial'];
 const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**

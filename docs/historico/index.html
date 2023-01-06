@@ -12,21 +12,23 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       let results = [
-[2016, 777, 60, 6],
-[2017, 814, 72, 7],
-[2018, 745, 71, 6],
-[2019, 721, 60, 9],
-[2020, 798, 64, 5],
-[2021, 532, 60, null],
-[2022, 554, null, null]];
+[2016, null, 777, 60, 6],
+[2017, null, 814, 72, 7],
+[2018, null, 745, 71, 6],
+[2019, null, 721, 60, 9],
+[2020, null, 798, 64, 5],
+[2021, null, 532, 60, null],
+[2022, null, 554, null, null]];
       google.charts.load('current', {packages: ['corechart']});
       google.charts.setOnLoadCallback(function() { drawParticipationResults(results); });
 
       function drawParticipationResults(results) {
         let cols = ['Ano'];
-        cols.push(...PHASES);
+        for (phase of PHASES)
+          cols.push({label: phase, type: 'number'});
         results.unshift(cols);
         let data = google.visualization.arrayToDataTable(results);
+        data.removeColumn(1); // Fase 0
         let formatNumber = new google.visualization.NumberFormat({pattern: "0"});
         formatNumber.format(data, 0);
         let options = {hAxis: {title: 'Ano', format: '0'},

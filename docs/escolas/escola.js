@@ -69,6 +69,7 @@ function drawHistory(rows) {
   //                       tooltip: {isHtml: true}});
 
   let data = dataTable(rows);
+  data.removeColumn(1); // Fase 0
   let lastYear = parseInt(rows.slice(-1)[0][0]);
   let firstYear = parseInt(rows[0][0]);
   if (firstYear < lastYear - YEARS_TO_SHOW + 1)
