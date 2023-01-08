@@ -198,7 +198,7 @@ function carousel(images) {
   for (i in images)
     items += `
   <div class="carousel-item ${i == 0 ? 'active' : ''}">
-    <img src="${images[i]}" class="d-block w-100">
+    <img src="${images[i]}" class="d-block w-100" style="object-fit: scale-down;">
   </div>`;
 
   return `

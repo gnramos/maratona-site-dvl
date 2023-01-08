@@ -3,7 +3,6 @@ import pandas as pd
 import random
 import re
 
-
 # Arquivo com as informações consideradas corretas para cada instituição.
 INSTITUTIONS_CSV = 'institutions.csv'
 # Arquivo com possíveis formas de escrita dao nome das instituições.
@@ -96,16 +95,15 @@ def _check_data(df, is_1st_phase):
                   f'instituições no arquivo "{INSTITUTIONS_CSV}".'
         problems.append((problem, sorted(missing_short)))
 
-    if is_1st_phase:
-        uf_df = df[df['UF'] == NATIONAL_UF]
-        missing_UF = [f'{_guess_institution_UF(g[1])},{g[0]},{g[1]}'
-                      for g, _ in uf_df.groupby(by=[SHORT, 'instName'])]
+    uf_df = df[df['UF'] == NATIONAL_UF]
+    missing_UFs = [f'{_guess_institution_UF(g[1])},{g[0]},{g[1]}'
+                   for g, _ in uf_df.groupby(by=[SHORT, 'instName'])]
 
-        if missing_UF:
-            problem = 'É preciso incluir as seguintes instituições no ' \
-                      f'arquivo "{INSTITUTIONS_CSV}". A UF é apenas uma ' \
-                      'sugestão, confirme a informação manualmente.'
-            problems.append((problem, sorted(missing_UF)))
+    if missing_UFs:
+        problem = ('É preciso incluir as seguintes instituições no '
+                   f'arquivo "{INSTITUTIONS_CSV}". A UF é apenas uma '
+                   'sugestão, confirme a informação manualmente.')
+        problems.append((problem, sorted(missing_UFs)))
 
     # Ajustando a UF, a região é automaticamente corrigida (_preprocess).
 
@@ -317,7 +315,7 @@ def process(file, guess_uf=False, verbose=True):
     df = _read_csv(file, verbose)
     df = _preprocess(df, guess_uf, verbose)
 
-    if problems := _check_data(df, phase != 'Nacional'):
+    if problems := _check_data(df, phase == 'Primeira'):
         print("Pendências identificadas!")
         for description, details in problems:
             _log(f'- {description}', 1)

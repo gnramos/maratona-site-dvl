@@ -1,8 +1,8 @@
 UF,Institution short name,Institution
 AC,FAMETA,Faculdade Meta
 AC,IFAC,Instituto Federal de Educação, Ciência e Tecnologia do Acre
-AC,UVERSE,Centro Universitário U:VERSE
 AC,UFAC,Universidade Federal do Acre
+AC,UVERSE,Centro Universitário U:VERSE
 AL,UFAL Arapiraca,Universidade Federal de Alagoas - Campus Arapiraca
 AL,UFAL,Universidade Federal de Alagoas
 AM,IComp/UFAM,Institute of Computing - Federal University of Amazonas
@@ -18,8 +18,8 @@ BA,FA1,Área1 – Faculdade de Ciência e Tecnologia
 BA,IFBA-VC,Instituto Federal de Educação, Ciência e Tecnologia da Bahia - Campus Vitória da Conquista
 BA,UCSAL,Universidade Catolica do Salvador
 BA,UEFS,Universidade Estadual de Feira de Santana
-BA,UESB-CJ,Universidade Estadual do Sudoeste da Bahia - Campus Jequié
 BA,UESB,Universidade Estadual do Sudoeste da Bahia
+BA,UESB-CJ,Universidade Estadual do Sudoeste da Bahia - Campus Jequié
 BA,UESC,Universidade Estadual de Santa Cruz
 BA,UFBA,Universidade Federal da Bahia
 BA,UNIFACS,Universidade Salvador
@@ -53,14 +53,14 @@ ES,UFES,Universidade Federal do Espirito Santo
 ES,UFES-CCENS-Alegre,UFES-Campus Alegre
 ES,UVV,Centro Universitário Vila Velha
 GO,CAJ/UFG,Universidade Federal de Goiás - Câmpus Jataí
+GO,IFG-CI,Instituto Federal de Educação, Ciência e Tecnologia Goiano - Câmpus Iporá
+GO,IFG-CU,Instituto Federal Goiano - Campus Urutaí
 GO,IFGo-RV,Instituto Federal Goiano - Campus Rio Verde
 GO,PUC-GO,Pontifícia Universidade Católica de Goiás
 GO,UCG,Universidade Católica de Goiás
 GO,UEG,Unidade Universitária de Ciências Exatas e Tecnológicas - UEG
 GO,UFG,Instituto de Informática - UFG
 GO,UniRV,Universidade de Rio Verde
-GO,IFG-CI,Instituto Federal de Educação, Ciência e Tecnologia Goiano - Câmpus Iporá
-GO,IFG-CU,Instituto Federal Goiano - Campus Urutaí
 MA,IFMA,Instituto Federal de Educação, Ciência e Tecnologia do Maranhão
 MA,UFMA,Universidade Federal do Maranhão
 MA,UNDB,Unidade de Ensino Superior Dom Bosco - UNDB
@@ -89,9 +89,9 @@ MG,IFTM-CI,Instituto Federal de Educação, Ciência e Tecnologia do Triângulo 
 MG,IFTM-CP,Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro - Campus Paracatu
 MG,IFTM-CPt,Instituto Federal do Triângulo Mineiro Campus Patrocínio
 MG,IFTM-CU,Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro - Campus Uberaba
-MG,IFTM-UPT,Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro campus Uberaba Parque Tecnológico
 MG,IFTM-Patrocinio/ADS,Instituto Federal do Triangulo Mineiro - Análise e Desenvolvimento Sistemas - Patrocínio
 MG,IFTM-Udi/TSPI,Instituto Federal de Educação, Ciência e Tecnologia de Uberlandia - Tecnologia em Sistemas para Internet
+MG,IFTM-UPT,Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro campus Uberaba Parque Tecnológico
 MG,IFU,Instituto Federal de Educação, Ciência e Tecnologia de Uberaba
 MG,II-PUC Minas,Instituto de Informática-PUC Minas
 MG,INATEL,INATEL - Instituto Nacional de Telecomunicações
@@ -122,11 +122,12 @@ MS,CPPP - UFMS,Campus de Ponta Porã - Universidade Federal de Mato Grosso do Su
 MS,FACOM - UFMS,Faculdade de Computação - UFMS
 MS,IFMS- NA,Instituto Federal de Educação, Ciências e Tecnologia do Mato Grosso do Sul - Campus Nova Andradina
 MS,Instituto Federal de,Instituto Federal de Educação, Ciência e Tecnologia de Mato Grosso do Sul - Campus Três Lagoas
-MS,UFMS-CPCX,Departamento de Ciências Exatas - CPCX/UFMS
 MS,UEMS,Universidade Estadual de Mato Grosso do Sul
 MS,UFGD,Universidade Federal da Grande Dourados
+MS,UFMS-CPCX,Departamento de Ciências Exatas - CPCX/UFMS
 MT,UFMT - Cuiabá,Universidade Federal de Mato Grosso - Campus Cuiabá
 MT,UNEMAT,Universidade do Estado de Mato Grosso
+PA,CESUPA,Centro Universitario do Para - CESUPA
 PA,IFPA,Instituto Federal de Educação, Ciência e Tecnologia do Pará
 PA,IFPA-CI,Instituto Federal de Educação, Ciência e Tecnologia do Pará - IFPA Campus Itaituba
 PA,UFOPA,Universidade Federal do Oeste do Pará
@@ -150,8 +151,9 @@ PI,IFPI,Instituto Federal de Educação, Ciência e Tecnologia do Piauí
 PI,IFPI-CP,Instituto Federal de Educação, Ciência e Tecnologia do Piauí - Campus Picos
 PI,UESPI Parnaíba,Universidade Estadual do Piauí - Campus de Parnaíba
 PI,UESPI,Universidade Estadual do Piauí
-PI,UFPI-CP,Universidade Federal do Piauí - Campus Picos
 PI,UFPI,Universidade Federal do Piauí
+PI,UFPI-CP,Universidade Federal do Piauí - Campus Picos
+PI,UNINASSAU,Faculdade Maurício de Nassau Parnaíba
 PR,CEULJI-ULBRA,Centro Universitário Luterano de Ji-Paraná da ULBRA
 PR,PUCPR,Pontificia Universidade Católica do Paraná
 PR,UEL,Universidade Estadual de Londrina
@@ -188,7 +190,7 @@ RN,IFRN-Par,Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande
 RN,UERN,Universidade do Estado do Rio Grande do Norte
 RN,UFRN,Universidade Federal do Rio Grande do Norte
 RO,,Faculdade de Porto Velho
-RO,UNIR,Fundação Universidade Federal de Rondônia
+RO,UNIR,Universidade Federal de Rondônia
 RR,CUEdA,Centro Universitário Estácio da Amazônia
 RR,FAAr,FAAr - Faculdades Associadas de Ariquemes
 RR,UERR,Universidade Estadual de Roraima

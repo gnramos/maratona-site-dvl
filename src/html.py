@@ -1,8 +1,14 @@
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 import os
 import re
 from report import STATE_UF, UF_REGION, normalize
 
+
+# Fases / ano de implementação.
+PHASES = {'Zero': 2022, 'Primeira': 2004, 'Nacional': 1996, 'Mundial': 1989}
+PHASE_TITLE = {'Zero': 'Fase 0', 'Primeira': '1ª Fase',
+               'Nacional': 'Final Nacional', 'Mundial': 'Final Mundial'}
+TITLE_PHASE = {title: phase for phase, title in PHASE_TITLE.items()}
 
 REGION_DIR = {'Centro-Oeste': 'co', 'Nordeste': 'ne', 'Norte': 'no',
               'Sudeste': 'se', 'Sul': 'su'}
@@ -11,15 +17,6 @@ UF_STATE = {uf: state for state, uf in STATE_UF.items()}
 
 BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
-
-
-# PHASES = ('Zero', 'Primeira', 'Nacional', 'Mundial')
-# PHASE_START = (2022, 2004, 1996, 1996)
-
-# Phase = namedtuple('Phase', 'name start')
-# PHASES = (Phase('Zero', 2022), Phase('Primeira', 2004),
-#           Phase('Nacional', 1996), Phase('Mundial', 1996))
-PHASES = {'Zero': 2022, 'Primeira': 2004, 'Nacional': 1996, 'Mundial': 1996}
 
 
 def _replace(template, file, replacements):
@@ -35,118 +32,152 @@ def _get_template(name):
     return os.path.join('templates', f'{name}.html')
 
 
-class History:
+def _get_array(name, content):
+    matches = re.search(f'let {name} = \\[([.\\s\\S]*?)\\];', content)
+    return [item for item in re.findall(r"(\[.*?\])", matches.group(1))]
+
+
+class Participation:
+    phases = list(PHASES)
+
+    def __init__(self, phase, region, teams):
+        self.phase = phase if phase in PHASES else TITLE_PHASE[phase]
+        self.region = region.upper()
+        self.teams = int(teams)
+
+    def __lt__(self, other):
+        if other is None:
+            return True
+        if self.phase != other.phase:
+            return Participation.phases.index(self.phase) < Participation.phases.index(other.phase)
+        return self.region < other.region
+
+    def __str__(self):
+        return f"['{PHASE_TITLE[self.phase]}', '{self.region}', {self.teams}]"
+
+
+class Contest:
     @staticmethod
-    def contests(df):
-        def label(phase):
-            return {'Zero': 'Fase 0', 'Primeira': '1ª Fase'}.get(phase, phase)
+    def path_index(year, phase=''):
+        path = os.path.join('..', 'docs', 'historico', str(year), phase)
+        index = os.path.join(path, 'index.html')
+        return path, index
 
-        def title(phase):
-            if phase in PHASES[:2]:
-                return label(phase)
-            return f'Final {phase.capitalize()}'
+    class Index:
+        @staticmethod
+        def make(year):
+            path, index = Contest.path_index(year)
+            os.makedirs(path, exist_ok=True)
+            _replace(_get_template('contest'),
+                     index, {r'{BOOTSTRAP}': BOOTSTRAP})
 
-        def get_gender_dict(df):
-            # É necessário ter todas as regiões, na mesma ordem, para garantir que
-            # as cores serão iguais nos gráficos.
-            d = {year: {'MALE': {p: {r: 0 for r in REGION_DIR} for p in PHASES},
-                        'FEMALE': {p: {r: 0 for r in REGION_DIR} for p in PHASES}}
-                 for year in df['Year'].unique()}
+        @staticmethod
+        def update(year, phase, region, gender, teams):
+            assert phase in PHASES
+            assert region.lower() in REGION_DIR.values()
+            assert gender in ('male', 'female')
+            assert teams >= 0
 
-            GROUPS = ['Year', 'Phase', 'Region', 'sex']
-            df = df[GROUPS + ['username']]
-            for group, group_df in df.groupby(GROUPS):
-                year, phase, region, gender = group
-                d[year][gender][phase][region] = group_df.username.count()
-            return d
+            path, index = Contest.path_index(year)
 
-        def makedirs(path, year):
-            if not os.path.isdir(path):
-                os.makedirs(path)
+            if not os.path.isfile(index):
+                Contest.Index.make(year)
 
-            year = int(year)
-            for phase, start in PHASES.items():
-                if (year < start):
-                    continue
-                phase_path = os.path.join(path, phase)
-                if not os.path.isdir(phase_path):
-                    os.makedirs(phase_path)
+            with open(index, 'r') as f:
+                content = f.read()
 
-                file = os.path.join(phase_path, 'index.html')
-                if not os.path.isfile(file):
-                    replacement_dict = {'{PHASE}': title(phase)}
+            participations = [Participation(*eval(item))
+                              for item in _get_array(gender, content)]
+            for p in participations:
+                if phase == p.phase and region == p.region:
+                    p.teams = teams
+                    break
+            else:
+                participations.append(Participation(phase, region, teams))
+            participations = ',\n'.join(str(p) for p in sorted(participations))
+
+            pattern = f'let {gender} = \\[([.\\s\\S]*?)\\];'
+            participations = f'let {gender} = [\n{participations}];'
+            content = re.sub(pattern, participations, content)
+
+            with open(index, 'w') as f:
+                f.write(content)
+
+    class Phase:
+        @staticmethod
+        def make(year, phase):
+            # Não sobrescreve arquivo existente!
+            assert phase in PHASES
+
+            if (int(year) >= PHASES[phase]):
+                path, index = Contest.path_index(year, phase)
+                os.makedirs(path, exist_ok=True)
+
+                if not os.path.isfile(index):
+                    replacements = {'{PHASE}': PHASE_TITLE[phase]}
                     if phase == 'Mundial':
-                        replacement_dict["let results = '';"] = f'''let results = `
-    <p>
-      Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-{int(year) + 1}">site do ICPC</a>.
-    </p>
-    `;'''
+                        replacements["let results = '';"] = f'''let results = `
+<p>
+  Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-{int(year) + 1}">site do ICPC</a>.
+</p>
+`;'''
 
-                    _replace(_get_template('phase'),
-                             os.path.join(phase_path, 'index.html'),
-                             replacement_dict)
-
-        def empty_phases(d):
-            # Fase sem participação implica em gráfico vazio. A remoção desta resulta
-            # em uma mensagem "No Data".
-            empty = tuple((year, gender, phase)
-                          for year, gender_d in d.items()
-                          for gender, phases_d in gender_d.items()
-                          for phase, regions_d in phases_d.items()
-                          if sum(regions_d.values()) == 0)
-            for year, gender, phase in empty:
-                del d[year][gender][phase]
-
-        def write_contest_file():
-            file = os.path.join(path, 'index.html')
-            replacement_dict = {r'{BOOTSTRAP}': BOOTSTRAP}
-            for year, gender_d in d.items():
-                for gender, phases_d in gender_d.items():
-                    replacement_dict[f'{{{gender}}}'] = ','.join(f"\n['{label(phase)}', '{REGION_DIR[r].upper()}', {count}]"
-                                                                 for phase, regions_d in phases_d.items()
-                                                                 for r, count in regions_d.items())
-
-            _replace(_get_template('contest'), file, replacement_dict)
-
-        for year in df['Year'].unique():
-            path = History._path(year)
-            makedirs(path, year)
-
-            d = get_gender_dict(df[df['Year'] == year])
-            empty_phases(d)
-            write_contest_file()
-
-        History._index(df)
+                    _replace(_get_template('phase'), index, replacements)
 
     @staticmethod
-    def _index(df):
-        d = defaultdict(dict)
-        GROUPS = ['Year', 'Phase']
-        for g, gdf in df.groupby(GROUPS):
-            year, phase = g
-            d[int(year)][phase] = gdf.teamName.count() // 3
+    def process(df):
+        def phase_participation(df):
+            # É necessário ter todas as regiões, na mesma ordem, para garantir
+            # que as cores serão iguais nos gráficos.
+            d = {gender: {region: 0 for region in REGION_DIR}
+                 for gender in df['sex'].unique()}
 
-        file = os.path.join('..', 'docs', 'historico', 'index.html')
-        with open(file, 'r') as f:
-            content = f.read()
+            # Contagem da participação
+            for group, group_df in df.groupby(['Region', 'sex']):
+                region, gender = group
+                d[gender][region] = group_df.username.count()
 
-        results = [Result(year, **phases_d) for year, phases_d in d.items()]
-        results = ',\n'.join(str(r) for r in sorted(results))
-        content = re.sub(r'(let results = \[[.\s\S]*?\];)',
-                         f'let results = [\n{results}];',
-                         content)
-        with open(file, 'w') as f:
-            f.write(content)
+            for gender, region_d in d.items():
+                if any(count for count in region_d.values()):
+                    for region, count in region_d.items():
+                        Contest.Index.update(year, phase,
+                                             REGION_DIR[region].upper(),
+                                             gender.lower(), count)
 
-    @staticmethod
-    def _path(year):
-        return os.path.join('..', 'docs', 'historico', str(year))
+        for group, group_df in df.groupby(['Year', 'Phase']):
+            year, phase = group
+            year = int(year)
+
+            Contest.Phase.make(year, phase)
+            phase_participation(group_df)
+            Contest.History.update(year, phase, group_df.teamName.count() // 3)
+
+    class History:
+        @staticmethod
+        def index():
+            return os.path.join('..', 'docs', 'historico', 'index.html')
+
+        @staticmethod
+        def reset():
+            Result.reset_file(Contest.History.index())
+
+        @staticmethod
+        def update(year, phase, teams):
+            assert phase in PHASES
+            assert teams >= 0
+
+            index = Contest.History.index()
+            Result.update_file(index, year, phase, teams)
 
 
 class Result:
     def __init__(self, year, **ranks):
         self.year = int(year)
-        self.ranks = {p: str(ranks.get(p, 'null')) for p in PHASES}
+        self.ranks = {}
+        for p in PHASES:
+            if (rank := ranks.get(p, 'null')) != 'null':
+                rank = f'{float(rank):.0f}'
+            self.ranks[p] = str(rank)
 
     def __setitem__(self, key, value):
         self.ranks[key] = str(value)
@@ -173,232 +204,181 @@ class Result:
         return f"[{self.year}, {s}]"
 
     @staticmethod
-    def fill_and_list(results):
-        if not results:
-            return ''
+    def update_file(file, year, phase, value, replace_if_better=False):
+        with open(file, 'r') as f:
+            content = f.read()
 
-        years = tuple(r.year for r in results)
-        results.extend(Result(y)
-                       for y in range(min(years) + 1, max(years))
-                       if y not in years)
-        return ',\n'.join(str(r) for r in sorted(results))
+        pattern = re.compile(r'\[(.*?), (.*?)\]')
+        results = []
+        for result in _get_array('results', content):
+            y, ranks = pattern.match(result).groups(1)
+            ranks = ranks.split(', ')
+            results.append(Result(y, **{phase: rank
+                                        for phase, rank in zip(PHASES, ranks)}))
+        for result in results:
+            if result.year == year:
+                if replace_if_better:
+                    if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > value):
+                        result[phase] = value
+                else:
+                    result[phase] = value
+                break
+        else:
+            results.append(Result(year, **{phase: value}))
+        results = ',\n'.join(str(r) for r in sorted(results))
 
-    @staticmethod
-    def find(year, results):
-        year = int(year)
-        for r in results:
-            if r.year == year:
-                return r
-        return None
+        pattern = r'let results = \[([.\s\S]*?)\];'
+        results = f'let results = [\n{results}];'
+        content = re.sub(pattern, results, content)
 
-
-class Schools:
-    @staticmethod
-    def _index(uf, inst_short, inst_full, results):
-        uf, path = uf.upper(), Schools._path(uf)
-
-        if not os.path.isdir(path):
-            os.makedirs(path)
-
-        file = os.path.join(path, f'{inst_short}.html')
-        results = Result.fill_and_list(results)
-
-        _replace(_get_template('school'), file,
-                 {r'{BOOTSTRAP}': BOOTSTRAP, r'{RESULTS}': results,
-                  r'{REGION}': UF_REGION[uf], r'{UF_FULL}': UF_STATE[uf],
-                  r'{INSTITUTION}': inst_full, r'{INSTSHORTNAME}': inst_short})
+        with open(file, 'w') as f:
+            f.write(content)
 
     @staticmethod
-    def _ufs(uf, results, institutions):
-        uf, path = uf.upper(), Schools._path(uf)
-
-        if not os.path.isdir(path):
-            os.makedirs(path)
-
-        file = os.path.join(path, 'index.html')
-        results = Result.fill_and_list(results)
-        dropdown = '\n'.join(f'           <li><a class="dropdown-item" href="{short}.html">{full}</a></li>'
-                             for short, full in sorted(institutions, key=lambda x: x[1]))
-
-        _replace(_get_template('uf'), file,
-                 {r'{BOOTSTRAP}': BOOTSTRAP, r'{RESULTS}': results,
-                  r'{REGION}': UF_REGION[uf],
-                  r'{UF_FULL}': UF_STATE[uf], r'{UF_SHORT}': uf.lower(),
-                  r'{DROPDOWN_ITEMS}': dropdown})
-
-    @staticmethod
-    def schools(df):
-        GROUPS = ['UF', 'instName', 'Year', 'Phase']
-        df = df.sort_values(by=GROUPS + ['teamRank'])
-        df_dict = {uf: defaultdict(dict) for uf in UF_STATE}
-        for group, group_df in df.groupby(GROUPS):
-            uf, inst, year, phase = group
-            best_rank, year = int(group_df.iloc[0]['teamRank']), int(year)
-            short = normalize(group_df.iloc[0]['instShortName'])
-            if short not in df_dict[uf]:
-                df_dict[uf][short] = {'Name': group_df.iloc[0]['instName'],
-                                      'Results': []}
-            if result := Result.find(year, df_dict[uf][short]['Results']):
-                result[phase] = best_rank
-            else:
-                df_dict[uf][short]['Results'].append(
-                    eval(f'Result({year}, {phase}={best_rank})'))
-
-        for uf, inst_dict in df_dict.items():
-            institutions, uf_results = [], []
-            for short, info in inst_dict.items():
-                Schools._index(uf, short, info['Name'], info['Results'])
-
-                institutions.append((short, info['Name']))
-                for result in info['Results']:
-                    if uf_result := Result.find(result.year, uf_results):
-                        for phase in PHASES:
-                            if uf_result[phase] == 'null' or (result[phase] != 'null' and int(uf_result[phase]) > int(result[phase])):
-                                uf_result[phase] = result[phase]
-                    else:
-                        uf_results.append(result)
-
-            Schools._ufs(uf, uf_results, institutions)
-
-    @staticmethod
-    def _path(uf):
-        region = REGION_DIR[UF_REGION[uf.upper()]]
-        return os.path.join('..', 'docs', 'escolas', region, uf.lower())
+    def reset_file(file):
+        with open(file, 'r') as f:
+            content = f.read()
+        pattern = re.compile(r'let results = \[[.\s\S]*?\];')
+        content = re.sub(pattern, 'let results = [];', content)
+        with open(file, 'w') as f:
+            f.write(content)
 
     # @staticmethod
-    # def update(uf, inst_short, year, phase, rank):
-    #     def get_results(content):
-    #         m = re.search(f'let resulst = \\[([.\\s\\S]*?)\\];', content)
-    #         results = []
-    #         for year, ranks in re.findall(r"\[(.*?), (.*?)\]", m.group(1)):
-    #             kw_args = {phase: rank
-    #                        for phase, rank in zip(PHASES, ranks.split(', '))}
-    #             results.append(Result(year, **kw_args))
-    #         return results
+    # def fill_and_list(results):
+    #     if not results:
+    #         return ''
 
-    #     file = os.path.join(Schools._path(uf), f'{inst_short}.html')
+    #     years = tuple(r.year for r in results)
+    #     results.extend(Result(y)
+    #                    for y in range(min(years) + 1, max(years))
+    #                    if y not in years)
+    #     return ',\n'.join(str(r) for r in sorted(results))
 
-    #     with open(file, 'r') as f:
-    #         content = f.read()
-
-    #     results = get_results(content)
-    #     inst_full = re.search(r'bodyHeader\("(.*?)",', content).group(1)
-
-    #     for result in results:
-    #         if result.year == year:
-    #             result[phase] = rank
-    #             break
-    #     else:
-    #         results.append(eval(f'Result({year}, {phase}={rank})'))
-
-    #     Schools.index(uf, inst_short, inst_full, results)
-
-    #     # If school being updated was the UF top ranking one and the update lowers
-    #     # its rank, UF rank IS NOT CHANGED!
-    #     file = os.path.join(Schools.path(uf), f'index.html')
-
-    #     with open(file, 'r') as f:
-    #         content = f.read()
-
-    #     results = get_results(content)
-
-    #     updated = True
-    #     if result := Result.find(year, results):
-    #         if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > int(rank)):
-    #             result[phase] = rank
-    #         else:
-    #             updated = False
-    #     else:
-    #         results.append(eval(f'Result({year}, {phase}={rank})'))
-
-    #     if updated:
-    #         pattern = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
-    #         institutions = [(short, full)
-    #                         for short, full in re.findall(pattern, content)]
-    #         Schools.uf(uf, results, institutions)
+    # @staticmethod
+    # def find(year, results):
+    #     year = int(year)
+    #     for r in results:
+    #         if r.year == year:
+    #             return r
+    #     return None
 
 
-#     df = df[['Region', 'UF', 'Year', 'Phase', 'teamRank']]
-#     df = df.drop_duplicates()
-#     GROUPS = ['Region', 'UF', 'Year', 'Phase']
-#     df = df.groupby(GROUPS).apply(lambda g: g[g['teamRank'] == g['teamRank'].min()])
-#     from collections import defaultdict
-#     results = defaultdict(list)
-#     results = {}
-#     for r in df.groupby(['Region', 'UF']):
-#         print(r)
-#     exit(0)
+class School:
+    @staticmethod
+    def reset():
+        for uf in UF_STATE:
+            School.UF.reset(uf)
+            School.Institution.reset(uf)
 
+    @staticmethod
+    def path_index(uf, institution='index'):
+        region = REGION_DIR[UF_REGION[uf.upper()]]
+        path = os.path.join('..', 'docs', 'escolas', region, uf.lower())
+        index = os.path.join(path, f'{institution}.html')
+        return path, index
 
-# if __name__ == '__main__':
-#     # update_school('df', 'unb', 2018, 'Nacional', 0)
-#     # exit(0)
-#     # raise 'Dashboard! Pie-chart de participantes por região, distribuição de desepenho por região?'
-#     #https://developers.google.com/chart/interactive/docs/gallery/controls
-#     # https://stackoverflow.com/questions/21411438/combining-two-types-of-category-filter-in-google-charts-api
-#     guess_uf = quiet = True
+    @staticmethod
+    def process(df):
+        GROUPS = ['Year', 'Phase', 'UF']
+        for group, group_df in df.groupby(GROUPS):
+            year, phase, uf = group
+            year = int(year)
 
-#     pattern = re.compile(r'.*\d{4}_(Primeira|Nacional|Mundial)\.csv$')
-#     pattern = re.compile(r'.*20(19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
-#     # pattern = re.compile(r'.*20(16|17|18|19)_(Primeira|Nacional|Programadores|Mundial)\.csv$')
-#     pattern = re.compile(r'.*20(17)_(Primeira|Nacional|Mundial)\.csv$')
-#     pattern = re.compile(r'.*20(16|17|18|19|20|21|22)_(Primeira|Nacional|Mundial)\.csv$')
-#     files = [os.path.join(root, f)
-#              for root, dirs, files in os.walk('../reports')
-#              for f in files if pattern.match(f)]
+            for g, gdf in group_df.groupby(['instShortName', 'instName', 'teamRank']):
+                short, full, rank = g
+                short, rank = normalize(short), int(rank)
 
-#     df = None
-#     for file in sorted(files, reverse=True):
-#         year, phase, contest = process(file, guess_uf, not quiet)
-#         contest['Phase'] = phase if phase != 'Primeira' else 'Primeira'
-#         contest['Year'] = year
+                School.Institution.update(uf, short, full, year, phase, rank)
+                School.UF.update_result(uf, year, phase, rank)
+                School.UF.update_dropdown(uf, short, full)
 
-#         if df is None:
-#             df = contest
-#         else:
-#             df = df.append(contest, verify_integrity=True, ignore_index=True)
+    class UF:
+        @staticmethod
+        def reset(uf):
+            path, index = School.path_index(uf.upper())
+            with open(index, 'r') as f:
+                content = f.read()
+            pattern = r'<ul class="dropdown-menu" [.\s\S]*?</ul>'
+            replace = '<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n       </ul>'
+            content = re.sub(pattern, replace, content)
+            with open(index, 'w') as f:
+                f.write(content)
 
-#     df = df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
+        @staticmethod
+        def update_result(uf, year, phase, rank):
+            uf = uf.upper()
+            assert uf in UF_STATE
+            assert phase in PHASES
+            assert rank >= 0
 
-#     # create_files(df)
-#     # create_contest(df)
-#     create_contest_history(df)
+            path, index = School.path_index(uf)
+            Result.update_file(index, year, phase, rank, replace_if_better=True)
 
-#     exit(0)
+        @staticmethod
+        def update_dropdown(uf, inst_short, inst_full):
+            uf = uf.upper()
+            assert uf in UF_STATE
 
-#     # df = df[(df['role'] == 'CONTESTANT') & (df['teamRank'] > 0)]
-#     # df = df[(df['teamStatus'] == 'ACCEPTED') & (df['teamRank'] > 0)]
-#     # df = df[['Region', 'UF', 'instName', 'instShortName', 'Year', 'Phase', 'teamName', 'teamRank']]
-#     # df = df.drop_duplicates()
-#     # # df = df.set_index(['Region', 'UF'])
-#     # GROUPS = ['Region', 'UF', 'instName', 'instShortName', 'Year', 'teamName']
-#     # # for group, group_df in df.groupby(GROUPS):
-#     # #     res = [group[4], 'null', 'null', 'null']
-#     # #     for row in group_df.itertuples():
-#     # #         res[['year', 'Primeira', 'Nacional', 'Mundial'].index(row[-3])] = int(row[-1])
+            path, file = School.path_index(uf)
+            with open(file, 'r') as f:
+                content = f.read()
 
-#     # #     group_df = group_df.sort_values(by='teamRank')
-#     # #     print(group)
-#     # #     for row in group_df.pivot(index='teamName', columns='Phase', values='teamRank').iterrows():
-#     # #         name, ranks = row
-#     # #         ranks = ranks.to_list()
-#     # #         print(name, type(ranks), )
-#     # df = df.pivot(index='teamName', columns='Phase', values='teamRank')
-#     # for r in df.iterrows():
-#     #     print(r[0])
-#     # exit(0)
+            pattern = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
+            items = [[s, f] for s, f in re.findall(pattern, content)]
+            for item in items:
+                if item[0] == inst_short:
+                    if item[1] != inst_full:
+                        item[1] = inst_full
+                    break
+            else:
+                items.append([inst_short, inst_full])
 
-#     # Campeões Regionais
-#     GROUPS = ['Region', 'UF', 'siteName', 'Year', 'Phase']
-#     regionais = df.groupby(GROUPS).apply(lambda g: g[g['teamRank'] == g['teamRank'].min()])
-#     # regionais = regionais[['Region', 'UF', 'Year', 'Phase', 'teamName', 'teamRank']].drop_duplicates()
-#     regionais = regionais.drop_duplicates()
-#     for group, groupdf in regionais.iterrows():
-#         print(group, groupdf)
-#     # print(df.groupby(GROUPS).apply(lambda g: g[g['teamRank'] == g['teamRank'].min()]))
-#     # for group, groupdf in df.groupby(GROUPS).apply(lambda g: g[g['teamRank'] == g['teamRank'].min()]).iterrows():
-#     #     region, uf, year, phase = group[:4]
-#     #     print(region, uf, year, phase, groupdf['teamName'], groupdf['teamRank'])
-#     # #     print(groupdf.pivot(index=['Region', 'UF', 'Year'], columns='Phase', values='teamRank'))
+            pattern = r'<ul class="dropdown-menu" [.\s\S]*?</ul>'
+            items = '\n'.join(f'<li><a class="dropdown-item" href="{s}.html">{f}</a></li>'
+                              for s, f in sorted(items, key=lambda x: x[1]))
+            items = f'''<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
+{items}
+       </ul>'''
+            content = re.sub(pattern, items, content)
 
-#     # # print(df) # GROUPS = []
+            with open(file, 'w') as f:
+                f.write(content)
+
+    class Institution:
+        @staticmethod
+        def reset(uf):
+            path, file = School.path_index(uf.upper())
+            Result.reset_file(file)
+            for root, dirs, files in os.walk(path):
+                for file in files:
+                    if file != 'index.html' and file.endswith('.html'):
+                        os.remove(os.path.join(path, file))
+
+        @staticmethod
+        def make(uf, inst_short, inst_full):
+            uf = uf.upper()
+            assert uf in UF_STATE
+
+            path, file = School.path_index(uf, inst_short)
+            _replace(_get_template('school'), file,
+                     {r'{BOOTSTRAP}': BOOTSTRAP, r'{REGION}': UF_REGION[uf],
+                      r'{UF_FULL}': UF_STATE[uf], r'{INSTITUTION}': inst_full,
+                      r'{INSTSHORTNAME}': inst_short})
+
+        @staticmethod
+        def update(uf, inst_short, inst_full, year, phase, rank):
+            uf = uf.upper()
+            assert uf in UF_STATE
+            assert phase in PHASES
+            assert rank > 0
+
+            path, file = School.path_index(uf, inst_short)
+
+            if not os.path.isfile(file):
+                School.Institution.make(uf, inst_short, inst_full)
+
+            Result.update_file(file, year, phase, rank, True)
+
+            # If institutionl being updated was the UF top ranking one and the
+            # update lowers its rank, UF rank IS NOT CHANGED!
+            School.UF.update_result(uf, year, phase, rank)

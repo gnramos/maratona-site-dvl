@@ -17,7 +17,7 @@
       //====================================================================================================
       let pageStart = `
 <p>
-  A Primeira Fase foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
+  A ${PHASE_TITLE[thisPhase()]} foi online, no dia 30 de outubro de 2021. Cada competidor podia usar seu próprio computador. Foram <strong>534 times de 127 instituições brasileiras</strong>.
 </p>`;
       let organization = `<p>
   Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Agustín Santiago Gutiérrez, Cláudio Leonardo Lucchesi, Clodes Silva, Cristhian Bonilha, Dâmi Henrique Pelegrino, Daniel Bossle, Fernando Fonseca, Francisco Arcos Filho, Giovanna Kobus Conrado, Jonathan Queiroz, Juan Pablo Marin, Lina Rosales, Lucas Matioli, Mauricio Collares, Matias Hunicken, Naum Azeredo, Pablo Blanc, Paulo Cezar Pereira Costa, Rafael Assis, Ricardo Anido, Teodoro Freund, Victor Lamarca e o juiz chefe do Brasil, Vinicius dos Santos.
@@ -121,7 +121,7 @@
   </head>
   <body>
     <script type="text/javascript">
-      document.write(bodyHeader(`Primeira Fase ${thisYear()}`, makeBreadcrumbs()));
+      document.write(bodyHeader(`${PHASE_TITLE[thisPhase()]} ${thisYear()}`, makeBreadcrumbs()));
       document.write(pageStart);
       document.write(accordion('Phase', [['Organização', organization],
                                          ['Prova', defaultInfo('contest', contestProblems)],
