@@ -26,6 +26,9 @@ def process_contest(args):
 
 
 def process_new(args):
+    path, index = html.Contest.path_index(args.year)
+    if os.path.isdir(path):
+        raise ValueError(f'Diretório para o ano {args.year} já existe.')
     html.Contest.Index.make(args.year)
 
 
