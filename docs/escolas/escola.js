@@ -99,7 +99,7 @@ function drawHistory(rows) {
                     end: lastYear}},
   });
 
-  var dashboard = new google.visualization.Dashboard(
+  let dashboard = new google.visualization.Dashboard(
       document.getElementById('dashboard_div'));
   dashboard.bind([control], [chart]);
   dashboard.draw(data);
