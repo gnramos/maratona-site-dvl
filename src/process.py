@@ -18,11 +18,15 @@ def _process_file(file, guess_uf, verbose):
     return df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
 
 
-def process_html(args):
+def process_contest(args):
     for file in args.files:
         df = _process_file(file, True, args.verbose)
         html.Contest.process(df)
         html.School.process(df)
+
+
+def process_new(args):
+    html.Contest.Index.make(args.year)
 
 
 def process_report(args):
@@ -39,14 +43,18 @@ def main():
     parser.set_defaults(process=lambda x: parser.print_usage())
     subparsers = parser.add_subparsers(help='Sub-comandos', dest='command')
     ###########################################################################
-    html_parser = subparsers.add_parser('html', help='Gerar/atualizar arquivos'
-                                        ' HTML referentes a uma etapa da '
-                                        'competição')
-    html_parser.add_argument('files', nargs='*', type=_report_file,
-                             help='Arquivo(s) com relatório(s) do ICPC')
-    html_parser.add_argument('-v', '--verbose', action='store_true',
-                             help='Exibir detalhes do processamento')
-    html_parser.set_defaults(process=process_html)
+    contest = subparsers.add_parser('contest', help='Atualizar arquivos HTML'
+                                    ' com os dados de etapa(s) da competição')
+    contest.add_argument('files', nargs='*', type=_report_file,
+                         help='Arquivo(s) com relatório(s) do ICPC')
+    contest.add_argument('-v', '--verbose', action='store_true',
+                         help='Exibir detalhes do processamento')
+    contest.set_defaults(process=process_contest)
+    ###########################################################################
+    new = subparsers.add_parser('new', help='Inicializar arquivos HTML de um'
+                                ' novo ano da competição')
+    new.add_argument('year', type=int, help='Ano da competição')
+    new.set_defaults(process=process_new)
     ###########################################################################
     report = subparsers.add_parser('report', help='Gerar relatório(s) '
                                    'referente(s) a arquivos')
