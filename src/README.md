@@ -3,7 +3,6 @@
 O processamento do(s) relatório(s) é feito por scripts em Python 3 (e [pandas](https://pandas.pydata.org/pandas-docs/stable/index.html)). O uso é simples:
 
 ```bash
-cd src
 python3 process.py -h
 ```
 

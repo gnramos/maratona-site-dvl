@@ -84,13 +84,10 @@ def _capitalize(string):
     return ' '.join(word.capitalize() for word in string.split())
 
 
-def _check_data(df, is_1st_phase):
+def _check_data(df):
     problems = []
 
-    missing_short_df = df[df[SHORT].isna()][['instName']]
-    missing_short = [g[0] for g in missing_short_df.groupby('instName')]
-
-    if missing_short:
+    if missing_short := df[df[SHORT].isna()]['instName'].unique():
         problem = 'Inclua o "short name" das seguintes ' \
                   f'instituições no arquivo "{INSTITUTIONS_CSV}".'
         problems.append((problem, sorted(missing_short)))
@@ -315,7 +312,7 @@ def process(file, guess_uf=False, verbose=True):
     df = _read_csv(file, verbose)
     df = _preprocess(df, guess_uf, verbose)
 
-    if problems := _check_data(df, phase == 'Primeira'):
+    if problems := _check_data(df):
         print("Pendências identificadas!")
         for description, details in problems:
             _log(f'- {description}', 1)

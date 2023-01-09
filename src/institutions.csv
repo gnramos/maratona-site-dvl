@@ -227,15 +227,13 @@ SC,UNOESC - São Miguel,UNOESC - Universidade do Oeste de Santa Catarina - São 
 SC,UNOESC,Universidade do Oeste de Santa Catarina - Joaçaba
 SE,Senai Cimatic,Faculdade de Tecnologia SENAI CIMATEC
 SE,UFS,Universidade Federal de Sergipe
-SP,,Faculdade Anhanguera Taubaté - Unidade II
-SP,,Faculdade de Tecnologia de Sorocaba
-SP,,Universidade Presbiteriana Mackenzie
 SP,CBM,Centro Universitário Barão de Mauá
 SP,EEP,Escola de Engenharia de Piracicaba
 SP,ESAMC,ESAMC Sorocaba
 SP,ESPM,Escola Superior de Propaganda e Marketing de São Paulo
 SP,FACENS,FACENS - Faculdade de Engenharia de Sorocaba
 SP,FAJ,Faculdade de Jaguariúna - FAJ
+SP,FAT-II,Faculdade Anhanguera Taubaté - Unidade II
 SP,FATEC Americana,Faculdade de Tecnologia Americana
 SP,FATEC Bauru,Fatec Bauru
 SP,FATEC Cruzeiro,Faculdade de Tecnologia de Cruzeiro
@@ -251,6 +249,7 @@ SP,FEI,Centro Universitário da FEI
 SP,FIAP,Faculdade de Informática e Administração Paulista
 SP,FIB,Faculdades Integradas de Bauru
 SP,FTI,Faculdade de Tecnologia de Itu
+SP,FTS,Faculdade de Tecnologia de Sorocaba
 SP,FTT,Faculdade de Tecnologia Termomecanica
 SP,IBILCE-UNESP,UNESP - Universidade Estadual Paulista (IBILCE)
 SP,IFSC-USP,IFSC - Instituto de Física de São Carlos - USP
@@ -285,6 +284,7 @@ SP,UNITAU,Universidade de Taubaté
 SP,UNIVEM,UNIVEM - Centro Universitário Eurípides de Marília
 SP,Univesp,Universidade Virtual do Estado de São Paulo
 SP,UNOESTE,UNOESTE - Universidade do Oeste Paulista
+SP,UPM,Universidade Presbiteriana Mackenzie
 SP,USF,Universidade São Francisco
 SP,USJT,Universidade São Judas Tadeu
 SP,USP - São Carlos,Universidade de São Paulo - Campus de São Carlos

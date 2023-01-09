@@ -37,23 +37,98 @@ def _get_array(name, content):
     return [item for item in re.findall(r"(\[.*?\])", matches.group(1))]
 
 
-class Participation:
-    phases = list(PHASES)
+class ChartInfo:
+    class GenderParticipation:
+        phases = list(PHASES)
 
-    def __init__(self, phase, region, teams):
-        self.phase = phase if phase in PHASES else TITLE_PHASE[phase]
-        self.region = region.upper()
-        self.teams = int(teams)
+        def __init__(self, phase, region, teams):
+            self.phase = PHASES.get(phase, TITLE_PHASE[phase])
+            self.region = region.upper()
+            self.teams = int(teams)
 
-    def __lt__(self, other):
-        if other is None:
-            return True
-        if self.phase != other.phase:
-            return Participation.phases.index(self.phase) < Participation.phases.index(other.phase)
-        return self.region < other.region
+        def __lt__(self, other):
+            if other is None:
+                return True
+            if self.phase != other.phase:
+                return ChartInfo.GenderParticipation.phases.index(self.phase) < ChartInfo.GenderParticipation.phases.index(other.phase)
+            return self.region < other.region
 
-    def __str__(self):
-        return f"['{PHASE_TITLE[self.phase]}', '{self.region}', {self.teams}]"
+        def __str__(self):
+            return f"['{PHASE_TITLE[self.phase]}', '{self.region}', {self.teams}]"
+
+    class Result:
+        def __init__(self, year, **ranks):
+            self.year = int(year)
+            self.ranks = {}
+            for p in PHASES:
+                if (rank := ranks.get(p, 'null')) != 'null':
+                    self.ranks[p] = f'{float(rank):.0f}'
+                else:
+                    self.ranks[p] = str(rank)
+
+        def __setitem__(self, key, value):
+            self.ranks[key] = str(value)
+
+        def __getitem__(self, key):
+            return self.ranks[key]
+
+        def __lt__(self, other):
+            if other is None:
+                return True
+            if self.year != other.year:
+                return self.year < other.year
+            for phase in reversed(PHASES):
+                if self.ranks[phase] != other.ranks[phase]:
+                    if self.ranks[phase] == 'null' != other.ranks[phase]:
+                        return False
+                    if self.ranks[phase] != 'null' == other.ranks[phase]:
+                        return True
+                    return int(self.ranks[phase]) > int(other.ranks[phase])
+            return False
+
+        def __str__(self):
+            s = ', '.join(self.ranks.values())
+            return f"[{self.year}, {s}]"
+
+        @staticmethod
+        def update_file(file, year, phase, value, replace_if_better=False):
+            with open(file, 'r') as f:
+                content = f.read()
+
+            pattern = re.compile(r'\[(.*?), (.*?)\]')
+            results = []
+            for result in _get_array('results', content):
+                y, ranks = pattern.match(result).groups(1)
+                ranks = ranks.split(', ')
+                results.append(ChartInfo.Result(y, **{phase: rank
+                                                for phase, rank in zip(PHASES, ranks)}))
+            for result in results:
+                if result.year == year:
+                    if replace_if_better:
+                        if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > value):
+                            result[phase] = value
+                    else:
+                        result[phase] = value
+                    break
+            else:
+                results.append(ChartInfo.Result(year, **{phase: value}))
+            results = ',\n'.join(str(r) for r in sorted(results))
+
+            pattern = r'let results = \[([.\s\S]*?)\];'
+            results = f'let results = [\n{results}];'
+            content = re.sub(pattern, results, content)
+
+            with open(file, 'w') as f:
+                f.write(content)
+
+        @staticmethod
+        def reset_file(file):
+            with open(file, 'r') as f:
+                content = f.read()
+            pattern = re.compile(r'let results = \[[.\s\S]*?\];')
+            content = re.sub(pattern, 'let results = [];', content)
+            with open(file, 'w') as f:
+                f.write(content)
 
 
 class Contest:
@@ -86,14 +161,14 @@ class Contest:
             with open(index, 'r') as f:
                 content = f.read()
 
-            participations = [Participation(*eval(item))
+            participations = [ChartInfo.GenderParticipation(*eval(item))
                               for item in _get_array(gender, content)]
             for p in participations:
                 if phase == p.phase and region == p.region:
                     p.teams = teams
                     break
             else:
-                participations.append(Participation(phase, region, teams))
+                participations.append(ChartInfo.GenderParticipation(phase, region, teams))
             participations = ',\n'.join(str(p) for p in sorted(participations))
 
             pattern = f'let {gender} = \\[([.\\s\\S]*?)\\];'
@@ -159,7 +234,7 @@ class Contest:
 
         @staticmethod
         def reset():
-            Result.reset_file(Contest.History.index())
+            ChartInfo.Result.reset_file(Contest.History.index())
 
         @staticmethod
         def update(year, phase, teams):
@@ -167,100 +242,7 @@ class Contest:
             assert teams >= 0
 
             index = Contest.History.index()
-            Result.update_file(index, year, phase, teams)
-
-
-class Result:
-    def __init__(self, year, **ranks):
-        self.year = int(year)
-        self.ranks = {}
-        for p in PHASES:
-            if (rank := ranks.get(p, 'null')) != 'null':
-                rank = f'{float(rank):.0f}'
-            self.ranks[p] = str(rank)
-
-    def __setitem__(self, key, value):
-        self.ranks[key] = str(value)
-
-    def __getitem__(self, key):
-        return self.ranks[key]
-
-    def __lt__(self, other):
-        if other is None:
-            return True
-        if self.year != other.year:
-            return self.year < other.year
-        for phase in reversed(PHASES):
-            if self.ranks[phase] != other.ranks[phase]:
-                if self.ranks[phase] == 'null' != other.ranks[phase]:
-                    return False
-                if self.ranks[phase] != 'null' == other.ranks[phase]:
-                    return True
-                return int(self.ranks[phase]) > int(other.ranks[phase])
-        return False
-
-    def __str__(self):
-        s = ', '.join(self.ranks.values())
-        return f"[{self.year}, {s}]"
-
-    @staticmethod
-    def update_file(file, year, phase, value, replace_if_better=False):
-        with open(file, 'r') as f:
-            content = f.read()
-
-        pattern = re.compile(r'\[(.*?), (.*?)\]')
-        results = []
-        for result in _get_array('results', content):
-            y, ranks = pattern.match(result).groups(1)
-            ranks = ranks.split(', ')
-            results.append(Result(y, **{phase: rank
-                                        for phase, rank in zip(PHASES, ranks)}))
-        for result in results:
-            if result.year == year:
-                if replace_if_better:
-                    if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > value):
-                        result[phase] = value
-                else:
-                    result[phase] = value
-                break
-        else:
-            results.append(Result(year, **{phase: value}))
-        results = ',\n'.join(str(r) for r in sorted(results))
-
-        pattern = r'let results = \[([.\s\S]*?)\];'
-        results = f'let results = [\n{results}];'
-        content = re.sub(pattern, results, content)
-
-        with open(file, 'w') as f:
-            f.write(content)
-
-    @staticmethod
-    def reset_file(file):
-        with open(file, 'r') as f:
-            content = f.read()
-        pattern = re.compile(r'let results = \[[.\s\S]*?\];')
-        content = re.sub(pattern, 'let results = [];', content)
-        with open(file, 'w') as f:
-            f.write(content)
-
-    # @staticmethod
-    # def fill_and_list(results):
-    #     if not results:
-    #         return ''
-
-    #     years = tuple(r.year for r in results)
-    #     results.extend(Result(y)
-    #                    for y in range(min(years) + 1, max(years))
-    #                    if y not in years)
-    #     return ',\n'.join(str(r) for r in sorted(results))
-
-    # @staticmethod
-    # def find(year, results):
-    #     year = int(year)
-    #     for r in results:
-    #         if r.year == year:
-    #             return r
-    #     return None
+            ChartInfo.Result.update_file(index, year, phase, teams)
 
 
 class School:
@@ -312,7 +294,7 @@ class School:
             assert rank >= 0
 
             path, index = School.path_index(uf)
-            Result.update_file(index, year, phase, rank, replace_if_better=True)
+            ChartInfo.Result.update_file(index, year, phase, rank, replace_if_better=True)
 
         @staticmethod
         def update_dropdown(uf, inst_short, inst_full):
@@ -348,7 +330,7 @@ class School:
         @staticmethod
         def reset(uf):
             path, file = School.path_index(uf.upper())
-            Result.reset_file(file)
+            ChartInfo.Result.reset_file(file)
             for root, dirs, files in os.walk(path):
                 for file in files:
                     if file != 'index.html' and file.endswith('.html'):
@@ -377,7 +359,7 @@ class School:
             if not os.path.isfile(file):
                 School.Institution.make(uf, inst_short, inst_full)
 
-            Result.update_file(file, year, phase, rank, True)
+            ChartInfo.Result.update_file(file, year, phase, rank, True)
 
             # If institutionl being updated was the UF top ranking one and the
             # update lowers its rank, UF rank IS NOT CHANGED!
