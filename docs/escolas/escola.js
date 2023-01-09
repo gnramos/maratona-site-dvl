@@ -58,7 +58,7 @@ function drawHistory(rows) {
     return data;
   }
 
-  google.charts.load('current', {packages: ['corechart', 'line', 'controls']});
+  google.charts.load('current', {packages: ['corechart', 'controls']});
 
   // let data = dataTable(rows.slice(-YEARS_TO_SHOW));
   // let lineChart = new google.visualization.LineChart(chart_div);
@@ -103,6 +103,13 @@ function drawHistory(rows) {
       document.getElementById('dashboard_div'));
   dashboard.bind([control], [chart]);
   dashboard.draw(data);
+
+  google.visualization.events.addListener(chart, 'select', function(e) {
+    let selection = chart.getChart().getSelection()[0];
+    let year = results[selection['row']][0],
+       phase = PHASE_DIR[selection['column'] / 2]; // /2 para lidar com a tooltip
+    window.location = `../../../historico/${year}/${phase}/index.html`;
+  });
 }
 
 /**

@@ -20,8 +20,6 @@
 [2021, null, 532, 60, null],
 [2022, null, 554, null, null]];
 
-      const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', /* 'Programadores', */ 'Mundial'];
-
       google.charts.load('current', {packages: ['corechart']});
       google.charts.setOnLoadCallback(function() { drawParticipationResults(results); });
 
@@ -41,11 +39,11 @@
         chart.draw(data, options);
 
         google.visualization.events.addListener(chart, 'select', function(e) {
-           let selection = chart.getSelection()[0];
-           let year = results[selection['row'] + 1][0],
-               phase = PHASE_DIR[selection['column']];
-           window.location = `${year}/${phase}/index.html`;
-         });
+             let selection = chart.getSelection()[0];
+             let year = results[selection['row'] + 1][0],
+                 phase = PHASE_DIR[selection['column']];
+             window.location = `${year}/${phase}/index.html`;
+           });
       }
 
     </script>
