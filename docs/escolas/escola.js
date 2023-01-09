@@ -60,21 +60,13 @@ function drawHistory(rows) {
 
   google.charts.load('current', {packages: ['corechart', 'controls']});
 
-  // let data = dataTable(rows.slice(-YEARS_TO_SHOW));
-  // let lineChart = new google.visualization.LineChart(chart_div);
-  // lineChart.draw(data, {hAxis: {title: 'Ano', format: '0'},
-  //                       vAxis: {title: 'Rank', baseline: 1, direction: -1, format: '0'},
-  //                       legend: {position: 'top'},
-  //                       pointSize: 10,
-  //                       tooltip: {isHtml: true}});
-
   let data = dataTable(rows);
   data.removeColumn(1); // Fase 0
   let lastYear = parseInt(rows.slice(-1)[0][0]);
   let firstYear = parseInt(rows[0][0]);
   if (firstYear < lastYear - YEARS_TO_SHOW + 1)
     firstYear = lastYear - YEARS_TO_SHOW + 1;
-  let chart = new google.visualization.ChartWrapper({
+  let chartWrapper = new google.visualization.ChartWrapper({
     chartType: 'LineChart',
     containerId: 'chart_div',
     options: {hAxis: {title: 'Ano', format: '0'},
@@ -101,11 +93,11 @@ function drawHistory(rows) {
 
   let dashboard = new google.visualization.Dashboard(
       document.getElementById('dashboard_div'));
-  dashboard.bind([control], [chart]);
+  dashboard.bind([control], [chartWrapper]);
   dashboard.draw(data);
 
-  google.visualization.events.addListener(chart, 'select', function(e) {
-    let selection = chart.getChart().getSelection()[0];
+  google.visualization.events.addListener(chartWrapper, 'select', function(e) {
+    let selection = chartWrapper.getChart().getSelection()[0];
     let year = results[selection['row'] + 2][0],
        phase = PHASE_DIR[selection['column'] / 2]; // /2 para lidar com a tooltip
     window.location = `../../../historico/${year}/${phase}/index.html`;
