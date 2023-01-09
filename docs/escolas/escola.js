@@ -106,7 +106,7 @@ function drawHistory(rows) {
 
   google.visualization.events.addListener(chart, 'select', function(e) {
     let selection = chart.getChart().getSelection()[0];
-    let year = results[selection['row']][0],
+    let year = results[selection['row'] + 2][0],
        phase = PHASE_DIR[selection['column'] / 2]; // /2 para lidar com a tooltip
     window.location = `../../../historico/${year}/${phase}/index.html`;
   });
