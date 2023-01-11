@@ -17,13 +17,10 @@ NATIONAL_REGION, NATIONAL_UF = 'Brasil', 'BR'
 REGIONS = ['Centro-Oeste', 'Nordeste', 'Norte', 'Sudeste', 'Sul']
 
 REGION_UF = {REGIONS[0]: ['DF', 'GO', 'MS', 'MT'],
-             REGIONS[1]: ['AL', 'BA', 'CE', 'MA', 'PB', 'PE', 'PI', 'RN',
-                          'SE'],
+             REGIONS[1]: ['AL', 'BA', 'CE', 'MA', 'PB', 'PE', 'PI', 'RN', 'SE'],
              REGIONS[2]: ['AC', 'AM', 'AP', 'PA', 'RO', 'RR', 'TO'],
              REGIONS[3]: ['ES', 'MG', 'RJ', 'SP'],
              REGIONS[4]: ['PR', 'RS', 'SC']}
-
-UF_REGION = {uf: region for region, ufs in REGION_UF.items() for uf in ufs}
 
 STATE_UF = {'Acre': 'AC', 'Alagoas': 'AL', 'Amazonas': 'AM', 'Amapá': 'AP',
             'Bahia': 'BA',
@@ -40,40 +37,28 @@ STATE_UF = {'Acre': 'AC', 'Alagoas': 'AL', 'Amazonas': 'AM', 'Amapá': 'AP',
             'Santa Catarina': 'SC', 'Sergipe': 'SE', 'São Paulo': 'SP',
             'Tocantins': 'TO'}
 
-# Variações nos nomes de estados para lidar com falta de padronização da
-# escrita.
-ALIAS_STATE = {'acre': 'Acre',
-               'alagoas': 'Alagoas',
-               'amazonas': 'Amazonas',
-               'amapa': 'Amapá',
-               'bahia': 'Bahia',
-               'ceara': 'Ceará',
-               'distritofederal': 'Distrito Federal',
-               'espíritosanto': 'Espírito Santo',
-               'goias': 'Goiás',
-               'maranhao': 'Maranhão',
-               'minasgerais': 'Minas Gerais',
-               'matogrossodosul': 'Mato Grosso do Sul',
-               'matogrosso': 'Mato Grosso',
-               'para': 'Pará',
-               'paraiba': 'Paraíba',
-               'pernambuco': 'Pernambuco',
-               'piaui': 'Piauí',
-               'parana': 'Paraná',
-               'riodejaneiro': 'Rio de Janeiro',
-               'riograndedonorte': 'Rio Grande do Norte',
-               'rondonia': 'Rondônia',
-               'roraima': 'Roraima',
-               'riograndedosul': 'Rio Grande do Sul',
-               'santacatarina': 'Santa Catarina',
-               'sergipe': 'Sergipe',
-               'saopaulo': 'São Paulo',
-               'tocantins': 'Tocantins'}
-
 SHORT = 'instShortName'  # melhorar a legibilidade do código
 CONTESTANTS_PER_TEAM = 3  # número mágico
 ###############################################################################
 # Funções auxiliares
+
+
+def normalize(text, remove_spaces=True):
+    import unicodedata
+
+    if remove_spaces:
+        text = ''.join(text.split())
+
+    text = re.sub(r'[^\w]', '', text.lower())
+    return (unicodedata.normalize('NFD', text)
+            .encode('ASCII', 'ignore')
+            .decode('utf-8'))
+
+
+# Variações nos nomes de estados para lidar com falta de padronização da
+# escrita.
+ALIAS_STATE = {normalize(s): s for s in STATE_UF}
+UF_REGION = {uf: region for region, ufs in REGION_UF.items() for uf in ufs}
 
 
 def _alias(institution):
@@ -206,10 +191,7 @@ def _preprocess(df, guess_uf=False, verbose=True):
 
     df['Region'] = [UF_REGION.get(uf, NATIONAL_REGION) for uf in df['UF']]
     df['siteName'] = df['siteName'].apply(_get_site)
-    # df['FullName'] = df['firstName'].apply(_capitalize) + ' ' + df['lastName'].apply(_capitalize)
     df['FullName'] = (df['firstName'] + ' ' + df['lastName']).apply(_capitalize)
-    # df['teamRank'] = df['teamRank'].fillna(0)
-    # df['SiteRank'] = df['teamRank']
     df['teamRank'] = df['teamRank'].fillna(df['teamRank'].max())
     df['SiteRank'] = df['teamRank']
 
@@ -220,8 +202,6 @@ def _preprocess(df, guess_uf=False, verbose=True):
             df.at[team_rank.index, 'SiteRank'] = site_rank + 1
 
     df = df.drop(['firstName', 'lastName'], axis=1)
-    # df.sort_values(by=['Region', 'siteName', 'teamRank']).to_csv('df.csv')
-
     return df
 
 
@@ -279,20 +259,6 @@ def _show_site_best(df):
         r = group_df.iloc[0]
         _log(f'{r["Region"]} > {r["UF"]} > {r["siteName"]} > {r["teamName"]}', 1)
 
-
-def normalize(text, remove_spaces=True):
-    import unicodedata
-
-    if remove_spaces:
-        text = ''.join(text.split())
-
-    text = re.sub(r'[^\w]', '', text.lower())
-    return (unicodedata.normalize('NFD', text)
-            .encode('ASCII', 'ignore')
-            .decode('utf-8'))
-
-    # text = unicodedata.normalize('NFD', text.lower()).encode('ascii', 'ignore')
-    # return str(text.decode('utf-8'))
 
 # Função principal.
 def process(file, guess_uf=False, verbose=True):

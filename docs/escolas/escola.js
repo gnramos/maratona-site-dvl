@@ -8,7 +8,7 @@ const YEARS_TO_SHOW = 5;
  *
  * @param  {Array}  rows  the results
  */
-function drawHistory(rows) {
+function drawHistory(results, chartId='chart_div', controlId='control_div') {
   function rankImg(year, phase, heightPx, rank) {
     let multiplier = 4, images = [], imgHTML = "";
 
@@ -37,7 +37,7 @@ function drawHistory(rows) {
     return `<div style="padding:5px 5px 5px 5px; min-width:75px;"><strong>Rank:</strong> ${rank} ${rankImg(year, phase, 12, rank)}</div>`;
   }
 
-  function dataTable(rows) {
+  function dataTable(results) {
     let data = new google.visualization.DataTable();
     data.addColumn('number', 'Year');
     for (let phase of PHASES) {
@@ -45,7 +45,7 @@ function drawHistory(rows) {
       data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
     }
 
-    for (let row of rows) {
+    for (let row of results) {
       let thisRow = [parseInt(row[0])];
       for (let phase in PHASES) {
         phase = Number(phase) + 1;
@@ -60,31 +60,31 @@ function drawHistory(rows) {
 
   google.charts.load('current', {packages: ['corechart', 'controls']});
 
-  let data = dataTable(rows);
+  let data = dataTable(results);
   data.removeColumn(1); // Fase 0
-  let lastYear = parseInt(rows.slice(-1)[0][0]);
-  let firstYear = parseInt(rows[0][0]);
+  let lastYear = parseInt(results.slice(-1)[0][0]);
+  let firstYear = parseInt(results[0][0]);
   if (firstYear < lastYear - YEARS_TO_SHOW + 1)
     firstYear = lastYear - YEARS_TO_SHOW + 1;
   let chartWrapper = new google.visualization.ChartWrapper({
-    chartType: 'LineChart',
-    containerId: 'chart_div',
-    options: {hAxis: {title: 'Ano', format: '0'},
-              vAxis: {title: 'Rank', format: '0', baseline: 1, direction: -1},
-              legend: {position: 'top'},
-              pointSize: 10,
-              tooltip: {isHtml: true}
-            }
+    'chartType': 'LineChart',
+    'containerId': chartId,
+    'options': {hAxis: {title: 'Ano', format: '0'},
+                vAxis: {title: 'Rank', format: '0', baseline: 1, direction: -1},
+                legend: {position: 'top'},
+                pointSize: 10,
+                tooltip: {isHtml: true}
+               }
   })
 
   let control = new google.visualization.ControlWrapper({
-    controlType: 'ChartRangeFilter',
-    containerId: 'control_div',
-    options: {
-              filterColumnLabel: 'Year',
-              minRangeSize: 1,
-              ui: {chartOptions: { hAxis: {format: '0'},
-                                   vAxis: {format: '0', direction: -1}}}
+    'controlType': 'ChartRangeFilter',
+    'containerId': controlId,
+    'options': {
+                filterColumnLabel: 'Year',
+                minRangeSize: 1,
+                ui: {chartOptions: { hAxis: {format: '0'},
+                                     vAxis: {format: '0', direction: -1}}}
             },
     state: {
             range: {start: firstYear,

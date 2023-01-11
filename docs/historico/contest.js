@@ -97,10 +97,9 @@ function advancingTeams(results) {
     for (i in RULE_COLORS)
       for (team of teams[i])
         cell += `<strong class="${RULE_COLORS[i]}" ${tooltip(i)}>Regra ${Number(i) + 1}</strong><br>`;
-
     return cell;
   }
-  function teamsCell(teams) {
+  function teamCell(teams) {
     let cell = '';
     for (i in RULE_COLORS)
       for (team of teams[i])
@@ -115,7 +114,7 @@ function advancingTeams(results) {
     <tr>
       <td scope="row">${site}</td>
       <td>${ruleCell(teams)}</td>
-      <td>${teamsCell(teams)}</td>
+      <td>${teamCell(teams)}</td>
     </tr>`;
     }
     return rows;

@@ -66,6 +66,9 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
 </li>`;
 }
   function infoItem(isActive) {
+    let caret = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+  <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+</svg>`;
     return `
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,7 +76,38 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li><a class="dropdown-item" href="${root()}historico/index.html">Maratonas</a></li>
-    <li><a class="dropdown-item" href="${root()}escolas/index.html">Escolas</a></li>
+    <li>
+      <span class="dropdown-item">${caret}Escolas</span>
+      <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
+        <li><a class="dropdown-item" href="${root()}escolas/ne/al/index.html">Alagoas</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/ac/index.html">Acre</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/am/index.html">Amazonas</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/ap/index.html">Amapá</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/ba/index.html">Bahia</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/ce/index.html">Ceará</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/co/df/index.html">Distrito Federal</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/se/es/index.html">Espírito Santo</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/co/go/index.html">Goiás</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/ma/index.html">Maranhão</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/co/ms/index.html">Mato Grosso</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/co/mt/index.html">Mato Grosso do Sul</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/se/mg/index.html">Minas Gerais</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/pa/index.html">Pará</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/pb/index.html">Paraíba</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/pe/index.html">Pernambuco</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/pi/index.html">Piauí</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/se/rj/index.html">Rio de Janeiro</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/rn/index.html">Rio Grande do Norte</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/su/rs/index.html">Rio Grande do Sul</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/ro/index.html">Rondônia</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/rr/index.html">Roraima</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/su/pr/index.html">Paraná</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/su/sc/index.html">Santa Catarina</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/se/sp/index.html">São Paulo</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/ne/se/index.html">Sergipe</a></li>
+        <li><a class="dropdown-item" href="${root()}escolas/no/to/index.html">Tocantins</a></li>
+      </ul>
+    </li>
   </ul>
 </li>`;
 }

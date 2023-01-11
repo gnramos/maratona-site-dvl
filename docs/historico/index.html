@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="../maratona.css">
     <script type="text/javascript" src="../maratona.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -21,9 +22,9 @@
 [2022, null, 554, null, null]];
 
       google.charts.load('current', {packages: ['corechart']});
-      google.charts.setOnLoadCallback(function() { drawParticipationResults(results); });
+      google.charts.setOnLoadCallback(function() { drawParticitpationHistory(results); });
 
-      function drawParticipationResults(results) {
+      function drawParticitpationHistory(results) {
         let cols = ['Ano'];
         for (phase of PHASES)
           cols.push({label: phase, type: 'number'});
@@ -34,6 +35,7 @@
         formatNumber.format(data, 0);
         let options = {hAxis: {title: 'Ano', format: '0'},
                        vAxis: {title: 'Times'},
+                       legend: { position: 'top'},
                        isStacked: true};
         let chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
         chart.draw(data, options);

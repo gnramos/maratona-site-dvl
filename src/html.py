@@ -19,17 +19,14 @@ BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
 
 
-def _replace(template, file, replacements):
+def _sub_in_template(template, repl, new_file):
+    template = os.path.join('templates', f'{template}.html')
     with open(template, 'r') as f:
         content = f.read()
-    for key, value in replacements.items():
+    for key, value in repl.items():
         content = re.sub(key, value, content)
-    with open(file, 'w') as f:
+    with open(new_file, 'w') as f:
         f.write(content)
-
-
-def _get_template(name):
-    return os.path.join('templates', f'{name}.html')
 
 
 def _get_array(name, content):
@@ -143,8 +140,7 @@ class Contest:
         def make(year):
             path, index = Contest.path_index(year)
             os.makedirs(path, exist_ok=True)
-            _replace(_get_template('contest'),
-                     index, {r'{BOOTSTRAP}': BOOTSTRAP})
+            _sub_in_template('contest', {r'{BOOTSTRAP}': BOOTSTRAP}, index)
 
         @staticmethod
         def update(year, phase, region, gender, teams):
@@ -191,13 +187,13 @@ class Contest:
                 if not os.path.isfile(index):
                     replacements = {'{PHASE}': PHASE_TITLE[phase]}
                     if phase == 'Mundial':
-                        replacements["let results = '';"] = f'''let results = `
+                        repl["let results = '';"] = f'''let results = `
 <p>
   Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-{int(year) + 1}">site do ICPC</a>.
 </p>
 `;'''
 
-                    _replace(_get_template('phase'), index, replacements)
+                    _sub_in_template('phase', repl, index)
 
     @staticmethod
     def process(df):
@@ -342,10 +338,9 @@ class School:
             assert uf in UF_STATE
 
             path, file = School.path_index(uf, inst_short)
-            _replace(_get_template('school'), file,
-                     {r'{BOOTSTRAP}': BOOTSTRAP, r'{REGION}': UF_REGION[uf],
-                      r'{UF_FULL}': UF_STATE[uf], r'{INSTITUTION}': inst_full,
-                      r'{INSTSHORTNAME}': inst_short})
+            repl = {r'{BOOTSTRAP}': BOOTSTRAP, r'{INSTITUTION}': inst_full,
+                    r'{INSTSHORTNAME}': inst_short}
+            _sub_in_template('school', repl, file)
 
         @staticmethod
         def update(uf, inst_short, inst_full, year, phase, rank):
