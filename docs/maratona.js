@@ -75,7 +75,7 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
     Histórico
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="${root()}historico/index.html">Maratonas</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/index.html">&nbsp;&nbsp;&nbsp;&nbsp;Maratonas</a></li>
     <li>
       <span class="dropdown-item">${caret}Escolas</span>
       <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
