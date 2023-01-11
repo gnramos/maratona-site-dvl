@@ -14,10 +14,10 @@ A criação de um novo evento é simples, basta aplicar com o script em [src](sr
 
 ### Histórico de Eventos
 
-Os arquivos referentes a um evento ficam no diretório `[historico](docs/historico)`, sendo organizados em subdiretórios `ano/fase`. O ano é no formato YYYY, e fase é uma das opções `Zero`, `Primeira`, `Nacional` e `Mundial`. Arquivos auxiliares para cada fase devem ser colocados em seus respectivos subdiretórios.
+Os arquivos referentes a um evento ficam no diretório [historico](docs/historico), sendo organizados em subdiretórios `ano/fase`. O ano é no formato YYYY, e fase é uma das opções `Zero`, `Primeira`, `Nacional` e `Mundial`. Arquivos auxiliares para cada fase devem ser colocados em seus respectivos subdiretórios.
 
 ### Escolas
 
-Os arquivos referentes a uma escola ficam no diretório `[escolas](docs/escolas)`, sendo organizados em subdiretórios `região/uf`. Cada escola tem sua própria página, nomeada conforme a sigla da instituição (normalizada).
+Os arquivos referentes a uma escola ficam no diretório [escolas](docs/escolas), sendo organizados em subdiretórios `região/uf`. Cada escola tem sua própria página, nomeada conforme a sigla da instituição (normalizada).
 
 A página de cada instituição é gerada automaticamente a partir dos relatórios de resultados. Caso queira que a página da sua instituição seja atualizada com a marca própria, basta criar um [pull request](https://docs.github.com/pt/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) incluindo o arquivo. Este deve ser uma imagem no formato [png](https://pt.wikipedia.org/wiki/PNG) com nome igual ao da página da instituição (geralmente a sigla - confira na página HTML criada para sua instituição).
