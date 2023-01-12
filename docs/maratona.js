@@ -1,4 +1,7 @@
 const CURRENT_YEAR = '2022';
+const CURRENT_PHASE = ''; // uma de PHASES (ou vazio)
+
+/* NÃO EDITAR A PARTIR DAQUI */
 
 const PHASES = ['Fase 0', '1ª Fase', 'Nacional', /* 'Programadores', */ 'Mundial'];
 const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', /* 'Programadores', */ 'Mundial'];
@@ -51,6 +54,12 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
 </li>`;
   }
   function participateItem(isActive) {
+    let phaseLinks = '';
+    for (let i = 0; i <= PHASES.indexOf(CURRENT_PHASE); i++) {
+      phaseLinks += `
+    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/${PHASE_DIR[i]}/index.html">${PHASES[i]}</a></li>`;
+    }
+
     return `
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,10 +68,7 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li><a class="dropdown-item" href="${root()}inscricoes.html"><strong>Inscrições</strong></a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Zero/index.html">Fase Zero</a></li>
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Primeira/index.html">Primeira Fase</a></li>
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Nacional/index.html">Final Nacional</a></li>
-    <!--<li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/Mundial/index.html">Final Mundial</a></li>-->
+${phaseLinks}
   </ul>
 </li>`;
 }

@@ -30,6 +30,13 @@ def process_new(args):
     if os.path.isdir(path):
         raise ValueError(f'Diretório para o ano {args.year} já existe.')
     html.Contest.Index.make(args.year)
+    for phase in html.Phases:
+        html.Contest.Phase.make(args.year, phase.name)
+    if args.update_js:
+        file = os.path.join('..', 'docs', 'maratona.js')
+        repl = {r"const CURRENT_YEAR = '\d{4}';": f"const CURRENT_YEAR = '{args.year}';",
+                r"const CURRENT_PHASE = '.*?';": f"const CURRENT_PHASE = '';"}
+        html.file_sub(file, repl, file)
 
 
 def process_report(args):
@@ -57,6 +64,8 @@ def main():
     new = subparsers.add_parser('new', help='Inicializar arquivos HTML de um'
                                 ' novo ano da competição')
     new.add_argument('year', type=int, help='Ano da competição')
+    new.add_argument('-u', '--update-js', action='store_true',
+                     help='Atualizar o arquivo JS com o novo ano.')
     new.set_defaults(process=process_new)
     ###########################################################################
     report = subparsers.add_parser('report', help='Gerar relatório(s) '

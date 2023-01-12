@@ -39,7 +39,8 @@ A estrutura de diretório definida é:
 Primeira
   +- contest
   +- warmup
-  `- index.html
+  +- index.html
+  `- manual_diretor.pdf
 ```
 
 A página apresenta, a princípio, 3 blocos de informações distintos. Mais informações podem ser acrescentadas se necessário (seguindo o padrão de formatação).

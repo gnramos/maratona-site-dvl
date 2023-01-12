@@ -4,22 +4,6 @@ import re
 from report import STATE_UF, UF_REGION, normalize
 
 
-class Phases(Enum):
-    Zero = {'title': 'Fase 0', 'dir': 'Zero', 'start': 2022, 'index': 0}
-    Primeira = {'title': '1ª Fase', 'dir': 'Primeira', 'start': 2004, 'index': 1}
-    Nacional = {'title': 'Final Nacional', 'dir': 'Nacional', 'start': 1996, 'index': 2}
-    Mundial = {'title': 'Final Mundial', 'dir': 'Mundial', 'start': 1989, 'index': 3}
-
-    def __str__(self):
-        return self.value['title']
-
-    def __lt__(self, other):
-        return self.value['index'] < other.value['index']
-
-    def exists_in(self, year):
-        return self.value['start'] <= year
-
-
 REGION_DIR = {'Centro-Oeste': 'co', 'Nordeste': 'ne', 'Norte': 'no',
               'Sudeste': 'se', 'Sul': 'su'}
 
@@ -29,19 +13,39 @@ BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
 
 
-def _sub_in_template(template, repl, file):
-    template = os.path.join('templates', f'{template}.html')
-    with open(template, 'r') as f:
+def file_sub(file_in, repl, file_out):
+    with open(file_in, 'r') as f:
         content = f.read()
     for key, value in repl.items():
         content = re.sub(key, value, content)
-    with open(file, 'w') as f:
+    with open(file_out, 'w') as f:
         f.write(content)
+
+
+def _sub_template(template, repl, file):
+    template = os.path.join('templates', f'{template}.html')
+    file_sub(template, repl, file)
 
 
 def _get_array(name, content):
     matches = re.search(f'let {name} = \\[([.\\s\\S]*?)\\];', content)
     return [item for item in re.findall(r"(\[.*?\])", matches.group(1))]
+
+
+class Phases(Enum):
+    Zero = {'title': 'Fase 0', 'start': 2022, 'index': 0}
+    Primeira = {'title': '1ª Fase', 'start': 2004, 'index': 1}
+    Nacional = {'title': 'Final Nacional', 'start': 1996, 'index': 2}
+    Mundial = {'title': 'Final Mundial', 'start': 1989, 'index': 3}
+
+    def __str__(self):
+        return self.value['title']
+
+    def __lt__(self, other):
+        return self.value['index'] < other.value['index']
+
+    def exists_in(self, year):
+        return self.value['start'] <= year
 
 
 class ChartInfo:
@@ -147,7 +151,7 @@ class Contest:
         def make(year):
             path, index = Contest.path_index(year)
             os.makedirs(path, exist_ok=True)
-            _sub_in_template('contest', {r'{BOOTSTRAP}': BOOTSTRAP}, index)
+            _sub_template('contest', {r'{BOOTSTRAP}': BOOTSTRAP}, index)
 
         @staticmethod
         def update(year, phase_name, region, gender, teams):
@@ -199,7 +203,7 @@ class Contest:
 </p>
 `;'''
 
-                    _sub_in_template('phase', repl, index)
+                    _sub_template('phase', repl, index)
 
     @staticmethod
     def process(df):
@@ -339,7 +343,7 @@ class School:
             path, file = School.path_index(uf, inst_short)
             repl = {r'{BOOTSTRAP}': BOOTSTRAP, r'{INSTITUTION}': inst_full,
                     r'{INSTSHORTNAME}': inst_short}
-            _sub_in_template('school', repl, file)
+            _sub_template('school', repl, file)
 
         @staticmethod
         def update(uf, inst_short, inst_full, year, phase_name, rank):
