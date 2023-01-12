@@ -16,8 +16,8 @@
       // date1Fase, dateNacional siteDeadline, siteForm, teamDeadline, discountDeadline, discountPrices, fullPrices.
       //====================================================================================================
       let date1Fase = '8/10/2022';
-      let dateNacional = '10/3/2023';
-      let placeNacional = 'Campo Grande, MS'
+      let dateNacional = '16/3/2023';
+      let placeNacional = `<a href="https://maratonasbc2022.ufms.br/">Campo Grande, MS</a>`;
       let siteDeadline = `30/6/2022`;
       let siteForm = `https://forms.gle/wAVvSjN8nzHFec3N9`;
       let teamDeadline = `26/9/2022`;
@@ -27,48 +27,48 @@
           fullPrices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 / time'],  // Instituição associada.
                         ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 / time']]; // Instituição não associada.
       let sites = [ //[regiao + cidade, local da prova, diretor do evento, e-mail de contato]
-['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', 'juniorlimeiras@gmail.com'],
-['AM, Manaus', 'UFAM', 'Rosiane de Freitas', 'rosiane@icomp.ufam.br'],
-['BA, Juazeiro', 'UNIVASF', 'Marcelo Linder', 'marcelo.linder@univasf.edu.br'],
-['BA, Lauro de Freitas', 'UNIME-Lauro de Freitas', 'Alex Alves da Paixão', 'alex.paixao@kroton.com.br'],
-['CE, Fortaleza', 'UFC-Fortaleza', 'Nicolas Moreira', 'nicolas@ufc.br'],
-['CE, Juazeiro do Norte', 'Centro Univ. Paraíso', 'Fabricio C. Costa', 'fabricio.carneiro@fapce.edu.br'],
-['CE, Quixadá', 'UFC-Quixadá', 'Arthur R. Araruna', 'ararunaufc@gmail.com'],
-['DF, Brasília', 'Centro Universitário IESB', 'Patricia Moscariello Rodrigues', 'pmoscariello@iesb.br'],
-['ES, Vitoria', 'UFES', 'Giovanni V. Comarela', 'gc@inf.ufes.br'],
-['GO, Goiânia', 'UFG', 'Humberto Longo', 'longo@ufg.br'],
-['MA, Balsas', 'Faculdade de Balsas', 'Jakson F. de Souza', 'jakson.ferreira@prof.unibalsas.edu.br'],
-['MG, Belo Horizonte', 'PUC-Minas', 'Felipe Domingos da Cunha', 'felipe@pucminas.br'],
-['MG, Montes Claros', 'UNIMONTES', 'Heveraldo R. de Oliveira', 'heveraldo.oliveira@unimontes.br'],
-['MG, Ouro Branco', 'UFSJ-CAP', 'Alex Vidigal Bastos', 'alexvbh@ufsj.edu.br'],
-['MG, Santa Rita do Sapucaí', 'INATEL', 'Marcelo V.C. Aragão', 'marcelovca90@inatel.br'],
-['MG, Timoteo', 'CEFET-MG Timóteo', 'Alessio Miranda Junior', 'alessio@cefetmg.br'],
-['MG, Uberaba', 'IFTM - Uberaba', 'Daniela R.S. Orbolato', 'danielaorbolato@iftm.edu.br'],
-['MG, Uberlândia', 'UFU', 'João H.S. Pereira', 'joaohs@ufu.br'],
-['MS, Campo Grande', 'UFMS', 'Amaury A. de Castro Jr.', 'amaury.junior@ufms.br'],
-['MT, Cuiabá', 'UFMT', 'Thiago M. Ventura', 'thiago@ic.ufmt.br'],
-['PA, Belém', 'UNAMA', 'Wendel de O. Castro', 'computacao.alcindo@unama.br'],
-['PA, Santarém', 'UFOPA-Santarém', 'Flavia Pessoa Monteiro', 'flavia.monteiro@ufopa.edu.br'],
-['PB, João Pessoa', 'UNIESP e IFPB', 'Marcelo Fernandes de Sousa', 'marcelo@iesp.edu.br'],
-['PE, Olinda', 'AESO Barros Melo', 'Antonio Renato C. Gonçalves', 'renato.cruz@prof.uniaeso.edu.br'],
-['PI Picos', 'UFPI-Picos', 'Glauber D. Gonçalves', 'ggoncalves@ufpi.edu.br'],
-['PI, Teresina', 'UESPI', 'José de Ribamar M. Bringel Filho', 'bringelfilho@gmail.com'],
-['PR, Campo Mourão', 'CEI', 'Anderson Fernandes', 'anderson.fernandes@grupointegrado.br'],
-['PR, Curitiba', 'UTFPR-Curitiba', 'Leandro Zatesko', 'zatesko@utfpr.edu.br'],
-['RJ, Rio de Janeiro', 'Stone', 'Leonardo Guineli', 'leonardo.guineli@stone.com.br'],
-['RN, Natal', 'UFRN', 'André L.S. Brito', 'andre@imd.ufrn.br'],
-['RO, Porto Velho', 'UNAMA-PVH', 'Renata Luz', 'renatalluz@gmail.com'],
-['RS, Porto Alegre', 'UFRGS', 'Weverton Cordeiro', 'weverton.cordeiro@inf.ufrgs.br'],
-['RS, Rio Grande', 'FURG', 'Vinicius M. de Oliveira', 'vinicius@furg.br'],
-['SC, Chapecó', 'UNOESC', 'Tiago Zonta', 'tiago.zonta@unoesc.edu.br'],
-['SE, São Cristovão', 'UFS', 'André Britto', 'andre@dcomp.ufs.br'],
-['SP Bauru', 'ITE, Bauru', 'Anderson Talon', 'anderson.talon@ite.edu.br'],
-['SP, Piracicaba', 'EEP', 'Clerivaldo J. Roccia', 'clerivaldo.roccia@gmail.com'],
-['SP, Santos', 'Unisantos', 'Ciro C. Trindade', 'ciroct@unisantos.br'],
-['SP, São José dos Campos', 'FATEC-SJC', 'Reinado Gen Ishiro Arakaki', 'reinaldo.arakaki@fatec.sp.gov.br'],
-['SP, São Paulo', 'IPT', 'Alessandro Santiago dos Santos', 'alesan@ipt.br'],
-['SP, Sorocaba', 'FACENS', 'Andréa L. B. Vieira', 'andrea.braga@facens.br'],
-['TO, Palmas', 'UFT', 'Anna Paula de S.P. Rodrigues', 'anna.rodrigues@uft.edu.br']];
+['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', ['juniorlimeiras', 'gmail.com']],
+['AM, Manaus', 'UFAM', 'Rosiane de Freitas', ['rosiane', 'icomp.ufam.br']],
+['BA, Juazeiro', 'UNIVASF', 'Marcelo Linder', ['marcelo.linder', 'univasf.edu.br']],
+['BA, Lauro de Freitas', 'UNIME-Lauro de Freitas', 'Alex Alves da Paixão', ['alex.paixao', 'kroton.com.br']],
+['CE, Fortaleza', 'UFC-Fortaleza', 'Nicolas Moreira', ['nicolas', 'ufc.br']],
+['CE, Juazeiro do Norte', 'Centro Univ. Paraíso', 'Fabricio C. Costa', ['fabricio.carneiro', 'fapce.edu.br']],
+['CE, Quixadá', 'UFC-Quixadá', 'Arthur R. Araruna', ['ararunaufc', 'gmail.com']],
+['DF, Brasília', 'Centro Universitário IESB', 'Patricia Moscariello Rodrigues', ['pmoscariello', 'iesb.br']],
+['ES, Vitoria', 'UFES', 'Giovanni V. Comarela', ['gc', 'inf.ufes.br']],
+['GO, Goiânia', 'UFG', 'Humberto Longo', ['longo', 'ufg.br']],
+['MA, Balsas', 'Faculdade de Balsas', 'Jakson F. de Souza', ['jakson.ferreira', 'prof.unibalsas.edu.br']],
+['MG, Belo Horizonte', 'PUC-Minas', 'Felipe Domingos da Cunha', ['felipe', 'pucminas.br']],
+['MG, Montes Claros', 'UNIMONTES', 'Heveraldo R. de Oliveira', ['heveraldo.oliveira', 'unimontes.br']],
+['MG, Ouro Branco', 'UFSJ-CAP', 'Alex Vidigal Bastos', ['alexvbh', 'ufsj.edu.br']],
+['MG, Santa Rita do Sapucaí', 'INATEL', 'Marcelo V.C. Aragão', ['marcelovca90', 'inatel.br']],
+['MG, Timoteo', 'CEFET-MG Timóteo', 'Alessio Miranda Junior', ['alessio', 'cefetmg.br']],
+['MG, Uberaba', 'IFTM - Uberaba', 'Daniela R.S. Orbolato', ['danielaorbolato', 'iftm.edu.br']],
+['MG, Uberlândia', 'UFU', 'João H.S. Pereira', ['joaohs', 'ufu.br']],
+['MS, Campo Grande', 'UFMS', 'Amaury A. de Castro Jr.', ['amaury.junior', 'ufms.br']],
+['MT, Cuiabá', 'UFMT', 'Thiago M. Ventura', ['thiago', 'ic.ufmt.br']],
+['PA, Belém', 'UNAMA', 'Wendel de O. Castro', ['computacao.alcindo', 'unama.br']],
+['PA, Santarém', 'UFOPA-Santarém', 'Flavia Pessoa Monteiro', ['flavia.monteiro', 'ufopa.edu.br']],
+['PB, João Pessoa', 'UNIESP e IFPB', 'Marcelo Fernandes de Sousa', ['marcelo', 'iesp.edu.br']],
+['PE, Olinda', 'AESO Barros Melo', 'Antonio Renato C. Gonçalves', ['renato.cruz', 'prof.uniaeso.edu.br']],
+['PI Picos', 'UFPI-Picos', 'Glauber D. Gonçalves', ['ggoncalves', 'ufpi.edu.br']],
+['PI, Teresina', 'UESPI', 'José de Ribamar M. Bringel Filho', ['bringelfilho', 'gmail.com']],
+['PR, Campo Mourão', 'CEI', 'Anderson Fernandes', ['anderson.fernandes', 'grupointegrado.br']],
+['PR, Curitiba', 'UTFPR-Curitiba', 'Leandro Zatesko', ['zatesko', 'utfpr.edu.br']],
+['RJ, Rio de Janeiro', 'Stone', 'Leonardo Guineli', ['leonardo.guineli', 'stone.com.br']],
+['RN, Natal', 'UFRN', 'André L.S. Brito', ['andre', 'imd.ufrn.br']],
+['RO, Porto Velho', 'UNAMA-PVH', 'Renata Luz', ['renatalluz', 'gmail.com']],
+['RS, Porto Alegre', 'UFRGS', 'Weverton Cordeiro', ['weverton.cordeiro', 'inf.ufrgs.br']],
+['RS, Rio Grande', 'FURG', 'Vinicius M. de Oliveira', ['vinicius', 'furg.br']],
+['SC, Chapecó', 'UNOESC', 'Tiago Zonta', ['tiago.zonta', 'unoesc.edu.br']],
+['SE, São Cristovão', 'UFS', 'André Britto', ['andre', 'dcomp.ufs.br']],
+['SP Bauru', 'ITE, Bauru', 'Anderson Talon', ['anderson.talon', 'ite.edu.br']],
+['SP, Piracicaba', 'EEP', 'Clerivaldo J. Roccia', ['clerivaldo.roccia', 'gmail.com']],
+['SP, Santos', 'Unisantos', 'Ciro C. Trindade', ['ciroct', 'unisantos.br']],
+['SP, São José dos Campos', 'FATEC-SJC', 'Reinado Gen Ishiro Arakaki', ['reinaldo.arakaki', 'fatec.sp.gov.br']],
+['SP, São Paulo', 'IPT', 'Alessandro Santiago dos Santos', ['alesan', 'ipt.br']],
+['SP, Sorocaba', 'FACENS', 'Andréa L. B. Vieira', ['andrea.braga', 'facens.br']],
+['TO, Palmas', 'UFT', 'Anna Paula de S.P. Rodrigues', ['anna.rodrigues', 'uft.edu.br']]];
 
       //======================================================================
       // Não editar a partir daqui.
@@ -97,7 +97,7 @@
 </p>
 <h4>Condições para sediar a Primeira Fase</h4>
 <p>
-  Espera-se que sua instituição receba pelo menos 10 times de 5 diferentes escolas na Primeira Fase, portante é importante a <a href="sobre/divulgacao.html">divulgação local do evento</a>. Lembre-se que o <a href="sobre/regras.html">número de vagas na Final Brasileira</> atribuídas à sede depende do número de escolas participantes nesta sede. O laboratório que receber a competição deve dispor de <strong>n + 3</strong> máquinas de configuração semelhante para os <strong>n</strong> times que lá disputarão a competição (3 máquinas sobressalentes). Cada máquina deve estar em uma bancada com espaço suficiente para que os três membros do time possam trabalhar em conjunto nos problemas.
+  Espera-se que sua instituição receba pelo menos 10 times de 5 diferentes escolas na Primeira Fase, portante é importante a <a href="sobre/divulgacao.html">divulgação local do evento</a>. Lembre-se que o <a href="sobre/regras.html">número de vagas na Final Brasileira</a> atribuídas à sede depende do número de escolas participantes nesta sede. O laboratório que receber a competição deve dispor de <strong>n + 3</strong> máquinas de configuração semelhante para os <strong>n</strong> times que lá disputarão a competição (3 máquinas sobressalentes). Cada máquina deve estar em uma bancada com espaço suficiente para que os três membros do time possam trabalhar em conjunto nos problemas.
 </p>
 <p>
   Todas as sedes participarão da correção centralizada. O DIretori local deve garantir as condições para que a correção ocorra em sua sede sem problemas, e deverá participar dos testes solicitados pelo pessoal de sistemas. Em particular, as máquinas locais devem ser capazes de hospedar <a href="sobre/ambiente_computacional.html">a configuração definida pela organização</a>.
@@ -162,7 +162,7 @@
     <tr>
       <td scope="row">${siteInfo[0]}</td>
       <td>${siteInfo[1]}</td>
-      <td>${contact(siteInfo[2], siteInfo[3].slice(0, 2), siteInfo[3].slice(2, -1), siteInfo[3].slice(-1))}</td>
+      <td>${contact(siteInfo[2], siteInfo[3][0], '&#x40;', siteInfo[3][1])}</td>
     </tr>`;
       siteTable = `
 <table class="table table-striped">
@@ -193,14 +193,15 @@ ${siteTable}
     </script>
   </head>
   <body>
-    <script type="text/javascript">document.write(bodyHeader('Inscrições'));</script>
+    <script type="text/javascript">
+      document.write(bodyHeader('Inscrições'));
+      document.write(`
     <p>
-      A Maratona de Programação ocorre em duas fases. A Primeira Fase será eliminatória em <script type="text/javascript">document.write(date1Fase);</script> com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de <script type="text/javascript">document.write(`${dateNacional} a ${addDays(dateNacional, 3)}`);</script> em <script type="text/javascript">document.write();</script>.
+      A Maratona de Programação ocorre em duas fases. A Primeira Fase será eliminatória em ${date1Fase} com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de ${dateNacional} a ${addDays(dateNacional, 2)} em ${placeNacional}.
     </p>
     <p class="text-danger">
-      O prazo de inscrição é <strong><script type="text/javascript">document.write(teamDeadline);</script></strong>.
-    </p>
-    <script type="text/javascript">
+      O prazo de inscrição é <strong>${teamDeadline}</strong>.
+    </p>`);
       document.write(accordion('enroll', [['Sede(s)', site],
                                           ['Time(s)', team + siteTable],
                                           ['Café-com-Leite', ccl],
