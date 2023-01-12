@@ -6,7 +6,7 @@ import os
 
 
 def _report_file(file):
-    phases = '|'.join(p for p in html.PHASES)
+    phases = '|'.join(p.name for p in html.Phases)
     if re.match(f'.*\\d{{4}}_({phases})\\.csv$', file) and os.path.isfile(file):
         return file
     raise ValueError(f'"{file}" não é um arquivo válido!')

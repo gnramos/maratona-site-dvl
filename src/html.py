@@ -1,14 +1,24 @@
-from collections import defaultdict
+from enum import Enum
 import os
 import re
 from report import STATE_UF, UF_REGION, normalize
 
 
-# Fases / ano de implementação.
-PHASES = {'Zero': 2022, 'Primeira': 2004, 'Nacional': 1996, 'Mundial': 1989}
-PHASE_TITLE = {'Zero': 'Fase 0', 'Primeira': '1ª Fase',
-               'Nacional': 'Final Nacional', 'Mundial': 'Final Mundial'}
-TITLE_PHASE = {title: phase for phase, title in PHASE_TITLE.items()}
+class Phases(Enum):
+    Zero = {'title': 'Fase 0', 'dir': 'Zero', 'start': 2022, 'index': 0}
+    Primeira = {'title': '1ª Fase', 'dir': 'Primeira', 'start': 2004, 'index': 1}
+    Nacional = {'title': 'Final Nacional', 'dir': 'Nacional', 'start': 1996, 'index': 2}
+    Mundial = {'title': 'Final Mundial', 'dir': 'Mundial', 'start': 1989, 'index': 3}
+
+    def __str__(self):
+        return self.value['title']
+
+    def __lt__(self, other):
+        return self.value['index'] < other.value['index']
+
+    def exists_in(self, year):
+        return self.value['start'] <= year
+
 
 REGION_DIR = {'Centro-Oeste': 'co', 'Nordeste': 'ne', 'Norte': 'no',
               'Sudeste': 'se', 'Sul': 'su'}
@@ -19,13 +29,13 @@ BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
 
 
-def _sub_in_template(template, repl, new_file):
+def _sub_in_template(template, repl, file):
     template = os.path.join('templates', f'{template}.html')
     with open(template, 'r') as f:
         content = f.read()
     for key, value in repl.items():
         content = re.sub(key, value, content)
-    with open(new_file, 'w') as f:
+    with open(file, 'w') as f:
         f.write(content)
 
 
@@ -36,32 +46,30 @@ def _get_array(name, content):
 
 class ChartInfo:
     class GenderParticipation:
-        phases = list(PHASES)
-
-        def __init__(self, phase, region, teams):
-            self.phase = PHASES.get(phase, TITLE_PHASE[phase])
+        def __init__(self, phase_title, region, teams):
             self.region = region.upper()
             self.teams = int(teams)
+            for phase in Phases:
+                if phase_title == str(phase):
+                    self.phase = phase
+                    break
+            else:
+                raise ValueError(f'Não existe fase "{phase_title}".')
 
         def __lt__(self, other):
-            if other is None:
-                return True
             if self.phase != other.phase:
-                return ChartInfo.GenderParticipation.phases.index(self.phase) < ChartInfo.GenderParticipation.phases.index(other.phase)
+                return self.phase < other.phase
             return self.region < other.region
 
         def __str__(self):
-            return f"['{PHASE_TITLE[self.phase]}', '{self.region}', {self.teams}]"
+            return f"['{self.phase}', '{self.region}', {self.teams}]"
 
     class Result:
         def __init__(self, year, **ranks):
             self.year = int(year)
-            self.ranks = {}
-            for p in PHASES:
-                if (rank := ranks.get(p, 'null')) != 'null':
-                    self.ranks[p] = f'{float(rank):.0f}'
-                else:
-                    self.ranks[p] = str(rank)
+            self.ranks = {phase.name: 'null' for phase in Phases}
+            for phase_name, rank in ranks.items():
+                self[phase_name] = rank
 
         def __setitem__(self, key, value):
             self.ranks[key] = str(value)
@@ -70,17 +78,15 @@ class ChartInfo:
             return self.ranks[key]
 
         def __lt__(self, other):
-            if other is None:
-                return True
             if self.year != other.year:
                 return self.year < other.year
-            for phase in reversed(PHASES):
-                if self.ranks[phase] != other.ranks[phase]:
-                    if self.ranks[phase] == 'null' != other.ranks[phase]:
+            for phase in reversed(Phases):
+                if self.ranks[phase.name] != other.ranks[phase.name]:
+                    if self.ranks[phase.name] == 'null' != other.ranks[phase.name]:
                         return False
-                    if self.ranks[phase] != 'null' == other.ranks[phase]:
+                    if self.ranks[phase.name] != 'null' == other.ranks[phase.name]:
                         return True
-                    return int(self.ranks[phase]) > int(other.ranks[phase])
+                    return int(self.ranks[phase.name]) > int(other.ranks[phase.name])
             return False
 
         def __str__(self):
@@ -88,7 +94,7 @@ class ChartInfo:
             return f"[{self.year}, {s}]"
 
         @staticmethod
-        def update_file(file, year, phase, value, replace_if_better=False):
+        def update_file(file, year, phase_name, value, replace_if_better=False):
             with open(file, 'r') as f:
                 content = f.read()
 
@@ -97,18 +103,19 @@ class ChartInfo:
             for result in _get_array('results', content):
                 y, ranks = pattern.match(result).groups(1)
                 ranks = ranks.split(', ')
-                results.append(ChartInfo.Result(y, **{phase: rank
-                                                for phase, rank in zip(PHASES, ranks)}))
+                results.append(ChartInfo.Result(y, **{phase.name: rank
+                                                      for phase, rank in zip(Phases, ranks)
+                                                      if rank != 'null'}))
             for result in results:
                 if result.year == year:
                     if replace_if_better:
-                        if result[phase] == 'null' or (result[phase] != 'null' and int(result[phase]) > value):
-                            result[phase] = value
+                        if result[phase_name] == 'null' or (result[phase_name] != 'null' and int(result[phase_name]) > value):
+                            result[phase_name] = value
                     else:
-                        result[phase] = value
+                        result[phase_name] = value
                     break
             else:
-                results.append(ChartInfo.Result(year, **{phase: value}))
+                results.append(ChartInfo.Result(year, **{phase_name: value}))
             results = ',\n'.join(str(r) for r in sorted(results))
 
             pattern = r'let results = \[([.\s\S]*?)\];'
@@ -130,8 +137,8 @@ class ChartInfo:
 
 class Contest:
     @staticmethod
-    def path_index(year, phase=''):
-        path = os.path.join('..', 'docs', 'historico', str(year), phase)
+    def path_index(year, phase_name=''):
+        path = os.path.join('..', 'docs', 'historico', str(year), phase_name)
         index = os.path.join(path, 'index.html')
         return path, index
 
@@ -143,8 +150,7 @@ class Contest:
             _sub_in_template('contest', {r'{BOOTSTRAP}': BOOTSTRAP}, index)
 
         @staticmethod
-        def update(year, phase, region, gender, teams):
-            assert phase in PHASES
+        def update(year, phase_name, region, gender, teams):
             assert region.lower() in REGION_DIR.values()
             assert gender in ('male', 'female')
             assert teams >= 0
@@ -159,12 +165,13 @@ class Contest:
 
             participations = [ChartInfo.GenderParticipation(*eval(item))
                               for item in _get_array(gender, content)]
-            for p in participations:
-                if phase == p.phase and region == p.region:
-                    p.teams = teams
+            for part in participations:
+                if phase_name == part.phase.name and region == part.region:
+                    part.teams = teams
                     break
             else:
-                participations.append(ChartInfo.GenderParticipation(phase, region, teams))
+                phase = eval(f'Phases.{phase_name}')
+                participations.append(ChartInfo.GenderParticipation(str(phase), region, teams))
             participations = ',\n'.join(str(p) for p in sorted(participations))
 
             pattern = f'let {gender} = \\[([.\\s\\S]*?)\\];'
@@ -176,17 +183,16 @@ class Contest:
 
     class Phase:
         @staticmethod
-        def make(year, phase):
+        def make(year, phase_name):
+            phase = eval(f'Phases.{phase_name}')
             # Não sobrescreve arquivo existente!
-            assert phase in PHASES
-
-            if (int(year) >= PHASES[phase]):
-                path, index = Contest.path_index(year, phase)
+            if phase.exists_in(year):
+                path, index = Contest.path_index(year, phase_name)
                 os.makedirs(path, exist_ok=True)
 
                 if not os.path.isfile(index):
-                    replacements = {'{PHASE}': PHASE_TITLE[phase]}
-                    if phase == 'Mundial':
+                    repl = {'{PHASE}': str(phase)}
+                    if phase is Phases.Mundial:
                         repl["let results = '';"] = f'''let results = `
 <p>
   Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-{int(year) + 1}">site do ICPC</a>.
@@ -197,13 +203,10 @@ class Contest:
 
     @staticmethod
     def process(df):
-        def phase_participation(df):
-            # É necessário ter todas as regiões, na mesma ordem, para garantir
-            # que as cores serão iguais nos gráficos.
+        def phase_participation(year, phase_name, df):
             d = {gender: {region: 0 for region in REGION_DIR}
                  for gender in df['sex'].unique()}
 
-            # Contagem da participação
             for group, group_df in df.groupby(['Region', 'sex']):
                 region, gender = group
                 d[gender][region] = group_df.username.count()
@@ -211,17 +214,17 @@ class Contest:
             for gender, region_d in d.items():
                 if any(count for count in region_d.values()):
                     for region, count in region_d.items():
-                        Contest.Index.update(year, phase,
+                        Contest.Index.update(year, phase_name,
                                              REGION_DIR[region].upper(),
                                              gender.lower(), count)
 
         for group, group_df in df.groupby(['Year', 'Phase']):
-            year, phase = group
-            year = int(year)
+            year, phase_name = group
+            year, num_teams = int(year), group_df.teamName.count() // 3
 
-            Contest.Phase.make(year, phase)
-            phase_participation(group_df)
-            Contest.History.update(year, phase, group_df.teamName.count() // 3)
+            Contest.Phase.make(year, phase_name)
+            phase_participation(year, phase_name, group_df)
+            Contest.History.update(year, phase_name, num_teams)
 
     class History:
         @staticmethod
@@ -233,12 +236,11 @@ class Contest:
             ChartInfo.Result.reset_file(Contest.History.index())
 
         @staticmethod
-        def update(year, phase, teams):
-            assert phase in PHASES
+        def update(year, phase_name, teams):
             assert teams >= 0
 
             index = Contest.History.index()
-            ChartInfo.Result.update_file(index, year, phase, teams)
+            ChartInfo.Result.update_file(index, year, phase_name, teams)
 
 
 class School:
@@ -259,15 +261,15 @@ class School:
     def process(df):
         GROUPS = ['Year', 'Phase', 'UF']
         for group, group_df in df.groupby(GROUPS):
-            year, phase, uf = group
+            year, phase_name, uf = group
             year = int(year)
 
             for g, gdf in group_df.groupby(['instShortName', 'instName', 'teamRank']):
                 short, full, rank = g
                 short, rank = normalize(short), int(rank)
 
-                School.Institution.update(uf, short, full, year, phase, rank)
-                School.UF.update_result(uf, year, phase, rank)
+                School.Institution.update(uf, short, full, year, phase_name, rank)
+                School.UF.update_result(uf, year, phase_name, rank)
                 School.UF.update_dropdown(uf, short, full)
 
     class UF:
@@ -283,14 +285,11 @@ class School:
                 f.write(content)
 
         @staticmethod
-        def update_result(uf, year, phase, rank):
+        def update_result(uf, year, phase_name, rank):
             uf = uf.upper()
-            assert uf in UF_STATE
-            assert phase in PHASES
-            assert rank >= 0
-
             path, index = School.path_index(uf)
-            ChartInfo.Result.update_file(index, year, phase, rank, replace_if_better=True)
+            ChartInfo.Result.update_file(index, year, phase_name, rank,
+                                         replace_if_better=True)
 
         @staticmethod
         def update_dropdown(uf, inst_short, inst_full):
@@ -343,19 +342,15 @@ class School:
             _sub_in_template('school', repl, file)
 
         @staticmethod
-        def update(uf, inst_short, inst_full, year, phase, rank):
+        def update(uf, inst_short, inst_full, year, phase_name, rank):
             uf = uf.upper()
-            assert uf in UF_STATE
-            assert phase in PHASES
-            assert rank > 0
-
             path, file = School.path_index(uf, inst_short)
 
             if not os.path.isfile(file):
                 School.Institution.make(uf, inst_short, inst_full)
 
-            ChartInfo.Result.update_file(file, year, phase, rank, True)
+            ChartInfo.Result.update_file(file, year, phase_name, rank, True)
 
             # If institutionl being updated was the UF top ranking one and the
             # update lowers its rank, UF rank IS NOT CHANGED!
-            School.UF.update_result(uf, year, phase, rank)
+            School.UF.update_result(uf, year, phase_name, rank)
