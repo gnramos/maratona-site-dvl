@@ -1,5 +1,5 @@
 const CURRENT_YEAR = '2022';
-const CURRENT_PHASE = ''; // uma de PHASES (ou vazio)
+const CURRENT_PHASE = 'Nacional'; // uma de PHASES (ou vazio)
 
 /* NÃO EDITAR A PARTIR DAQUI */
 
