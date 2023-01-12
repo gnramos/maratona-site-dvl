@@ -5,15 +5,16 @@ const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', /* 'Programadores', */ 'Mundi
 const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**
- * Obfuscate an e-mail contact in link.
+ * Create a contact link.
  *
  * @param  {Array}  text the text to show as link
  * @param  {String} args parts of the string that compose de e-mail address
  * @return {String}        the HTML with the formatted information
  */
 function contact(text, ...args) {
-    let email = args.reduce((acc, cur) => acc + cur);
-    return `<a href="mailto:${email}">${text}</a>`;
+    let address = args.reduce((acc, cur) => acc + cur);
+    // html HEX character encoding
+    return `<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;${address}">${text}</a>`;
 }
 
 /**
@@ -21,7 +22,6 @@ function contact(text, ...args) {
  */
 function root() {
   let url = window.location.pathname.split('/');
-  // return '../'.repeat(url.length - 3);
   // return '../'.repeat(url.length - 9);
   return '/maratona-site-dvl/';
 }
