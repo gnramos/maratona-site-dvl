@@ -81,7 +81,7 @@ ${phaseLinks}
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <li><a class="dropdown-item" href="${root()}historico/index.html">&nbsp;&nbsp;&nbsp;Maratonas</a></li>
     <li>
-      <span class="dropdown-item">« Escolas</span>
+      <span class="dropdown-item">⏴ Escolas</span>
       <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
         <li><a class="dropdown-item" href="${root()}escolas/ne/al/index.html">Alagoas</a></li>
         <li><a class="dropdown-item" href="${root()}escolas/no/ac/index.html">Acre</a></li>

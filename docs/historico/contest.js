@@ -218,7 +218,7 @@ function thisPhase() {
  */
 function makeBreadcrumbs() {
   let url = window.location.pathname.split('/');
-  if (url.at(-3) == CURRENT_YEAR)
+  if (url.at(-3) == CONFIG.current.year)
     return '';
 
   let breadcrumbItems = [];
