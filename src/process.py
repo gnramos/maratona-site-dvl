@@ -5,42 +5,49 @@ import report
 import os
 
 
-def _report_file(file):
-    phases = '|'.join(p.name for p in html.Phases)
-    if re.match(f'.*\\d{{4}}_({phases})\\.csv$', file) and os.path.isfile(file):
-        return file
-    raise ValueError(f'"{file}" não é um arquivo válido!')
-
-
-def _process_file(file, guess_uf, verbose):
+def _process_report_file(file, guess_uf, verbose):
     year, phase, df = report.process(file, guess_uf, verbose)
     df['Year'], df['Phase'] = year, phase
     return df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
 
 
+def new_year(year):
+    path, index = html.Contest.path_index(year)
+    if os.path.isdir(path):
+        raise ValueError(f'Diretório para o ano {year} já existe.')
+    return int(year)
+
+
 def process_contest(args):
     for file in args.files:
-        df = _process_file(file, True, args.verbose)
+        df = _process_report_file(file, True, args.verbose)
         html.Contest.process(df)
         html.School.process(df)
 
 
+def report_file(file):
+    if not os.path.isfile(file):
+        raise ValueError(f'"{file}" não existe!')
+    phases = '|'.join(p.name for p in html.Phases)
+    if not re.match(f'.*\\d{{4}}_({phases})\\.csv$', file):
+        raise ValueError(f'"{file}" não é um arquivo no formato YYYY_FASE.csv!')
+    return file
+
+
 def process_new(args):
     path, index = html.Contest.path_index(args.year)
-    if os.path.isdir(path):
-        raise ValueError(f'Diretório para o ano {args.year} já existe.')
     html.Contest.Index.make(args.year)
     for phase in html.Phases:
         html.Contest.Phase.make(args.year, phase.name)
     if args.update_js:
         file = os.path.join('..', 'docs', 'maratona.js')
-        repl = {r"const CURRENT_YEAR = '\d{4}';": f"const CURRENT_YEAR = '{args.year}';",
-                r"const CURRENT_PHASE = '.*?';": f"const CURRENT_PHASE = '';"}
+        repl = {r"year: '\d{4}'": f"year: '{args.year}'",
+                r"phase: '\w+'": f"phase: ''"}
         html.file_sub(file, repl, file)
 
 
 def process_report(args):
-    _process_file(args.file, args.guess, True)
+    _process_report_file(args.file, args.guess, True)
 
 
 def process_reset(args):
@@ -55,7 +62,7 @@ def main():
     ###########################################################################
     contest = subparsers.add_parser('contest', help='Atualizar arquivos HTML'
                                     ' com os dados de etapa(s) da competição')
-    contest.add_argument('files', nargs='*', type=_report_file,
+    contest.add_argument('files', nargs='*', type=report_file,
                          help='Arquivo(s) com relatório(s) do ICPC')
     contest.add_argument('-v', '--verbose', action='store_true',
                          help='Exibir detalhes do processamento')
@@ -63,14 +70,14 @@ def main():
     ###########################################################################
     new = subparsers.add_parser('new', help='Inicializar arquivos HTML de um'
                                 ' novo ano da competição')
-    new.add_argument('year', type=int, help='Ano da competição')
+    new.add_argument('year', type=new_year, help='Ano da competição')
     new.add_argument('-u', '--update-js', action='store_true',
                      help='Atualizar o arquivo JS com o novo ano.')
     new.set_defaults(process=process_new)
     ###########################################################################
     report = subparsers.add_parser('report', help='Gerar relatório(s) '
                                    'referente(s) a arquivos')
-    report.add_argument('file', type=_report_file, help='Arquivo(s) com '
+    report.add_argument('file', type=report_file, help='Arquivo(s) com '
                         'relatório(s) do ICPC')
     report.add_argument('-g', '--guess', action='store_true',
                         help='Tentar adivinhar a UF da instituição')

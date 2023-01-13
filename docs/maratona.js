@@ -1,10 +1,11 @@
-const CURRENT_YEAR = '2022';
-const CURRENT_PHASE = 'Nacional'; // uma de PHASES (ou vazio)
+const CONFIG = {current: {year: '2022',
+                          phase: 'Nacional'}};
+/******************************************************************************/
 
 /* NÃO EDITAR A PARTIR DAQUI */
 
-const PHASES = ['Fase 0', '1ª Fase', 'Nacional', /* 'Programadores', */ 'Mundial'];
-const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', /* 'Programadores', */ 'Mundial'];
+const PHASES = ['Fase 0', '1ª Fase', 'Nacional', 'Mundial'];
+const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', 'Mundial'];
 const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**
@@ -36,7 +37,6 @@ function root() {
  */
 function bodyHeader(pageTitle='', breadcrumbs='') {
   let url = window.location.pathname.split('/');
-  let currentPage = url.at(-1);
 
   function aboutItem(isActive) {
     return `
@@ -55,9 +55,9 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   }
   function participateItem(isActive) {
     let phaseLinks = '';
-    for (let i = 0; i <= PHASES.indexOf(CURRENT_PHASE); i++) {
+    for (let i = 0; i <= PHASES.indexOf(CONFIG.current.phase); i++) {
       phaseLinks += `
-    <li><a class="dropdown-item" href="${root()}historico/${CURRENT_YEAR}/${PHASE_DIR[i]}/index.html">${PHASES[i]}</a></li>`;
+    <li><a class="dropdown-item" href="${root()}historico/${CONFIG.current.year}/${PHASE_DIR[i]}/index.html">${PHASES[i]}</a></li>`;
     }
 
     return `
@@ -73,18 +73,15 @@ ${phaseLinks}
 </li>`;
 }
   function infoItem(isActive) {
-    let caret = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
-  <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
-</svg>`;
     return `
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Histórico
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="${root()}historico/index.html">&nbsp;&nbsp;&nbsp;&nbsp;Maratonas</a></li>
+    <li><a class="dropdown-item" href="${root()}historico/index.html">&nbsp;&nbsp;&nbsp;Maratonas</a></li>
     <li>
-      <span class="dropdown-item">${caret}Escolas</span>
+      <span class="dropdown-item">« Escolas</span>
       <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
         <li><a class="dropdown-item" href="${root()}escolas/ne/al/index.html">Alagoas</a></li>
         <li><a class="dropdown-item" href="${root()}escolas/no/ac/index.html">Acre</a></li>
@@ -153,9 +150,9 @@ ${phaseLinks}
         </a>
         <ul class="nav nav-pills">
           ${aboutItem(url.includes('sobre'))}
-          ${participateItem(currentPage == 'inscricoes.html' || url.includes(CURRENT_YEAR))}
-          ${infoItem(!url.includes(CURRENT_YEAR) && (url.includes('historico') || url.includes('escolas')))}
-          ${contactItem(currentPage == 'contato.html')}
+          ${participateItem(url.includes('inscricoes.html') || url.includes(CONFIG.current.year))}
+          ${infoItem(!url.includes(CONFIG.current.year) && (url.includes('historico') || url.includes('escolas')))}
+          ${contactItem(url.includes('contato.html'))}
           ${socialMediaItems}
         </ul>
       </header>

@@ -12,7 +12,7 @@ YYYY
   `- Mundial
 ```
 
-Ela é replicada para cada ano (`YYYY`), e as informações organizadas em subdiretórios, um para cada fase. O arquivo `index.html` mostra o poster do evento e um índice para cada fase.
+Ela é replicada para cada ano (`YYYY`), e as informações organizadas em subdiretórios, um para cada fase.
 
 ## Contest Info
 

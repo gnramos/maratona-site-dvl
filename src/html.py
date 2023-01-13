@@ -332,7 +332,7 @@ class School:
             ChartInfo.Result.reset_file(file)
             for root, dirs, files in os.walk(path):
                 for file in files:
-                    if file != 'index.html' and file.endswith('.html'):
+                    if file != 'index.html' and file != f'{uf.lower()}.svg':
                         os.remove(os.path.join(path, file))
 
         @staticmethod
