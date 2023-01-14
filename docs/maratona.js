@@ -1,5 +1,4 @@
-const CONFIG = {current: {year: '2022',
-                          phase: 'Nacional'},
+const CONFIG = {current: {year: '2022', phase: 'Nacional'},
                 rules: [{color: 'text-warning'},
                         {color: 'text-danger', tooltip: 'Top 15!'},
                         {color: 'text-primary', tooltip: 'Distribuição por sedes.'},
@@ -29,7 +28,6 @@ function contact(text, ...args) {
  */
 function root() {
   let url = window.location.pathname.split('/');
-  // return '../'.repeat(url.length - 9);
   return '/maratona-site-dvl/';
 }
 
