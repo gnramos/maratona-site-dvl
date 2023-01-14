@@ -27,22 +27,23 @@ def _sub_template(template, repl, file):
     file_sub(template, repl, file)
 
 
-def _get_array(name, content):
-    matches = re.search(f'let {name} = \\[([.\\s\\S]*?)\\];', content)
+def _get_array(file, array_name):
+    with open(file) as f:
+        matches = re.search(f'let {array_name} = \\[([.\\s\\S]*?)\\];', f.read())
     return [item for item in re.findall(r"(\[.*?\])", matches.group(1))]
 
 
 class Phases(Enum):
-    Zero = {'title': 'Fase 0', 'start': 2022, 'index': 0}
-    Primeira = {'title': '1ª Fase', 'start': 2004, 'index': 1}
-    Nacional = {'title': 'Final Nacional', 'start': 1996, 'index': 2}
-    Mundial = {'title': 'Final Mundial', 'start': 1989, 'index': 3}
+    Zero = {'title': 'Fase 0', 'start': 2022}
+    Primeira = {'title': '1ª Fase', 'start': 2004}
+    Nacional = {'title': 'Final Nacional', 'start': 1996}
+    Mundial = {'title': 'Final Mundial', 'start': 1989}
 
     def __str__(self):
         return self.value['title']
 
     def __lt__(self, other):
-        return self.value['index'] < other.value['index']
+        return self.value['start'] > other.value['start']
 
     def exists_in(self, year):
         return self.value['start'] <= year
@@ -99,12 +100,9 @@ class ChartInfo:
 
         @staticmethod
         def update_file(file, year, phase_name, value, replace_if_better=False):
-            with open(file, 'r') as f:
-                content = f.read()
-
             pattern = re.compile(r'\[(.*?), (.*?)\]')
             results = []
-            for result in _get_array('results', content):
+            for result in _get_array(file, 'results'):
                 y, ranks = pattern.match(result).groups(1)
                 ranks = ranks.split(', ')
                 results.append(ChartInfo.Result(y, **{phase.name: rank
@@ -122,21 +120,13 @@ class ChartInfo:
                 results.append(ChartInfo.Result(year, **{phase_name: value}))
             results = ',\n'.join(str(r) for r in sorted(results))
 
-            pattern = r'let results = \[([.\s\S]*?)\];'
-            results = f'let results = [\n{results}];'
-            content = re.sub(pattern, results, content)
-
-            with open(file, 'w') as f:
-                f.write(content)
+            repl = {r'let results = \[([.\s\S]*?)\];': f'let results = [\n{results}];'}
+            file_sub(file, repl, file)
 
         @staticmethod
         def reset_file(file):
-            with open(file, 'r') as f:
-                content = f.read()
-            pattern = re.compile(r'let results = \[[.\s\S]*?\];')
-            content = re.sub(pattern, 'let results = [];', content)
-            with open(file, 'w') as f:
-                f.write(content)
+            repl = {r'let results = \[[.\s\S]*?\];': 'let results = [];'}
+            file_sub(file, repl, file)
 
 
 class Contest:
@@ -164,11 +154,8 @@ class Contest:
             if not os.path.isfile(index):
                 Contest.Index.make(year)
 
-            with open(index, 'r') as f:
-                content = f.read()
-
             participations = [ChartInfo.GenderParticipation(*eval(item))
-                              for item in _get_array(gender, content)]
+                              for item in _get_array(index, gender)]
             for part in participations:
                 if phase_name == part.phase.name and region == part.region:
                     part.teams = teams
@@ -178,12 +165,8 @@ class Contest:
                 participations.append(ChartInfo.GenderParticipation(str(phase), region, teams))
             participations = ',\n'.join(str(p) for p in sorted(participations))
 
-            pattern = f'let {gender} = \\[([.\\s\\S]*?)\\];'
-            participations = f'let {gender} = [\n{participations}];'
-            content = re.sub(pattern, participations, content)
-
-            with open(index, 'w') as f:
-                f.write(content)
+            repl = {f'let {gender} = \\[([.\\s\\S]*?)\\];': f'let {gender} = [\n{participations}];'}
+            file_sub(index, repl, index)
 
     class Phase:
         @staticmethod
@@ -280,13 +263,8 @@ class School:
         @staticmethod
         def reset(uf):
             path, index = School.path_index(uf.upper())
-            with open(index, 'r') as f:
-                content = f.read()
-            pattern = r'<ul class="dropdown-menu" [.\s\S]*?</ul>'
-            replace = '<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n       </ul>'
-            content = re.sub(pattern, replace, content)
-            with open(index, 'w') as f:
-                f.write(content)
+            repl = {r'<ul class="dropdown-menu" [.\s\S]*?</ul>': '<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n       </ul>'}
+            file_sub(index, repl, index)
 
         @staticmethod
         def update_result(uf, year, phase_name, rank):
