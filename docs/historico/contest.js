@@ -1,10 +1,3 @@
-const RULE_TOOLTIP = ['Top 15!',
-                      'Distribuição por sedes.',
-                      'Vagas discricionárias.'];
-
-const PHASE_TITLE = {'Zero': 'Fase 0', 'Primeira': '1ª Fase',
-                     'Nacional': 'Final Nacional', 'Mundial': 'Final Mundial'};
-
 /**
  * Return a list with the given problems.
  *
@@ -94,16 +87,18 @@ function advancingTeams(results) {
   // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
   function ruleCell(teams) {
     let cell = '';
-    for (i in RULE_COLORS)
-      for (team of teams[i])
-        cell += `<strong class="${RULE_COLORS[i]}" ${tooltip(i)}>Regra ${Number(i) + 1}</strong><br>`;
+    for (i in CONFIG.rules.slice(1))
+      for (team of teams[i]) {
+        j = Number(i) + 1;
+        cell += `<strong class="${CONFIG.rules[j].color}" data-toggle="tooltip" data-html="true" title="${CONFIG.rules[j].tooltip}"}>Regra ${j}</strong><br>`;
+      }
     return cell;
   }
   function teamCell(teams) {
     let cell = '';
-    for (i in RULE_COLORS)
+    for (i in CONFIG.rules.slice(1))
       for (team of teams[i])
-        cell += `<span class="${RULE_COLORS[i]}">${team}</span><br>`;
+        cell += `<span class="${CONFIG.rules[Number(i) + 1].color}">${team}</span><br>`;
     return cell;
   }
   function makeRows(siteTeams) {
@@ -240,13 +235,4 @@ function makeBreadcrumbs() {
             ${lis}
           </ol>
         </nav>`;
-}
-
-/**
- * Returns a tooltip.
- *
- * @return {String} the tooltip.
- */
-function tooltip(i) {
-  return `data-toggle="tooltip" data-html="true" title="${RULE_TOOLTIP[i]}"`;
 }

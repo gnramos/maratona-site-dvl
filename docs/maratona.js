@@ -1,12 +1,15 @@
 const CONFIG = {current: {year: '2022',
-                          phase: 'Nacional'}};
+                          phase: 'Nacional'},
+                rules: [{color: 'text-warning'},
+                        {color: 'text-danger', tooltip: 'Top 15!'},
+                        {color: 'text-primary', tooltip: 'Distribuição por sedes.'},
+                        {color: 'text-success', tooltip: 'Vagas discricionárias.'}]};
 /******************************************************************************/
 
 /* NÃO EDITAR A PARTIR DAQUI */
 
 const PHASES = ['Fase 0', '1ª Fase', 'Nacional', 'Mundial'];
 const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', 'Mundial'];
-const RULE_COLORS = ['text-danger', 'text-primary', 'text-success'];
 
 /**
  * Create a contact link.

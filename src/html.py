@@ -13,11 +13,11 @@ BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
 
 
-def file_sub(file_in, repl, file_out):
+def file_sub(file_in, repl, file_out, count=0):
     with open(file_in, 'r') as f:
         content = f.read()
     for key, value in repl.items():
-        content = re.sub(key, value, content)
+        content = re.sub(key, value, content, count=count)
     with open(file_out, 'w') as f:
         f.write(content)
 

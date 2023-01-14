@@ -43,7 +43,7 @@ def process_new(args):
         file = os.path.join('..', 'docs', 'maratona.js')
         repl = {r"year: '\d{4}'": f"year: '{args.year}'",
                 r"phase: '\w+'": f"phase: ''"}
-        html.file_sub(file, repl, file)
+        html.file_sub(file, repl, file, 1)
 
 
 def process_report(args):
