@@ -3,13 +3,13 @@ const CONFIG = {current: {year: '2022',
                 rules: [{color: 'text-warning'},
                         {color: 'text-danger', tooltip: 'Top 15!'},
                         {color: 'text-primary', tooltip: 'Distribuição por sedes.'},
-                        {color: 'text-success', tooltip: 'Vagas discricionárias.'}]};
+                        {color: 'text-success', tooltip: 'Vagas discricionárias.'}],
+                phases: [{name: 'Fase 0', dir: 'Zero', start: 2022},
+                         {name: '1ª Fase', dir: 'Primeira', start: 2004},
+                         {name: 'Nacional', dir: 'Nacional', start: 1996},
+                         {name: 'Mundial', dir: 'Mundial', start: 1989}],
+                schools: {chart: {show_last_years: 5}}};
 /******************************************************************************/
-
-/* NÃO EDITAR A PARTIR DAQUI */
-
-const PHASES = ['Fase 0', '1ª Fase', 'Nacional', 'Mundial'];
-const PHASE_DIR = ['Zero', 'Primeira', 'Nacional', 'Mundial'];
 
 /**
  * Create a contact link.
@@ -58,9 +58,11 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   }
   function participateItem(isActive) {
     let phaseLinks = '';
-    for (let i = 0; i <= PHASES.indexOf(CONFIG.current.phase); i++) {
+    for (i in CONFIG.phases) {
       phaseLinks += `
-    <li><a class="dropdown-item" href="${root()}historico/${CONFIG.current.year}/${PHASE_DIR[i]}/index.html">${PHASES[i]}</a></li>`;
+    <li><a class="dropdown-item" href="${root()}historico/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
+      if (CONFIG.phases[i].name == CONFIG.current.phase)
+        break;
     }
 
     return `

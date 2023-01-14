@@ -26,8 +26,8 @@
 
       function drawParticitpationHistory(results) {
         let cols = ['Ano'];
-        for (phase of PHASES)
-          cols.push({label: phase, type: 'number'});
+        for (phase of CONFIG.phases)
+          cols.push({label: phase.name, type: 'number'});
         results.unshift(cols);
         let data = google.visualization.arrayToDataTable(results);
         data.removeColumn(1); // Fase 0
@@ -43,7 +43,7 @@
         google.visualization.events.addListener(chart, 'select', function(e) {
              let selection = chart.getSelection()[0];
              let year = results[selection['row'] + 1][0],
-                 phase = PHASE_DIR[selection['column']];
+                 phase = CONFIG.phases[selection['column']].dir;
              window.location = `${year}/${phase}/index.html`;
            });
       }

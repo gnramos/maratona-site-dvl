@@ -1,10 +1,8 @@
-const YEARS_TO_SHOW = 5;
-
 /**
  * Draw a graphic with the results.
  *
  * Assumes the results are ordered and that each result is in the following format:
- * [year, PHASES]. Always shows the last RESULT_LEN values.
+ * [year, phases].
  *
  * @param  {Array}  rows  the results
  */
@@ -40,17 +38,17 @@ function drawHistory(results, chartId='chart_div', controlId='control_div') {
   function dataTable(results) {
     let data = new google.visualization.DataTable();
     data.addColumn('number', 'Year');
-    for (let phase of PHASES) {
-      data.addColumn('number', phase);
+    for (let phase of CONFIG.phases) {
+      data.addColumn('number', phase.name);
       data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
     }
 
     for (let row of results) {
       let thisRow = [parseInt(row[0])];
-      for (let phase in PHASES) {
-        phase = Number(phase) + 1;
-        thisRow.push(row[phase]);
-        thisRow.push(toolTip(row[0], PHASES[phase - 1], row[phase] == null ? '' : row[phase]));
+      for (let i in CONFIG.phases) {
+        i = Number(i) + 1;
+        thisRow.push(row[i]);
+        thisRow.push(toolTip(row[0], CONFIG.phases[i - 1].name, row[i] == null ? '' : row[i]));
       }
       data.addRow(thisRow);
     }
@@ -63,9 +61,7 @@ function drawHistory(results, chartId='chart_div', controlId='control_div') {
   let data = dataTable(results);
   data.removeColumn(1); // Fase 0
   let lastYear = parseInt(results.slice(-1)[0][0]);
-  let firstYear = parseInt(results[0][0]);
-  if (firstYear < lastYear - YEARS_TO_SHOW + 1)
-    firstYear = lastYear - YEARS_TO_SHOW + 1;
+  let firstYear = Math.max(parseInt(results[0][0]), lastYear - CONFIG.schools.chart.show_last_years + 1);
   let chartWrapper = new google.visualization.ChartWrapper({
     'chartType': 'LineChart',
     'containerId': chartId,
@@ -98,8 +94,9 @@ function drawHistory(results, chartId='chart_div', controlId='control_div') {
 
   google.visualization.events.addListener(chartWrapper, 'select', function(e) {
     let selection = chartWrapper.getChart().getSelection()[0];
-    let year = results[selection['row'] + 2][0],
-       phase = PHASE_DIR[selection['column'] / 2]; // /2 para lidar com a tooltip
+    let year = results[selection['row'] + 1][0],
+       phase = CONFIG.phases[selection['column'] / 2].dir; // /2 para lidar com a tooltip
+      // console.log(year, phase);
     window.location = `../../../historico/${year}/${phase}/index.html`;
   });
 }

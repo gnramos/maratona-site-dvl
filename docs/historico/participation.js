@@ -25,7 +25,7 @@ function phasePickerWrapper() {
           'allowNone': false
         }
       },
-      'state': {'selectedValues': [PHASES[0]]}
+      'state': {'selectedValues': [CONFIG.phases[0].name]}
     });
 }
 
@@ -88,13 +88,12 @@ function drawFemaleDashboard(){
  */
 function phaseList(year) {
   let links = '';
-  if (year >= 2022)
-    links += '\n<li><a href="Zero/index.html">Fase 0</a></li>'
-  if (year >= 2004)
-    links += '\n<li><a href="Primeira/index.html">1ª Fase</a></li>';
-  links += '\n<li><a href="Nacional/index.html">Final Nacional</a></li>';
-  if (year >= 2012 && year != 2021)    links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(year) + 1}">Summer School</a></li>`;
-  links += '\n<li><a href="Mundial/index.html">Final Mundial</a></li>';
+  for (phase of CONFIG.phases) {
+    if (year >= phase.start)
+      links += `\n<li><a href="${phase.dir}/index.html">${phase.name}</a></li>`;
+      if (phase.name == 'Nacional' && year >= 2012 && year != 2021)
+        links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(year) + 1}">Summer School</a></li>`;
+  }
   return `<ul class="list-group">
   <li class="list-group"><strong>Informações:</strong></li>
   ${links}
