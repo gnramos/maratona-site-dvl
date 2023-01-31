@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona SBC de Programação</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+    [BOOTSTRAP]
+    <link rel="stylesheet" href="../../../maratona.css">
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../contest.js"></script>
+    <script type="text/javascript">
+      let organization = `<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: [?].
+</p>`;
+      let contestProblems = [];
+      let results = '';
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.write(bodyHeader(`[PHASE_NAME] ([YEAR])`, makeBreadcrumbs()));
+    </script>
+    <p>
+      A [PHASE_NAME] do ICPC ocorreu em [DATA] em [LOCAL].
+    </p>
+    <script type="text/javascript">
+      document.write(accordion('Phase', [['Organização', organization],
+                                         ['Prova', defaultInfo('contest', contestProblems)],
+                                         ['Resultados', defaultReport('contest') + results]]));
+      document.write(bodyFooter());
+    </script>
+  </body>
+</html>

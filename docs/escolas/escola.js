@@ -96,7 +96,7 @@ function drawHistory(results, chartId='chart_div', controlId='control_div') {
     let selection = dashboard.getSelection()[0];
     let year = results[selection['row']][0], //
        phase = CONFIG.phases[selection['column'] / 2].dir; // /2 para lidar com a tooltip
-    window.location = `../../../historico/${year}/${phase}/index.html`;
+    window.location = `../../../eventos/${year}/${phase}/index.html`;
   });
 }
 

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona SBC de Programação</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+    [BOOTSTRAP]
+    <link rel="stylesheet" href="../../../maratona.css">
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../contest.js"></script>
+    <script type="text/javascript">
+      let organization = `<p>
+  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: [?].
+</p>`;
+      let contestProblems = [];
+      let pictures = [];
+      let sponsors = `<p>A competição foi patrocinada por [?].</p>`;
+      let slides = `<a href="warmup/slides.pdf">Slides apresentados na abertura do evento.</a>`;
+      let warmupProblems = [];
+      let champion_pic = 'team1.webp';
+      // medalists = [['teamName', ['list_contestants'], ['list_coaches']]]; // em ordem de rank
+      let medalists = [['teamName', ['contestants'], ['coaches']]];
+      let regional_champs = `
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Centro Oeste: <strong>[?]</strong></li>
+      <li class="list-group-item">Nordeste: <strong>[?]</strong></li>
+      <li class="list-group-item">Norte: <strong>[?]</strong></li>
+      <li class="list-group-item">Sudeste: <strong>[?]</strong></li>
+      <li class="list-group-item">Sul: <strong>[?]</strong></li>
+    </ul>
+    ${gallery(['', '', '', '', ''])}`;
+      // Não editar a partir daqui.
+      let [gold, silver, bronze] = splitByMedal(medalists);
+      let results = showChampion(medalists[0], champion_pic) +
+                    accordion('PhaseResults',
+                              [['Medalhas de Ouro', listTeams(gold)],
+                               ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
+                               ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.  length)],
+                               ['Campeões Regionais', regional_champs]],
+                              ['text-black" style="background-color: #FFD700;"',
+                               'text-black" style="background-color: #C0C0C0;"',
+                               'text-black" style="background-color: #CD7F32;"',
+                               'bg-success text-white']);
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.write(bodyHeader(`[PHASE_NAME] ([YEAR])`, makeBreadcrumbs()));
+    </script>
+    <p>
+      A [PHASE_NAME] do ICPC ocorreu em [DATA] em [LOCAL].
+    </p>
+    <script type="text/javascript">
+      document.write(accordion('Phase', [['Fotos', carousel(pictures)],
+                                         ['Patrocinadores', sponsors],
+                                         ['Organização', organization],
+                                         ['Warm Up', defaultInfo('contest', warmupProblems)],
+                                         ['Prova', defaultInfo('contest', contestProblems)],
+                                         ['Resultados', defaultReport('contest') + results]]));
+      [SUMMER_SCHOOL]
+      document.write(bodyFooter());
+    </script>
+  </body>
+</html>

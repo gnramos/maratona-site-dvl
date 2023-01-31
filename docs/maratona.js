@@ -1,12 +1,12 @@
 const CONFIG = {current: {year: '2022', phase: 'Nacional'},
-                rules: [{color: 'text-warning'},
-                        {color: 'text-danger', tooltip: 'Top 15!'},
-                        {color: 'text-primary', tooltip: 'Distribuição por sedes.'},
-                        {color: 'text-success', tooltip: 'Vagas discricionárias.'}],
+                rules: [{class: 'text-warning'},
+                        {class: 'text-danger', tooltip: 'Top 15!'},
+                        {class: 'text-primary', tooltip: 'Distribuição por sedes.'},
+                        {class: 'text-success', tooltip: 'Vagas discricionárias.'}],
                 phases: [{name: 'Fase 0', dir: 'Zero', start: 2022},
                          {name: '1ª Fase', dir: 'Primeira', start: 2004},
-                         {name: 'Nacional', dir: 'Nacional', start: 1996},
-                         {name: 'Mundial', dir: 'Mundial', start: 1989}],
+                         {name: 'Final Nacional', dir: 'Nacional', start: 1996},
+                         {name: 'Final Mundial', dir: 'Mundial', start: 1989}],
                 schools: {chart: {show_last_years: 5}}};
 /******************************************************************************/
 
@@ -15,7 +15,7 @@ const CONFIG = {current: {year: '2022', phase: 'Nacional'},
  *
  * @param  {Array}  text the text to show as link
  * @param  {String} args parts of the string that compose de e-mail address
- * @return {String}        the HTML with the formatted information
+ * @return {String}      the HTML with the formatted information
  */
 function contact(text, ...args) {
     let address = args.reduce((acc, cur) => acc + cur);
@@ -28,6 +28,7 @@ function contact(text, ...args) {
  */
 function root() {
   let url = window.location.pathname.split('/');
+  // return '../'.repeat(url.length - 9);
   return '/maratona-site-dvl/';
 }
 
@@ -58,8 +59,8 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
     let phaseLinks = '';
     for (i in CONFIG.phases) {
       phaseLinks += `
-    <li><a class="dropdown-item" href="${root()}historico/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
-      if (CONFIG.phases[i].name == CONFIG.current.phase)
+    <li><a class="dropdown-item" href="${root()}eventos/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
+      if (CONFIG.phases[i].dir == CONFIG.current.phase)
         break;
     }
 
@@ -82,7 +83,7 @@ ${phaseLinks}
     Histórico
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="${root()}historico/index.html">&nbsp;&nbsp;&nbsp;Maratonas</a></li>
+    <li><a class="dropdown-item" href="${root()}eventos/index.html">&nbsp;&nbsp;&nbsp;Maratonas</a></li>
     <li>
       <span class="dropdown-item">⏴ Escolas</span>
       <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
@@ -154,7 +155,7 @@ ${phaseLinks}
         <ul class="nav nav-pills">
           ${aboutItem(url.includes('sobre'))}
           ${participateItem(url.includes('inscricoes.html') || url.includes(CONFIG.current.year))}
-          ${infoItem(!url.includes(CONFIG.current.year) && (url.includes('historico') || url.includes('escolas')))}
+          ${infoItem(!url.includes(CONFIG.current.year) && (url.includes('eventos') || url.includes('escolas')))}
           ${contactItem(url.includes('contato.html'))}
           ${socialMediaItems}
         </ul>
@@ -262,16 +263,17 @@ function carousel(images) {
 /**
  * Return a list with the given items.
  *
- * @param  {String} type    type of list (ul, ol)
- * @param  {Array}  items   array with items to be listed
- * @param  {String} options list options
- * @return {String}          the HTML with the formatted information
+ * @param  {String} type         type of list (ul, ol)
+ * @param  {Array}  items        array with items to be listed
+ * @param  {String} list_options list options
+ * @param  {String} item_options item options
+ * @return {String}              the HTML with the formatted information
  */
-function makeList(type, items, options='') {
+function makeList(type, items, list_options='', item_options=[]) {
   let listItems = '';
-  for (item of items)
-    listItems += `\n<li>${item}</li>`;
-  return `\n<${type} ${options}>${listItems}\n</${type}>`;
+  for (i in items)
+    listItems += `\n<li ${item_options[i]}>${items[i]}</li>`;
+  return `\n<${type} ${list_options}>${listItems}\n</${type}>`;
 }
 
 /**
@@ -279,16 +281,17 @@ function makeList(type, items, options='') {
  *
  * Assumes the links are formatted as a list of [url, text] items.
  *
- * @param  {Array}  links   array with links to be listed, each in the [link, text] format
- * @param  {String} type    type of list (ul, ol)
- * @param  {String} options list options
- * @return {String}         the HTML with the formatted information
+ * @param  {Array}  links        array with links to be listed, each in the [link, text] format
+ * @param  {String} type         type of list (ul, ol)
+ * @param  {String} list_options list options
+ * @param  {String} item_options item options
+ * @return {String}              the HTML with the formatted information
  */
-function listLinks(links, type='ul', options='') {
+function listLinks(links, type='ul', list_options='', item_options=[]) {
   let items = [];
   for (link of links)
     items.push(`<a href="${link[0]}">${link[1]}</a>`);
-  return makeList(type, items, options);
+  return makeList(type, items, list_options);
 }
 
 /**

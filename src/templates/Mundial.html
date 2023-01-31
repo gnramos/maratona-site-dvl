@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maratona SBC de Programação</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico">
+    [BOOTSTRAP]
+    <link rel="stylesheet" href="../../../maratona.css">
+    <script type="text/javascript" src="../../../maratona.js"></script>
+    <script type="text/javascript" src="../../contest.js"></script>
+    <script type="text/javascript">
+      let pictures = [];
+      //  teams = [[Escola, rank]]
+      let teams = [['?', 1]];  // ordem por rank
+      // Não editar a partir daqui.
+      let results = `
+    <p>
+      Os resultados oficiais estão disponíveis no <a href="https://icpc.global/community/results-[YEAR]">site do ICPC</a>.`;
+      let teamList = '<ul>', teamImages = [];
+      for (i in teams) {{
+        teamList += `\n  <li>${teams[i]}</a>`;
+        teamImages.push(`../../Nacional/img/team${Number(i) + 1}.webp`);
+      }}
+      teamList += `\n<ul>\n${gallery(teamImages)}`;
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      document.write(bodyHeader(`[PHASE_NAME] ([YEAR])`, makeBreadcrumbs()));
+    </script>
+    <p>
+      A [PHASE_NAME] do ICPC ocorreu em [DATA] em [LOCAL].
+    </p>
+    <script type="text/javascript">
+      document.write(accordion('Phase', [['Fotos', carousel(pictures)],
+                                         ['Participantes', teamList],
+                                         ['Resultados', results]]));
+      document.write(bodyFooter());
+    </script>
+  </body>
+</html>

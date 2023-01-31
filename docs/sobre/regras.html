@@ -74,7 +74,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 </p>`;
         let phases = `
 <p>
-  O evento existe desde 1970, mas a <em>Final Mundial</em> ocorre anualmente desde 1989. A participação brasileira ocorre <a href="../historico/1996/index.html">desde 1996</a>, quando instituiu-se a fase <em>Final Nacional</em>, que ocorre presencialmente em uma sede no país e serve como classificatória para a Final Mundial. Com o crescimento do evento, em <a href="../historico/2004/index.html">2004</a> instituiu-se a <em>1ª Fase</em>, multisede e disputada presencialmente, como etapa classificatória para a Final Nacional. A partir de <a href="../historico/2022/index.html">2022</a>, criou-se a <em>Fase Zero</em>, de participação opcional e disputada virtualmente. Espera-se que em 2024 haja a <em>Final Latino-americana</em>, que se chamará "Programadores da América", como nova etapa classificatória entre a Final Nacional e a Final Mundial.
+  O evento existe desde 1970, mas a <em>Final Mundial</em> ocorre anualmente desde 1989. A participação brasileira ocorre <a href="../eventos/1996/index.html">desde 1996</a>, quando instituiu-se a fase <em>Final Nacional</em>, que ocorre presencialmente em uma sede no país e serve como classificatória para a Final Mundial. Com o crescimento do evento, em <a href="../eventos/2004/index.html">2004</a> instituiu-se a <em>1ª Fase</em>, multisede e disputada presencialmente, como etapa classificatória para a Final Nacional. A partir de <a href="../eventos/2022/index.html">2022</a>, criou-se a <em>Fase Zero</em>, de participação opcional e disputada virtualmente. Espera-se que em 2024 haja a <em>Final Latino-americana</em>, que se chamará "Programadores da América", como nova etapa classificatória entre a Final Nacional e a Final Mundial.
 </p>`;
         let contest = `
 <p>
@@ -96,7 +96,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 </p>
 <h4>Sedes da 1ª Fase</h4>
 <p>
-  A organização do evento define a região geográfica coberta por cada sede, e cada escola deverá inscrever seus times conforme sua localização nesta. Uma mudança de sede pode ser solicitada ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Caso não seja autorizada, o time pode concorrer na sede desejada disputando apenas a vagas das regras <strong class="${CONFIG.rules[1].color}">1</strong> e <strong class="${CONFIG.rules[3].color}">3</strong> (definidas no próximo tópico).
+  A organização do evento define a região geográfica coberta por cada sede, e cada escola deverá inscrever seus times conforme sua localização nesta. Uma mudança de sede pode ser solicitada ao <a href="../contato.html">Comitê Diretor da Maratona de Programação</a>. Caso não seja autorizada, o time pode concorrer na sede desejada disputando apenas a vagas das regras <strong class="${CONFIG.rules[1].class}">1</strong> e <strong class="${CONFIG.rules[3].class}">3</strong> (definidas no próximo tópico).
 </p>
 <p>
   As sedes que não atingirem o limiar de <strong>10 times e 5 escolas</strong> são agrupadas em <em>supersedes</em>:
@@ -112,13 +112,13 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 </p>`;
         let advancingToNextPhase = `
 <p>
-  <strong class="${CONFIG.rules[0].color}">[regra 0]</strong> Um time só qualifica caso tenha resolvido pelo menos <strong>3</strong> problemas na prova da 1ª Fase. O campeão de uma sede pode qualificar tendo resolvido <strong>2</strong> problemas.
+  <strong class="${CONFIG.rules[0].class}">[regra 0]</strong> Um time só qualifica caso tenha resolvido pelo menos <strong>3</strong> problemas na prova da 1ª Fase. O campeão de uma sede pode qualificar tendo resolvido <strong>2</strong> problemas.
 </p>
 <p>
-  <strong class="${CONFIG.rules[1].color}">[regra 1]</strong> <strong>15</strong> vagas serão atribuídas aos times com melhor desempenho por todas as sedes. Uma sede se qualifica para vagas deste tipo se tiver times de pelo menos duas escolas; e uma escola pode classificar, no máximo, dois times.
+  <strong class="${CONFIG.rules[1].class}">[regra 1]</strong> <strong>15</strong> vagas serão atribuídas aos times com melhor desempenho por todas as sedes. Uma sede se qualifica para vagas deste tipo se tiver times de pelo menos duas escolas; e uma escola pode classificar, no máximo, dois times.
 </p>
 <p>
-  <strong class="${CONFIG.rules[2].color}">[regra 2]</strong> cerca de <strong>65% das vagas</strong> serão distribuídas entre as sedes com <strong>pelo menos 10 times e pelo menos 5 escolas</strong>. No caso de supersede, cada sede pode classificar apenas um time por esta regra. A quantidade é definida pela fórmula:
+  <strong class="${CONFIG.rules[2].class}">[regra 2]</strong> cerca de <strong>65% das vagas</strong> serão distribuídas entre as sedes com <strong>pelo menos 10 times e pelo menos 5 escolas</strong>. No caso de supersede, cada sede pode classificar apenas um time por esta regra. A quantidade é definida pela fórmula:
   <p class="text-center">
 \\begin{equation*}
 Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDeEscolas}\\Biggr\\rceil\.
@@ -127,7 +127,7 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
 
 </p>
 <p>
-  <strong class="${CONFIG.rules[3].color}">[regra 3]</strong> cerca de <strong>10% das vagas</strong> serão atribuídas entre as sedes pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional. <strong>O melhor time composto apenas por meninas terá uma vaga garantida, independentemente das regras anteriores.</strong>
+  <strong class="${CONFIG.rules[3].class}">[regra 3]</strong> cerca de <strong>10% das vagas</strong> serão atribuídas entre as sedes pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional. <strong>O melhor time composto apenas por meninas terá uma vaga garantida, independentemente das regras anteriores.</strong>
 </p>
 <p>
   As porcentagens acima indicam o número aproximado de vagas de cada tipo. As vagas não usadas por uma das regras serão distribuídas automaticamente entre as demais, a critério do Comitê Diretor da Maratona de Programação.

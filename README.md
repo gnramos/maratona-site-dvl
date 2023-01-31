@@ -14,7 +14,7 @@ A criação de um novo evento é simples, basta aplicar com o script em [src](sr
 
 ### Histórico de Eventos
 
-Os arquivos referentes a um evento ficam no diretório [historico](docs/historico), sendo organizados em subdiretórios `ano/fase`. O ano é no formato YYYY, e fase é uma das opções `Zero`, `Primeira`, `Nacional` e `Mundial`. Arquivos auxiliares para cada fase devem ser colocados em seus respectivos subdiretórios.
+Os arquivos referentes a um evento ficam no diretório [eventos](docs/eventos), sendo organizados em subdiretórios `ano/fase`. O ano é no formato YYYY, e fase é uma das opções `Zero`, `Primeira`, `Nacional` e `Mundial`. Arquivos auxiliares para cada fase devem ser colocados em seus respectivos subdiretórios.
 
 ### Escolas
 

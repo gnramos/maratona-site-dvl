@@ -16,7 +16,7 @@ Crie a estrutura de diretórios para um ano. Se preferir não usar a atualizaç�
 
 Atualize a página [inscricoes](../docs/inscricoes.html). Atenção pra garantir a funcionalidade de links como o para o "Manual do Diretor" ou formulários de inscrição para Fase 0 ou Café-com-leite.
 
-Atualize a lista de sedes (`sites`) na página [histórico](../docs/historico/index.html) com o local da sede do ano anterior.
+Atualize a lista de sedes (`sites`) na página [eventos](../docs/eventos/index.html) com o local da sede do ano anterior.
 
 ## `report`
 
