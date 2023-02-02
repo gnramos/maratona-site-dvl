@@ -13,7 +13,7 @@ UF_STATE = {uf: state for state, uf in STATE_UF.items()}
 BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
 
-Phase = namedtuple('Phase', 'title start')
+Phase = namedtuple('Phase', 'html_name start')
 
 
 def file_sub(file_in, repl, file_out, count=0):
@@ -39,15 +39,13 @@ def _get_array(file, array_name):
 
 class Charts:
     class GenderParticipation:
-        def __init__(self, phase_title, region, teams):
+        def __init__(self, phase_html_name, region, teams):
             self.region = region.upper()
             self.teams = int(teams)
             for phase in Event.Phases:
-                if phase_title == str(phase):
+                if phase_html_name == phase.value.html_name:
                     self.phase = phase
                     break
-            else:
-                raise ValueError(f'Não existe fase "{phase_title}".')
 
         def __lt__(self, other):
             if self.phase != other.phase:
@@ -60,9 +58,10 @@ class Charts:
     class Result:
         def __init__(self, year, **ranks):
             self.year = int(year)
+            # Sempre lista todas as fases, nesta ordem!
             self.ranks = {phase.name: 'null' for phase in Event.Phases}
-            for phase_title, rank in ranks.items():
-                self[phase_title] = rank
+            for phase_html_name, rank in ranks.items():
+                self[phase_html_name] = rank
 
         def __setitem__(self, key, value):
             self.ranks[key] = str(value)
@@ -74,12 +73,12 @@ class Charts:
             if self.year != other.year:
                 return self.year < other.year
             for phase in reversed(Event.Phases):
-                if self.ranks[phase.title] != other.ranks[phase.title]:
-                    if self.ranks[phase.title] == 'null' != other.ranks[phase.title]:
+                if self.ranks[phase.html_name] != other.ranks[phase.html_name]:
+                    if self.ranks[phase.html_name] == 'null' != other.ranks[phase.html_name]:
                         return False
-                    if self.ranks[phase.title] != 'null' == other.ranks[phase.title]:
+                    if self.ranks[phase.html_name] != 'null' == other.ranks[phase.html_name]:
                         return True
-                    return int(self.ranks[phase.title]) > int(other.ranks[phase.title])
+                    return int(self.ranks[phase.html_name]) > int(other.ranks[phase.html_name])
             return False
 
         def __str__(self):
@@ -119,47 +118,17 @@ class Charts:
 
 class Event:
     @staticmethod
-    def path_index(year, phase_name=''):
-        path = os.path.join('..', 'docs', 'eventos', str(year), phase_name)
-        index = os.path.join(path, 'index.html')
-        return path, index
-
-    @staticmethod
-    def make_index(year):
+    def create(year):
         path, index = Event.path_index(year)
         os.makedirs(path, exist_ok=True)
         repl = {r'\[BOOTSTRAP\]': BOOTSTRAP}
         _sub_template('contest', repl, index)
 
     @staticmethod
-    def make_phase_index(year, phase):
-        # Não sobrescreve arquivo existente!
-        if phase.exists_in(year):
-            path, index = Event.path_index(year, phase.name)
-            os.makedirs(path, exist_ok=True)
-
-            if not os.path.isfile(index):
-                Event.make_phase(year, phase)
-
-    @staticmethod
-    def make_phase(year, phase):
-        if phase == Event.Phases.Nacional and year >= 2012:
-            summer = f'''
-         </script>
-    <br>
-    <p>
-      Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao{year + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
-    </p>
-    <script type="text/javascript">'''
-        else:
-            summer = ''
-
-        repl = {r'\[BOOTSTRAP\]': BOOTSTRAP,
-                r'\[YEAR\]': str(year),
-                r'\[PHASE_NAME\]': str(phase),
-                r'\[SUMMER_SCHOOL\]': summer}
-        path, index = Event.path_index(year, phase.name)
-        _sub_template(phase.name, repl, index)
+    def path_index(year):
+        path = os.path.join('..', 'docs', 'eventos', str(year))
+        index = os.path.join(path, 'index.html')
+        return path, index
 
     @staticmethod
     def update_index(year, phase, region, gender, teams):
@@ -186,7 +155,7 @@ class Event:
 
     @staticmethod
     def process(df):
-        def phase_participation(year, phase, df):
+        def gender_participation(year, phase, df):
             d = {gender: {region: 0 for region in REGION_DIR}
                  for gender in df['sex'].unique()}
 
@@ -201,27 +170,24 @@ class Event:
                                            REGION_DIR[region].upper(),
                                            gender.lower(), count)
 
+        def team_participation(year, phase, num_teams):
+            path, index = Event.path_index('')
+            Charts.Result.update_file(index, year, phase.name, num_teams)
+
         for group, group_df in df.groupby(['Year', 'Phase']):
             year, phase_name = group
             phase = eval(f'Event.Phases.{phase_name}')
             year, num_teams = int(year), group_df.teamName.count() // 3
 
-            Event.make_index(year)
-            Event.make_phase_index(year, phase)
-            phase_participation(year, phase, group_df)
-            Event.update_history(year, phase.name, num_teams)
+            Event.create(year)
+            phase.create(year)
+            gender_participation(year, phase, group_df)
+            team_participation(year, phase, num_teams)
 
     @staticmethod
     def reset_index():
         path, index = Event.path_index('')
         Charts.Result.reset_file(index)
-
-    @staticmethod
-    def update_history(year, phase_name, teams):
-        assert teams >= 0
-
-        path, index = Event.path_index('')
-        Charts.Result.update_file(index, year, phase_name, teams)
 
     class Phases(Enum):
         Zero = Phase('Fase 0', 2022)
@@ -230,20 +196,50 @@ class Event:
         Mundial = Phase('Final Mundial', 1989)
 
         def __str__(self):
-            return self.value.title
+            return self.value.html_name
 
         def __lt__(self, other):
             return self.value.start > other.value.start
 
-        def exists_in(self, year):
-            return self.value.start <= year
+        def create(self, year):
+            def summerschool():
+                if self != Event.Phases.Nacional or year < 2012:
+                    return ''
+                return f'''
+         </script>
+    <br>
+    <p>
+      Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao{year + 1}/">curso de treinamento</a> que ocorrerá na Unicamp.
+    </p>
+    <script type="text/javascript">'''
+
+            if self.value.start > year:
+                print(f'{self.value.html_name} só existe a partir {self.value.start}.')
+                return
+
+            path, index = self.path_index(year)
+            if os.path.isfile(index):
+                print(f'Já existe um arquivo para {self.value.html_name} em {year}.')
+                return
+
+            os.makedirs(path, exist_ok=True)
+
+            repl = {r'\[BOOTSTRAP\]': BOOTSTRAP,
+                    r'\[YEAR\]': str(year),
+                    r'\[PHASE_NAME\]': self.value.html_name,
+                    r'\[SUMMER_SCHOOL\]': summerschool()}
+            _sub_template(self.name, repl, index)
+
+        def path_index(self, year):
+            path = os.path.join('..', 'docs', 'eventos', str(year), self.name)
+            index = os.path.join(path, 'index.html')
+            return path, index
 
 
 class School:
     @staticmethod
-    def make_institution_index(uf, inst_short, inst_full):
+    def create(uf, inst_short, inst_full):
         uf = uf.upper()
-        assert uf in UF_STATE
 
         path, file = School.path_index(uf, inst_short)
         repl = {r'\[BOOTSTRAP\]': BOOTSTRAP,
@@ -252,10 +248,10 @@ class School:
         _sub_template('school', repl, file)
 
     @staticmethod
-    def path_index(uf, institution='index'):
+    def path_index(uf, school_name):
         region = REGION_DIR[UF_REGION[uf.upper()]]
         path = os.path.join('..', 'docs', 'escolas', region, uf.lower())
-        index = os.path.join(path, f'{institution}.html')
+        index = os.path.join(path, f'{school_name}.html')
         return path, index
 
     @staticmethod
@@ -269,45 +265,41 @@ class School:
                 short, full, rank = g
                 short, rank = normalize(short), int(rank)
 
-                School.update_institution(uf, short, full, year, phase_name, rank)
-                School.update_uf_result(uf, year, phase_name, rank)
-                School.update_uf_dropdown(uf, short, full)
+                School.update(uf, short, full, year, phase_name, rank)
 
     @staticmethod
     def reset():
         for uf in UF_STATE:
-            School.reset_uf(uf)
-            School.reset_institutions(uf)
+            # Dropdown
+            path, index = School.path_index(uf.upper(), 'index')
+            repl = {r'<ul class="dropdown-menu" [.\s\S]*?</ul>': '<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n       </ul>'}
+            file_sub(index, repl, index)
+
+            # School files
+            Charts.Result.reset_file(index)
+            for root, dirs, files in os.walk(path):
+                for file in files:
+                    if file != 'index.html' and file != f'{uf.lower()}.svg':
+                        os.remove(os.path.join(path, file))
 
     @staticmethod
-    def reset_institutions(uf):
-        path, file = School.path_index(uf.upper())
-        Charts.Result.reset_file(file)
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                if file != 'index.html' and file != f'{uf.lower()}.svg':
-                    os.remove(os.path.join(path, file))
-
-    @staticmethod
-    def reset_uf(uf):
-        path, index = School.path_index(uf.upper())
-        repl = {r'<ul class="dropdown-menu" [.\s\S]*?</ul>': '<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n       </ul>'}
-        file_sub(index, repl, index)
-
-    @staticmethod
-    def update_uf_result(uf, year, phase_name, rank):
+    def update(uf, inst_short, inst_full, year, phase_name, rank):
         uf = uf.upper()
-        path, index = School.path_index(uf)
+        path, file = School.path_index(uf, inst_short)
+
+        if not os.path.isfile(file):
+            School.create(uf, inst_short, inst_full)
+
+        Charts.Result.update_file(file, year, phase_name, rank, True)
+
+        # If institutionl being updated was the UF top ranking one and the
+        # update lowers its rank, UF rank IS NOT CHANGED!
+        path, index = School.path_index(uf, 'index')
         Charts.Result.update_file(index, year, phase_name, rank,
                                   replace_if_better=True)
 
-    @staticmethod
-    def update_uf_dropdown(uf, inst_short, inst_full):
-        uf = uf.upper()
-        assert uf in UF_STATE
-
-        path, file = School.path_index(uf)
-        with open(file, 'r') as f:
+        # Update dropdown
+        with open(index, 'r') as f:
             content = f.read()
 
         pattern = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
@@ -320,26 +312,10 @@ class School:
         else:
             items.append([inst_short, inst_full])
 
-        pattern = r'<ul class="dropdown-menu" [.\s\S]*?</ul>'
         items = '\n  '.join(f'<li><a class="dropdown-item" href="{s}.html">{f}</a></li>'
                             for s, f in sorted(items, key=lambda x: x[1]))
         items = f'''<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
 {items}
        </ul>'''
-        content = re.sub(pattern, items, content)
-        with open(file, 'w') as f:
-            f.write(content)
-
-    @staticmethod
-    def update_institution(uf, inst_short, inst_full, year, phase_name, rank):
-        uf = uf.upper()
-        path, file = School.path_index(uf, inst_short)
-
-        if not os.path.isfile(file):
-            School.make_institution_index(uf, inst_short, inst_full)
-
-        Charts.Result.update_file(file, year, phase_name, rank, True)
-
-        # If institutionl being updated was the UF top ranking one and the
-        # update lowers its rank, UF rank IS NOT CHANGED!
-        School.update_uf_result(uf, year, phase_name, rank)
+        repl = {r'<ul class="dropdown-menu" [.\s\S]*?</ul>': items}
+        file_sub(index, repl, index)

@@ -5,14 +5,14 @@ AC,FBRC,Faculdade Barão do Rio Branco
 AC,IFAC,Instituto Federal de Educação, Ciência e Tecnologia do Acre
 AC,UFAC,Universidade Federal do Acre
 AC,UVERSE,Centro Universitário U:VERSE
-AL,UFAL Arapiraca,Universidade Federal de Alagoas - Campus Arapiraca
+AL,UFALCA,Universidade Federal de Alagoas - Campus Arapiraca
 AL,UFAL,Universidade Federal de Alagoas
 AM,IComp/UFAM,Institute of Computing - Federal University of Amazonas
 AM,IESAM,Instituto de Estudos Superiores da Amazônia
 AM,IFAM,Instituto Federal de Educação, Ciência e Tecnologia do Amazonas
 AM,UEA,Universidade do Estado do Amazonas
 AM,UEA-CEST,Universidade do Estado do Amazonas - Itacoatiara
-AM,UFAM - Itacoatiara,Universidade Federal do Amazonas - Campus Itacoatiara
+AM,UFAM-CI,Universidade Federal do Amazonas - Campus Itacoatiara
 AM,UFAM,Universidade Federal do Amazonas
 AM,UNINORTE,UNINORTE - Laureate International Universities
 AP,UNIFAP,Universidade Federal do Amapá
@@ -63,12 +63,11 @@ GO,UCG,Universidade Católica de Goiás
 GO,UEG,Unidade Universitária de Ciências Exatas e Tecnológicas - UEG
 GO,UFG,Instituto de Informática - UFG
 GO,UniRV,Universidade de Rio Verde
+MA,FACAM,FACULDADE DO MARANHAO
 MA,IFMA,Instituto Federal de Educação, Ciência e Tecnologia do Maranhão
 MA,UFMA,Universidade Federal do Maranhão
 MA,UNDB,Unidade de Ensino Superior Dom Bosco - UNDB
 MA,UNIBALSAS,Faculdade de Balsas
-MG,,Faculdade Governador Ozanam Coelho
-MG,,Faculdade Pitágoras Divinópolis
 MG,CEFET-MG - Timóteo,Centro Federal de Educação Tecnológica de Minas Gerais Campus Timóteo
 MG,CEFET-MG,Centro Federal de Educação Tecnológica de Minas Gerais
 MG,CEFET-MG-C2,Centro Federal de Educação Tecnológica de Minas Gerais - Campus 2
@@ -77,6 +76,9 @@ MG,CES/JF,Centro de Ensino Superior de Juiz de Fora
 MG,DPI-UFV,Universidade Federal de Viçosa
 MG,FACIT,Faculdade de Ciencia e Tecnologia de Montes Claros
 MG,FAI,FAI - Centro de Ensino Superior em Gestão, Tecnologia e Educação
+MG,FASA,Faculdades Santo Agostinho
+MG,FGOC,Faculdade Governador Ozanam Coelho
+MG,FPD,Faculdade Pitágoras Divinópolis
 MG,FPU,Faculdade Politécnica de Uberlândia
 MG,IFMG - Bambuí,Instituto Federal de Minas Gerais - Campus Bambuí
 MG,IFMS,Instituto Federal de Educação, Ciência e Tecnologia do Sul de Minas
@@ -108,6 +110,7 @@ MG,UFU,Universidade Federal de Uberlândia
 MG,UFU-Monte Carmelo/SI,Universidade Federal de Uberlândia - Campus Monte Carmelo - Sistemas de Informação
 MG,UFV-Campus Florestal,Universidade Federal de Viçosa - Campus Florestal
 MG,UFV-Rio Paranaíba,Universidade Federal de Viçosa - Campus Rio Paranaíba - Sistemas de Informação
+MG,UNA-BH,UNA - Belo Horizonte
 MG,UNICA,Faculdade Única de Ipatinga (Única Educacional)
 MG,Unifei Itabira,Universidade Federal de Itajubá - Campus Itabira
 MG,UNIFEI,Universidade Federal de Itajubá - Campus Itajubá
@@ -148,7 +151,9 @@ PE,CESAR School,CESAR School
 PE,UAG-UFRPE,Federal Rural University of Pernambuco - Academic Unit of Garanhuns
 PE,UFPE,Universidade Federal de Pernambuco
 PE,UFRPE,Universidade Federal Rural de Pernambuco
+PE,UNIAESO,Faculdades Integradas Barros Melo
 PE,UNIVASF,Universidade Federal do Vale do São Francisco
+PE,UPE,Universidade de Pernambuco
 PI,IFPI,Instituto Federal de Educação, Ciência e Tecnologia do Piauí
 PI,IFPI-CP,Instituto Federal de Educação, Ciência e Tecnologia do Piauí - Campus Picos
 PI,UESPI Parnaíba,Universidade Estadual do Piauí - Campus de Parnaíba
@@ -165,8 +170,9 @@ PR,UF Paraná,Universidade Federal do Paraná
 PR,UFPR-JA,Universidade Federal do Paraná - Jandaia do Sul
 PR,UNICENTRO,Universidade Estadual do Centro-Oeste
 PR,Uninter,Centro Universitário Internacional
-PR,UNIOESTE - Cascavel,UNIOESTE - Campus Cascavel
-PR,UNIOESTE - Foz do Iguaçu,UNIOESTE - Campus de Foz do Iguaçu
+PR,UNIOESTE-C,UNIOESTE - Campus Cascavel
+PR,UNIOESTE-FI,UNIOESTE - Campus de Foz do Iguaçu
+PR,UP,Universidade Positivo
 PR,UTFPR,Universidade Tecnológica Federal do Paraná
 PR,UTFPR-CM, Universidade Tecnológica Federal do Paraná - Campus Medianeira
 PR,UTFPR-CT,Universidade Tecnológica Federal do Paraná - Campus Curitiba
@@ -191,7 +197,6 @@ RN,IFRN - CNAT,Instituto Federal de Educação, Ciência e Tecnologia do Rio Gra
 RN,IFRN-Par,Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte - Campus Parnamirim
 RN,UERN,Universidade do Estado do Rio Grande do Norte
 RN,UFRN,Universidade Federal do Rio Grande do Norte
-RO,,Faculdade de Porto Velho
 RO,UNIR,UNIR - Universidade Federal de Rondonia
 RR,CUEdA,Centro Universitário Estácio da Amazônia
 RR,FAAr,FAAr - Faculdades Associadas de Ariquemes
@@ -279,9 +284,11 @@ SP,UNIFAE,Centro Universitário das Faculdades Associadas de Ensino
 SP,UNIFESP,Universidade Federal de São Paulo
 SP,UNILINS,Centro Universitário de Lins
 SP,UNINOVE,Universidade Nove de Julho
+SP,UNIP-SC,UNIP - Campus Sorocaba
 SP,UNISAL,Centro Universitário Salesiano de São Paulo
 SP,UNISALESIANO,Centro Universitário Católico Salesiano Auxilum
 SP,UniSantos,Universidade Católica de Santos
+SP,UNISO,Universidade de Sorocaba
 SP,UNITAU,Universidade de Taubaté
 SP,UNIVEM,UNIVEM - Centro Universitário Eurípides de Marília
 SP,Univesp,Universidade Virtual do Estado de São Paulo

@@ -5,13 +5,6 @@ import report
 import os
 
 
-def _process_report_file(file, guess_uf, verbose):
-    df = report.process(file, guess_uf, verbose)
-    if df is None or df.empty:
-        return None
-    return df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
-
-
 def _new_year(year):
     path, index = html.Event.path_index(year)
     if os.path.isdir(path):
@@ -20,7 +13,7 @@ def _new_year(year):
 
 
 def _process_event(args):
-    for file in args.files:
+    for file in sorted(args.files):
         df = _process_report_file(file, True, args.verbose)
         if df is not None:
             html.Event.process(df)
@@ -29,18 +22,23 @@ def _process_event(args):
 
 def _process_new(args):
     path, index = html.Event.path_index(args.year)
-    html.Event.make_index(args.year)
-    for phase in html.Event.Phases:
-        html.Event.make_phase_index(args.year, phase)
-    if args.update_js:
+    html.Event.create(args.year)
+    if args.current:
         file = os.path.join('..', 'docs', 'maratona.js')
         repl = {r"year: '\d{4}'": f"year: '{args.year}'",
-                r"phase: '\w+'": f"phase: ''"}
+                r"phase: '\w+'": "phase: ''"}
         html.file_sub(file, repl, file, 1)
 
 
 def _process_report(args):
     _process_report_file(args.file, args.guess, True)
+
+
+def _process_report_file(file, guess_uf, verbose):
+    df = report.process(file, guess_uf, verbose)
+    if df is None or df.empty:
+        return None
+    return df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
 
 
 def _process_reset(args):
@@ -73,8 +71,8 @@ def main():
     new = subparsers.add_parser('new', help='Inicializar arquivos HTML de um'
                                 ' novo ano da competição')
     new.add_argument('year', type=_new_year, help='Ano da competição')
-    new.add_argument('-u', '--update-js', action='store_true',
-                     help='Atualizar o arquivo JS com o novo ano.')
+    new.add_argument('-c', '--current', action='store_true',
+                     help='Definir ano como o atual no arquivo JS.')
     new.set_defaults(process=_process_new)
     ###########################################################################
     report = subparsers.add_parser('report', help='Gerar relatório(s) '

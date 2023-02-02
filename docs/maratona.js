@@ -1,4 +1,4 @@
-const CONFIG = {current: {year: '2022', phase: 'Nacional'},
+const CONFIG = {current: {year: '2022', phase: ''},
                 rules: [{class: 'text-warning'},
                         {class: 'text-danger', tooltip: 'Top 15!'},
                         {class: 'text-primary', tooltip: 'Distribuição por sedes.'},
@@ -57,11 +57,13 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   }
   function participateItem(isActive) {
     let phaseLinks = '';
-    for (i in CONFIG.phases) {
-      phaseLinks += `
+    if (CONFIG.current.phase != '') {
+      for (i in CONFIG.phases) {
+        phaseLinks += `
     <li><a class="dropdown-item" href="${root()}eventos/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
-      if (CONFIG.phases[i].dir == CONFIG.current.phase)
-        break;
+        if (CONFIG.phases[i].dir == CONFIG.current.phase)
+          break;
+      }
     }
 
     return `

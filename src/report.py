@@ -103,14 +103,14 @@ class Get:
     def uf_from_institution(institution):
         if info := INSTITUTIONS.get(normalize(institution), False):
             return info.UF
-
         return NATIONAL_UF
 
     @staticmethod
-    def short_name_from_full(institution):
+    def short_name_from_full(institution, known_short):
         if info := INSTITUTIONS.get(normalize(institution), False):
-            return info.short
-        return institution
+            if info.short:
+                return info.short
+        return known_short
 
     @staticmethod
     def region_from_uf(uf):
@@ -183,8 +183,11 @@ def _preprocess(df, guess_uf=False, verbose=True):
     # df['username'] = df['username'].apply(_hash)
     df['instName'] = df['instName'].apply(_alias)
 
-    for i, row in df[df[SHORT].isna()].iterrows():
-        df.at[i, SHORT] = Get.short_name_from_full(row['instName'])
+    for i, row in df.iterrows():
+        df.at[i, SHORT] = Get.short_name_from_full(row['instName'], row[SHORT])
+
+    # for i, row in df[df[SHORT].isna()].iterrows():
+    #     df.at[i, SHORT] = Get.short_name_from_full(row['instName'])
 
     df['UF'] = df['siteName'].apply(Get.uf_from_site)
     if guess_uf:
