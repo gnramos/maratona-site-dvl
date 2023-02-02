@@ -1,4 +1,3 @@
-from collections import namedtuple
 from enum import Enum
 import os
 import re
@@ -12,8 +11,6 @@ UF_STATE = {uf: state for state, uf in STATE_UF.items()}
 
 BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
-
-Phase = namedtuple('Phase', 'html_name start')
 
 
 def file_sub(file_in, repl, file_out, count=0):
@@ -43,7 +40,7 @@ class Charts:
             self.region = region.upper()
             self.teams = int(teams)
             for phase in Event.Phases:
-                if phase_html_name == phase.value.html_name:
+                if phase_html_name == phase.html_name:
                     self.phase = phase
                     break
 
@@ -190,16 +187,20 @@ class Event:
         Charts.Result.reset_file(index)
 
     class Phases(Enum):
-        Zero = Phase('Fase 0', 2022)
-        Primeira = Phase('1ª Fase', 2012)
-        Nacional = Phase('Final Nacional', 1996)
-        Mundial = Phase('Final Mundial', 1989)
+        Zero = ('Fase 0', 2022)
+        Primeira = ('1ª Fase', 2012)
+        Nacional = ('Final Nacional', 1996)
+        Mundial = ('Final Mundial', 1989)
+
+        def __init__(self, html_name, start):
+            self.html_name = html_name
+            self.start = start
 
         def __str__(self):
-            return self.value.html_name
+            return self.html_name
 
         def __lt__(self, other):
-            return self.value.start > other.value.start
+            return self.start > other.start
 
         def create(self, year):
             def summerschool():
@@ -213,20 +214,20 @@ class Event:
     </p>
     <script type="text/javascript">'''
 
-            if self.value.start > year:
-                print(f'{self.value.html_name} só existe a partir {self.value.start}.')
+            if self.start > year:
+                print(f'{self.html_name} só existe a partir {self.start}.')
                 return
 
             path, index = self.path_index(year)
             if os.path.isfile(index):
-                print(f'Já existe um arquivo para {self.value.html_name} em {year}.')
+                print(f'Já existe um arquivo para {self.html_name} em {year}.')
                 return
 
             os.makedirs(path, exist_ok=True)
 
             repl = {r'\[BOOTSTRAP\]': BOOTSTRAP,
                     r'\[YEAR\]': str(year),
-                    r'\[PHASE_NAME\]': self.value.html_name,
+                    r'\[PHASE_NAME\]': self.html_name,
                     r'\[SUMMER_SCHOOL\]': summerschool()}
             _sub_template(self.name, repl, index)
 
@@ -284,6 +285,16 @@ class School:
 
     @staticmethod
     def update(uf, inst_short, inst_full, year, phase_name, rank):
+        def dropdown_ul(file):
+            with open(file, 'r') as f:
+                content = f.read()
+            pattern = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
+            d = {s: f for s, f in re.findall(pattern, content)}
+            d[inst_short] = inst_full
+            items = '\n  '.join(f'<li><a class="dropdown-item" href="{s}.html">{f}</a></li>'
+                                for s, f in sorted(d.items(), key=lambda x: x[1]))
+            return f'<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">\n{items}\n</ul>'
+
         uf = uf.upper()
         path, file = School.path_index(uf, inst_short)
 
@@ -297,25 +308,5 @@ class School:
         path, index = School.path_index(uf, 'index')
         Charts.Result.update_file(index, year, phase_name, rank,
                                   replace_if_better=True)
-
         # Update dropdown
-        with open(index, 'r') as f:
-            content = f.read()
-
-        pattern = r'<li><a class="dropdown-item" href="(.*?).html">(.*?)</a></li>'
-        items = [[s, f] for s, f in re.findall(pattern, content)]
-        for item in items:
-            if item[0] == inst_short:
-                if item[1] != inst_full:
-                    item[1] = inst_full
-                break
-        else:
-            items.append([inst_short, inst_full])
-
-        items = '\n  '.join(f'<li><a class="dropdown-item" href="{s}.html">{f}</a></li>'
-                            for s, f in sorted(items, key=lambda x: x[1]))
-        items = f'''<ul class="dropdown-menu" aria-labelledby="dropdownInstitutions">
-{items}
-       </ul>'''
-        repl = {r'<ul class="dropdown-menu" [.\s\S]*?</ul>': items}
-        file_sub(index, repl, index)
+        file_sub(index, {r'<ul [.\s\S]*?</ul>': dropdown_ul(index)}, index)

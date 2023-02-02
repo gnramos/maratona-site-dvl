@@ -5,18 +5,19 @@ AC,FBRC,Faculdade Barão do Rio Branco
 AC,IFAC,Instituto Federal de Educação, Ciência e Tecnologia do Acre
 AC,UFAC,Universidade Federal do Acre
 AC,UVERSE,Centro Universitário U:VERSE
-AL,UFALCA,Universidade Federal de Alagoas - Campus Arapiraca
 AL,UFAL,Universidade Federal de Alagoas
+AL,UFALCA,Universidade Federal de Alagoas - Campus Arapiraca
 AM,IComp/UFAM,Institute of Computing - Federal University of Amazonas
 AM,IESAM,Instituto de Estudos Superiores da Amazônia
 AM,IFAM,Instituto Federal de Educação, Ciência e Tecnologia do Amazonas
 AM,UEA,Universidade do Estado do Amazonas
 AM,UEA-CEST,Universidade do Estado do Amazonas - Itacoatiara
-AM,UFAM-CI,Universidade Federal do Amazonas - Campus Itacoatiara
 AM,UFAM,Universidade Federal do Amazonas
+AM,UFAM-CI,Universidade Federal do Amazonas - Campus Itacoatiara
 AM,UNINORTE,UNINORTE - Laureate International Universities
 AP,UNIFAP,Universidade Federal do Amapá
 BA,FA1,Área1 – Faculdade de Ciência e Tecnologia
+BA,FRB,Faculdade Ruy Barbosa
 BA,IFBA-VC,Instituto Federal de Educação, Ciência e Tecnologia da Bahia - Campus Vitória da Conquista
 BA,UCSAL,Universidade Catolica do Salvador
 BA,UEFS,Universidade Estadual de Feira de Santana
@@ -121,6 +122,7 @@ MG,UNIS,Centro Universitário do Sul de Minas
 MG,Unitri,Centro Universitário do Triângulo
 MG,UNIVALE,Universidade Vale do Rio Doce- Univale
 MG,UNIVAS,Universidade do Vale do Sapucaí - UNIVAS
+MG,UNIVERSO,Universidade Salgado de Oliveira - UNIVERSO
 MG,UNIVERSO-JF,Universidade Salgado de Oliveira - Juiz de Fora
 MG,UU-CU,Universidade de Uberaba - Campus Uberaba
 MS,CPPP - UFMS,Campus de Ponta Porã - Universidade Federal de Mato Grosso do Sul
@@ -169,6 +171,7 @@ PR,UEPG,Universidade Estadual de Ponta Grossa
 PR,UF Paraná,Universidade Federal do Paraná
 PR,UFPR-JA,Universidade Federal do Paraná - Jandaia do Sul
 PR,UNICENTRO,Universidade Estadual do Centro-Oeste
+PR,UNICESUMAR,UNICESUMAR - University Center of Maringa
 PR,Uninter,Centro Universitário Internacional
 PR,UNIOESTE-C,UNIOESTE - Campus Cascavel
 PR,UNIOESTE-FI,UNIOESTE - Campus de Foz do Iguaçu
@@ -197,6 +200,7 @@ RN,IFRN - CNAT,Instituto Federal de Educação, Ciência e Tecnologia do Rio Gra
 RN,IFRN-Par,Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte - Campus Parnamirim
 RN,UERN,Universidade do Estado do Rio Grande do Norte
 RN,UFRN,Universidade Federal do Rio Grande do Norte
+RO,FIP,Faculdade de Porto Velho
 RO,UNIR,UNIR - Universidade Federal de Rondonia
 RR,CUEdA,Centro Universitário Estácio da Amazônia
 RR,FAAr,FAAr - Faculdades Associadas de Ariquemes
@@ -249,6 +253,7 @@ SP,Fatec Lins,Faculdade de Tecnologia de Lins
 SP,Fatec Mococa,Faculdade de Tecnologia de Mococa
 SP,Fatec Ourinhos,Fatec Ourinhos
 SP,FATEC São Paulo,Faculdade de Tecnologia de São Paulo
+SP,FATEC-C,FATEC Carapicuíba
 SP,Fatec-MC,Faculdade de Tecnologia de Mogi das Cruzes
 SP,FATEC-SJC,Faculdade de Tecnologia de São José dos Campos
 SP,FCT-UNESP,UNESP - Universidade Estadual Paulista (Faculdade de Ciências e Tecnologia - Presidente Prudente)

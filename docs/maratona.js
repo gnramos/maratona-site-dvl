@@ -13,7 +13,7 @@ const CONFIG = {current: {year: '2022', phase: ''},
 /**
  * Create a contact link.
  *
- * @param  {Array}  text the text to show as link
+ * @param  {String}  text the text to show as link
  * @param  {String} args parts of the string that compose de e-mail address
  * @return {String}      the HTML with the formatted information
  */
