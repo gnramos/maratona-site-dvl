@@ -158,7 +158,7 @@ class Event:
 
             for group, group_df in df.groupby(['Region', 'sex']):
                 region, gender = group
-                d[gender][region] = group_df.username.count()
+                d[gender][region] = group_df.FullName.count()
 
             for gender, region_d in d.items():
                 if any(count for count in region_d.values()):
