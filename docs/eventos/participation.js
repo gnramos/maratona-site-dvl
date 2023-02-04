@@ -81,26 +81,6 @@ function drawFemaleDashboard(){
 }
 
 /**
- * Builds a list with the phase links.
- *
- * @param  {Number} year year of the contest
- * @return {String}      the HTML with the formatted information
- */
-function phaseList(year) {
-  let links = '';
-  for (phase of CONFIG.phases) {
-    if (year >= phase.start)
-      links += `\n<li><a href="${phase.dir}/index.html">${phase.name}</a></li>`;
-      if (phase.name == 'Nacional' && year >= 2012 && year != 2021)
-        links += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(year) + 1}">Summer School</a></li>`;
-  }
-  return `<ul class="list-group">
-  <li class="list-group"><strong>Informações:</strong></li>
-  ${links}
-</ul>`;
-}
-
-/**
  * Builds the page body for an event.
  *
  * There are 3 parts: the folder, the pie chars with contestant statistics, and
@@ -109,8 +89,24 @@ function phaseList(year) {
  * @return {String} the HTML with the formatted information
  */
 function eventPageBody() {
-  let year = thisYear();
-  let header = bodyHeader(`${toRoman(year - 1995)} Maratona SBC de Programação (${year})`, makeBreadcrumbs());
+  function phaseList(year) {
+    let items = '';
+    for (phase of CONFIG.phases) {
+      if (year >= phase.start)
+        items += `\n<li><a href="${phase.dir}/index.html">${phase.name}</a></li>`;
+        if (phase.name == 'Nacional' && year >= 2012 && year != 2021)
+          items += `\n<li><a href="http://maratona.ic.unicamp.br/MaratonaVerao${Number(year) + 1}">Summer School</a></li>`;
+    }
+    return `<ul class="list-group">
+  <li class="list-group"><strong>Informações:</strong></li>
+  ${items}
+</ul>`;
+  }
+
+  let url = window.location.pathname.split('/');
+  let year = (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
+  let header = bodyHeader(fullName(year, ` (${year})`), makeBreadcrumbs());
+
   return `${header}
 <div class="container">
   <div class="row">
@@ -130,4 +126,14 @@ function eventPageBody() {
   </div>
 </div>
 ${bodyFooter()}`;
+}
+
+/**
+ * Return the year for specific events from the dir structure.
+ *
+ * @return {String} the year.
+ */
+function thisYear() {
+  let url = window.location.pathname.split('/');
+  return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
 }

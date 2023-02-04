@@ -187,7 +187,7 @@ class Event:
         Charts.Result.reset_file(index)
 
     class Phases(Enum):
-        Zero = ('Fase 0', 2022)
+        Zero = ('Fase Zero', 2022)
         Primeira = ('1ª Fase', 2012)
         Nacional = ('Final Nacional', 1996)
         Mundial = ('Final Mundial', 1989)

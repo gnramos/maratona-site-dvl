@@ -191,16 +191,6 @@ function showChampion(team, img) {
  *
  * @return {String} the year.
  */
-function thisYear() {
-  let url = window.location.pathname.split('/');
-  return (isNaN(parseInt(url.at(-3))) ? url.at(-2) : url.at(-3));
-}
-
-/**
- * Return the year for specific events from the dir structure.
- *
- * @return {String} the year.
- */
 function thisPhase() {
   let url = window.location.pathname.split('/');
   return (isNaN(parseInt(url.at(-3))) ? url.at(-1) : url.at(-2));

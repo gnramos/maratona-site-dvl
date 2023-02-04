@@ -1,4 +1,4 @@
-const CONFIG = {current: {year: '2022', phase: ''},
+const CONFIG = {current: {year: '2022', phase: 'Nacional'},
                 rules: [{class: 'text-warning'},
                         {class: 'text-danger', tooltip: 'Top 15!'},
                         {class: 'text-primary', tooltip: 'Distribuição por sedes.'},
@@ -297,20 +297,15 @@ function listLinks(links, type='ul', list_options='', item_options=[]) {
 }
 
 /**
- * Return the number in Roman format.
- *
- * Assumes 0 < number < 100.
- *
- * @param  {Int}  num integer value
- * @return {String}   the roman number for num .
+ * Return the full name of the event (with roman numerals).
  */
-function toRoman(num) {
+function fullName(year, suffix='') {
+  // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
   const NUMERAL_CODES = [["","I","II","III","IV","V","VI","VII","VIII","IX"],  // Ones
                          ["","X","XX","XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]];  // Tens
-  // https://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
-  let numeral = '';
-  let digits = num.toString().split('').reverse();
+  let numeral = '', digits = (year - 1995).toString().split('').reverse();
   for (let i = 0; i < digits.length; i++)
     numeral = NUMERAL_CODES[i][parseInt(digits[i])] + numeral;
-  return numeral;
+
+  return `${numeral} Maratona SBC de Programação${suffix}`
 }

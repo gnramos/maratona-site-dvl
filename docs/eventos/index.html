@@ -71,7 +71,7 @@
       let listItems = '', accordionItems = [], year;
       for (i in sites) {
         year = 1995 + sites.length - i;  // O 1o evento ocorreu em 1996
-        listItems += `\n<li class="list-group-item"><a href="${year}/index.html">${toRoman(year - 1995)} Maratona - ${sites[i]} (${year})</a></li>`;
+        listItems += `\n<li class="list-group-item"><a href="${year}/index.html">${fullName(year, " - " + sites[i]) + " " + year}</a></li>`;
         if (year % 10 == 0) {
           accordionItems.push([`${year} ~`, `\n<ul class="list-group">${listItems}\n</ul>`]);
           listItems = '';
