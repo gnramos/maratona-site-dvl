@@ -119,11 +119,11 @@ class Event:
         path, index = Event.path_index(year)
         os.makedirs(path, exist_ok=True)
         repl = {r'\[BOOTSTRAP\]': BOOTSTRAP}
-        _sub_template('contest', repl, index)
+        _sub_template('evento', repl, index)
 
     @staticmethod
-    def path_index(year):
-        path = os.path.join('..', 'docs', 'eventos', str(year))
+    def path_index(year, phase_name=''):
+        path = os.path.join('..', 'docs', 'eventos', str(year), phase_name)
         index = os.path.join(path, 'index.html')
         return path, index
 
@@ -187,6 +187,7 @@ class Event:
         Charts.Result.reset_file(index)
 
     class Phases(Enum):
+        # name = value  (name deve ser o nome do diretório)
         Zero = ('Fase Zero', 2022)
         Primeira = ('1ª Fase', 2012)
         Nacional = ('Final Nacional', 1996)
@@ -218,7 +219,7 @@ class Event:
                 print(f'{self.html_name} só existe a partir {self.start}.')
                 return
 
-            path, index = self.path_index(year)
+            path, index = Event.path_index(year, self.name)
             if os.path.isfile(index):
                 print(f'Já existe um arquivo para {self.html_name} em {year}.')
                 return
@@ -231,11 +232,6 @@ class Event:
                     r'\[SUMMER_SCHOOL\]': summerschool()}
             _sub_template(self.name, repl, index)
 
-        def path_index(self, year):
-            path = os.path.join('..', 'docs', 'eventos', str(year), self.name)
-            index = os.path.join(path, 'index.html')
-            return path, index
-
 
 class School:
     @staticmethod
@@ -246,7 +242,7 @@ class School:
         repl = {r'\[BOOTSTRAP\]': BOOTSTRAP,
                 r'\[FULL_NAME\]': inst_full,
                 r'\[SHORT_NAME\]': inst_short}
-        _sub_template('school', repl, file)
+        _sub_template('escola', repl, file)
 
     @staticmethod
     def path_index(uf, school_name):
