@@ -1,9 +1,9 @@
-const CONFIG = {current: {year: '2022', phase: 'Nacional'},
+const CONFIG = {current: {year: '2022', phaseName: 'Final Nacional'},
                 rules: [{class: 'text-warning'},
                         {class: 'text-danger', tooltip: 'Top 15!'},
                         {class: 'text-primary', tooltip: 'Distribuição por sedes.'},
                         {class: 'text-success', tooltip: 'Vagas discricionárias.'}],
-                phases: [{name: 'Fase 0', dir: 'Zero', start: 2022},
+                phases: [{name: 'Fase Zero', dir: 'Zero', start: 2022},
                          {name: '1ª Fase', dir: 'Primeira', start: 2004},
                          {name: 'Final Nacional', dir: 'Nacional', start: 1996},
                          {name: 'Final Mundial', dir: 'Mundial', start: 1989}],
@@ -57,11 +57,11 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   }
   function participateItem(isActive) {
     let phaseLinks = '';
-    if (CONFIG.current.phase != '') {
+    if (CONFIG.current.phaseName != '') {
       for (i in CONFIG.phases) {
         phaseLinks += `
     <li><a class="dropdown-item" href="${root()}eventos/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
-        if (CONFIG.phases[i].dir == CONFIG.current.phase)
+        if (CONFIG.phases[i].name == CONFIG.current.phaseName)
           break;
       }
     }
@@ -196,10 +196,11 @@ function bodyFooter() {
  *
  * Creates a Bootstrap Accordion (https://getbootstrap.com/docs/5.0/components/accordion/).
  *
- * @param  {String} name          the ID for the accordion
- * @param  {Array}  items         an array with the content for each accordion item, which should be formatted as an Array [headerText, bodyText]
- * @param  {Array}  headerClasses an array with additional class information for each item header
- * @return {String}               the HTML with the formatted information
+ * @param  {String}  name          the ID for the accordion
+ * @param  {Array}   items         an array with the content for each accordion item, which should be formatted as an Array [headerText, bodyText]
+ * @param  {Array}   headerClasses an array with additional class information for each item header
+ * @param  {boolean} collapseFirst a boolean indicating whether to collapse the first item
+ * @return {String}                the HTML with the formatted information
  */
 function accordion(name, items, headerClasses=[], collapseFirst=true) {
   let accItems = '';
@@ -217,7 +218,7 @@ function accordion(name, items, headerClasses=[], collapseFirst=true) {
       </div>
     </div>
   </div>`;
-  if (!collapseFirst) collapseFirst = true;
+    if (!collapseFirst) collapseFirst = true;
   }
 
   return `
@@ -261,17 +262,17 @@ function carousel(images) {
 /**
  * Return a list with the given items.
  *
- * @param  {String} type         type of list (ul, ol)
- * @param  {Array}  items        array with items to be listed
- * @param  {String} list_options list options
- * @param  {String} item_options item options
- * @return {String}              the HTML with the formatted information
+ * @param  {String} type        type of list (ul, ol)
+ * @param  {Array}  items       array with items to be listed
+ * @param  {String} listOptions list options
+ * @param  {String} itemOptions item options
+ * @return {String}             the HTML with the formatted information
  */
-function makeList(type, items, list_options='', item_options=[]) {
+function makeList(type, items, listOptions='', itemOptions=[]) {
   let listItems = '';
   for (i in items)
-    listItems += `\n<li ${item_options[i]}>${items[i]}</li>`;
-  return `\n<${type} ${list_options}>${listItems}\n</${type}>`;
+    listItems += `\n<li ${itemOptions[i]}>${items[i]}</li>`;
+  return `\n<${type} ${listOptions}>${listItems}\n</${type}>`;
 }
 
 /**
@@ -279,17 +280,17 @@ function makeList(type, items, list_options='', item_options=[]) {
  *
  * Assumes the links are formatted as a list of [url, text] items.
  *
- * @param  {Array}  links        array with links to be listed, each in the [link, text] format
- * @param  {String} type         type of list (ul, ol)
- * @param  {String} list_options list options
- * @param  {String} item_options item options
- * @return {String}              the HTML with the formatted information
+ * @param  {Array}  links       array with links to be listed, each in the [link, text] format
+ * @param  {String} type        type of list (ul, ol)
+ * @param  {String} listOptions list options
+ * @param  {String} itemOptions item options
+ * @return {String}             the HTML with the formatted information
  */
-function listLinks(links, type='ul', list_options='', item_options=[]) {
+function listLinks(links, type='ul', listOptions='', itemOptions=[]) {
   let items = [];
   for (link of links)
     items.push(`<a href="${link[0]}">${link[1]}</a>`);
-  return makeList(type, items, list_options);
+  return makeList(type, items, listOptions, itemOptions);
 }
 
 /**
