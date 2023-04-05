@@ -233,7 +233,7 @@ class Statistics:
             female_contestants.groupby('teamName')[
                 'teamName'].transform('count') == CONTESTANTS_PER_TEAM]['teamName'].unique()
         coaches = df[df['role'] == 'COACH']
-        student_coaches = df[df['role'] == 'STUDENT_COACH']
+        student_coaches = df[df['role'].isin(['STUDENT_COACH', 'CONTESTANT_COACH'])]
 
         _log(f'{len(df["instName"].unique()):4d} instituições.')
         _log(f'{len(coaches.groupby(["FullName"]).count().index):4d} coaches')

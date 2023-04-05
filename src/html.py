@@ -1,13 +1,13 @@
 from enum import Enum
 import os
 import re
-from report import STATE_UF, UF_REGION, normalize
+import report
 
 
 REGION_DIR = {'Centro-Oeste': 'co', 'Nordeste': 'ne', 'Norte': 'no',
               'Sudeste': 'se', 'Sul': 'su'}
 
-UF_STATE = {uf: state for state, uf in STATE_UF.items()}
+UF_STATE = {uf: state for state, uf in report.STATE_UF.items()}
 
 BOOTSTRAP = '''<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>'''
@@ -27,18 +27,18 @@ def _sub_template(template, repl, file, count=0):
     file_sub(template, repl, file, count)
 
 
-def _get_array(file, array_name):
+def _get_array(file, array):
     with open(file) as f:
-        if matches := re.search(f'let {array_name} = \\[([.\\s\\S]*?)\\];', f.read()):
-            return [item for item in re.findall(r"(\[.*?\])", matches.group(1))]
+        if matches := re.search(f'let {array} = \\[([.\\s\\S]*?)\\];', f.read()):
+            return re.findall(r"(\[.*?\])", matches.group(1))
     return []
 
 
 class Charts:
-    class GenderParticipation:
-        def __init__(self, phase_html_name, region, teams):
+    class TeamParticipation:
+        def __init__(self, phase_html_name, region, num_teams):
             self.region = region.upper()
-            self.teams = int(teams)
+            self.num_teams = int(num_teams)
             for phase in Event.Phases:
                 if phase_html_name == phase.html_name:
                     self.phase = phase
@@ -50,15 +50,14 @@ class Charts:
             return self.region < other.region
 
         def __str__(self):
-            return f"['{self.phase}', '{self.region}', {self.teams}]"
+            return f"['{self.phase}', '{self.region}', {self.num_teams}]"
 
     class Result:
         def __init__(self, year, **ranks):
             self.year = int(year)
-            # Sempre lista todas as fases, nesta ordem!
-            self.ranks = {phase.name: 'null' for phase in Event.Phases}
-            for phase_html_name, rank in ranks.items():
-                self[phase_html_name] = rank
+            # Sempre lista todas as fases em ordem.
+            self.ranks = {phase.name: ranks.get(phase.name, 'null')
+                          for phase in Event.Phases}
 
         def __setitem__(self, key, value):
             self.ranks[key] = str(value)
@@ -70,12 +69,13 @@ class Charts:
             if self.year != other.year:
                 return self.year < other.year
             for phase in reversed(Event.Phases):
-                if self.ranks[phase.html_name] != other.ranks[phase.html_name]:
-                    if self.ranks[phase.html_name] == 'null' != other.ranks[phase.html_name]:
+                self_rank, other_rank = self[phase.name], other[phase.name]
+                if self_rank != other_rank:
+                    if self_rank == 'null' != other_rank:
                         return False
-                    if self.ranks[phase.html_name] != 'null' == other.ranks[phase.html_name]:
+                    if self_rank != 'null' == other_rank:
                         return True
-                    return int(self.ranks[phase.html_name]) > int(other.ranks[phase.html_name])
+                    return int(self_rank) < int(other_rank)
             return False
 
         def __str__(self):
@@ -88,16 +88,14 @@ class Charts:
             results = []
             for result in _get_array(file, 'results'):
                 y, ranks = pattern.match(result).groups(1)
-                ranks = ranks.split(', ')
-                results.append(Charts.Result(y, **{phase.name: rank
-                                                   for phase, rank in zip(Event.Phases, ranks)
-                                                   if rank != 'null'}))
+                ranks = {phase.name: rank
+                         for phase, rank in zip(Event.Phases, ranks.split(', '))
+                         if rank != 'null'}
+                results.append(Charts.Result(y, **ranks))
             for result in results:
                 if result.year == year:
-                    if replace_if_better:
-                        if result[phase_name] == 'null' or (result[phase_name] != 'null' and int(result[phase_name]) > value):
-                            result[phase_name] = value
-                    else:
+                    if (replace_if_better or result[phase_name] == 'null' or
+                        (result[phase_name] != 'null' and int(result[phase_name]) > value)):
                         result[phase_name] = value
                     break
             else:
@@ -128,26 +126,26 @@ class Event:
         return path, index
 
     @staticmethod
-    def update_index(year, phase, region, gender, teams):
+    def update_index(year, phase, region, gender, num_teams):
         assert region.lower() in REGION_DIR.values()
-        assert teams >= 0
+        assert num_teams >= 0
 
         path, index = Event.path_index(year)
 
         if not os.path.isfile(index):
             Event.Index.make(year)
 
-        participations = [Charts.GenderParticipation(*eval(item))
-                          for item in _get_array(index, gender)]
-        for part in participations:
+        participants = [Charts.TeamParticipation(*eval(item))
+                        for item in _get_array(index, gender)]
+        for part in participants:
             if phase == part.phase and region == part.region:
-                part.teams = teams
+                part.num_teams = num_teams
                 break
         else:
-            participations.append(Charts.GenderParticipation(str(phase), region, teams))
-        participations = ',\n'.join(str(p) for p in sorted(participations))
+            participants.append(Charts.TeamParticipation(str(phase), region, num_teams))
 
-        repl = {f'let {gender} = \\[([.\\s\\S]*?)\\];': f'let {gender} = [\n{participations}];'}
+        participants = ',\n'.join(str(p) for p in sorted(participants))
+        repl = {f'let {gender} = \\[([.\\s\\S]*?)\\];': f'let {gender} = [\n{participants}];'}
         file_sub(index, repl, index)
 
     @staticmethod
@@ -176,7 +174,10 @@ class Event:
             phase = eval(f'Event.Phases.{phase_name}')
             year, num_teams = int(year), group_df.teamName.count() // 3
 
-            Event.create(year)
+            path, index = Event.path_index(year)
+            if not os.path.isfile(index):
+                Event.create(year)
+
             phase.create(year)
             gender_participation(year, phase, group_df)
             team_participation(year, phase, num_teams)
@@ -187,10 +188,12 @@ class Event:
         Charts.Result.reset_file(index)
 
     class Phases(Enum):
-        # name = value  (name deve ser o nome do diretório)
+        # name = value  ("name" deve ser o nome do diretório, a ordem de
+        #                declaração deve seguir a ordem temporal das fases)
         Zero = ('Fase Zero', 2022)
         Primeira = ('1ª Fase', 2012)
         Nacional = ('Final Nacional', 1996)
+        LatAm = ('Campeonato Latino-Americano', 2023)
         Mundial = ('Final Mundial', 1989)
 
         def __init__(self, html_name, start):
@@ -201,7 +204,7 @@ class Event:
             return self.html_name
 
         def __lt__(self, other):
-            return self.start > other.start
+            return Event.Phases._member_names_.index(self.name) < Event.Phases._member_names_.index(other.name)
 
         def create(self, year):
             def summerschool():
@@ -221,7 +224,8 @@ class Event:
 
             path, index = Event.path_index(year, self.name)
             if os.path.isfile(index):
-                print(f'Já existe um arquivo para {self.html_name} em {year}.')
+                print(f'Já existe um arquivo para {self.html_name} em {year},'
+                      'neste caso a atualização deve ser manual.')
                 return
 
             os.makedirs(path, exist_ok=True)
@@ -246,7 +250,7 @@ class School:
 
     @staticmethod
     def path_index(uf, school_name):
-        region = REGION_DIR[UF_REGION[uf.upper()]]
+        region = REGION_DIR[report.UF_REGION[uf.upper()]]
         path = os.path.join('..', 'docs', 'escolas', region, uf.lower())
         index = os.path.join(path, f'{school_name}.html')
         return path, index
@@ -260,7 +264,7 @@ class School:
 
             for g, gdf in group_df.groupby(['instShortName', 'instName', 'teamRank']):
                 short, full, rank = g
-                short, rank = normalize(short), int(rank)
+                short, rank = report.normalize(short), int(rank)
 
                 School.update(uf, short, full, year, phase_name, rank)
 
@@ -299,7 +303,7 @@ class School:
 
         Charts.Result.update_file(file, year, phase_name, rank, True)
 
-        # If institutionl being updated was the UF top ranking one and the
+        # If institutional being updated was the UF top ranking one and the
         # update lowers its rank, UF rank IS NOT CHANGED!
         path, index = School.path_index(uf, 'index')
         Charts.Result.update_file(index, year, phase_name, rank,

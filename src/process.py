@@ -26,7 +26,7 @@ def _process_new(args):
     if args.current:
         file = os.path.join('..', 'docs', 'maratona.js')
         repl = {r"year: '\d{4}'": f"year: '{args.year}'",
-                r"phase: '\w+'": "phase: ''"}
+                r"phaseDir: '\w+'": "phaseDir: ''"}
         html.file_sub(file, repl, file, 1)
 
 
@@ -38,12 +38,16 @@ def _process_report_file(file, guess_uf, verbose):
     df = report.process(file, guess_uf, verbose)
     if df is None or df.empty:
         return None
-    return df[(df.role == 'CONTESTANT') & (df.teamRank > 0) & (df.teamStatus == 'ACCEPTED')]
+    return df[(df.role == 'CONTESTANT') &
+              (df.teamRank > 0) &
+              (df.teamStatus == 'ACCEPTED')]
 
 
 def _process_reset(args):
-    html.Event.reset_index()
-    html.School.reset()
+    print('Isso apagará todos os dados de eventos e arquivos de escolas!')
+    if 's' in input('Deseja continuar (S/N)? [default=N] ').lower():
+        html.Event.reset_index()
+        html.School.reset()
 
 
 def _report_file(file):
@@ -51,40 +55,44 @@ def _report_file(file):
         raise ValueError(f'"{file}" não existe!')
     phases = '|'.join(p.name for p in html.Event.Phases)
     if not re.match(f'.*\\d{{4}}_({phases})\\.csv$', file):
-        raise ValueError(f'"{file}" não é um arquivo no formato YYYY_FASE.csv!')
+        raise ValueError(f'"{file}" não está no formato YYYY_FASE.csv!')
     return file
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Processamento de arquivos '
+                                     'para composição do site da Maratona SBC '
+                                     'de Programação.')
     parser.set_defaults(process=lambda x: parser.print_usage())
-    subparsers = parser.add_subparsers(help='Sub-comandos', dest='command')
+    subparsers = parser.add_subparsers()
     ###########################################################################
-    event = subparsers.add_parser('event', help='Atualizar arquivos HTML'
-                                  ' com os dados de etapa(s) da competição')
+    event = subparsers.add_parser('event', description='Atualiza arquivos do '
+                                  'site com os dados de etapa(s) da '
+                                  'competição.')
     event.add_argument('files', nargs='*', type=_report_file,
-                       help='Arquivo(s) com relatório(s) do ICPC')
+                       help='arquivo(s) CSV com relatório(s) do ICPC')
     event.add_argument('-v', '--verbose', action='store_true',
-                       help='Exibir detalhes do processamento')
+                       help='apresenta detalhes do processamento')
     event.set_defaults(process=_process_event)
     ###########################################################################
-    new = subparsers.add_parser('new', help='Inicializar arquivos HTML de um'
-                                ' novo ano da competição')
-    new.add_argument('year', type=_new_year, help='Ano da competição')
+    new = subparsers.add_parser('new', description='Cria os arquivos iniciais '
+                                'de um novo ano da competição.')
+    new.add_argument('year', type=_new_year, help='ano da competição')
     new.add_argument('-c', '--current', action='store_true',
-                     help='Definir ano como o atual no arquivo JS.')
+                     help='define o ano fornecido como o atual no arquivo JS')
     new.set_defaults(process=_process_new)
     ###########################################################################
-    report = subparsers.add_parser('report', help='Gerar relatório(s) '
-                                   'referente(s) a arquivos')
-    report.add_argument('file', type=_report_file, help='Arquivo(s) com '
+    report = subparsers.add_parser('report', description='Apresenta as '
+                                   'informações sobre o evento.')
+    report.add_argument('file', type=_report_file, help='arquivo(s) CSV com '
                         'relatório(s) do ICPC')
     report.add_argument('-g', '--guess', action='store_true',
-                        help='Tentar adivinhar a UF da instituição')
+                        help='tenta adivinhar a UF de cada instituição')
     report.set_defaults(process=_process_report)
     ###########################################################################
-    reset = subparsers.add_parser('reset', help='Apagar informações/arquivos '
-                                  'gerados automaticamente')
+    reset = subparsers.add_parser('reset', description='Apaga todas as '
+                                  'informações e arquivos gerados '
+                                  'automaticamente.')
     reset.set_defaults(process=_process_reset)
     ###########################################################################
     args = parser.parse_args()

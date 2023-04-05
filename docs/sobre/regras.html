@@ -25,8 +25,8 @@
 </p>
 <ul class='text-danger'>
   <li><strong>Substituição em time classificado para a final brasileira</strong></li>
-  <li><strong>Remover restrição de número de escolas na regra 1</strong></li> 
-  <li><strong>Vagas remanescentes na final ocupadas por times locais</strong></li> 
+  <li><strong>Remover restrição de número de escolas na regra 1</strong></li>
+  <li><strong>Vagas remanescentes na final ocupadas por times locais</strong></li>
   <li><strong>Vagas extras para os melhores times femininos na final brasileira.</strong></li>
 </ul>`;
 
@@ -113,9 +113,9 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
   A organização determina a sede no ano anterior ao evento.
 </p>`;
         let advancingToNextPhase = `
-<p> 
-  A final brasileira terá pelo menos 65 vagas, e os times se classificam para estas vagas segundo as seguintes regras: 
-</p> 
+<p>
+  A final brasileira terá pelo menos 65 vagas, e os times se classificam para estas vagas segundo as seguintes regras:
+</p>
 <p>
   <strong class="${CONFIG.rules[0].class}">[regra 0]</strong> Um time só qualifica caso tenha resolvido pelo menos <strong>3</strong> problemas na prova da 1ª Fase. O campeão de uma sede pode qualificar tendo resolvido <strong>2</strong> problemas.
 </p>
@@ -135,18 +135,21 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
   <strong class="${CONFIG.rules[3].class}">[regra 3]</strong> cerca de <strong>4 vagas</strong> serão atribuídas entre as sedes pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional.
 </p>
 <p>
-  <strong class="${CONFIG.rules[4].class}">[regra 4]</strong> <strong>6 vagas</strong> para equipes com participação feminina: 3 vagas para os times com 3 mulheres melhor colocados; 2 vagas para os times mais bem colocados com pelo menos 2 mulheres; 1 vaga para o time melhor colocado com participação feminina. Vagas com participação feminina não contam para o limite de times por instituição.
-</p> 
+  <strong class="${CONFIG.rules[3].class}">[regra 4]</strong> <strong>6 vagas</strong> para equipes com participação feminina: 3 vagas para os times com 3 mulheres melhor colocados; 2 vagas para os times mais bem colocados com pelo menos 2 mulheres; 1 vaga para o time melhor colocado com participação feminina. Vagas com participação feminina não contam para o limite de times por instituição.
+</p>
+<p>
+  <strong class="${CONFIG.rules[4].class}">[regra 5]</strong> ???.
+</p>
 <p>
   Os números acima indicam o número aproximado de vagas de cada tipo. As vagas não usadas por uma das regras serão distribuídas automaticamente entre as demais, a critério do Comitê Diretor da Maratona de Programação.
 </p>`;
         let substitutions = `
-<ul> 
-   <li> O reserva cadastrado no sistema do ICPC pode substituir um dos competidores na primeira fase desde que informado ao Diretor da sede e ao Comitê Diretor com pelo menos 24 horas de antecedência. </li> 
-   <li> Um time classificado para a final brasileira pode solicitar a troca de um membro do time pelo reserva cadastrado mediante justificativa enviada ao Comitê Diretor com pelo menos <strong>uma semana de antecedência</strong>. </li> 
-   <li> Times classificados para a final que não possam participar devem informar sua ausência e justificá-la ao comitê com pelo menos <strong>duas semanas</strong> de antecedência. </li> 
-   <li> Vagas remanescentes de times desistentes poderão ser ocupadas por times da mesma sede da instituição anfitriã, na ordem definida pela primeira fase</li> 
-</ul>`;  
+<ul>
+   <li> O reserva cadastrado no sistema do ICPC pode substituir um dos competidores na primeira fase desde que informado ao Diretor da sede e ao Comitê Diretor com pelo menos 24 horas de antecedência. </li>
+   <li> Um time classificado para a final brasileira pode solicitar a troca de um membro do time pelo reserva cadastrado mediante justificativa enviada ao Comitê Diretor com pelo menos <strong>uma semana de antecedência</strong>. </li>
+   <li> Times classificados para a final que não possam participar devem informar sua ausência e justificá-la ao comitê com pelo menos <strong>duas semanas</strong> de antecedência. </li>
+   <li> Vagas remanescentes de times desistentes poderão ser ocupadas por times da mesma sede da instituição anfitriã, na ordem definida pela primeira fase</li>
+</ul>`;
 
         let appealing = `
 <p>
@@ -173,7 +176,7 @@ Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDe
                                          ['Competição', contest],
                                          ['Sedes', site],
                                          ['Vagas na Final Brasileira', advancingToNextPhase],
-                                         ['Substituições', substitutions], 
+                                         ['Substituições', substitutions],
                                          ['Recursos', appealing],
                                          ]));
       document.write(bodyFooter());

@@ -1,4 +1,4 @@
-const CONFIG = {current: {year: '2022', phaseName: 'Final Nacional'},
+const CONFIG = {current: {year: '2023', phaseDir: ''},
                 rules: [{class: 'text-warning'},
                         {class: 'text-danger', tooltip: 'Top 15!'},
                         {class: 'text-primary', tooltip: 'Distribuição por sedes.'},
@@ -7,6 +7,7 @@ const CONFIG = {current: {year: '2022', phaseName: 'Final Nacional'},
                 phases: [{name: 'Fase Zero', dir: 'Zero', start: 2022},
                          {name: '1ª Fase', dir: 'Primeira', start: 2004},
                          {name: 'Final Nacional', dir: 'Nacional', start: 1996},
+                         {name: 'Campeonato Latino-Americano', dir: 'LatAm', start: 2023},
                          {name: 'Final Mundial', dir: 'Mundial', start: 1989}],
                 schools: {chart: {show_last_years: 5}}};
 /******************************************************************************/
@@ -14,7 +15,7 @@ const CONFIG = {current: {year: '2022', phaseName: 'Final Nacional'},
 /**
  * Create a contact link.
  *
- * @param  {String}  text the text to show as link
+ * @param  {String} text the text to show as link
  * @param  {String} args parts of the string that compose de e-mail address
  * @return {String}      the HTML with the formatted information
  */
@@ -36,7 +37,9 @@ function root() {
 /**
  * Create page header.
  *
- * @return {String} the HTML with the formatted information
+ * @param  {String} pageTitle   page title
+ * @param  {String} breadcrumbs breadcrumbs to page
+ * @return {String}             the HTML with the formatted information
  */
 function bodyHeader(pageTitle='', breadcrumbs='') {
   let url = window.location.pathname.split('/');
@@ -58,11 +61,11 @@ function bodyHeader(pageTitle='', breadcrumbs='') {
   }
   function participateItem(isActive) {
     let phaseLinks = '';
-    if (CONFIG.current.phaseName != '') {
+    if (CONFIG.current.phaseDir != '') {
       for (i in CONFIG.phases) {
         phaseLinks += `
     <li><a class="dropdown-item" href="${root()}eventos/${CONFIG.current.year}/${CONFIG.phases[i].dir}/index.html">${CONFIG.phases[i].name}</a></li>`;
-        if (CONFIG.phases[i].name == CONFIG.current.phaseName)
+        if (CONFIG.phases[i].dir == CONFIG.current.phaseDir)
           break;
       }
     }
@@ -79,54 +82,15 @@ ${phaseLinks}
   </ul>
 </li>`;
 }
-  function infoItem(isActive) {
-    return `
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle ${isActive ? 'active' : ''}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Histórico
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li><a class="dropdown-item" href="${root()}eventos/index.html">&nbsp;&nbsp;&nbsp;Maratonas</a></li>
-    <li>
-      <span class="dropdown-item">⏴ Escolas</span>
-      <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
-        <li><a class="dropdown-item" href="${root()}escolas/no/ac/index.html">Acre</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/al/index.html">Alagoas</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/am/index.html">Amazonas</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/ap/index.html">Amapá</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/ba/index.html">Bahia</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/ce/index.html">Ceará</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/co/df/index.html">Distrito Federal</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/se/es/index.html">Espírito Santo</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/co/go/index.html">Goiás</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/ma/index.html">Maranhão</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/co/ms/index.html">Mato Grosso</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/co/mt/index.html">Mato Grosso do Sul</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/se/mg/index.html">Minas Gerais</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/pa/index.html">Pará</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/pb/index.html">Paraíba</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/su/pr/index.html">Paraná</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/pe/index.html">Pernambuco</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/pi/index.html">Piauí</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/se/rj/index.html">Rio de Janeiro</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/rn/index.html">Rio Grande do Norte</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/su/rs/index.html">Rio Grande do Sul</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/ro/index.html">Rondônia</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/rr/index.html">Roraima</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/su/sc/index.html">Santa Catarina</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/se/sp/index.html">São Paulo</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/ne/se/index.html">Sergipe</a></li>
-        <li><a class="dropdown-item" href="${root()}escolas/no/to/index.html">Tocantins</a></li>
-      </ul>
-    </li>
-  </ul>
+  function historyItem(isActive) {
+    return `<li class="nav-item">
+  <a href="${root()}hist/index.html" class="nav-link${isActive ? ' active" aria-current="page"' : ''}">Histórico</a>
 </li>`;
 }
   function contactItem(isActive) {
-    return `
-<li class="nav-item">
+    return `<li class="nav-item">
   <a href="${root()}contato.html" class="nav-link${isActive ? ' active" aria-current="page"' : ''}">Contato</a>
-</li>`;
+</li>`
 }
   let socialMediaItems = `
 <li class="nav-item">
@@ -154,7 +118,7 @@ ${phaseLinks}
         <ul class="nav nav-pills">
           ${aboutItem(url.includes('sobre'))}
           ${participateItem(url.includes('inscricoes.html') || url.includes(CONFIG.current.year))}
-          ${infoItem(!url.includes(CONFIG.current.year) && (url.includes('eventos') || url.includes('escolas')))}
+          ${historyItem(!url.includes(CONFIG.current.year) && (url.includes('eventos') || url.includes('escolas') || url.includes('hist')))}
           ${contactItem(url.includes('contato.html'))}
           ${socialMediaItems}
         </ul>
