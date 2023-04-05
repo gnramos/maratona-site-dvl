@@ -196,11 +196,16 @@ ${siteTable}
     <script type="text/javascript">
       document.write(bodyHeader('Inscrições'));
       document.write(`
+    <p> 
+    A fase zero da Maratona ocorre em 13/6/2023 com participação voluntária e vários prêmios aos participantes. 
+    </p> 
     <p>
       A Maratona de Programação ocorre em duas fases. A 1ª Fase será eliminatória em ${date1Fase} com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de ${dateNacional} a ${addDays(dateNacional, 2)} em ${placeNacional}.
     </p>
+    <p class="text-danger"> 
+      A inscrição para sediar a primeira fase do evento está aberta até <strong>$siteDeadline</strong>. 
     <p class="text-danger">
-      O prazo de inscrição é <strong>${teamDeadline}</strong>.
+      O prazo de inscrição no evento é <strong>${teamDeadline}</strong>.
     </p>`);
       document.write(accordion('enroll', [['Sede(s)', site],
                                           ['Time(s)', team + siteTable],
