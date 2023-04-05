@@ -15,3 +15,8 @@ left: auto;
 .dropdown-menu > li:hover > .dropdown-submenu {
 display: block;
 }
+
+/* Regra 4 - classificação para Final Nacional */
+.regra4 {
+color: HotPink;
+}
