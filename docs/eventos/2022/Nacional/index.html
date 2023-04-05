@@ -19,65 +19,55 @@
       //====================================================================================================
       let pageStart = `
 <p>
-  A Final Brasileira será realizada em <a href="https://maratonasbc2022.ufms.br/">Campo Grande, MS</a>.
+  A Final Brasileira de 2022 foi realizada na hospitaleira cidade de Campo Grande, no Mato Grosso do Sul, com realização da Universidade Federal do Mato Grosso do Sul (<a href="https://maratonasbc2022.ufms.br/">site do evento</a>). O Prof. Anderson V. de Araújo foi o diretor da Final, com uma grande equipe de apoio da UFMS e entusiasmados melancias.
 </p>`;  // informações a serem apresentadas no topo da página (HTML).
-      let images = []; // imagens do carousel
+      let images = ['img/todomundo22.jpeg', 'img/moreninho.jpeg']; // imagens do carousel
       let sponsor = `
 <p>
-  A competição foi patrocinada por VTEX, SAP, CNPq, Americanas, BrDigital, beecrowd e Alura
+  A competição foi patrocinada por VTEX, Incognia e Stone (diamante), Huawei (ouro), TecSinapse, Alura e Memind (prata). Contamos ainda com o apoio do CNPq, Fundect, Instituto Criativo e Beecrowd. Tivemos o prazer de receber na final do Sr. Bo Deng, da Huawei (Patrocinadora multi regional do ICPC) e a Sra. Margarita Shadrina, da Jetbrains, patrocinador mundial do ICPC.
 </p>`;  // informações sobre os patrocinadores.
       let organization = `
 <p>
-  Neste ano participaram da preparação da prova, escolha de problemas, resolução e testes as seguintes pessoas: Alejandro Strejilevich de Loma, Arthur Nascimento, Cristhian Bonilha, Cláudio Leonardo Lucchesi, Clodes Fernando de Morais Silva, Daniel Bossle, Giovanna Kobus Conrado, Juan Pablo Marin Rosas, Lina Rosales, Marcelo Fornet, Naim Shaikhzadeh Santos, Ricardo Anido, Rafael García, Tiago Domingos Almeida Souza, Victor de Sousa Lamarca, Vinicius Fernandes dos Santos, e Yan Silva.
+  As seguintes pessoas ajudaram no desenvolvimento do conjunto de problemas criando e aperfeiçoando os enunciados, soluções, casos de teste e checadores das entradas e saídas: Alejandro Strejilevich de Loma, Argentina; Arthur Nascimento, Brasil; Cristhian Bonilha, Brasil; Célio Passos, Brasil; Crystal Rodríguez, Mexico; Daniel Bossle, Brasil; Enrique Junchaya, Perú; Facundo Gutiérrez, Argentina; Franco Ramírez, Mexico; Ivan Bórquez, Mexico; Juan Pablo Marin Rosas, Mexico; Mário da Silva, Brasil; Pablo Blanc, Argentina; Paulo Cezar Pereira Costa, Brasil; Rafael Armando Garcia Gomez, Colombia; Rafael de Assis Cruz, Brasil; Vinicius Fernandes dos Santos, Brasil; e Welton Cardoso, Brasil.
 </p>`;  // geralmente a listagem dos envolvidos na organização do evento.
       let warmUpProblems = ['Almost Origami - Alejandro Strejilevich de Loma, Argentina',
-                             'Mountain Ranges - Vinicius Santos, Brasil',
+                             'Invested Money - Alejandro Strejilevich de Loma, Argentina',
                              'Non-Integer Donuts - Paulo Cezar Pereira Costa, Brasil'];
-      let contestProblems = ['Ancient Towers - Giovanna Kobus Conrado, Brasil',
-                              'Because, Art! - Naim Shaikhzadeh Santos, Brasil',
-                              'Cyclists versus Clouds, Paulo Cezar Pereira Costa, Brasil',
-                              'Daily Turnovers, Yan Silva, Brasil',
-                              'Expedition Plans, Daniel Bossle, Brasil',
-                              'Fields Division, Yan Silva, Brasil',
-                              'Generator Tree, Victor de Sousa Lamarca, Brasil',
-                              'Hamilton - The Musical, Tiago Domingos Almeida Souza, Brasil',
-                              'Invested Money, Alejandro Strejilevich de Loma, Argentina',
-                              'Joining Pairs, Giovanna Kobus Conrado, Brasil',
-                              'KIARA is a Recursive Acronym, Alejandro Strejilevich de Loma, Argentina',
-                              'Leaving Yharnam, Giovanna Kobus Conrado, Brasil',
-                              'Most Ordered Way, Naim Shaikhzadeh Santos, Brasil'];
+      let contestProblems = ['Asking for Money - Pablo Blanc, Argentina',
+                             'Board Game - Enrique Junchaya, Perú',
+                             'City Folding - Mário da Silva, Brasil',
+                             'Daily Trips - Mário da Silva, Brasil',
+                             'Empty Squares - Pablo Blanc, Argentina',
+                             'Favorite Tree - Daniel Bossle, Brasi',
+                             'Gravitational Wave Detector - Mário da Silva, Brasil',
+                             'Horse Race - Daniel Bossle, Brasil',
+                             'Italian Calzone & Pasta Corner - Daniel Bossle, Brasil',
+                             'Joining a Marathon - Giovanna Kobus Conrado, Brasil',
+                             'Kind Baker - Giovanna Kobus Conrado, Brasil',
+                             'Lazy Printing - Célio Passos, Brasil',
+                             'Maze in Bolt - Welton Cardoso, Brasil'];
       let champion_pic = 'team1.webp';
       let medalists = [// [teamName, [contestants], [coaches]]
-        ['UFPE - Amigos de Yuki U・ᴥ・U', ['Gabriel Pessoa', 'Bezaliel Silva', 'Ícaro Guerra'], ['Nivan Ferreira', 'Tiago Gonçalves']],
-        ['UFMG - Summergimurne?', ['Emanuel Silva, Bernardo Amorim', 'Bruno Monteiro'], ['Pedro Paniago', 'Rafael Grandsire']],
-        ['IMPA - Last Chance', ['Yukun Zhao', 'Celio Passos', 'Angel Napa Bernuy'], ['Lucas Resende']],
-        ['USP-São Carlos - gramando no deitado', ['Lucas Turci', 'André Fakhoury', 'Frederico Ribeiro'], ['Guilherme Tubone', 'João Batista Neto']],
-        ["USP - Hoje tem 'In Queue' do Ribamar", ['Gabriel Morete', 'Thiago Oliveira', 'Lucas Harada'], ['Arthur Nascimento', 'Germano Neuenfeld']],
-        ['UFCG - O amarelo foi ejetado', ['Daniel Figueiredo', 'Rennan Freitas', 'João Medeiros'], ['Rohit Gheyi', 'Emerson Lucena', 'Lucas Figueiredo']],
-        ['UFRJ - desCE ouTro BaLão, MelAnCia!!@!1!', ['Christopher Ciafrino', 'Leticia Sousa', 'Felipe Chen'], ['Marcia Cerioli']],
-        ['UFMG - Guloso k-dimensional', ['Kaio Vieira', 'Tomaz Mascarenhas', 'Henrique Brito'], ['Pedro Paniago', 'Rafael Grandsire']],
-        ['Unicamp - Moratonistas', ['Bernardo Archegas', 'Luiz Oda', 'Luiz Morato'], ['Fabio Usberti', 'Matheus Viana']],
-        ['UFRN - SegTreeste e Persistente', ['Paulo Medeiros', 'Paulo Borges', 'João Aquino'], ['Sergio Medeiros', 'Carlos Prolo', 'Rafael Beserra Gomes']],
-        ['IME - Nada é trivial', ['Henrique Navarro', 'Davi Holanda', 'Sergio Macário'], ['Claudia Justel']],
-        ['Se der bom não pergunte como', ['Israel Silva', 'Kenzo Nobre', 'Luan Arcanjo'], ['Guilherme Tubone', 'João Batista']]];
-      let ccl = [['WAN TAAN SURI KILL', [], [], 'ccl.jpg']];
+        ['UFRJ - Lebenslangerschicksalsschatz', ['Felipe Chen', 'Gabriel de Março', 'Letícia Freire Carvalho de Sousa'], ['Marcia Cerioli', 'Christopher Ciafrino']],
+        ["UFMG - Humuhumunukunukuapua'a", ['Bernardo Amorim', 'Bruno Monteiro', 'Emanuel Silva'], ['Pedro Papa Paniago', 'Rafael Grandsire Oliveira']],
+        ['Unicamp - Você beijaria Matheus Leal Viana?', ['Naim Shaikhzadeh', 'Tiago Souza', 'Yan Silva'], ['Luiz Fernando Batista Morato', 'Matheus Viana']],
+        ['Unicamp - Inimigos do Hungaro', ['Bernardo Panka Archegas', 'Cirilo Morais', 'Luiz Henrique Yuji Delgado Oda'], ['Fábio Luiz Usberti', 'Luiz Fernando Batista Morato', 'Matheus Viana']],
+        ['IME -  12k Club', ['Davi Holanda', 'Henrique Navarro', 'Sergio Macário'], ['Claudia Justel']],
+        ['UnB - FLAMENGO', ['Eduardo Quirino de Oliveira', 'Enzo Niho', 'Wilson Guimarães'], ['Guilherme Ramos', 'José Marcos da Silva Leite', 'Roberta Oliveira' ,'Vinicius Borges']],
+        ['USP - MWNWMWNNWMWNWN', ['Nathan Martins', 'Willian Miura Mori', 'Willian Wang'], ['Gabriel Morete', 'Enrique Junchaya', 'Jiang Zhi']],
+        ['UFCG - A ascensão e queda do buldogue francês', ['Lucas Brenner Herculano e Albuquerque', 'Raphael De Paula Fonseca', 'Rennan Rocha de Freitas'], ['Rohit Gheyi', 'Emerson Leonardo Lucena', 'Lucas de Matos Figueredo']],
+        ['UnB - RockLee não manda WA', ['Alberto Neto', 'Leonardo Riether', 'Tiago Fernandes'], ['Guilherme Ramos', 'José Marcos da Silva Leite', 'Roberta Oliveira' ,'Vinicius Borges']],
+        ['USP-São Carlos - o de sempre', ['Dikson Santos', 'Fernando Lincoln', 'Thiago  Queiroz'], ['Andre Fakhoury', 'Frederico Ribeiro', 'Joao do Espirito Santo  Batista Neto']],
+        ['UFPE - Desculpa, Beto', ['Clodes Silva', 'Gabriel Meireles', 'José Carlos Cruz'], ['Nivan Ferreira']],
+        ['UDESC - Como Treinar o Seu João', ['Eliton Machado da Silva', 'João Vitor Fröhlich', 'Rafael Granza de Mello'], ['Karina Roggia', 'Vinícius Gasparini']]];
+      let ccl = [['O dia que renasci no Japão e encontrei o Kawakami no metro', [], [], 'ccl.jpeg']];
 
       let regional_champs = [ // CO -> NE -> NO -> SE -> SU (ordem alfabética da região)
-                             ['UnB - Posso mandar um WA?', 'unb.webp'],
-                             ['UFPE - Amigos do Yuki U・ᴥ・U', 'team1.webp'],
-                             ['UFAM - tuturu sem O(1)', 'ufam.webp'],
-                             ['UFMG - Summerginmune?', 'team2.webp'],
-                             ['UDESC - The Ballonatics', 'udesc.webp']];
-      let extra = `
- <p>
- Foi realizada também uma competição de hardware livre, os <a href="https://caninosloucos.org/pt/">Caninos Loucos</a>, organizada por Geovane Fedrecheski, Rodrigo Suigh da POLI-USP e Claudio Machado Diniz (UFRGS). Os três melhores times foram:
-</p>
-<ul>
-  <li>CEFET-RJ - random.choice(funny_names)</li>
-  <li>UnB - Posso mandar um WA?</li>
-  <li>UFC-Quixadá - two thousands rubles trap</li>
-</ul>
-${gallery(['cefetrj.webp', 'unb.webp', 'ufcqxd.webp'])}`;
+                             ['UnB - FLAMENGO', 'team6.webp'],
+                             ['UFCG - A ascensão e queda do buldogue francês', 'team8.webp'],
+                             ['UFAM - tuturu', 'ufam.webp'],
+                             ['UFRJ - Lebenslagschicksalsschatz', 'team1.webp'],
+                             ['UDESC - Como treinar o Seu João', 'team12.webp']];
 
       //======================================================================
       // Não editar a partir daqui.
@@ -109,7 +99,8 @@ ${gallery(images)}`;
 ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], regional_champs[3][1], regional_champs[4][1]])}`;
 
       let [gold, silver, bronze] = splitByMedal(medalists);
-      let results = accordion('PhaseResults',
+      let results = showChampion(medalists[0], champion_pic) +
+                    accordion('PhaseResults',
                               [['Medalhas de Ouro', listTeams(gold, 1)],
                                ['Medalhas de Prata', listTeams(silver, 1 + gold.length)],
                                ['Medalhas de Bronze', listTeams(bronze, 1 + gold.length + silver.length)],
@@ -126,19 +117,18 @@ ${gallery([regional_champs[0][1], regional_champs[1][1], regional_champs[2][1], 
     <script type="text/javascript">
       document.write(bodyHeader(`Final Nacional (2022)`));
       document.write(pageStart);
-//         document.write(accordion('Phase', [['Fotos', carousel(images)],
-//                                            ['Patrocinadores', sponsor],
-//                                            ['Organização', organization],
-//                                            ['Warm Up', slides + defaultInfo('warmup', warmUpProblems)],
-//                                            ['Prova', defaultInfo('contest', contestProblems)],
-//                                            ['Resultados', defaultReport('contest') + champion + results],
-//                                            ['Caninos Loucos', extra]
-//                                            ]));
-//         document.write(`
-// <br>
-// <p>
-//   Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao2023/">curso de treinamento</a> que ocorrerá na Unicamp.
-// </p>`);
+        document.write(accordion('Phase', [['Fotos', carousel(images)],
+                                           ['Patrocinadores', sponsor],
+                                           ['Organização', organization],
+                                           ['Warm Up', slides + defaultInfo('warmup', warmUpProblems)],
+                                           ['Prova', defaultInfo('contest', contestProblems)],
+                                           ['Resultados', defaultReport('contest') + results]
+                                           ]));
+        document.write(`
+<br>
+<p>
+  Os times classificados para a Final Mundial serão convidados para o <a href="http://maratona.ic.unicamp.br/MaratonaVerao2023/">curso de treinamento</a> que ocorrerá na Unicamp.
+</p>`);
       document.write(bodyFooter());
     </script>
   </body>
