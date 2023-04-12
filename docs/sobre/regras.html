@@ -114,7 +114,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 </p>`;
         let advancingToNextPhase = `
 <p>
-  A final brasileira terá pelo menos 65 vagas, e os times se classificam para estas vagas segundo as seguintes regras:
+  A final brasileira terá pelo menos 65 vagas, e os times se classificam para estas vagas segundo as seguintes regras, aplicadas em ordem:
 </p>
 <p>
   <strong class="${CONFIG.rules[0].class}">[regra 0]</strong> Um time só qualifica caso tenha resolvido pelo menos <strong>3</strong> problemas na prova da 1ª Fase. O campeão de uma sede pode qualificar tendo resolvido <strong>2</strong> problemas.
@@ -129,7 +129,7 @@ Por exemplo, se você iniciou seu primeiro curso superior em ${yearsAgo(3)}, pod
 Vagas = \\Biggl\\lfloor\\frac{VagasRegra2 \\times NumeroDeEscolasNaSede}{TotalDeEscolas}\\Biggr\\rceil\.
 \\end{equation*}
   </p>
-
+  Cada escola classifica no máximo um time por esta regra, desde que não tenha classificado times pela regra 1. 
 </p>
 <p>
   <strong class="${CONFIG.rules[3].class}">[regra 3]</strong> cerca de <strong>4 vagas</strong> serão atribuídas entre as sedes pelo <a href="organizacao.html">Comitê Diretor da Maratona de Programação</a> sob forma de incentivo ao crescimento de sedes ainda não contempladas, ou por outros critérios que serão divulgados na ocasião da definição dos times participantes da Final Nacional.
