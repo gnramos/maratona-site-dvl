@@ -26,49 +26,13 @@
                              ['R$ 200,00', 'R$ 330,00', 'R$ 130,00 / time']], // Instituição não associada.
           fullPrices = [['R$ 260,00', 'R$ 384,00', 'R$ 160,00 / time'],  // Instituição associada.
                         ['R$ 300,00', 'R$ 480,00', 'R$ 200,00 / time']]; // Instituição não associada.
-      let sites = [ //[regiao + cidade, local da prova, diretor do evento, e-mail de contato]
-['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', ['juniorlimeiras', 'gmail.com']],
-['AM, Manaus', 'UFAM', 'Rosiane de Freitas', ['rosiane', 'icomp.ufam.br']],
-['BA, Juazeiro', 'UNIVASF', 'Marcelo Linder', ['marcelo.linder', 'univasf.edu.br']],
-['BA, Lauro de Freitas', 'UNIME-Lauro de Freitas', 'Alex Alves da Paixão', ['alex.paixao', 'kroton.com.br']],
-['CE, Fortaleza', 'UFC-Fortaleza', 'Nicolas Moreira', ['nicolas', 'ufc.br']],
-['CE, Juazeiro do Norte', 'Centro Univ. Paraíso', 'Fabricio C. Costa', ['fabricio.carneiro', 'fapce.edu.br']],
-['CE, Quixadá', 'UFC-Quixadá', 'Arthur R. Araruna', ['ararunaufc', 'gmail.com']],
-['DF, Brasília', 'Centro Universitário IESB', 'Patricia Moscariello Rodrigues', ['pmoscariello', 'iesb.br']],
-['ES, Vitoria', 'UFES', 'Giovanni V. Comarela', ['gc', 'inf.ufes.br']],
-['GO, Goiânia', 'UFG', 'Humberto Longo', ['longo', 'ufg.br']],
-['MA, Balsas', 'Faculdade de Balsas', 'Jakson F. de Souza', ['jakson.ferreira', 'prof.unibalsas.edu.br']],
-['MG, Belo Horizonte', 'PUC-Minas', 'Felipe Domingos da Cunha', ['felipe', 'pucminas.br']],
-['MG, Montes Claros', 'UNIMONTES', 'Heveraldo R. de Oliveira', ['heveraldo.oliveira', 'unimontes.br']],
-['MG, Ouro Branco', 'UFSJ-CAP', 'Alex Vidigal Bastos', ['alexvbh', 'ufsj.edu.br']],
-['MG, Santa Rita do Sapucaí', 'INATEL', 'Marcelo V.C. Aragão', ['marcelovca90', 'inatel.br']],
-['MG, Timoteo', 'CEFET-MG Timóteo', 'Alessio Miranda Junior', ['alessio', 'cefetmg.br']],
-['MG, Uberaba', 'IFTM - Uberaba', 'Daniela R.S. Orbolato', ['danielaorbolato', 'iftm.edu.br']],
-['MG, Uberlândia', 'UFU', 'João H.S. Pereira', ['joaohs', 'ufu.br']],
-['MS, Campo Grande', 'UFMS', 'Amaury A. de Castro Jr.', ['amaury.junior', 'ufms.br']],
-['MT, Cuiabá', 'UFMT', 'Thiago M. Ventura', ['thiago', 'ic.ufmt.br']],
-['PA, Belém', 'UNAMA', 'Wendel de O. Castro', ['computacao.alcindo', 'unama.br']],
-['PA, Santarém', 'UFOPA-Santarém', 'Flavia Pessoa Monteiro', ['flavia.monteiro', 'ufopa.edu.br']],
-['PB, João Pessoa', 'UNIESP e IFPB', 'Marcelo Fernandes de Sousa', ['marcelo', 'iesp.edu.br']],
-['PE, Olinda', 'AESO Barros Melo', 'Antonio Renato C. Gonçalves', ['renato.cruz', 'prof.uniaeso.edu.br']],
-['PI Picos', 'UFPI-Picos', 'Glauber D. Gonçalves', ['ggoncalves', 'ufpi.edu.br']],
-['PI, Teresina', 'UESPI', 'José de Ribamar M. Bringel Filho', ['bringelfilho', 'gmail.com']],
-['PR, Campo Mourão', 'CEI', 'Anderson Fernandes', ['anderson.fernandes', 'grupointegrado.br']],
-['PR, Curitiba', 'UTFPR-Curitiba', 'Leandro Zatesko', ['zatesko', 'utfpr.edu.br']],
-['RJ, Rio de Janeiro', 'Stone', 'Leonardo Guineli', ['leonardo.guineli', 'stone.com.br']],
-['RN, Natal', 'UFRN', 'André L.S. Brito', ['andre', 'imd.ufrn.br']],
-['RO, Porto Velho', 'UNAMA-PVH', 'Renata Luz', ['renatalluz', 'gmail.com']],
-['RS, Porto Alegre', 'UFRGS', 'Weverton Cordeiro', ['weverton.cordeiro', 'inf.ufrgs.br']],
-['RS, Rio Grande', 'FURG', 'Vinicius M. de Oliveira', ['vinicius', 'furg.br']],
-['SC, Chapecó', 'UNOESC', 'Tiago Zonta', ['tiago.zonta', 'unoesc.edu.br']],
-['SE, São Cristovão', 'UFS', 'André Britto', ['andre', 'dcomp.ufs.br']],
-['SP Bauru', 'ITE, Bauru', 'Anderson Talon', ['anderson.talon', 'ite.edu.br']],
-['SP, Piracicaba', 'EEP', 'Clerivaldo J. Roccia', ['clerivaldo.roccia', 'gmail.com']],
-['SP, Santos', 'Unisantos', 'Ciro C. Trindade', ['ciroct', 'unisantos.br']],
-['SP, São José dos Campos', 'FATEC-SJC', 'Reinado Gen Ishiro Arakaki', ['reinaldo.arakaki', 'fatec.sp.gov.br']],
-['SP, São Paulo', 'IPT', 'Alessandro Santiago dos Santos', ['alesan', 'ipt.br']],
-['SP, Sorocaba', 'FACENS', 'Andréa L. B. Vieira', ['andrea.braga', 'facens.br']],
-['TO, Palmas', 'UFT', 'Anna Paula de S.P. Rodrigues', ['anna.rodrigues', 'uft.edu.br']]];
+      let sites = []; // cada sede é um item na lista configurado assim:
+                      // [regiao + cidade, local da prova, diretor do evento, e-mail de contato]
+                      //
+                      // Cada e-mail é uma lista no formato [usuario, dominio]
+                      //
+                      // Ex:
+                      // ['AC, Rio Branco', 'UFAC', 'Manoel Limeira Jr.', ['juniorlimeiras', 'sbc.com']
 
       //======================================================================
       // Não editar a partir daqui.
@@ -155,16 +119,17 @@
   A escola deve inscrever seus times na sede da cidade mais próxima. Caso seu time deseje competir em uma sede que não seja a mais próxima, entre em contato com a organização.
 <p>`;
           let siteTable = '';
-          if (sites != []) {
+          if (sites.length) {
             siteTable = '';
-            for (siteInfo of sites)
+            for (siteInfo of sites) {
               siteTable += `\n
     <tr>
       <td scope="row">${siteInfo[0]}</td>
       <td>${siteInfo[1]}</td>
       <td>${contact(siteInfo[2], siteInfo[3][0], '&#x40;', siteInfo[3][1])}</td>
     </tr>`;
-      siteTable = `
+            }
+            siteTable = `
 <table class="table table-striped">
   <thead>
     <tr>
@@ -196,14 +161,14 @@ ${siteTable}
     <script type="text/javascript">
       document.write(bodyHeader('Inscrições'));
       document.write(`
-    <p> 
-    A fase zero da Maratona ocorre em 13/6/2023 com participação voluntária e vários prêmios aos participantes. 
-    </p> 
+    <p>
+    A fase zero da Maratona ocorre em 13/6/2023 com participação voluntária e vários prêmios aos participantes.
+    </p>
     <p>
       A Maratona de Programação ocorre em duas fases. A 1ª Fase será eliminatória em ${date1Fase} com várias sedes espalhadas pelo país. A Final Brasileira ocorrerá de ${dateNacional} a ${addDays(dateNacional, 2)} em ${placeNacional}.
     </p>
-    <p class="text-danger"> 
-      A inscrição para sediar a primeira fase do evento está aberta até <strong>${siteDeadline}</strong>. 
+    <p class="text-danger">
+      A inscrição para sediar a primeira fase do evento está aberta até <strong>${siteDeadline}</strong>.
     <p class="text-danger">
       O prazo de inscrição no evento é <strong>${teamDeadline}</strong>.
     </p>`);
