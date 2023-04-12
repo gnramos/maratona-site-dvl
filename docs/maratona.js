@@ -148,7 +148,7 @@ function bodyFooter() {
               <a href="${root()}sobre/sbc.html"><img src="${root()}img/footer_SBC.png" class="img-fluid"></a>
             </div>
             <div class="col-sm-7">
-              <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.jpg" class="img-fluid"></a>
+              <a href="https://icpc.global/"><img src="${root()}img/footer_ICPC.png" class="img-fluid"></a>
             </div>
           </div>
         </div>
