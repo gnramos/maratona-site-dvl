@@ -113,7 +113,7 @@ ${phaseLinks}
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="${root()}index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
           <img src="${root()}img/maratona-logo.jpg" class="bi me-2" height="32">
-          <span class="fs-4">Maratona de Programação</span>
+          <span class="fs-4">Maratona SBC de Programação</span>
         </a>
         <ul class="nav nav-pills">
           ${aboutItem(url.includes('sobre'))}
