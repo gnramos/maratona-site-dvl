@@ -84,21 +84,23 @@ function splitByMedal(medalists) {
  * @return {String}           the HTML with the formatted information
  */
 function advancingTeams(results) {
-  // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3]]
+  // results -> [siteName, [listOfRule1, listOfRule3, listOfRule3, listOfRule4]]
   function ruleCell(teams) {
     let cell = '';
     for (i in CONFIG.rules.slice(1))
-      for (team of teams[i]) {
-        j = Number(i) + 1;
-        cell += `<strong class="${CONFIG.rules[j].class}" data-toggle="tooltip" data-html="true" title="${CONFIG.rules[j].tooltip}"}>Regra ${j}</strong><br>`;
-      }
+      if (i < teams.length)
+        for (team of teams[i]) {
+          j = Number(i) + 1;
+          cell += `<strong class="${CONFIG.rules[j].class}" data-toggle="tooltip" data-html="true" title="${CONFIG.rules[j].tooltip}"}>Regra ${j}</strong><br>`;
+        }
     return cell;
   }
   function teamCell(teams) {
     let cell = '';
     for (i in CONFIG.rules.slice(1))
-      for (team of teams[i])
-        cell += `<span class="${CONFIG.rules[Number(i) + 1].class}">${team}</span><br>`;
+      if (i < teams.length)
+        for (team of teams[i])
+          cell += `<span class="${CONFIG.rules[Number(i) + 1].class}">${team}</span><br>`;
     return cell;
   }
   function makeRows(siteTeams) {
